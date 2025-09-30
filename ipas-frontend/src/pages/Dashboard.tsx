@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Grid, Box, Typography, Card, CardContent, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Grid, Box, Typography, Card, CardContent, Dialog, DialogTitle, DialogContent, Alert, IconButton, Button } from '@mui/material';
+import { Close as CloseIcon, Download as DownloadIcon, Description as DescriptionIcon } from '@mui/icons-material';
 import ApprovalStatusChart from '../components/Dashboard/ApprovalStatusChart';
 import RecentCasesTable from '../components/Dashboard/RecentCasesTable';
 import AnalyticsReports from '../components/Dashboard/AnalyticsReports';
@@ -11,6 +12,30 @@ import ErrorBoundary from '../components/ErrorBoundary';
 const Dashboard: React.FC = () => {
   const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
   const [caseDetailsOpen, setCaseDetailsOpen] = useState(false);
+  const [showLetterNotification, setShowLetterNotification] = useState(false);
+
+  // Check if letter was generated for PA-2024-001
+  React.useEffect(() => {
+    const checkLetterGeneration = () => {
+      const letterKey = 'ipas_letter_generated_PA-2024-001';
+      const dismissedKey = 'ipas_letter_notification_dismissed_PA-2024-001';
+      
+      const letterGenerated = localStorage.getItem(letterKey);
+      const notificationDismissed = localStorage.getItem(dismissedKey);
+      
+      // Show notification if letter was generated and notification hasn't been dismissed
+      if (letterGenerated && !notificationDismissed) {
+        setShowLetterNotification(true);
+      }
+    };
+
+    checkLetterGeneration();
+    
+    // Poll for changes every 2 seconds to detect when letter is generated
+    const interval = setInterval(checkLetterGeneration, 2000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   // Consistent data for today
   const todayData = {
@@ -38,9 +63,61 @@ const Dashboard: React.FC = () => {
         IPAS Dashboard
       </Typography>
       
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+      <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
         Welcome to the Intelligent Prior Authorization System
       </Typography>
+
+      {/* Letter Generation Notification */}
+      {showLetterNotification && (
+        <Alert 
+          severity="success" 
+          icon={<DescriptionIcon />}
+          sx={{ 
+            mb: 3,
+            backgroundColor: '#d4edda',
+            border: '1px solid #c3e6cb',
+            '& .MuiAlert-icon': {
+              color: '#155724'
+            }
+          }}
+          action={
+            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+              <Button
+                size="small"
+                variant="contained"
+                color="success"
+                startIcon={<DownloadIcon />}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/sample-documents/approval-letters/PA-2024-001-approval-letter.pdf';
+                  link.download = 'PA-2024-001-approval-letter.pdf';
+                  link.click();
+                }}
+              >
+                Download
+              </Button>
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setShowLetterNotification(false);
+                  localStorage.setItem('ipas_letter_notification_dismissed_PA-2024-001', 'true');
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            </Box>
+          }
+        >
+          <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#155724' }}>
+            📄 Approval Letter Generated
+          </Typography>
+          <Typography variant="body2" sx={{ color: '#155724' }}>
+            Approval letter for Case <strong>PA-2024-001 (John Smith)</strong> has been generated and is ready for download
+          </Typography>
+        </Alert>
+      )}
 
       {/* Statistics Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>

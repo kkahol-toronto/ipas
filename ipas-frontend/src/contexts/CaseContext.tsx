@@ -234,6 +234,17 @@ export const CaseProvider: React.FC<CaseProviderProps> = ({ children }) => {
     // Mock notifications
     const mockNotifications: Notification[] = [
       {
+        id: 'n0',
+        type: 'case_assigned',
+        title: 'Approval Letter Generated',
+        message: 'Approval letter for Case PA-2024-001 (John Smith) has been generated and is ready for download',
+        priority: 'high',
+        timestamp: new Date().toISOString(),
+        read: false,
+        actionRequired: false,
+        caseId: '1001'
+      },
+      {
         id: 'n1',
         type: 'decision_required',
         title: 'High Priority Case Requires Review',

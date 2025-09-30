@@ -19,7 +19,9 @@ import {
   Edit as EditIcon,
   CheckCircle as CheckCircleIcon,
   Cancel as CancelIcon,
-  Schedule as ScheduleIcon
+  Schedule as ScheduleIcon,
+  Download as DownloadIcon,
+  Description as DescriptionIcon
 } from '@mui/icons-material';
 
 interface Case {
@@ -149,6 +151,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                 <TableCell>Priority</TableCell>
                 <TableCell>Amount</TableCell>
                 <TableCell>Submitted</TableCell>
+                <TableCell>Letter</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -192,6 +195,28 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                     <Typography variant="body2" color="text.secondary">
                       {new Date(caseItem.submittedDate).toLocaleDateString()}
                     </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {caseItem.status === 'approved' ? (
+                      <IconButton 
+                        size="small" 
+                        color="success"
+                        onClick={() => {
+                          // Download the approval letter PDF
+                          const link = document.createElement('a');
+                          link.href = `/sample-documents/approval-letters/${caseItem.id}-approval-letter.pdf`;
+                          link.download = `${caseItem.id}-approval-letter.pdf`;
+                          link.click();
+                        }}
+                        title="Download Approval Letter"
+                      >
+                        <DownloadIcon />
+                      </IconButton>
+                    ) : (
+                      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <DescriptionIcon sx={{ color: '#ccc', fontSize: 20 }} />
+                      </Box>
+                    )}
                   </TableCell>
                   <TableCell>
                     <Box sx={{ display: 'flex', gap: 1 }}>
