@@ -1,0 +1,161 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 1500
+>>
+stream
+BT
+/F1 18 Tf
+50 750 Td
+(UNITEDHEALTHCARE INSURANCE CARD) Tj
+0 -30 Td
+/F2 10 Tf
+(Group Policy Information) Tj
+0 -30 Td
+/F1 14 Tf
+(MEMBER INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Member Name: Michael Robert Johnson) Tj
+0 -15 Td
+(Date of Birth: 08/14/1965) Tj
+0 -15 Td
+(Member ID: UHC345678901) Tj
+0 -15 Td
+(Group Number: GRP003) Tj
+0 -15 Td
+(Policy Number: UHC789012345) Tj
+0 -30 Td
+/F1 14 Tf
+(PLAN INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Plan Type: PPO (Preferred Provider Organization)) Tj
+0 -15 Td
+(Effective Date: 01/01/2024) Tj
+0 -15 Td
+(Termination Date: 12/31/2024) Tj
+0 -15 Td
+(Network: UnitedHealthcare Choice Plus) Tj
+0 -30 Td
+/F1 14 Tf
+(BENEFIT INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Deductible: $1,800 individual / $3,600 family) Tj
+0 -15 Td
+(Out-of-Pocket Maximum: $7,000 individual / $14,000 family) Tj
+0 -15 Td
+(Co-pay: $35 primary care / $70 specialist) Tj
+0 -15 Td
+(Emergency Room: $300 co-pay) Tj
+0 -15 Td
+(Hospitalization: 30% coinsurance after deductible) Tj
+0 -30 Td
+/F1 14 Tf
+(PRIOR AUTHORIZATION REQUIREMENTS) Tj
+0 -20 Td
+/F2 10 Tf
+(Arthroscopic Knee Surgery: REQUIRES PRIOR AUTHORIZATION) Tj
+0 -15 Td
+(Authorization Phone: (303) 800-AUTH) Tj
+0 -15 Td
+(Authorization Fax: (303) 800-FAX) Tj
+0 -15 Td
+(Online Portal: www.uhc.com/pa) Tj
+0 -15 Td
+(Provider Portal: https://provider.uhc.com) Tj
+0 -30 Td
+/F1 14 Tf
+(CONTACT INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Customer Service: (303) 800-UHC) Tj
+0 -15 Td
+(Claims Address: PO Box 98765, Denver, CO 80202) Tj
+0 -15 Td
+(Provider Relations: (303) 800-PROV) Tj
+0 -15 Td
+(24/7 Nurse Line: (303) 800-NURSE) Tj
+0 -30 Td
+/F3 8 Tf
+(Card ID: UHC-2024-001236 | Issue Date: 01/01/2024 | Valid Through: 12/31/2024) Tj
+0 -15 Td
+(For verification: www.uhc.com/verify | Phone: (303) 800-VERIFY) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000001774 00000 n 
+0000002024 00000 n 
+0000002274 00000 n 
+trailer
+<<
+/Size 8
+/Root 1 0 R
+>>
+startxref
+2375
+%%EOF

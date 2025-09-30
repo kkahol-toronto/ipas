@@ -1,0 +1,239 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 2500
+>>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(PATIENT MEDICAL HISTORY - JOHN DOE) Tj
+0 -30 Td
+/F2 10 Tf
+(Medical Record #: MR123456789 | Date: 12/15/2024) Tj
+0 -30 Td
+/F1 14 Tf
+(PATIENT DEMOGRAPHICS) Tj
+0 -20 Td
+/F2 10 Tf
+(Name: John Michael Doe                    DOB: 01/15/1980  Age: 44) Tj
+0 -15 Td
+(Sex: Male  Female  Other    Race: Caucasian  African American  Hispanic ) Tj
+0 -15 Td
+(Address: 123 Main Street, Anytown, ST 12345) Tj
+0 -15 Td
+(Phone: (555) 123-4567              Email: john.doe@email.com) Tj
+0 -15 Td
+(Emergency Contact: Jane Doe (Spouse) - (555) 123-4568) Tj
+0 -30 Td
+/F1 14 Tf
+(CHIEF COMPLAINT & HISTORY OF PRESENT ILLNESS) Tj
+0 -20 Td
+/F2 10 Tf
+(Chief Complaint: Persistent headaches and dizziness for 3 weeks) Tj
+0 -20 Td
+(History of Present Illness:) Tj
+0 -15 Td
+(Patient reports onset of headaches 3 weeks ago. Headaches are described as) Tj
+0 -12 Td
+(bilateral, throbbing, moderate intensity 7/10 on pain scale. Associated) Tj
+0 -12 Td
+(symptoms include nausea, photophobia, and occasional dizziness. No fever,) Tj
+0 -12 Td
+(neck stiffness, or focal neurological symptoms. Headaches occur daily,) Tj
+0 -12 Td
+(lasting 4-6 hours. No relief with OTC medications. No recent head trauma) Tj
+0 -12 Td
+(or travel history.) Tj
+0 -30 Td
+/F1 14 Tf
+(PAST MEDICAL HISTORY) Tj
+0 -20 Td
+/F2 10 Tf
+(Condition                    Date Diagnosed    Status        Provider) Tj
+0 -15 Td
+(Hypertension                 2018              Well controlled Dr. Johnson) Tj
+0 -15 Td
+(Type 2 Diabetes             2020              HbA1c 6.8%    Dr. Johnson) Tj
+0 -15 Td
+(Hyperlipidemia              2019              On statin      Dr. Johnson) Tj
+0 -15 Td
+(Allergies: None known        N/A               N/A           N/A) Tj
+0 -15 Td
+(Surgical History: None       N/A               N/A           N/A) Tj
+0 -15 Td
+(Psychiatric History: None    N/A               N/A           N/A) Tj
+0 -30 Td
+/F1 14 Tf
+(CURRENT MEDICATIONS) Tj
+0 -20 Td
+/F2 10 Tf
+(Medication        Dosage        Frequency    Indication        Start Date) Tj
+0 -15 Td
+(Lisinopril        10mg          Daily        Hypertension      2018) Tj
+0 -15 Td
+(Metformin         500mg         BID          Diabetes          2020) Tj
+0 -15 Td
+(Atorvastatin      20mg          Daily        Hyperlipidemia    2019) Tj
+0 -15 Td
+(Aspirin           81mg          Daily        Cardioprotection  2019) Tj
+0 -15 Td
+(Multivitamin      1 tablet      Daily        General health   2020) Tj
+0 -30 Td
+/F1 14 Tf
+(SOCIAL HISTORY & FAMILY HISTORY) Tj
+0 -20 Td
+/F2 10 Tf
+(Social History:) Tj
+0 -15 Td
+( Occupation: Office Manager    Smoking: Never    Alcohol: Occasional) Tj
+0 -15 Td
+( Exercise: Regular (3x/week)   Drug Use: None    Travel: None recent) Tj
+0 -20 Td
+(Family History:) Tj
+0 -15 Td
+( Father: Hypertension, Diabetes    Mother: Breast Cancer (age 65)) Tj
+0 -15 Td
+( Siblings: No significant history  Children: No relevant history) Tj
+0 -30 Td
+/F1 14 Tf
+(REVIEW OF SYSTEMS) Tj
+0 -20 Td
+/F2 10 Tf
+(Constitutional:  No fever  No weight loss  No fatigue) Tj
+0 -15 Td
+(Neurological:    Headaches  Dizziness  No seizures  No weakness) Tj
+0 -15 Td
+(Cardiovascular:  No chest pain  No palpitations  No SOB) Tj
+0 -15 Td
+(Respiratory:     No cough  No wheezing  No hemoptysis) Tj
+0 -15 Td
+(GI:             Occasional nausea  No vomiting  No abdominal pain) Tj
+0 -15 Td
+(GU:             No dysuria  No frequency  No urgency) Tj
+0 -30 Td
+/F1 14 Tf
+(PHYSICAL EXAMINATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Vital Signs: BP 128/82, HR 72, RR 16, Temp 98.6F, Weight 180 lbs, Height 5'10") Tj
+0 -15 Td
+(General: Well-appearing, no acute distress, alert and oriented x3) Tj
+0 -15 Td
+(HEENT: Normocephalic, no meningeal signs, PERRLA, EOMI, no facial asymmetry) Tj
+0 -15 Td
+(Neurological: CN II-XII intact, no focal deficits, normal reflexes) Tj
+0 -15 Td
+(Cardiovascular: RRR, no murmurs, no gallops, no rubs) Tj
+0 -15 Td
+(Respiratory: Clear to auscultation bilaterally, no wheezes, no rales) Tj
+0 -15 Td
+(Extremities: No edema, pulses intact, no clubbing, no cyanosis) Tj
+0 -30 Td
+/F1 14 Tf
+(ASSESSMENT AND PLAN) Tj
+0 -20 Td
+/F2 10 Tf
+(1. Headaches - Likely tension type headaches) Tj
+0 -15 Td
+(   Plan: Order MRI brain with contrast to rule out intracranial pathology) Tj
+0 -15 Td
+(   Consider neurology referral if MRI abnormal) Tj
+0 -20 Td
+(2. Hypertension - Well controlled) Tj
+0 -15 Td
+(   Plan: Continue current medication, monitor BP) Tj
+0 -20 Td
+(3. Diabetes - Well controlled) Tj
+0 -15 Td
+(   Plan: Continue metformin, recheck HbA1c in 3 months) Tj
+0 -20 Td
+(4. Hyperlipidemia - Continue statin therapy) Tj
+0 -15 Td
+(   Plan: Continue atorvastatin, recheck lipids in 6 months) Tj
+0 -20 Td
+(Follow-up: Return in 2 weeks with MRI results) Tj
+0 -15 Td
+(Patient counseled on headache management and importance of follow-up care) Tj
+0 -30 Td
+/F3 8 Tf
+(Provider: Dr. Sarah Smith, MD - Neurology | Date: 12/15/2024 | E-Signature: Applied) Tj
+0 -15 Td
+(Medical Record ID: MR123456789 | Visit ID: V20241215001 | Timestamp: 12/15/2024 14:30:25) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000002774 00000 n 
+0000003024 00000 n 
+0000003274 00000 n 
+trailer
+<<
+/Size 8
+/Root 1 0 R
+>>
+startxref
+3375
+%%EOF

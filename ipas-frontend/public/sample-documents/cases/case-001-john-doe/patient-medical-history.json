@@ -1,0 +1,110 @@
+{
+  "patientInfo": {
+    "name": "John Michael Doe",
+    "dob": "01/15/1980",
+    "age": 44,
+    "sex": "Male",
+    "mrn": "MR123456789",
+    "phone": "(555) 123-4567",
+    "email": "john.doe@email.com",
+    "address": "123 Main Street, Anytown, ST 12345"
+  },
+  "chiefComplaint": "Persistent headaches and dizziness for 3 weeks",
+  "historyOfPresentIllness": {
+    "duration": "3 weeks",
+    "symptoms": [
+      "Bilateral throbbing headaches",
+      "Moderate intensity (7/10 pain scale)",
+      "Nausea",
+      "Photophobia",
+      "Occasional dizziness"
+    ],
+    "associatedFactors": [
+      "No fever",
+      "No neck stiffness",
+      "No focal neurological symptoms",
+      "Daily occurrence",
+      "4-6 hour duration",
+      "No relief with OTC medications"
+    ]
+  },
+  "pastMedicalHistory": [
+    {
+      "condition": "Hypertension",
+      "dateDiagnosed": "2018",
+      "status": "Well controlled",
+      "provider": "Dr. Johnson"
+    },
+    {
+      "condition": "Type 2 Diabetes",
+      "dateDiagnosed": "2020",
+      "status": "HbA1c 6.8%",
+      "provider": "Dr. Johnson"
+    },
+    {
+      "condition": "Hyperlipidemia",
+      "dateDiagnosed": "2019",
+      "status": "On statin",
+      "provider": "Dr. Johnson"
+    }
+  ],
+  "currentMedications": [
+    {
+      "medication": "Lisinopril",
+      "dosage": "10mg",
+      "frequency": "Daily",
+      "indication": "Hypertension",
+      "startDate": "2018"
+    },
+    {
+      "medication": "Metformin",
+      "dosage": "500mg",
+      "frequency": "BID",
+      "indication": "Diabetes",
+      "startDate": "2020"
+    },
+    {
+      "medication": "Atorvastatin",
+      "dosage": "20mg",
+      "frequency": "Daily",
+      "indication": "Hyperlipidemia",
+      "startDate": "2019"
+    }
+  ],
+  "familyHistory": {
+    "father": "Hypertension, Diabetes",
+    "mother": "Breast Cancer (age 65)",
+    "siblings": "No significant history"
+  },
+  "physicalExamination": {
+    "vitalSigns": {
+      "bp": "128/82",
+      "hr": "72",
+      "rr": "16",
+      "temp": "98.6F",
+      "weight": "180 lbs",
+      "height": "5'10\""
+    },
+    "neurological": "CN II-XII intact, no focal deficits, normal reflexes",
+    "cardiovascular": "RRR, no murmurs, no gallops, no rubs",
+    "respiratory": "Clear to auscultation bilaterally"
+  },
+  "assessment": [
+    "Headaches - Likely tension type headaches",
+    "Hypertension - Well controlled",
+    "Diabetes - Well controlled",
+    "Hyperlipidemia - Continue statin therapy"
+  ],
+  "plan": [
+    "Order MRI brain with contrast to rule out intracranial pathology",
+    "Consider neurology referral if MRI abnormal",
+    "Continue current medications",
+    "Follow-up in 2 weeks with MRI results"
+  ],
+  "provider": {
+    "name": "Dr. Sarah Smith, MD",
+    "specialty": "Neurology",
+    "date": "12/15/2024",
+    "signature": "Applied"
+  }
+}

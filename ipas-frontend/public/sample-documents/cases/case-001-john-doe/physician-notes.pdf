@@ -1,0 +1,205 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 2000
+>>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(PHYSICIAN CLINICAL NOTES - JOHN DOE) Tj
+0 -30 Td
+/F2 10 Tf
+(Visit Date: 12/15/2024 | Provider: Dr. Sarah Smith, MD - Neurology) Tj
+0 -30 Td
+/F1 14 Tf
+(CLINICAL ASSESSMENT) Tj
+0 -20 Td
+/F2 10 Tf
+(Chief Complaint: Persistent headaches and dizziness for 3 weeks) Tj
+0 -20 Td
+(History of Present Illness:) Tj
+0 -15 Td
+(44-year-old male presents with 3-week history of bilateral throbbing) Tj
+0 -12 Td
+(headaches, rated 7/10 on pain scale. Headaches occur daily, lasting) Tj
+0 -12 Td
+(4-6 hours. Associated symptoms include nausea, photophobia, and) Tj
+0 -12 Td
+(occasional dizziness. No fever, neck stiffness, or focal neurological) Tj
+0 -12 Td
+(symptoms. No recent head trauma or travel history. OTC medications) Tj
+0 -12 Td
+(have provided no relief.) Tj
+0 -20 Td
+(Physical Examination:) Tj
+0 -15 Td
+(Vital Signs: BP 128/82, HR 72, RR 16, Temp 98.6F) Tj
+0 -15 Td
+(General: Well-appearing, no acute distress, alert and oriented x3) Tj
+0 -15 Td
+(HEENT: Normocephalic, no meningeal signs, PERRLA, EOMI) Tj
+0 -15 Td
+(Neurological: CN II-XII intact, no focal deficits, normal reflexes) Tj
+0 -15 Td
+(Cardiovascular: RRR, no murmurs, no gallops, no rubs) Tj
+0 -15 Td
+(Respiratory: Clear to auscultation bilaterally) Tj
+0 -30 Td
+/F1 14 Tf
+(CLINICAL REASONING) Tj
+0 -20 Td
+/F2 10 Tf
+(Differential Diagnosis:) Tj
+0 -15 Td
+(1. Tension-type headaches (most likely)) Tj
+0 -15 Td
+(2. Migraine headaches) Tj
+0 -15 Td
+(3. Intracranial pathology (mass, hemorrhage)) Tj
+0 -15 Td
+(4. Secondary headache (medication overuse, etc.)) Tj
+0 -20 Td
+(Risk Factors for Intracranial Pathology:) Tj
+0 -15 Td
+(- Age > 40 (patient is 44)) Tj
+0 -15 Td
+(- New onset headaches) Tj
+0 -15 Td
+(- Associated neurological symptoms (dizziness)) Tj
+0 -15 Td
+(- No response to OTC medications) Tj
+0 -30 Td
+/F1 14 Tf
+(PLAN AND RECOMMENDATIONS) Tj
+0 -20 Td
+/F2 10 Tf
+(Imaging Studies:) Tj
+0 -15 Td
+(- MRI Brain with Contrast (STAT) to rule out intracranial pathology) Tj
+0 -15 Td
+(- Consider MRA if vascular abnormality suspected) Tj
+0 -20 Td
+(Laboratory Studies:) Tj
+0 -15 Td
+(- CBC, CMP, ESR, CRP (routine labs)) Tj
+0 -15 Td
+(- Consider inflammatory markers if indicated) Tj
+0 -20 Td
+(Medications:) Tj
+0 -15 Td
+(- Ibuprofen 600mg TID PRN for headache) Tj
+0 -15 Td
+(- Consider triptan if migraine suspected) Tj
+0 -20 Td
+(Follow-up:) Tj
+0 -15 Td
+(- Return in 2 weeks with MRI results) Tj
+0 -15 Td
+(- Consider neurology referral if MRI abnormal) Tj
+0 -15 Td
+(- Emergency department if symptoms worsen) Tj
+0 -30 Td
+/F1 14 Tf
+(PRIOR AUTHORIZATION REQUEST) Tj
+0 -20 Td
+/F2 10 Tf
+(Service Requested: MRI Brain with Contrast) Tj
+0 -15 Td
+(CPT Code: 70553) Tj
+0 -15 Td
+(ICD-10 Code: R51 - Headache) Tj
+0 -15 Td
+(Medical Necessity: Patient presents with persistent headaches) Tj
+0 -12 Td
+(and dizziness for 3 weeks. Physical examination reveals no focal) Tj
+0 -12 Td
+(neurological deficits. MRI brain with contrast is medically necessary) Tj
+0 -12 Td
+(to rule out intracranial pathology including mass lesions, vascular) Tj
+0 -12 Td
+(abnormalities, or acute stroke. Clinical guidelines support MRI) Tj
+0 -12 Td
+(imaging for persistent headaches with associated symptoms.) Tj
+0 -30 Td
+/F3 8 Tf
+(Provider: Dr. Sarah Smith, MD - Neurology | Date: 12/15/2024 | E-Signature: Applied) Tj
+0 -15 Td
+(Notes ID: N20241215001 | Timestamp: 12/15/2024 14:30:25) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000002274 00000 n 
+0000002524 00000 n 
+0000002774 00000 n 
+trailer
+<<
+/Size 8
+/Root 1 0 R
+>>
+startxref
+2875
+%%EOF

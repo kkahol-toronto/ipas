@@ -1,0 +1,187 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 2000
+>>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(MRI BRAIN WITH CONTRAST REPORT) Tj
+0 -30 Td
+/F2 10 Tf
+(Report ID: MRI-2024-001234 | Date: 12/10/2024) Tj
+0 -30 Td
+/F1 14 Tf
+(PATIENT INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Name: John Michael Doe                    DOB: 01/15/1980) Tj
+0 -15 Td
+(MRN: 123456789              Study Date: 12/10/2024) Tj
+0 -15 Td
+(Referring Physician: Dr. Sarah Smith, MD - Neurology) Tj
+0 -15 Td
+(Clinical History: Persistent headaches and dizziness for 3 weeks) Tj
+0 -30 Td
+/F1 14 Tf
+(TECHNICAL INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Scanner: Siemens Magnetom Skyra 3.0T) Tj
+0 -15 Td
+(Protocol: Brain MRI with and without contrast) Tj
+0 -15 Td
+(Contrast Agent: Gadavist 10ml IV) Tj
+0 -15 Td
+(Sequences: T1, T2, FLAIR, DWI, ADC, T1 post-contrast) Tj
+0 -30 Td
+/F1 14 Tf
+(FINDINGS) Tj
+0 -20 Td
+/F2 10 Tf
+(BRAIN PARENCHYMA:) Tj
+0 -15 Td
+(No acute intracranial abnormality is identified. No evidence of) Tj
+0 -12 Td
+(intracranial hemorrhage, mass effect, or midline shift.) Tj
+0 -15 Td
+(No restricted diffusion to suggest acute infarction.) Tj
+0 -15 Td
+(No abnormal enhancement following contrast administration.) Tj
+0 -20 Td
+(WHITE MATTER:) Tj
+0 -15 Td
+(Scattered foci of T2 hyperintensity in the periventricular white) Tj
+0 -12 Td
+(matter, consistent with chronic small vessel ischemic changes.) Tj
+0 -15 Td
+(No acute white matter lesions.) Tj
+0 -20 Td
+(GRAY MATTER:) Tj
+0 -15 Td
+(Normal gray-white matter differentiation throughout.) Tj
+0 -15 Td
+(No cortical abnormalities or mass lesions identified.) Tj
+0 -20 Td
+(VENTRICULAR SYSTEM:) Tj
+0 -15 Td
+(Ventricular system is normal in size and configuration.) Tj
+0 -15 Td
+(No hydrocephalus or mass effect on the ventricular system.) Tj
+0 -20 Td
+(CEREBELLUM:) Tj
+0 -15 Td
+(Cerebellum is normal in size and signal characteristics.) Tj
+0 -15 Td
+(No cerebellar lesions or atrophy identified.) Tj
+0 -20 Td
+(BRAINSTEM:) Tj
+0 -15 Td
+(Brainstem is normal in appearance with no signal abnormalities.) Tj
+0 -15 Td
+(No brainstem lesions or compression identified.) Tj
+0 -30 Td
+/F1 14 Tf
+(IMPRESSION) Tj
+0 -20 Td
+/F2 10 Tf
+(1. No acute intracranial abnormality.) Tj
+0 -15 Td
+(2. Scattered chronic small vessel ischemic changes in the) Tj
+0 -12 Td
+(   periventricular white matter, consistent with age-related) Tj
+0 -12 Td
+(   microvascular disease.) Tj
+0 -15 Td
+(3. No evidence of mass lesion, hemorrhage, or acute infarction.) Tj
+0 -15 Td
+(4. Normal ventricular system and brainstem.) Tj
+0 -20 Td
+(RECOMMENDATIONS:) Tj
+0 -15 Td
+(Clinical correlation recommended. Consider follow-up imaging) Tj
+0 -12 Td
+(in 6-12 months if symptoms persist or worsen.) Tj
+0 -30 Td
+/F3 8 Tf
+(Radiologist: Dr. Michael Chen, MD | Date: 12/10/2024 | E-Signature: Applied) Tj
+0 -15 Td
+(Report ID: MRI-2024-001234 | Timestamp: 12/10/2024 16:45:30) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000002274 00000 n 
+0000002524 00000 n 
+0000002774 00000 n 
+trailer
+<<
+/Size 8
+/Root 1 0 R
+>>
+startxref
+2875
+%%EOF

@@ -1,0 +1,66 @@
+{
+  "visitInfo": {
+    "date": "2024-12-15",
+    "provider": "Dr. Sarah Smith, MD - Neurology",
+    "visitId": "V20241215001",
+    "notesId": "N20241215001"
+  },
+  "clinicalAssessment": {
+    "chiefComplaint": "Persistent headaches and dizziness for 3 weeks",
+    "historyOfPresentIllness": "44-year-old male presents with 3-week history of bilateral throbbing headaches, rated 7/10 on pain scale. Headaches occur daily, lasting 4-6 hours. Associated symptoms include nausea, photophobia, and occasional dizziness. No fever, neck stiffness, or focal neurological symptoms. No recent head trauma or travel history. OTC medications have provided no relief.",
+    "physicalExamination": {
+      "vitalSigns": "BP 128/82, HR 72, RR 16, Temp 98.6F",
+      "general": "Well-appearing, no acute distress, alert and oriented x3",
+      "heent": "Normocephalic, no meningeal signs, PERRLA, EOMI",
+      "neurological": "CN II-XII intact, no focal deficits, normal reflexes",
+      "cardiovascular": "RRR, no murmurs, no gallops, no rubs",
+      "respiratory": "Clear to auscultation bilaterally"
+    }
+  },
+  "clinicalReasoning": {
+    "differentialDiagnosis": [
+      "Tension-type headaches (most likely)",
+      "Migraine headaches",
+      "Intracranial pathology (mass, hemorrhage)",
+      "Secondary headache (medication overuse, etc.)"
+    ],
+    "riskFactors": [
+      "Age > 40 (patient is 44)",
+      "New onset headaches",
+      "Associated neurological symptoms (dizziness)",
+      "No response to OTC medications"
+    ]
+  },
+  "planAndRecommendations": {
+    "imagingStudies": [
+      "MRI Brain with Contrast (STAT) to rule out intracranial pathology",
+      "Consider MRA if vascular abnormality suspected"
+    ],
+    "laboratoryStudies": [
+      "CBC, CMP, ESR, CRP (routine labs)",
+      "Consider inflammatory markers if indicated"
+    ],
+    "medications": [
+      "Ibuprofen 600mg TID PRN for headache",
+      "Consider triptan if migraine suspected"
+    ],
+    "followUp": [
+      "Return in 2 weeks with MRI results",
+      "Consider neurology referral if MRI abnormal",
+      "Emergency department if symptoms worsen"
+    ]
+  },
+  "priorAuthorizationRequest": {
+    "serviceRequested": "MRI Brain with Contrast",
+    "cptCode": "70553",
+    "icd10Code": "R51 - Headache",
+    "medicalNecessity": "Patient presents with persistent headaches and dizziness for 3 weeks. Physical examination reveals no focal neurological deficits. MRI brain with contrast is medically necessary to rule out intracranial pathology including mass lesions, vascular abnormalities, or acute stroke. Clinical guidelines support MRI imaging for persistent headaches with associated symptoms."
+  },
+  "providerInfo": {
+    "name": "Dr. Sarah Smith, MD - Neurology",
+    "date": "2024-12-15",
+    "signature": "Applied",
+    "notesId": "N20241215001",
+    "timestamp": "2024-12-15 14:30:25"
+  }
+}

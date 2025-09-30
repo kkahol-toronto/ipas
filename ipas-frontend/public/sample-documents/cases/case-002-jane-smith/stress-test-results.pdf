@@ -1,0 +1,197 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 2000
+>>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(STRESS TEST RESULTS - JANE SMITH) Tj
+0 -30 Td
+/F2 10 Tf
+(Test Date: 12/10/2024 | Provider: Dr. Michael Chen, MD - Cardiology) Tj
+0 -30 Td
+/F1 14 Tf
+(PATIENT INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Name: Jane Elizabeth Smith              DOB: 03/22/1975) Tj
+0 -15 Td
+(MRN: 789012345              Test ID: ST-2024-001235) Tj
+0 -15 Td
+(Referring Physician: Dr. Michael Chen, MD - Cardiology) Tj
+0 -15 Td
+(Clinical History: Chest pain and shortness of breath for 2 weeks) Tj
+0 -30 Td
+/F1 14 Tf
+(TEST PROTOCOL) Tj
+0 -20 Td
+/F2 10 Tf
+(Test Type: Exercise Stress Test with Nuclear Imaging) Tj
+0 -15 Td
+(Protocol: Bruce Protocol) Tj
+0 -15 Td
+(Imaging Agent: Technetium-99m Sestamibi) Tj
+0 -15 Td
+(Dose: 25 mCi at rest, 25 mCi at peak exercise) Tj
+0 -15 Td
+(Camera: GE Discovery NM/CT 670) Tj
+0 -30 Td
+/F1 14 Tf
+(EXERCISE PARAMETERS) Tj
+0 -20 Td
+/F2 10 Tf
+(Peak Heart Rate: 145 bpm (85% of predicted maximum)) Tj
+0 -15 Td
+(Peak Blood Pressure: 168/95 mmHg) Tj
+0 -15 Td
+(Exercise Duration: 8 minutes 30 seconds) Tj
+0 -15 Td
+(METs Achieved: 8.5 METs) Tj
+0 -15 Td
+(Reason for Termination: Patient fatigue and dyspnea) Tj
+0 -15 Td
+(ECG Response: Normal sinus rhythm throughout) Tj
+0 -30 Td
+/F1 14 Tf
+(ECG FINDINGS) Tj
+0 -20 Td
+/F2 10 Tf
+(Resting ECG: Normal sinus rhythm, no acute changes) Tj
+0 -15 Td
+(Exercise ECG: 2mm ST depression in leads II, III, aVF) Tj
+0 -15 Td
+(Peak Exercise: 3mm ST depression in leads II, III, aVF, V4-V6) Tj
+0 -15 Td
+(Recovery: ST depression persisted for 5 minutes post-exercise) Tj
+0 -15 Td
+(Arrhythmias: None noted) Tj
+0 -30 Td
+/F1 14 Tf
+(NUCLEAR IMAGING FINDINGS) Tj
+0 -20 Td
+/F2 10 Tf
+(REST IMAGES:) Tj
+0 -15 Td
+(Normal myocardial perfusion at rest) Tj
+0 -15 Td
+(No fixed perfusion defects identified) Tj
+0 -15 Td
+(Normal left ventricular function) Tj
+0 -20 Td
+(STRESS IMAGES:) Tj
+0 -15 Td
+(Large reversible perfusion defect in the inferior wall) Tj
+0 -15 Td
+(Moderate reversible perfusion defect in the lateral wall) Tj
+0 -15 Td
+(No fixed perfusion defects) Tj
+0 -15 Td
+(Left ventricular ejection fraction: 45% (mildly reduced)) Tj
+0 -30 Td
+/F1 14 Tf
+(IMPRESSION) Tj
+0 -20 Td
+/F2 10 Tf
+(1. POSITIVE STRESS TEST - Evidence of myocardial ischemia) Tj
+0 -15 Td
+(2. Reversible perfusion defects in inferior and lateral walls) Tj
+0 -15 Td
+(3. ST depression on exercise ECG consistent with ischemia) Tj
+0 -15 Td
+(4. Mildly reduced left ventricular function) Tj
+0 -20 Td
+(RECOMMENDATIONS:) Tj
+0 -15 Td
+(1. Cardiac catheterization recommended for definitive diagnosis) Tj
+0 -15 Td
+(2. Consider coronary angiography to evaluate coronary arteries) Tj
+0 -15 Td
+(3. Optimize medical therapy (statin, beta-blocker, ACE inhibitor)) Tj
+0 -15 Td
+(4. Lifestyle modifications (diet, exercise, smoking cessation)) Tj
+0 -15 Td
+(5. Follow-up with cardiology in 1 week) Tj
+0 -30 Td
+/F3 8 Tf
+(Radiologist: Dr. Jennifer Lee, MD | Date: 12/10/2024 | E-Signature: Applied) Tj
+0 -15 Td
+(Report ID: ST-2024-001235 | Timestamp: 12/10/2024 15:20:45) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000002274 00000 n 
+0000002524 00000 n 
+0000002774 00000 n 
+trailer
+<<
+/Size 8
+/Root 1 0 R
+>>
+startxref
+2875
+%%EOF

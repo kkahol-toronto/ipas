@@ -1,0 +1,199 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 2000
+>>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(MRI KNEE REPORT - MIKE JOHNSON) Tj
+0 -30 Td
+/F2 10 Tf
+(Report ID: MRI-2024-001236 | Date: 12/05/2024) Tj
+0 -30 Td
+/F1 14 Tf
+(PATIENT INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Name: Michael Robert Johnson           DOB: 08/14/1965) Tj
+0 -15 Td
+(MRN: 345678901              Study Date: 12/05/2024) Tj
+0 -15 Td
+(Referring Physician: Dr. Lisa Rodriguez, MD - Orthopedics) Tj
+0 -15 Td
+(Clinical History: Chronic knee pain and limited mobility for 6 months) Tj
+0 -30 Td
+/F1 14 Tf
+(TECHNICAL INFORMATION) Tj
+0 -20 Td
+/F2 10 Tf
+(Scanner: GE Signa Premier 3.0T) Tj
+0 -15 Td
+(Protocol: Knee MRI without contrast) Tj
+0 -15 Td
+(Sequences: T1, T2, PD, STIR, 3D SPGR) Tj
+0 -15 Td
+(Field of View: 16cm) Tj
+0 -15 Td
+(Slice Thickness: 3mm) Tj
+0 -30 Td
+/F1 14 Tf
+(FINDINGS) Tj
+0 -20 Td
+/F2 10 Tf
+(MENISCI:) Tj
+0 -15 Td
+(Medial Meniscus: Complex tear involving the posterior horn) Tj
+0 -12 Td
+(and body. Tear extends to the inferior articular surface.) Tj
+0 -15 Td
+(Lateral Meniscus: Intact, no tear identified) Tj
+0 -20 Td
+(CRUCIATE LIGAMENTS:) Tj
+0 -15 Td
+(Anterior Cruciate Ligament: Intact, no tear identified) Tj
+0 -15 Td
+(Posterior Cruciate Ligament: Intact, no tear identified) Tj
+0 -20 Td
+(COLLATERAL LIGAMENTS:) Tj
+0 -15 Td
+(Medial Collateral Ligament: Intact, no tear identified) Tj
+0 -15 Td
+(Lateral Collateral Ligament: Intact, no tear identified) Tj
+0 -20 Td
+(ARTICULAR CARTILAGE:) Tj
+0 -15 Td
+(Medial Compartment: Grade 2 chondromalacia of the medial) Tj
+0 -12 Td
+(femoral condyle. No full-thickness cartilage loss.) Tj
+0 -15 Td
+(Lateral Compartment: Grade 1 chondromalacia of the lateral) Tj
+0 -12 Td
+(femoral condyle. No full-thickness cartilage loss.) Tj
+0 -15 Td
+(Patellofemoral Compartment: Grade 2 chondromalacia of the) Tj
+0 -12 Td
+(patella. No full-thickness cartilage loss.) Tj
+0 -20 Td
+(BONE MARROW:) Tj
+0 -15 Td
+(No bone marrow edema or contusion identified) Tj
+0 -15 Td
+(No stress fracture or osteonecrosis) Tj
+0 -20 Td
+(SOFT TISSUES:) Tj
+0 -15 Td
+(No significant joint effusion) Tj
+0 -15 Td
+(No bursitis or tendinosis) Tj
+0 -15 Td
+(No Baker's cyst) Tj
+0 -30 Td
+/F1 14 Tf
+(IMPRESSION) Tj
+0 -20 Td
+/F2 10 Tf
+(1. Complex tear of the medial meniscus involving the posterior) Tj
+0 -12 Td
+(   horn and body, extending to the inferior articular surface.) Tj
+0 -15 Td
+(2. Grade 2 chondromalacia of the medial femoral condyle) Tj
+0 -15 Td
+(3. Grade 2 chondromalacia of the patella) Tj
+0 -15 Td
+(4. Grade 1 chondromalacia of the lateral femoral condyle) Tj
+0 -15 Td
+(5. No evidence of ligamentous injury) Tj
+0 -20 Td
+(RECOMMENDATIONS:) Tj
+0 -15 Td
+(1. Arthroscopic surgery recommended for meniscal repair) Tj
+0 -15 Td
+(2. Consider chondroplasty for cartilage lesions) Tj
+0 -15 Td
+(3. Physical therapy post-operatively) Tj
+0 -15 Td
+(4. Follow-up with orthopedics in 2 weeks) Tj
+0 -30 Td
+/F3 8 Tf
+(Radiologist: Dr. Robert Kim, MD | Date: 12/05/2024 | E-Signature: Applied) Tj
+0 -15 Td
+(Report ID: MRI-2024-001236 | Timestamp: 12/05/2024 14:30:15) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000002274 00000 n 
+0000002524 00000 n 
+0000002774 00000 n 
+trailer
+<<
+/Size 8
+/Root 1 0 R
+>>
+startxref
+2875
+%%EOF

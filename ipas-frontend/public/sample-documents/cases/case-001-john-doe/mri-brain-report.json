@@ -1,0 +1,83 @@
+{
+  "patientInfo": {
+    "name": "John Michael Doe",
+    "dob": "01/15/1980",
+    "mrn": "123456789",
+    "studyDate": "12/10/2024"
+  },
+  "studyInfo": {
+    "studyType": "MRI Brain with Contrast",
+    "reportId": "MRI-2024-001234",
+    "referringPhysician": "Dr. Sarah Smith, MD - Neurology",
+    "clinicalHistory": "Persistent headaches and dizziness for 3 weeks"
+  },
+  "technicalInfo": {
+    "scanner": "Siemens Magnetom Skyra 3.0T",
+    "protocol": "Brain MRI with and without contrast",
+    "contrastAgent": "Gadavist 10ml IV",
+    "sequences": ["T1", "T2", "FLAIR", "DWI", "ADC", "T1 post-contrast"]
+  },
+  "findings": {
+    "brainParenchyma": {
+      "status": "Normal",
+      "details": [
+        "No acute intracranial abnormality identified",
+        "No evidence of intracranial hemorrhage, mass effect, or midline shift",
+        "No restricted diffusion to suggest acute infarction",
+        "No abnormal enhancement following contrast administration"
+      ]
+    },
+    "whiteMatter": {
+      "status": "Chronic changes",
+      "details": [
+        "Scattered foci of T2 hyperintensity in the periventricular white matter",
+        "Consistent with chronic small vessel ischemic changes",
+        "No acute white matter lesions"
+      ]
+    },
+    "grayMatter": {
+      "status": "Normal",
+      "details": [
+        "Normal gray-white matter differentiation throughout",
+        "No cortical abnormalities or mass lesions identified"
+      ]
+    },
+    "ventricularSystem": {
+      "status": "Normal",
+      "details": [
+        "Ventricular system is normal in size and configuration",
+        "No hydrocephalus or mass effect on the ventricular system"
+      ]
+    },
+    "cerebellum": {
+      "status": "Normal",
+      "details": [
+        "Cerebellum is normal in size and signal characteristics",
+        "No cerebellar lesions or atrophy identified"
+      ]
+    },
+    "brainstem": {
+      "status": "Normal",
+      "details": [
+        "Brainstem is normal in appearance with no signal abnormalities",
+        "No brainstem lesions or compression identified"
+      ]
+    }
+  },
+  "impression": [
+    "No acute intracranial abnormality",
+    "Scattered chronic small vessel ischemic changes in the periventricular white matter, consistent with age-related microvascular disease",
+    "No evidence of mass lesion, hemorrhage, or acute infarction",
+    "Normal ventricular system and brainstem"
+  ],
+  "recommendations": [
+    "Clinical correlation recommended",
+    "Consider follow-up imaging in 6-12 months if symptoms persist or worsen"
+  ],
+  "radiologist": {
+    "name": "Dr. Michael Chen, MD",
+    "date": "12/10/2024",
+    "signature": "Applied",
+    "reportId": "MRI-2024-001234"
+  }
+}

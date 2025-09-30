@@ -1,0 +1,54 @@
+{
+  "insuranceCompany": "Blue Cross Blue Shield",
+  "memberInfo": {
+    "name": "John Michael Doe",
+    "dob": "01/15/1980",
+    "memberId": "BCBS123456789",
+    "groupNumber": "GRP001",
+    "policyNumber": "POL987654321"
+  },
+  "planInfo": {
+    "planType": "PPO (Preferred Provider Organization)",
+    "effectiveDate": "01/01/2024",
+    "terminationDate": "12/31/2024",
+    "network": "Blue Cross Blue Shield Network"
+  },
+  "benefits": {
+    "deductible": {
+      "individual": "$1,500",
+      "family": "$3,000"
+    },
+    "outOfPocketMaximum": {
+      "individual": "$6,000",
+      "family": "$12,000"
+    },
+    "copays": {
+      "primaryCare": "$25",
+      "specialist": "$50",
+      "emergencyRoom": "$200"
+    },
+    "coinsurance": {
+      "hospitalization": "20% after deductible"
+    }
+  },
+  "priorAuthorization": {
+    "mriBrainWithContrast": "REQUIRES PRIOR AUTHORIZATION",
+    "authorizationPhone": "(555) 800-AUTH",
+    "authorizationFax": "(555) 800-FAX",
+    "onlinePortal": "www.bcbs.com/pa",
+    "providerPortal": "https://provider.bcbs.com"
+  },
+  "contactInfo": {
+    "customerService": "(555) 800-BCBS",
+    "claimsAddress": "PO Box 12345, Anytown, ST 12345",
+    "providerRelations": "(555) 800-PROV",
+    "nurseLine": "(555) 800-NURSE"
+  },
+  "cardInfo": {
+    "cardId": "BCBS-2024-001234",
+    "issueDate": "01/01/2024",
+    "validThrough": "12/31/2024",
+    "verificationWebsite": "www.bcbs.com/verify",
+    "verificationPhone": "(555) 800-VERIFY"
+  }
+}
