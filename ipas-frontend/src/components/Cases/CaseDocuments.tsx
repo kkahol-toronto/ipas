@@ -44,14 +44,22 @@ interface CaseDocumentsProps {
 const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
   // Get case-specific documents based on caseId
   const getCaseDocuments = (caseId: string): CaseDocument[] => {
-    const caseFolder = `case-${caseId.padStart(3, '0')}`;
-    
     // Map case IDs to specific case folders and documents
     const caseDocumentMap: Record<string, CaseDocument[]> = {
       '001': [
         {
           id: '1',
-          name: 'Prior Authorization Request Form',
+          name: 'Prior Authorization Request Form (Original)',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '1.6 MB',
+          uploadDate: '2024-12-15',
+          status: 'ready',
+          url: '/sample-documents/cases/case-001-john-doe/prior-auth-form-original.pdf'
+        },
+        {
+          id: '2',
+          name: 'Prior Authorization Request Form (Extracted)',
           type: 'pdf',
           category: 'prior-auth',
           size: '245 KB',
@@ -60,7 +68,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-001-john-doe/prior-auth-request-form.pdf'
         },
         {
-          id: '2',
+          id: '3',
           name: 'Patient Medical History - John Doe',
           type: 'pdf',
           category: 'medical-records',
@@ -70,7 +78,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-001-john-doe/patient-medical-history.pdf'
         },
         {
-          id: '3',
+          id: '4',
           name: 'MRI Brain Report',
           type: 'pdf',
           category: 'imaging',
@@ -80,7 +88,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-001-john-doe/mri-brain-report.pdf'
         },
         {
-          id: '4',
+          id: '5',
           name: 'Insurance Card - BCBS',
           type: 'pdf',
           category: 'insurance',
@@ -90,7 +98,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-001-john-doe/insurance-card.pdf'
         },
         {
-          id: '5',
+          id: '6',
           name: 'Physician Clinical Notes',
           type: 'pdf',
           category: 'clinical-notes',
@@ -103,7 +111,17 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
       '002': [
         {
           id: '1',
-          name: 'Prior Authorization Request Form',
+          name: 'Prior Authorization Request Form (Original)',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '1.8 MB',
+          uploadDate: '2024-12-18',
+          status: 'ready',
+          url: '/sample-documents/cases/case-002-jane-smith/prior-auth-form-original.pdf'
+        },
+        {
+          id: '2',
+          name: 'Prior Authorization Request Form (Extracted)',
           type: 'pdf',
           category: 'prior-auth',
           size: '267 KB',
@@ -112,7 +130,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-002-jane-smith/prior-auth-request-form.pdf'
         },
         {
-          id: '2',
+          id: '3',
           name: 'Patient Medical History - Jane Smith',
           type: 'pdf',
           category: 'medical-records',
@@ -122,7 +140,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-002-jane-smith/patient-medical-history.pdf'
         },
         {
-          id: '3',
+          id: '4',
           name: 'Stress Test Results',
           type: 'pdf',
           category: 'imaging',
@@ -132,7 +150,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-002-jane-smith/stress-test-results.pdf'
         },
         {
-          id: '4',
+          id: '5',
           name: 'Insurance Card - Aetna',
           type: 'pdf',
           category: 'insurance',
@@ -142,7 +160,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-002-jane-smith/insurance-card.pdf'
         },
         {
-          id: '5',
+          id: '6',
           name: 'Cardiology Consultation Notes',
           type: 'pdf',
           category: 'clinical-notes',
@@ -155,7 +173,17 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
       '003': [
         {
           id: '1',
-          name: 'Prior Authorization Request Form',
+          name: 'Prior Authorization Request Form (Original)',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '2.1 MB',
+          uploadDate: '2024-12-20',
+          status: 'ready',
+          url: '/sample-documents/cases/case-003-mike-johnson/prior-auth-form-original.pdf'
+        },
+        {
+          id: '2',
+          name: 'Prior Authorization Request Form (Extracted)',
           type: 'pdf',
           category: 'prior-auth',
           size: '289 KB',
@@ -164,7 +192,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-003-mike-johnson/prior-auth-request-form.pdf'
         },
         {
-          id: '2',
+          id: '3',
           name: 'Patient Medical History - Mike Johnson',
           type: 'pdf',
           category: 'medical-records',
@@ -174,7 +202,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-003-mike-johnson/patient-medical-history.pdf'
         },
         {
-          id: '3',
+          id: '4',
           name: 'MRI Knee Report',
           type: 'pdf',
           category: 'imaging',
@@ -184,7 +212,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.pdf'
         },
         {
-          id: '4',
+          id: '5',
           name: 'Insurance Card - UHC',
           type: 'pdf',
           category: 'insurance',
@@ -194,7 +222,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           url: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf'
         },
         {
-          id: '5',
+          id: '6',
           name: 'Physical Therapy Notes',
           type: 'pdf',
           category: 'clinical-notes',

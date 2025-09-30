@@ -8,19 +8,22 @@ This directory contains sample documents organized by case for the IPAS (Intelli
 public/sample-documents/
 ├── cases/
 │   ├── case-001-john-doe/
-│   │   ├── prior-auth-request-form.pdf
+│   │   ├── prior-auth-form-original.pdf      # Original scanned form
+│   │   ├── prior-auth-request-form.pdf       # Extracted/processed form
 │   │   ├── patient-medical-history.pdf
 │   │   ├── mri-brain-report.pdf
 │   │   ├── insurance-card.pdf
 │   │   └── physician-notes.pdf
 │   ├── case-002-jane-smith/
-│   │   ├── prior-auth-request-form.pdf
+│   │   ├── prior-auth-form-original.pdf      # Original scanned form
+│   │   ├── prior-auth-request-form.pdf       # Extracted/processed form
 │   │   ├── patient-medical-history.pdf
 │   │   ├── stress-test-results.pdf
 │   │   ├── insurance-card.pdf
 │   │   └── cardiology-notes.pdf
 │   ├── case-003-mike-johnson/
-│   │   ├── prior-auth-request-form.pdf
+│   │   ├── prior-auth-form-original.pdf      # Original scanned form
+│   │   ├── prior-auth-request-form.pdf       # Extracted/processed form
 │   │   ├── patient-medical-history.pdf
 │   │   ├── mri-knee-report.pdf
 │   │   ├── insurance-card.pdf
@@ -54,11 +57,24 @@ public/sample-documents/
 
 Each case contains documents in the following categories:
 
-- **prior-auth**: Prior authorization request forms
+- **prior-auth**: Prior authorization request forms (both original and extracted versions)
 - **medical-records**: Patient medical history and records
 - **imaging**: MRI, CT, X-ray reports and results
 - **insurance**: Insurance cards and coverage information
 - **clinical-notes**: Physician notes and consultation reports
+
+## Dual Form Structure
+
+Each case includes both versions of the prior authorization form:
+
+- **Original Form** (`prior-auth-form-original.pdf`): The scanned or uploaded original document
+- **Extracted Form** (`prior-auth-request-form.pdf`): The processed/extracted information in a clean format
+
+This allows users to:
+- View the original document as submitted
+- Review the extracted/processed information
+- Compare the original with the AI-processed version
+- Verify data extraction accuracy
 
 ## Adding New Cases
 
