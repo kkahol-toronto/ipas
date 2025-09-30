@@ -9,12 +9,6 @@ import {
   Tabs,
   Tab,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Divider,
   IconButton,
   Tooltip
@@ -23,16 +17,15 @@ import {
   Person as PersonIcon,
   LocalHospital as HospitalIcon,
   Description as DocumentIcon,
-  Image as ImageIcon,
   Psychology as PsychologyIcon,
   Psychology as AIIcon,
   Timeline as TimelineIcon,
   Download as DownloadIcon,
-  Visibility as ViewIcon,
   Edit as EditIcon,
   Share as ShareIcon
 } from '@mui/icons-material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
+import CaseDocuments from './CaseDocuments';
 
 interface CaseDetailsEnhancedProps {
   caseId: string;
@@ -252,55 +245,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         </TabPanel>
 
         <TabPanel value={tabValue} index={1}>
-          <Typography variant="h6" gutterBottom>
-            Case Documents
-          </Typography>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Document</TableCell>
-                  <TableCell>Type</TableCell>
-                  <TableCell>Size</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {caseData.documents.map((doc) => (
-                  <TableRow key={doc.id}>
-                    <TableCell>
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        {doc.type === 'PDF' ? <DocumentIcon /> : <ImageIcon />}
-                        <Typography variant="body2" sx={{ ml: 1 }}>
-                          {doc.name}
-                        </Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Chip label={doc.type} size="small" color="primary" variant="outlined" />
-                    </TableCell>
-                    <TableCell>{doc.size}</TableCell>
-                    <TableCell>
-                      <Chip
-                        label={doc.status}
-                        size="small"
-                        color={doc.status === 'Processed' ? 'success' : 'warning'}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <IconButton size="small">
-                        <ViewIcon />
-                      </IconButton>
-                      <IconButton size="small">
-                        <DownloadIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <CaseDocuments caseId={caseId} />
         </TabPanel>
 
         <TabPanel value={tabValue} index={2}>

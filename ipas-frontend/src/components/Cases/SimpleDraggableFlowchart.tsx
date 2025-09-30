@@ -43,6 +43,9 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
   const [stepDetailsOpen, setStepDetailsOpen] = useState(false);
   const [draggedStep, setDraggedStep] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationStep, setAnimationStep] = useState(0);
+  const [showMessage, setShowMessage] = useState<string>('');
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Simplified Process Steps - Only Start and Auth Intake
@@ -147,8 +150,59 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
   }, [draggedStep, dragOffset, handleMouseMove]);
 
   const handleStepClick = (step: ProcessStep) => {
-    setSelectedStep(step);
-    setStepDetailsOpen(true);
+    if (step.id === 'start' && step.status === 'completed') {
+      // Start the animation sequence
+      startAnimationSequence();
+    } else {
+      setSelectedStep(step);
+      setStepDetailsOpen(true);
+    }
+  };
+
+  const startAnimationSequence = () => {
+    setIsAnimating(true);
+    setAnimationStep(0);
+    setShowMessage('');
+
+    // Step 1: Show case number
+    setTimeout(() => {
+      setShowMessage(`Case #${caseId} Generated`);
+      setAnimationStep(1);
+    }, 500);
+
+    // Step 2: Show initial data collection
+    setTimeout(() => {
+      setShowMessage('Initial Data Collection...');
+      setAnimationStep(2);
+    }, 2000);
+
+    // Step 3: Show clinical guidelines message
+    setTimeout(() => {
+      setShowMessage('Clinical Guidelines Ingested ✓');
+      setAnimationStep(3);
+    }, 3500);
+
+    // Step 4: Animate connector and transition to Auth Intake
+    setTimeout(() => {
+      setShowMessage('Connecting to Auth Intake...');
+      setAnimationStep(4);
+      
+      // Update Auth Intake status to running
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'auth-intake' 
+            ? { ...step, status: 'running' }
+            : step
+        )
+      );
+    }, 5000);
+
+    // Step 5: Complete animation
+    setTimeout(() => {
+      setShowMessage('Auth Intake Process Started');
+      setAnimationStep(5);
+      setIsAnimating(false);
+    }, 7000);
   };
 
   const renderConnector = (fromStep: ProcessStep, toStep: ProcessStep, condition?: string) => {
@@ -196,46 +250,51 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       pathData = `M ${fromX} ${fromY} L ${fromX} ${midY} L ${toX} ${midY} L ${toX} ${toY}`;
     }
     
-    const midX = (fromX + toX) / 2;
-    const midY = (fromY + toY) / 2;
-    
-    return (
-      <g key={`${fromStep.id}-${toStep.id}`}>
-        <path
-          d={pathData}
-          stroke={getStatusColor(fromStep.status)}
-          strokeWidth="2"
-          fill="none"
-          markerEnd="url(#arrowhead)"
-          style={{ 
-            filter: condition ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' : 'none',
-            cursor: 'pointer',
-            transition: 'stroke-width 0.2s ease'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.strokeWidth = '3';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.strokeWidth = '2';
-          }}
-        />
-        {condition && (
-          <text
-            x={midX}
-            y={midY - 8}
-            fontSize="10"
-            fill="#666"
-            textAnchor="middle"
-            style={{ 
-              fontWeight: 'bold',
-              filter: 'drop-shadow(0 1px 1px rgba(255,255,255,0.8))'
-            }}
-          >
-            {condition}
-          </text>
-        )}
-      </g>
-    );
+             const midX = (fromX + toX) / 2;
+             const midY = (fromY + toY) / 2;
+             
+             // Check if this connector should be animated
+             const shouldAnimate = isAnimating && animationStep >= 4 && fromStep.id === 'start' && toStep.id === 'auth-intake';
+             
+             return (
+               <g key={`${fromStep.id}-${toStep.id}`}>
+                 <path
+                   d={pathData}
+                   stroke={getStatusColor(fromStep.status)}
+                   strokeWidth={shouldAnimate ? "4" : "2"}
+                   fill="none"
+                   markerEnd="url(#arrowhead)"
+                   style={{ 
+                     filter: condition ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' : 'none',
+                     cursor: 'pointer',
+                     transition: 'stroke-width 0.2s ease',
+                     strokeDasharray: shouldAnimate ? '10,5' : 'none',
+                     animation: shouldAnimate ? 'dash 1s linear infinite' : 'none'
+                   }}
+                   onMouseEnter={(e) => {
+                     e.currentTarget.style.strokeWidth = '3';
+                   }}
+                   onMouseLeave={(e) => {
+                     e.currentTarget.style.strokeWidth = shouldAnimate ? '4' : '2';
+                   }}
+                 />
+                 {condition && (
+                   <text
+                     x={midX}
+                     y={midY - 8}
+                     fontSize="10"
+                     fill="#666"
+                     textAnchor="middle"
+                     style={{ 
+                       fontWeight: 'bold',
+                       filter: 'drop-shadow(0 1px 1px rgba(255,255,255,0.8))'
+                     }}
+                   >
+                     {condition}
+                   </text>
+                 )}
+               </g>
+             );
   };
 
   return (
@@ -250,6 +309,30 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             <Chip label="1/2 Steps Complete" color="info" size="small" />
           </Box>
         </Box>
+
+        {/* Animation Message Display */}
+        {showMessage && (
+          <Box sx={{ 
+            mb: 3, 
+            p: 2, 
+            backgroundColor: animationStep >= 3 ? '#e8f5e8' : '#fff3cd',
+            border: `2px solid ${animationStep >= 3 ? '#4caf50' : '#ff9800'}`,
+            borderRadius: 2,
+            textAlign: 'center',
+            animation: 'pulse 0.5s ease-in-out'
+          }}>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                color: animationStep >= 3 ? '#2e7d32' : '#e65100',
+                fontWeight: 'bold',
+                animation: animationStep >= 4 ? 'flash 0.5s ease-in-out infinite alternate' : 'none'
+              }}
+            >
+              {showMessage}
+            </Typography>
+          </Box>
+        )}
 
         {/* Simple Draggable Flowchart */}
         <Box 
@@ -278,6 +361,25 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                   fill="#666"
                 />
               </marker>
+              <style>
+                {`
+                  @keyframes dash {
+                    to {
+                      stroke-dashoffset: -15;
+                    }
+                  }
+                  @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                  }
+                  @keyframes flash {
+                    0% { opacity: 1; }
+                    50% { opacity: 0.7; }
+                    100% { opacity: 1; }
+                  }
+                `}
+              </style>
             </defs>
             
             {/* Render connectors */}
@@ -308,8 +410,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                 backgroundColor: 'white',
                 boxShadow: 2,
                 '&:hover': {
-                  boxShadow: 4,
-                  transform: 'scale(1.02)',
+                  boxShadow: step.id === 'start' && step.status === 'completed' ? 6 : 4,
+                  transform: step.id === 'start' && step.status === 'completed' ? 'scale(1.05)' : 'scale(1.02)',
                   transition: 'all 0.2s'
                 },
                 userSelect: 'none'
@@ -322,7 +424,12 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                 <Typography variant="subtitle2" sx={{ ml: 1, fontWeight: 'bold' }}>
                   {step.name}
                 </Typography>
-                <Box sx={{ ml: 'auto' }}>
+                <Box sx={{ ml: 'auto', display: 'flex', alignItems: 'center', gap: 1 }}>
+                  {step.id === 'start' && step.status === 'completed' && (
+                    <Typography variant="caption" sx={{ color: '#1976d2', fontWeight: 'bold' }}>
+                      Click to Start
+                    </Typography>
+                  )}
                   {getStatusIcon(step.status)}
                 </Box>
               </Box>
