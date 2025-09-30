@@ -32,7 +32,20 @@ interface ApprovalData {
   total: number;
 }
 
-const ApprovalStatusChart: React.FC = () => {
+interface TodayData {
+  totalCases: number;
+  pendingReview: number;
+  autoApproved: number;
+  partiallyApproved: number;
+  denied: number;
+  patientsServiced: number;
+}
+
+interface ApprovalStatusChartProps {
+  todayData: TodayData;
+}
+
+const ApprovalStatusChart: React.FC<ApprovalStatusChartProps> = ({ todayData }) => {
   const [duration, setDuration] = useState('week');
 
   // Dummy data for different time periods
@@ -40,10 +53,10 @@ const ApprovalStatusChart: React.FC = () => {
     today: [
       {
         period: 'Today',
-        approved: 8,
-        partiallyApproved: 3,
-        denied: 1,
-        total: 12
+        approved: todayData.autoApproved,
+        partiallyApproved: todayData.partiallyApproved,
+        denied: todayData.denied,
+        total: todayData.totalCases
       }
     ],
     week: [

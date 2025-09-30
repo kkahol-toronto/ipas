@@ -33,7 +33,11 @@ interface Case {
   amount: number;
 }
 
-const RecentCasesTable: React.FC = () => {
+interface RecentCasesTableProps {
+  onCaseClick?: (caseId: string) => void;
+}
+
+const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   // Dummy data for recent cases
   const cases: Case[] = [
     {
@@ -191,10 +195,20 @@ const RecentCasesTable: React.FC = () => {
                   </TableCell>
                   <TableCell>
                     <Box sx={{ display: 'flex', gap: 1 }}>
-                      <IconButton size="small" color="primary">
+                      <IconButton 
+                        size="small" 
+                        color="primary"
+                        onClick={() => onCaseClick?.(caseItem.id)}
+                        title="View Case Details"
+                      >
                         <VisibilityIcon />
                       </IconButton>
-                      <IconButton size="small" color="secondary">
+                      <IconButton 
+                        size="small" 
+                        color="secondary"
+                        onClick={() => onCaseClick?.(caseItem.id)}
+                        title="Edit Case"
+                      >
                         <EditIcon />
                       </IconButton>
                     </Box>

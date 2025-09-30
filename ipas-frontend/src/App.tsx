@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
@@ -122,6 +122,45 @@ const AppRoutes: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  useEffect(() => {
+    // Global error handler to suppress ResizeObserver errors
+    const originalError = console.error;
+    const originalWarn = console.warn;
+    
+    console.error = (...args) => {
+      if (typeof args[0] === 'string' && 
+          (args[0].includes('ResizeObserver loop completed with undelivered notifications') ||
+           args[0].includes('ResizeObserver loop limit exceeded'))) {
+        return;
+      }
+      originalError(...args);
+    };
+    
+    console.warn = (...args) => {
+      if (typeof args[0] === 'string' && 
+          args[0].includes('ResizeObserver')) {
+        return;
+      }
+      originalWarn(...args);
+    };
+
+    // Handle uncaught errors
+    const handleError = (event: ErrorEvent) => {
+      if (event.message && event.message.includes('ResizeObserver')) {
+        event.preventDefault();
+        return false;
+      }
+    };
+
+    window.addEventListener('error', handleError);
+
+    return () => {
+      console.error = originalError;
+      console.warn = originalWarn;
+      window.removeEventListener('error', handleError);
+    };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>

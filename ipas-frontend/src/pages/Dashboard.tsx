@@ -1,12 +1,37 @@
-import React from 'react';
-import { Grid, Box, Typography, Card, CardContent } from '@mui/material';
+import React, { useState } from 'react';
+import { Grid, Box, Typography, Card, CardContent, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import ApprovalStatusChart from '../components/Dashboard/ApprovalStatusChart';
 import RecentCasesTable from '../components/Dashboard/RecentCasesTable';
 import AnalyticsReports from '../components/Dashboard/AnalyticsReports';
 import GeographicHeatMap from '../components/Dashboard/GeographicHeatMap';
 import HospitalPerformance from '../components/Dashboard/HospitalPerformance';
+import CaseDetailsEnhanced from '../components/Cases/CaseDetailsEnhanced';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const Dashboard: React.FC = () => {
+  const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
+  const [caseDetailsOpen, setCaseDetailsOpen] = useState(false);
+
+  // Consistent data for today
+  const todayData = {
+    totalCases: 12,
+    pendingReview: 0, // All cases have been processed
+    autoApproved: 8,
+    partiallyApproved: 3,
+    denied: 1,
+    patientsServiced: 1247
+  };
+
+  const handleCaseClick = (caseId: string) => {
+    setSelectedCaseId(caseId);
+    setCaseDetailsOpen(true);
+  };
+
+  const handleCloseCaseDetails = () => {
+    setCaseDetailsOpen(false);
+    setSelectedCaseId(null);
+  };
+
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#1976d2', fontWeight: 'bold' }}>
@@ -26,7 +51,7 @@ const Dashboard: React.FC = () => {
                 Total Cases
               </Typography>
               <Typography variant="h3" component="div" sx={{ fontWeight: 'bold', color: '#333' }}>
-                25
+                {todayData.totalCases}
               </Typography>
             </CardContent>
           </Card>
@@ -39,7 +64,7 @@ const Dashboard: React.FC = () => {
                 Pending Review
               </Typography>
               <Typography variant="h3" component="div" sx={{ fontWeight: 'bold', color: '#333' }}>
-                12
+                {todayData.pendingReview}
               </Typography>
             </CardContent>
           </Card>
@@ -52,7 +77,7 @@ const Dashboard: React.FC = () => {
                 Auto Approved
               </Typography>
               <Typography variant="h3" component="div" sx={{ fontWeight: 'bold', color: '#333' }}>
-                13
+                {todayData.autoApproved}
               </Typography>
             </CardContent>
           </Card>
@@ -65,7 +90,7 @@ const Dashboard: React.FC = () => {
                 Denied
               </Typography>
               <Typography variant="h3" component="div" sx={{ fontWeight: 'bold', color: '#333' }}>
-                1
+                {todayData.denied}
               </Typography>
             </CardContent>
           </Card>
@@ -78,21 +103,21 @@ const Dashboard: React.FC = () => {
                 Patients Serviced
               </Typography>
               <Typography variant="h3" component="div" sx={{ fontWeight: 'bold', color: '#333' }}>
-                1,247
+                {todayData.patientsServiced.toLocaleString()}
               </Typography>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
 
-      {/* Approval Status Chart */}
-      <Box sx={{ mb: 4 }}>
-        <ApprovalStatusChart />
-      </Box>
+        {/* Approval Status Chart */}
+        <Box sx={{ mb: 4 }}>
+          <ApprovalStatusChart todayData={todayData} />
+        </Box>
 
       {/* Recent Cases Table */}
       <Box sx={{ mb: 4 }}>
-        <RecentCasesTable />
+        <RecentCasesTable onCaseClick={handleCaseClick} />
       </Box>
 
       {/* Geographic Heat Map */}
@@ -107,6 +132,28 @@ const Dashboard: React.FC = () => {
 
       {/* Analytics & Reports */}
       <AnalyticsReports />
+
+      {/* Case Details Dialog */}
+      <Dialog
+        open={caseDetailsOpen}
+        onClose={handleCloseCaseDetails}
+        maxWidth="xl"
+        fullWidth
+        PaperProps={{
+          sx: { height: '90vh' }
+        }}
+      >
+        <DialogTitle>
+          Case Details
+        </DialogTitle>
+        <DialogContent sx={{ p: 0 }}>
+          {selectedCaseId && (
+            <ErrorBoundary>
+              <CaseDetailsEnhanced caseId={selectedCaseId} />
+            </ErrorBoundary>
+          )}
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };
