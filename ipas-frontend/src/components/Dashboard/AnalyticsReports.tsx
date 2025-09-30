@@ -12,14 +12,12 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
-  Paper
+  TableRow
 } from '@mui/material';
 import {
   TrendingUp as TrendingUpIcon,
   TrendingDown as TrendingDownIcon,
-  Assessment as AssessmentIcon,
-  Speed as SpeedIcon
+  Assessment as AssessmentIcon
 } from '@mui/icons-material';
 
 const AnalyticsReports: React.FC = () => {

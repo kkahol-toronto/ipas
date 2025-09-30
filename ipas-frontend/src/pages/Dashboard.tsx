@@ -3,6 +3,8 @@ import { Grid, Box, Typography, Card, CardContent } from '@mui/material';
 import ApprovalStatusChart from '../components/Dashboard/ApprovalStatusChart';
 import RecentCasesTable from '../components/Dashboard/RecentCasesTable';
 import AnalyticsReports from '../components/Dashboard/AnalyticsReports';
+import GeographicHeatMap from '../components/Dashboard/GeographicHeatMap';
+import HospitalPerformance from '../components/Dashboard/HospitalPerformance';
 
 const Dashboard: React.FC = () => {
   return (
@@ -68,6 +70,19 @@ const Dashboard: React.FC = () => {
             </CardContent>
           </Card>
         </Grid>
+        
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <Card sx={{ textAlign: 'center', backgroundColor: '#e8f5e8' }}>
+            <CardContent>
+              <Typography variant="h6" sx={{ color: '#2e7d32' }} gutterBottom>
+                Patients Serviced
+              </Typography>
+              <Typography variant="h3" component="div" sx={{ fontWeight: 'bold', color: '#333' }}>
+                1,247
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
 
       {/* Approval Status Chart */}
@@ -78,6 +93,16 @@ const Dashboard: React.FC = () => {
       {/* Recent Cases Table */}
       <Box sx={{ mb: 4 }}>
         <RecentCasesTable />
+      </Box>
+
+      {/* Geographic Heat Map */}
+      <Box sx={{ mb: 4 }}>
+        <GeographicHeatMap />
+      </Box>
+
+      {/* Hospital Performance */}
+      <Box sx={{ mb: 4 }}>
+        <HospitalPerformance />
       </Box>
 
       {/* Analytics & Reports */}

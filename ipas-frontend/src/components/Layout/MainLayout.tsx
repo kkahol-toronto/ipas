@@ -12,10 +12,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const handleSidebarToggle = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
   const handleSidebarClose = () => {
     setSidebarOpen(false);
   };
