@@ -10,7 +10,13 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  Paper
+  Paper,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  ButtonGroup
 } from '@mui/material';
 import {
   PlayArrow as StartIcon,
@@ -20,7 +26,12 @@ import {
   Error as ErrorIcon,
   Schedule as PendingIcon,
   Gavel as DecisionIcon,
-  Download as DownloadIcon
+  Download as DownloadIcon,
+  Chat as ChatIcon,
+  Send as SendIcon,
+  ThumbUp as ThumbUpIcon,
+  ThumbDown as ThumbDownIcon,
+  Remove as RemoveIcon
 } from '@mui/icons-material';
 
 interface ProcessStep {
@@ -48,6 +59,12 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
   const [animationStep, setAnimationStep] = useState(0);
   const [showMessage, setShowMessage] = useState<string>('');
   const [sessionLoaded, setSessionLoaded] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
+  const [chatInput, setChatInput] = useState('');
+  const [decisionDialogOpen, setDecisionDialogOpen] = useState(false);
+  const [selectedDecision, setSelectedDecision] = useState<'approve' | 'partial' | 'decline' | null>(null);
+  const [justification, setJustification] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Get initial process steps based on case ID
@@ -793,7 +810,13 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 5000);
 
     setTimeout(() => {
-      setShowMessage('✓ Gold status detected - Premium coverage');
+      if (caseId === 'PA-2024-001') {
+        setShowMessage('✓ Gold status detected - Premium coverage');
+      } else if (caseId === 'PA-2024-002') {
+        setShowMessage('✓ Standard coverage - No gold status');
+      } else {
+        setShowMessage('✓ Insurance status verified');
+      }
       setAnimationStep(23);
     }, 6000);
 
@@ -804,7 +827,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 7000);
 
     setTimeout(() => {
-      setShowMessage('✓ High priority assigned');
+      if (caseId === 'PA-2024-002') {
+        setShowMessage('✓ High priority assigned (Amount > $5,000)');
+      } else {
+        setShowMessage('✓ High priority assigned');
+      }
       setAnimationStep(25);
     }, 8000);
 
@@ -815,7 +842,14 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 9000);
 
     setTimeout(() => {
-      setShowMessage('🎉 AUTOMATED APPROVAL - Case approved!');
+      // Case-specific decision
+      if (caseId === 'PA-2024-001') {
+        setShowMessage('🎉 AUTOMATED APPROVAL - Case approved!');
+      } else if (caseId === 'PA-2024-002') {
+        setShowMessage('⚠️ Requires Additional Review - High amount, standard coverage');
+      } else {
+        setShowMessage('✓ Auth Triage completed');
+      }
       setAnimationStep(27);
       
       // Update Auth Triage status to completed
@@ -827,25 +861,37 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         )
       );
       
-      // Automatically proceed to Provider Notification after a short delay
+      // Route to next stage based on case
       setTimeout(() => {
-        setShowMessage('Proceeding to Provider Notification...');
-        setAnimationStep(28);
-        
-        // Update Provider Notification to running status
-        setProcessSteps(prev => 
-          prev.map(step => 
-            step.id === 'provider-notification' 
-              ? { ...step, status: 'running' }
-              : step
-          )
-        );
-        
-        // Keep animation active for 2 more seconds while transitioning
-        setTimeout(() => {
-          // Start the Provider Notification process
-          startProviderNotificationProcess();
-        }, 2000);
+        if (caseId === 'PA-2024-001') {
+          // Case-001: Direct to Provider Notification
+          setShowMessage('Proceeding to Provider Notification...');
+          setAnimationStep(28);
+          setProcessSteps(prev => 
+            prev.map(step => 
+              step.id === 'provider-notification' 
+                ? { ...step, status: 'running' }
+                : step
+            )
+          );
+          setTimeout(() => {
+            startProviderNotificationProcess();
+          }, 2000);
+        } else if (caseId === 'PA-2024-002') {
+          // Case-002: Proceed to Member Verification
+          setShowMessage('Proceeding to Member Verification...');
+          setAnimationStep(28);
+          setProcessSteps(prev => 
+            prev.map(step => 
+              step.id === 'member-verification' 
+                ? { ...step, status: 'running' }
+                : step
+            )
+          );
+          setTimeout(() => {
+            startMemberVerificationProcess();
+          }, 2000);
+        }
       }, 2000);
     }, 10000);
   };
@@ -909,6 +955,382 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       
       setIsAnimating(false);
     }, 7000);
+  };
+
+  const startMemberVerificationProcess = () => {
+    setIsAnimating(true);
+    setAnimationStep(29);
+    setShowMessage('');
+
+    setTimeout(() => {
+      setShowMessage('Verifying member eligibility...');
+      setAnimationStep(30);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Member ID verified: INS987654321');
+      setAnimationStep(31);
+    }, 2000);
+
+    setTimeout(() => {
+      setShowMessage('Checking coverage details...');
+      setAnimationStep(32);
+    }, 3000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Coverage verified - Active benefits');
+      setAnimationStep(33);
+    }, 4000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Member Verification complete');
+      setAnimationStep(34);
+      
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'member-verification' 
+            ? { ...step, status: 'completed' }
+            : step
+        )
+      );
+      
+      // Proceed to Data Enrichment
+      setTimeout(() => {
+        setShowMessage('Proceeding to Data Enrichment...');
+        setAnimationStep(35);
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'data-enrichment' 
+              ? { ...step, status: 'running' }
+              : step
+          )
+        );
+        setTimeout(() => {
+          startDataEnrichmentProcess();
+        }, 2000);
+      }, 2000);
+    }, 5000);
+  };
+
+  const startDataEnrichmentProcess = () => {
+    setIsAnimating(true);
+    setAnimationStep(36);
+    setShowMessage('');
+
+    setTimeout(() => {
+      setShowMessage('⚡ Flashing clinical data...');
+      setAnimationStep(37);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowMessage('📊 Stress test results found');
+      setAnimationStep(38);
+    }, 2000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Clinical data loaded');
+      setAnimationStep(39);
+    }, 3000);
+
+    setTimeout(() => {
+      setShowMessage('Checking clinical guidelines...');
+      setAnimationStep(40);
+    }, 4000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Meets clinical guidelines for cardiac catheterization');
+      setAnimationStep(41);
+    }, 5000);
+
+    setTimeout(() => {
+      setShowMessage('Analyzing similar patient cases...');
+      setAnimationStep(42);
+    }, 6000);
+
+    setTimeout(() => {
+      setShowMessage('✓ 87% of similar patients were approved');
+      setAnimationStep(43);
+    }, 7000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Data Enrichment complete');
+      setAnimationStep(44);
+      
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'data-enrichment' 
+            ? { ...step, status: 'completed' }
+            : step
+        )
+      );
+      
+      // Proceed to Gap Assessment
+      setTimeout(() => {
+        setShowMessage('Proceeding to Gap Assessment...');
+        setAnimationStep(45);
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'gap-assessment' 
+              ? { ...step, status: 'running' }
+              : step
+          )
+        );
+        setTimeout(() => {
+          startGapAssessmentProcess();
+        }, 2000);
+      }, 2000);
+    }, 8000);
+  };
+
+  const startGapAssessmentProcess = () => {
+    setIsAnimating(true);
+    setAnimationStep(46);
+    setShowMessage('');
+
+    setTimeout(() => {
+      setShowMessage('Scanning for data gaps...');
+      setAnimationStep(47);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowMessage('Analyzing documentation completeness...');
+      setAnimationStep(48);
+    }, 2000);
+
+    setTimeout(() => {
+      setShowMessage('✓ No gaps found in documentation');
+      setAnimationStep(49);
+    }, 3000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Gap Assessment complete');
+      setAnimationStep(50);
+      
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'gap-assessment' 
+            ? { ...step, status: 'completed' }
+            : step
+        )
+      );
+      
+      // Proceed to Data Prediction
+      setTimeout(() => {
+        setShowMessage('Proceeding to Data Prediction...');
+        setAnimationStep(51);
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'data-prediction' 
+              ? { ...step, status: 'running' }
+              : step
+          )
+        );
+        setTimeout(() => {
+          startDataPredictionProcess();
+        }, 2000);
+      }, 2000);
+    }, 4000);
+  };
+
+  const startDataPredictionProcess = () => {
+    setIsAnimating(true);
+    setAnimationStep(52);
+    setShowMessage('');
+
+    setTimeout(() => {
+      setShowMessage('Assembling clinical notes...');
+      setAnimationStep(53);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowMessage('Running ML prediction model...');
+      setAnimationStep(54);
+    }, 2000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Prediction: Case can be APPROVED');
+      setAnimationStep(55);
+    }, 3000);
+
+    setTimeout(() => {
+      setShowMessage('💬 Opening chat for case review...');
+      setAnimationStep(56);
+      // Open chat dialog
+      setChatOpen(true);
+      setChatMessages([
+        {
+          role: 'assistant',
+          content: `I've analyzed Case PA-2024-002 (Mary Johnson - Cardiac Catheterization). Based on clinical guidelines, similar patient outcomes (87% approval rate), and medical necessity, my prediction is that this case can be APPROVED. Do you have any questions about the case?`
+        }
+      ]);
+    }, 4000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Data Prediction complete');
+      setAnimationStep(57);
+      
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'data-prediction' 
+            ? { ...step, status: 'completed' }
+            : step
+        )
+      );
+      
+      // Proceed to Clinical Summarization
+      setTimeout(() => {
+        setShowMessage('Proceeding to Clinical Summarization...');
+        setAnimationStep(58);
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'clinical-summarization' 
+              ? { ...step, status: 'running' }
+              : step
+          )
+        );
+        setTimeout(() => {
+          startClinicalSummarizationProcess();
+        }, 2000);
+      }, 2000);
+    }, 5000);
+  };
+
+  const startClinicalSummarizationProcess = () => {
+    setIsAnimating(true);
+    setAnimationStep(59);
+    setShowMessage('');
+
+    setTimeout(() => {
+      setShowMessage('Synthesizing clinical data...');
+      setAnimationStep(60);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowMessage('Generating comprehensive summary...');
+      setAnimationStep(61);
+    }, 2000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Clinical summary generated');
+      setAnimationStep(62);
+    }, 3000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Clinical Summarization complete');
+      setAnimationStep(63);
+      
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'clinical-summarization' 
+            ? { ...step, status: 'completed' }
+            : step
+        )
+      );
+      
+      // Proceed to Clinical Review Planning
+      setTimeout(() => {
+        setShowMessage('Proceeding to Clinical Review Planning...');
+        setAnimationStep(64);
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'clinical-review-planning' 
+              ? { ...step, status: 'running' }
+              : step
+          )
+        );
+        setTimeout(() => {
+          startClinicalReviewPlanningProcess();
+        }, 2000);
+      }, 2000);
+    }, 4000);
+  };
+
+  const startClinicalReviewPlanningProcess = () => {
+    setIsAnimating(true);
+    setAnimationStep(65);
+    setShowMessage('');
+
+    setTimeout(() => {
+      setShowMessage('Creating review plan...');
+      setAnimationStep(66);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Review criteria established');
+      setAnimationStep(67);
+    }, 2000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Timeline planned');
+      setAnimationStep(68);
+    }, 3000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Clinical Review Planning complete');
+      setAnimationStep(69);
+      
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'clinical-review-planning' 
+            ? { ...step, status: 'completed' }
+            : step
+        )
+      );
+      
+      // Proceed to Clinical Decisioning
+      setTimeout(() => {
+        setShowMessage('Proceeding to Clinical Decisioning...');
+        setAnimationStep(70);
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'clinical-decisioning' 
+              ? { ...step, status: 'running' }
+              : step
+          )
+        );
+        setTimeout(() => {
+          startClinicalDecisioningProcess();
+        }, 2000);
+      }, 2000);
+    }, 4000);
+  };
+
+  const startClinicalDecisioningProcess = () => {
+    setIsAnimating(true);
+    setAnimationStep(71);
+    setShowMessage('');
+
+    setTimeout(() => {
+      setShowMessage('Reviewing medical necessity...');
+      setAnimationStep(72);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowMessage('Applying clinical guidelines...');
+      setAnimationStep(73);
+    }, 2000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Recommendation: APPROVE');
+      setAnimationStep(74);
+    }, 3000);
+
+    setTimeout(() => {
+      setShowMessage('⏸️ Awaiting decision confirmation...');
+      setAnimationStep(75);
+      
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'clinical-decisioning' 
+            ? { ...step, status: 'completed' }
+            : step
+        )
+      );
+      
+      // Show decision dialog
+      setIsAnimating(false);
+      setDecisionDialogOpen(true);
+    }, 4000);
   };
 
   const clearSession = () => {
@@ -1433,6 +1855,243 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           <DialogActions>
             <Button onClick={() => setStepDetailsOpen(false)}>
               Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Chat Dialog for Data Prediction */}
+        <Dialog
+          open={chatOpen}
+          onClose={() => setChatOpen(false)}
+          maxWidth="md"
+          fullWidth
+        >
+          <DialogTitle>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <ChatIcon sx={{ mr: 1 }} />
+              <Typography variant="h6">
+                Case Discussion - PA-2024-002
+              </Typography>
+            </Box>
+          </DialogTitle>
+          <DialogContent>
+            <List sx={{ maxHeight: 400, overflow: 'auto', mb: 2 }}>
+              {chatMessages.map((msg, index) => (
+                <ListItem
+                  key={index}
+                  sx={{
+                    flexDirection: 'column',
+                    alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                    mb: 1
+                  }}
+                >
+                  <Paper
+                    sx={{
+                      p: 2,
+                      backgroundColor: msg.role === 'user' ? '#e3f2fd' : '#f5f5f5',
+                      maxWidth: '80%'
+                    }}
+                  >
+                    <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 'bold' }}>
+                      {msg.role === 'user' ? 'You' : 'AI Assistant'}
+                    </Typography>
+                    <Typography variant="body2" sx={{ mt: 0.5 }}>
+                      {msg.content}
+                    </Typography>
+                  </Paper>
+                </ListItem>
+              ))}
+            </List>
+            <Divider sx={{ mb: 2 }} />
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              <TextField
+                fullWidth
+                size="small"
+                placeholder="Ask a question about the case..."
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && chatInput.trim()) {
+                    const userMessage = chatInput.trim();
+                    setChatMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                    setChatInput('');
+                    
+                    // Simulate AI response
+                    setTimeout(() => {
+                      const responses: {[key: string]: string} = {
+                        'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 87% approval rate for similar cases supports an approval decision.',
+                        'risk': 'The risk assessment indicates a favorable outcome. Patient has stable vitals and meets all clinical criteria for the procedure.',
+                        'cost': 'The $15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
+                        'guidelines': 'The case meets all clinical guidelines for cardiac catheterization as per the American College of Cardiology standards.',
+                      };
+                      
+                      let response = responses.default;
+                      if (userMessage.toLowerCase().includes('risk')) response = responses.risk;
+                      if (userMessage.toLowerCase().includes('cost') || userMessage.toLowerCase().includes('amount')) response = responses.cost;
+                      if (userMessage.toLowerCase().includes('guideline')) response = responses.guidelines;
+                      
+                      setChatMessages(prev => [...prev, { role: 'assistant', content: response }]);
+                    }, 1000);
+                  }
+                }}
+              />
+              <Button
+                variant="contained"
+                startIcon={<SendIcon />}
+                onClick={() => {
+                  if (chatInput.trim()) {
+                    const userMessage = chatInput.trim();
+                    setChatMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+                    setChatInput('');
+                    
+                    setTimeout(() => {
+                      setChatMessages(prev => [...prev, { 
+                        role: 'assistant', 
+                        content: 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity.'
+                      }]);
+                    }, 1000);
+                  }
+                }}
+              >
+                Send
+              </Button>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setChatOpen(false)} variant="outlined">
+              Close Chat
+            </Button>
+            <Button 
+              onClick={() => {
+                setChatOpen(false);
+                // Continue to next stage
+                setTimeout(() => {
+                  setShowMessage('✓ Data Prediction complete');
+                  setProcessSteps(prev => 
+                    prev.map(step => 
+                      step.id === 'data-prediction' 
+                        ? { ...step, status: 'completed' }
+                        : step
+                    )
+                  );
+                  
+                  setTimeout(() => {
+                    setShowMessage('Proceeding to Clinical Summarization...');
+                    setProcessSteps(prev => 
+                      prev.map(step => 
+                        step.id === 'clinical-summarization' 
+                          ? { ...step, status: 'running' }
+                          : step
+                      )
+                    );
+                    setTimeout(() => {
+                      startClinicalSummarizationProcess();
+                    }, 2000);
+                  }, 2000);
+                }, 500);
+              }} 
+              variant="contained"
+              color="primary"
+            >
+              Continue to Next Stage
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Decision Dialog for Clinical Decisioning */}
+        <Dialog
+          open={decisionDialogOpen}
+          onClose={() => setDecisionDialogOpen(false)}
+          maxWidth="sm"
+          fullWidth
+        >
+          <DialogTitle>
+            <Typography variant="h6">
+              Clinical Decision Required
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <Typography variant="body2" sx={{ mb: 3 }}>
+              Recommendation: <strong>APPROVE</strong>
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 2 }}>
+              Select your decision:
+            </Typography>
+            <ButtonGroup fullWidth sx={{ mb: 3 }}>
+              <Button
+                variant={selectedDecision === 'approve' ? 'contained' : 'outlined'}
+                color="success"
+                startIcon={<ThumbUpIcon />}
+                onClick={() => setSelectedDecision('approve')}
+              >
+                Approve
+              </Button>
+              <Button
+                variant={selectedDecision === 'partial' ? 'contained' : 'outlined'}
+                color="warning"
+                startIcon={<RemoveIcon />}
+                onClick={() => setSelectedDecision('partial')}
+              >
+                Partial
+              </Button>
+              <Button
+                variant={selectedDecision === 'decline' ? 'contained' : 'outlined'}
+                color="error"
+                startIcon={<ThumbDownIcon />}
+                onClick={() => setSelectedDecision('decline')}
+              >
+                Decline
+              </Button>
+            </ButtonGroup>
+            {selectedDecision && (
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Justification (required)"
+                placeholder="Enter your justification for this decision..."
+                value={justification}
+                onChange={(e) => setJustification(e.target.value)}
+                sx={{ mt: 2 }}
+              />
+            )}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => {
+              setDecisionDialogOpen(false);
+              setSelectedDecision(null);
+              setJustification('');
+            }}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={!selectedDecision || !justification.trim()}
+              onClick={() => {
+                setDecisionDialogOpen(false);
+                setShowMessage(`✓ Decision: ${selectedDecision?.toUpperCase()}`);
+                
+                // Proceed to Provider Notification
+                setTimeout(() => {
+                  setShowMessage('Proceeding to Provider Notification...');
+                  setProcessSteps(prev => 
+                    prev.map(step => 
+                      step.id === 'provider-notification' 
+                        ? { ...step, status: 'running' }
+                        : step
+                    )
+                  );
+                  setTimeout(() => {
+                    startProviderNotificationProcess();
+                  }, 2000);
+                }, 2000);
+                
+                setSelectedDecision(null);
+                setJustification('');
+              }}
+            >
+              Confirm Decision
             </Button>
           </DialogActions>
         </Dialog>
