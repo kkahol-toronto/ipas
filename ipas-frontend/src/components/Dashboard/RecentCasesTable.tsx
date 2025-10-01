@@ -40,6 +40,32 @@ interface RecentCasesTableProps {
 }
 
 const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
+  const [caseStatuses, setCaseStatuses] = React.useState<{[key: string]: Case['status']}>({});
+
+  // Check localStorage for case completion status
+  React.useEffect(() => {
+    const checkCaseStatus = () => {
+      const statuses: {[key: string]: Case['status']} = {};
+      
+      // Check if letters were generated (indicates completion)
+      if (localStorage.getItem('ipas_letter_generated_PA-2024-001')) {
+        statuses['PA-2024-001'] = 'approved';
+      }
+      if (localStorage.getItem('ipas_letter_generated_PA-2024-002')) {
+        statuses['PA-2024-002'] = 'approved';
+      }
+      
+      setCaseStatuses(statuses);
+    };
+
+    checkCaseStatus();
+    
+    // Poll for changes every 2 seconds
+    const interval = setInterval(checkCaseStatus, 2000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   // Dummy data for recent cases
   const cases: Case[] = [
     {
@@ -156,7 +182,12 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cases.map((caseItem) => (
+              {cases.map((caseItem) => {
+                // Use dynamic status if available, otherwise use default
+                const currentStatus = caseStatuses[caseItem.id] || caseItem.status;
+                const caseWithStatus = { ...caseItem, status: currentStatus };
+                
+                return (
                 <TableRow key={caseItem.id} hover>
                   <TableCell>
                     <Typography variant="body2" fontWeight="bold">
@@ -170,7 +201,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                       {caseItem.procedure}
                     </Typography>
                   </TableCell>
-                  <TableCell>{getStatusChip(caseItem.status)}</TableCell>
+                  <TableCell>{getStatusChip(currentStatus)}</TableCell>
                   <TableCell>
                     <Box
                       sx={{
@@ -197,7 +228,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    {caseItem.status === 'approved' ? (
+                    {currentStatus === 'approved' ? (
                       <IconButton 
                         size="small" 
                         color="success"
@@ -239,7 +270,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                     </Box>
                   </TableCell>
                 </TableRow>
-              ))}
+              );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
