@@ -185,6 +185,122 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       ];
     }
     
+    // Case PA-2024-003: Partial approval workflow (coverage limit)
+    if (caseId === 'PA-2024-003') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 300, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation, guideline matching, and approval determination',
+          subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+          nextSteps: ['member-verification'],
+          position: { x: 550, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['data-enrichment'],
+          position: { x: 800, y: 50 }
+        },
+        {
+          id: 'data-enrichment',
+          name: 'Data Enrichment',
+          type: 'process',
+          status: 'pending',
+          description: 'Enrich case data with additional clinical information',
+          subSteps: ['Medical History', 'Lab Results', 'External Records'],
+          nextSteps: ['gap-assessment'],
+          position: { x: 1050, y: 50 }
+        },
+        {
+          id: 'gap-assessment',
+          name: 'Gap Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'Identify and assess data gaps',
+          subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
+          nextSteps: ['data-prediction'],
+          position: { x: 1300, y: 50 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Data Prediction',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
+          nextSteps: ['clinical-summarization'],
+          position: { x: 50, y: 250 }
+        },
+        {
+          id: 'clinical-summarization',
+          name: 'Clinical Summarization',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate comprehensive clinical summary',
+          subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['clinical-review-planning'],
+          position: { x: 300, y: 250 }
+        },
+        {
+          id: 'clinical-review-planning',
+          name: 'Clinical Review Planning',
+          type: 'process',
+          status: 'pending',
+          description: 'Plan clinical review strategy',
+          subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
+          nextSteps: ['clinical-decisioning'],
+          position: { x: 550, y: 250 }
+        },
+        {
+          id: 'clinical-decisioning',
+          name: 'Clinical Decisioning',
+          type: 'decision',
+          status: 'pending',
+          description: 'Final clinical decision on authorization',
+          subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
+          nextSteps: ['provider-notification'],
+          position: { x: 800, y: 250 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
+          nextSteps: [],
+          position: { x: 800, y: 450 }
+        }
+      ];
+    }
+    
     // Case PA-2024-001: Simple automated approval workflow (gold status)
     return [
     {
@@ -978,7 +1094,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 3000);
 
     setTimeout(() => {
-      setShowMessage('✓ Coverage verified - Active benefits');
+      if (caseId === 'PA-2024-003') {
+        setShowMessage('⚠️ Coverage limit: $4,000 for knee arthroscopy (Requested: $8,000)');
+      } else {
+        setShowMessage('✓ Coverage verified - Active benefits');
+      }
       setAnimationStep(33);
     }, 4000);
 
@@ -1038,7 +1158,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 4000);
 
     setTimeout(() => {
-      setShowMessage('✓ Meets clinical guidelines for cardiac catheterization');
+      if (caseId === 'PA-2024-003') {
+        setShowMessage('✓ Meets clinical guidelines for knee arthroscopy');
+      } else {
+        setShowMessage('✓ Meets clinical guidelines for cardiac catheterization');
+      }
       setAnimationStep(41);
     }, 5000);
 
@@ -1157,12 +1281,21 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       setAnimationStep(56);
       // Open chat dialog
       setChatOpen(true);
-      setChatMessages([
-        {
-          role: 'assistant',
-          content: `I've analyzed Case PA-2024-002 (Mary Johnson - Cardiac Catheterization). Based on clinical guidelines, similar patient outcomes (87% approval rate), and medical necessity, my prediction is that this case can be APPROVED. Do you have any questions about the case?`
-        }
-      ]);
+      if (caseId === 'PA-2024-003') {
+        setChatMessages([
+          {
+            role: 'assistant',
+            content: `I've analyzed Case PA-2024-003 (Robert Davis - Knee Arthroscopy). The procedure is medically necessary and meets clinical guidelines. However, the insurance policy has a coverage limit of $4,000 for this condition, while the requested amount is $8,000. My recommendation is PARTIAL APPROVAL for $4,000. Do you have any questions?`
+          }
+        ]);
+      } else {
+        setChatMessages([
+          {
+            role: 'assistant',
+            content: `I've analyzed Case PA-2024-002 (Mary Johnson - Cardiac Catheterization). Based on clinical guidelines, similar patient outcomes (87% approval rate), and medical necessity, my prediction is that this case can be APPROVED. Do you have any questions about the case?`
+          }
+        ]);
+      }
     }, 4000);
 
     setTimeout(() => {
@@ -1366,7 +1499,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 14000);
 
     setTimeout(() => {
-      setShowMessage('✓ Final Recommendation: APPROVE');
+      if (caseId === 'PA-2024-003') {
+        setShowMessage('✓ Final Recommendation: PARTIAL APPROVAL ($4,000 of $8,000)');
+      } else {
+        setShowMessage('✓ Final Recommendation: APPROVE');
+      }
       setAnimationStep(84);
     }, 15500);
 
@@ -2067,8 +2204,13 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           </DialogTitle>
           <DialogContent>
             <Typography variant="body2" sx={{ mb: 3 }}>
-              Recommendation: <strong>APPROVE</strong>
+              Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : 'APPROVE'}</strong>
             </Typography>
+            {caseId === 'PA-2024-003' && (
+              <Typography variant="body2" color="warning.main" sx={{ mb: 2, p: 1, bgcolor: '#fff3cd', borderRadius: 1 }}>
+                ⚠️ Insurance coverage limit: $4,000 maximum for knee arthroscopy procedures
+              </Typography>
+            )}
             <Typography variant="body2" sx={{ mb: 2 }}>
               Select your decision:
             </Typography>
