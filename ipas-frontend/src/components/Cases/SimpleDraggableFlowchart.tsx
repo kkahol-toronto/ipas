@@ -163,7 +163,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate letter and notify provider',
           subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
           nextSteps: [],
-          position: { x: 1300, y: 250 }
+          position: { x: 1050, y: 450 }
         }
       ];
     }
@@ -929,7 +929,13 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     const dx = toCenterX - fromCenterX;
     const dy = toCenterY - fromCenterY;
     
-    if (dx > 0) {
+    // Special case: Clinical Decisioning to Provider Notification (right to top)
+    if (fromStep.id === 'clinical-decisioning' && toStep.id === 'provider-notification') {
+      fromX = fromRight; // Right edge of Clinical Decisioning
+      fromY = fromStep.position.y + 85; // 85px from top
+      toX = toStep.position.x + 100; // Center top of Provider Notification
+      toY = toStep.position.y; // Top edge
+    } else if (dx > 0) {
       // Target is to the right of source - connect right side to left side
       fromX = fromRight; // Right edge of source
       toX = toLeft;      // Left edge of target
@@ -946,7 +952,12 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Calculate right-angle path
     let pathData: string;
     
-    if (Math.abs(dx) > Math.abs(dy)) {
+    // Special handling for Clinical Decisioning to Provider Notification
+    if (fromStep.id === 'clinical-decisioning' && toStep.id === 'provider-notification') {
+      // Go right, then down
+      const midX = fromX + 50; // 50px to the right
+      pathData = `M ${fromX} ${fromY} L ${midX} ${fromY} L ${midX} ${toY} L ${toX} ${toY}`;
+    } else if (Math.abs(dx) > Math.abs(dy)) {
       // Horizontal connection: go right/left first, then up/down
       const midX = fromX + (toX - fromX) / 2;
       pathData = `M ${fromX} ${fromY} L ${midX} ${fromY} L ${midX} ${toY} L ${toX} ${toY}`;
