@@ -50,8 +50,126 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
   const [sessionLoaded, setSessionLoaded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Simplified Process Steps - Only Start and Auth Intake
-  const [processSteps, setProcessSteps] = useState<ProcessStep[]>([
+  // Get initial process steps based on case ID
+  const getInitialProcessSteps = useCallback((): ProcessStep[] => {
+    // Case PA-2024-002: Complex review workflow (non-gold, high amount)
+    if (caseId === 'PA-2024-002') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 300, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation, guideline matching, and approval determination',
+          subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+          nextSteps: ['member-verification'],
+          position: { x: 550, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['data-enrichment'],
+          position: { x: 800, y: 50 }
+        },
+        {
+          id: 'data-enrichment',
+          name: 'Data Enrichment',
+          type: 'process',
+          status: 'pending',
+          description: 'Enrich case data with additional clinical information',
+          subSteps: ['Medical History', 'Lab Results', 'External Records'],
+          nextSteps: ['gap-assessment'],
+          position: { x: 1050, y: 50 }
+        },
+        {
+          id: 'gap-assessment',
+          name: 'Gap Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'Identify and assess data gaps',
+          subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
+          nextSteps: ['data-prediction'],
+          position: { x: 50, y: 250 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Data Prediction',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
+          nextSteps: ['clinical-summarization'],
+          position: { x: 300, y: 250 }
+        },
+        {
+          id: 'clinical-summarization',
+          name: 'Clinical Summarization',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate comprehensive clinical summary',
+          subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['clinical-review-planning'],
+          position: { x: 550, y: 250 }
+        },
+        {
+          id: 'clinical-review-planning',
+          name: 'Clinical Review Planning',
+          type: 'process',
+          status: 'pending',
+          description: 'Plan clinical review strategy',
+          subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
+          nextSteps: ['clinical-decisioning'],
+          position: { x: 800, y: 250 }
+        },
+        {
+          id: 'clinical-decisioning',
+          name: 'Clinical Decisioning',
+          type: 'decision',
+          status: 'pending',
+          description: 'Final clinical decision on authorization',
+          subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
+          nextSteps: ['provider-notification'],
+          position: { x: 1050, y: 250 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
+          nextSteps: [],
+          position: { x: 50, y: 450 }
+        }
+      ];
+    }
+    
+    // Case PA-2024-001: Simple automated approval workflow (gold status)
+    return [
     {
       id: 'start',
       name: 'Start',
@@ -111,7 +229,10 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       nextSteps: [],
       position: { x: 800, y: 100 }
     }
-  ]);
+    ];
+  }, [caseId]);
+
+  const [processSteps, setProcessSteps] = useState<ProcessStep[]>(getInitialProcessSteps());
 
   // Load session state from localStorage on component mount
   useEffect(() => {
@@ -130,12 +251,12 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           
           console.log('Loaded session state:', { savedSteps, savedAnimationStep, savedMessage });
           
-          // Validate that saved steps include all required steps (Start, Auth Intake, Auth Triage, Provider Notification)
-          const hasAllSteps = savedSteps.length === 4 && 
-                             savedSteps.some((s: ProcessStep) => s.id === 'start') &&
-                             savedSteps.some((s: ProcessStep) => s.id === 'auth-intake') &&
-                             savedSteps.some((s: ProcessStep) => s.id === 'auth-triage') &&
-                             savedSteps.some((s: ProcessStep) => s.id === 'provider-notification');
+          // Validate that saved steps match the current case workflow
+          const expectedSteps = getInitialProcessSteps();
+          const hasAllSteps = savedSteps.length === expectedSteps.length && 
+                             expectedSteps.every(expected => 
+                               savedSteps.some((s: ProcessStep) => s.id === expected.id)
+                             );
           
           if (hasAllSteps) {
             setProcessSteps(savedSteps);
@@ -782,68 +903,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     const sessionKey = `ipas_orchestration_${caseId}`;
     localStorage.removeItem(sessionKey);
     
-    // Reset to initial state
-    setProcessSteps([
-      {
-        id: 'start',
-        name: 'Start',
-        type: 'start',
-        status: 'pending',
-        description: 'Initiates the prior authorization case processing workflow',
-        subSteps: ['Case ID Generation', 'Initial Data Collection'],
-        nextSteps: ['auth-intake'],
-        position: { x: 50, y: 100 }
-      },
-      {
-        id: 'auth-intake',
-        name: 'Auth Intake',
-        type: 'process',
-        status: 'pending',
-        description: 'Multi-modal document ingestion and data extraction',
-        subSteps: [
-          'Email Processing',
-          'Mail Processing', 
-          'Fax Processing',
-          'Call Processing',
-          'Portal Processing',
-          'EDI/FHIR Processing',
-          'Auth ID Creation'
-        ],
-        nextSteps: ['auth-triage'],
-        position: { x: 300, y: 100 }
-      },
-      {
-        id: 'auth-triage',
-        name: 'Auth Triage',
-        type: 'process',
-        status: 'pending',
-        description: 'Data validation, guideline matching, and approval determination',
-        subSteps: [
-          'Data Completeness Check',
-          'Guideline Matching',
-          'Insurance Status Check',
-          'Priority Assignment',
-          'Approval Decision'
-        ],
-        nextSteps: ['provider-notification'],
-        position: { x: 550, y: 100 }
-      },
-      {
-        id: 'provider-notification',
-        name: 'Provider Notification',
-        type: 'process',
-        status: 'pending',
-        description: 'Generate approval letter and notify provider',
-        subSteps: [
-          'Letter Creation',
-          'Letter Generation',
-          'Provider Notification',
-          'Notification Sent'
-        ],
-        nextSteps: [],
-        position: { x: 800, y: 100 }
-      }
-    ]);
+    // Reset to initial state based on case
+    setProcessSteps(getInitialProcessSteps());
     setAnimationStep(0);
     setShowMessage('');
     setIsAnimating(false);
@@ -1005,17 +1066,19 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         <Box
           ref={containerRef}
           sx={{ 
-            height: 600, 
+            height: 700, 
             width: '100%',
-            minWidth: 1250,
+            minWidth: 1400,
             border: '1px solid #e0e0e0', 
             borderRadius: 2,
             position: 'relative',
             overflow: 'auto',
+            overflowX: 'scroll',
+            overflowY: 'scroll',
             backgroundColor: '#fafafa'
           }}
         >
-          <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0 }}>
+          <svg width="1400" height="600" style={{ position: 'absolute', top: 0, left: 0 }}>
             <defs>
               <marker
                 id="arrowhead"
