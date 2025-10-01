@@ -1285,6 +1285,9 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       setAnimationStep(56);
       // Open chat dialog
       setChatOpen(true);
+      // Pause animation - will resume when user clicks "Continue"
+      setIsAnimating(false);
+      
       if (caseId === 'PA-2024-003') {
         setChatMessages([
           {
@@ -1302,34 +1305,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       }
     }, 4000);
 
-    setTimeout(() => {
-      setShowMessage('✓ Data Prediction complete');
-      setAnimationStep(57);
-      
-      setProcessSteps(prev => 
-        prev.map(step => 
-          step.id === 'data-prediction' 
-            ? { ...step, status: 'completed' }
-            : step
-        )
-      );
-      
-      // Proceed to Clinical Summarization
-      setTimeout(() => {
-        setShowMessage('Proceeding to Clinical Summarization...');
-        setAnimationStep(58);
-        setProcessSteps(prev => 
-          prev.map(step => 
-            step.id === 'clinical-summarization' 
-              ? { ...step, status: 'running' }
-              : step
-          )
-        );
-        setTimeout(() => {
-          startClinicalSummarizationProcess();
-        }, 2000);
-      }, 2000);
-    }, 5000);
+    // Removed automatic progression - now controlled by chat dialog "Continue" button
   };
 
   const startClinicalSummarizationProcess = () => {
