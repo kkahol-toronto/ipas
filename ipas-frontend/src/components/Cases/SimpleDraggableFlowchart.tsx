@@ -1147,7 +1147,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 1000);
 
     setTimeout(() => {
-      setShowMessage('📊 Stress test results found');
+      if (caseId === 'PA-2024-003') {
+        setShowMessage('📊 X-ray and MRI results found');
+      } else {
+        setShowMessage('📊 Stress test results found');
+      }
       setAnimationStep(38);
     }, 2000);
 
@@ -1176,7 +1180,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 6000);
 
     setTimeout(() => {
-      setShowMessage('✓ 87% of similar patients were approved');
+      if (caseId === 'PA-2024-003') {
+        setShowMessage('✓ 65% of similar patients were partially approved');
+      } else {
+        setShowMessage('✓ 87% of similar patients were approved');
+      }
       setAnimationStep(43);
     }, 7000);
 
@@ -1276,7 +1284,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 2000);
 
     setTimeout(() => {
-      setShowMessage('✓ Prediction: Case can be APPROVED');
+      if (caseId === 'PA-2024-003') {
+        setShowMessage('✓ Prediction: PARTIAL APPROVAL recommended ($4,000)');
+      } else {
+        setShowMessage('✓ Prediction: Case can be APPROVED');
+      }
       setAnimationStep(55);
     }, 3000);
 
