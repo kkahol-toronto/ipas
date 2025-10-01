@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
   // Consistent data for today
   const todayData = {
     totalCases: 12,
-    pendingReview: 0, // All cases have been processed
+    pendingReview: 2,
     autoApproved: 8,
     partiallyApproved: 3,
     denied: 1,
