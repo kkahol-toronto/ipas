@@ -11,7 +11,17 @@ import {
   Paper,
   Divider,
   IconButton,
-  Tooltip
+  Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel
 } from '@mui/material';
 import {
   Person as PersonIcon,
@@ -59,6 +69,10 @@ function TabPanel(props: TabPanelProps) {
 
 const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => {
   const [tabValue, setTabValue] = useState(0);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const [selectedReviewers, setSelectedReviewers] = useState<string[]>([]);
+  const [editNotesOpen, setEditNotesOpen] = useState(false);
+  const [clinicalNotes, setClinicalNotes] = useState('');
 
   // Mock case data
   const caseData = {
@@ -153,18 +167,62 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               </Box>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
-              <Tooltip title="Download Case">
-                <IconButton>
+              <Tooltip title="Download EMR Insert JSON">
+                <IconButton
+                  onClick={() => {
+                    const emrData = {
+                      case_id: caseData.id,
+                      patient: {
+                        name: caseData.patientName,
+                        patient_id: caseData.patientId,
+                        date_of_birth: caseData.dateOfBirth,
+                        insurance: caseData.insurance,
+                        policy_number: caseData.policyNumber
+                      },
+                      provider: {
+                        name: caseData.provider,
+                        provider_id: caseData.providerId,
+                        hospital: caseData.hospital
+                      },
+                      procedure: {
+                        name: caseData.procedure,
+                        diagnosis: caseData.diagnosis,
+                        estimated_cost: caseData.estimatedCost
+                      },
+                      authorization: {
+                        status: caseData.status,
+                        priority: caseData.priority,
+                        submitted_date: caseData.submittedDate,
+                        last_updated: caseData.lastUpdated
+                      },
+                      clinical_notes: clinicalNotes || caseData.clinicalNotes.map(n => n.note).join('\n')
+                    };
+                    const blob = new Blob([JSON.stringify(emrData, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `EMR_insert_${caseData.id}.json`;
+                    link.click();
+                    URL.revokeObjectURL(url);
+                  }}
+                >
                   <DownloadIcon />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="Edit Case">
-                <IconButton>
+              <Tooltip title="Edit Clinical Notes">
+                <IconButton
+                  onClick={() => {
+                    setClinicalNotes(caseData.clinicalNotes.map(n => `[${new Date(n.timestamp).toLocaleString()}] ${n.author}:\n${n.note}`).join('\n\n'));
+                    setEditNotesOpen(true);
+                  }}
+                >
                   <EditIcon />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Share Case">
-                <IconButton>
+                <IconButton
+                  onClick={() => setShareDialogOpen(true)}
+                >
                   <ShareIcon />
                 </IconButton>
               </Tooltip>
@@ -378,6 +436,96 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           </Grid>
         </TabPanel>
       </Card>
+
+      {/* Edit Clinical Notes Dialog */}
+      <Dialog open={editNotesOpen} onClose={() => setEditNotesOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle>
+          Edit Clinical Notes - {caseData.id}
+        </DialogTitle>
+        <DialogContent>
+          <TextField
+            fullWidth
+            multiline
+            rows={12}
+            value={clinicalNotes}
+            onChange={(e) => setClinicalNotes(e.target.value)}
+            placeholder="Enter clinical notes..."
+            sx={{ mt: 2 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEditNotesOpen(false)}>Cancel</Button>
+          <Button 
+            variant="contained" 
+            onClick={() => {
+              setEditNotesOpen(false);
+              alert('Clinical notes saved successfully!');
+            }}
+          >
+            Save Notes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Share with Reviewers Dialog */}
+      <Dialog open={shareDialogOpen} onClose={() => setShareDialogOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>
+          Share Case - {caseData.id}
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="body2" sx={{ mb: 2 }}>
+            Select reviewers to share this case with:
+          </Typography>
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel>Select Reviewers</InputLabel>
+            <Select
+              multiple
+              value={selectedReviewers}
+              onChange={(e) => setSelectedReviewers(e.target.value as string[])}
+              label="Select Reviewers"
+            >
+              <MenuItem value="Dr. Sarah Wilson - Cardiologist">Dr. Sarah Wilson - Cardiologist</MenuItem>
+              <MenuItem value="Dr. Michael Chen - Medical Director">Dr. Michael Chen - Medical Director</MenuItem>
+              <MenuItem value="Dr. Emily Rodriguez - Clinical Specialist">Dr. Emily Rodriguez - Clinical Specialist</MenuItem>
+              <MenuItem value="Dr. James Thompson - Quality Assurance">Dr. James Thompson - Quality Assurance</MenuItem>
+              <MenuItem value="Dr. Lisa Anderson - Internal Medicine">Dr. Lisa Anderson - Internal Medicine</MenuItem>
+              <MenuItem value="Dr. Robert Martinez - Cardiothoracic Surgery">Dr. Robert Martinez - Cardiothoracic Surgery</MenuItem>
+            </Select>
+          </FormControl>
+          {selectedReviewers.length > 0 && (
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="caption" color="text.secondary">
+                Selected: {selectedReviewers.length} reviewer(s)
+              </Typography>
+              <Box sx={{ mt: 1 }}>
+                {selectedReviewers.map((reviewer) => (
+                  <Chip
+                    key={reviewer}
+                    label={reviewer}
+                    size="small"
+                    sx={{ mr: 1, mb: 1 }}
+                    onDelete={() => setSelectedReviewers(prev => prev.filter(r => r !== reviewer))}
+                  />
+                ))}
+              </Box>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShareDialogOpen(false)}>Cancel</Button>
+          <Button 
+            variant="contained"
+            disabled={selectedReviewers.length === 0}
+            onClick={() => {
+              setShareDialogOpen(false);
+              alert(`Case ${caseData.id} shared with ${selectedReviewers.length} reviewer(s):\n${selectedReviewers.join('\n')}`);
+              setSelectedReviewers([]);
+            }}
+          >
+            Share Case
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
