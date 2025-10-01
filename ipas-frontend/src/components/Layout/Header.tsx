@@ -53,7 +53,7 @@ const Header: React.FC = () => {
     <AppBar position="fixed" sx={{ backgroundColor: '#1976d2', zIndex: 1200 }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-          IPAS - Intelligent Prior Authorization System
+          Smart Auth - Intelligent Prior Authorization System
         </Typography>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

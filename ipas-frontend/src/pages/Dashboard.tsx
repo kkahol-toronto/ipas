@@ -60,11 +60,11 @@ const Dashboard: React.FC = () => {
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#1976d2', fontWeight: 'bold' }}>
-        IPAS Dashboard
+        Smart Auth Dashboard
       </Typography>
       
       <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-        Welcome to the Intelligent Prior Authorization System
+        Welcome to Smart Auth - Intelligent Prior Authorization System
       </Typography>
 
       {/* Letter Generation Notification */}
