@@ -945,6 +945,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-002') {
         setShowMessage('✓ High priority assigned (Amount > $5,000)');
+      } else if (caseId === 'PA-2024-003') {
+        setShowMessage('✓ Medium priority assigned');
       } else {
         setShowMessage('✓ High priority assigned');
       }
@@ -963,6 +965,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         setShowMessage('🎉 AUTOMATED APPROVAL - Case approved!');
       } else if (caseId === 'PA-2024-002') {
         setShowMessage('⚠️ Requires Additional Review - High amount, standard coverage');
+      } else if (caseId === 'PA-2024-003') {
+        setShowMessage('⚠️ Requires Additional Review - Coverage limit detected');
       } else {
         setShowMessage('✓ Auth Triage completed');
       }
@@ -993,8 +997,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           setTimeout(() => {
             startProviderNotificationProcess();
           }, 2000);
-        } else if (caseId === 'PA-2024-002') {
-          // Case-002: Proceed to Member Verification
+        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003') {
+          // Case-002 & Case-003: Proceed to Member Verification
           setShowMessage('Proceeding to Member Verification...');
           setAnimationStep(28);
           setProcessSteps(prev => 
