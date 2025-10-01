@@ -301,6 +301,82 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       ];
     }
     
+    // Case PA-2024-004: Denial workflow (missing documentation)
+    if (caseId === 'PA-2024-004') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 300, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation, guideline matching, and approval determination',
+          subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+          nextSteps: ['member-verification'],
+          position: { x: 550, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['data-enrichment'],
+          position: { x: 800, y: 50 }
+        },
+        {
+          id: 'data-enrichment',
+          name: 'Data Enrichment',
+          type: 'process',
+          status: 'pending',
+          description: 'Enrich case data with additional clinical information',
+          subSteps: ['Medical History', 'Lab Results', 'External Records'],
+          nextSteps: ['gap-assessment'],
+          position: { x: 1050, y: 50 }
+        },
+        {
+          id: 'gap-assessment',
+          name: 'Gap Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'Identify and assess data gaps',
+          subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
+          nextSteps: ['provider-notification'],
+          position: { x: 1300, y: 50 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate denial letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
+          nextSteps: [],
+          position: { x: 1300, y: 250 }
+        }
+      ];
+    }
+    
     // Case PA-2024-001: Simple automated approval workflow (gold status)
     return [
     {
@@ -997,8 +1073,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           setTimeout(() => {
             startProviderNotificationProcess();
           }, 2000);
-        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003') {
-          // Case-002 & Case-003: Proceed to Member Verification
+        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004') {
+          // Case-002, Case-003 & Case-004: Proceed to Member Verification
           setShowMessage('Proceeding to Member Verification...');
           setAnimationStep(28);
           setProcessSteps(prev => 
@@ -1023,7 +1099,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     // Step 1: Letter Creation
     setTimeout(() => {
-      setShowMessage('Creating approval letter...');
+      if (caseId === 'PA-2024-004') {
+        setShowMessage('Creating denial letter...');
+      } else {
+        setShowMessage('Creating approval letter...');
+      }
       setAnimationStep(30);
     }, 1000);
 
@@ -1039,7 +1119,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 3000);
 
     setTimeout(() => {
-      setShowMessage('✓ Approval letter generated');
+      if (caseId === 'PA-2024-004') {
+        setShowMessage('✓ Denial letter generated - Missing documentation noted');
+      } else {
+        setShowMessage('✓ Approval letter generated');
+      }
       setAnimationStep(33);
     }, 4000);
 
@@ -1056,7 +1140,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     // Step 4: Complete
     setTimeout(() => {
-      setShowMessage('🎉 Provider Notification Complete - Letter available for download!');
+      if (caseId === 'PA-2024-004') {
+        setShowMessage('❌ Authorization Denied - Letter available for download');
+      } else {
+        setShowMessage('🎉 Provider Notification Complete - Letter available for download!');
+      }
       setAnimationStep(36);
       
       // Update Provider Notification status to completed
@@ -1234,13 +1322,23 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 2000);
 
     setTimeout(() => {
-      setShowMessage('✓ No gaps found in documentation');
-      setAnimationStep(49);
+      if (caseId === 'PA-2024-004') {
+        setShowMessage('❌ GAPS FOUND: Missing critical documentation');
+        setAnimationStep(49);
+      } else {
+        setShowMessage('✓ No gaps found in documentation');
+        setAnimationStep(49);
+      }
     }, 3000);
 
     setTimeout(() => {
-      setShowMessage('✓ Gap Assessment complete');
-      setAnimationStep(50);
+      if (caseId === 'PA-2024-004') {
+        setShowMessage('❌ Missing: Documentation of prior colonoscopies and dates');
+        setAnimationStep(50);
+      } else {
+        setShowMessage('✓ Gap Assessment complete');
+        setAnimationStep(50);
+      }
       
       setProcessSteps(prev => 
         prev.map(step => 
@@ -1250,20 +1348,37 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         )
       );
       
-      // Proceed to Data Prediction
+      // Route based on case
       setTimeout(() => {
-        setShowMessage('Proceeding to Data Prediction...');
-        setAnimationStep(51);
-        setProcessSteps(prev => 
-          prev.map(step => 
-            step.id === 'data-prediction' 
-              ? { ...step, status: 'running' }
-              : step
-          )
-        );
-        setTimeout(() => {
-          startDataPredictionProcess();
-        }, 2000);
+        if (caseId === 'PA-2024-004') {
+          // Case-004: Skip to Provider Notification for denial
+          setShowMessage('Proceeding to Provider Notification (Denial)...');
+          setAnimationStep(51);
+          setProcessSteps(prev => 
+            prev.map(step => 
+              step.id === 'provider-notification' 
+                ? { ...step, status: 'running' }
+                : step
+            )
+          );
+          setTimeout(() => {
+            startProviderNotificationProcess();
+          }, 2000);
+        } else {
+          // Other cases: Proceed to Data Prediction
+          setShowMessage('Proceeding to Data Prediction...');
+          setAnimationStep(51);
+          setProcessSteps(prev => 
+            prev.map(step => 
+              step.id === 'data-prediction' 
+                ? { ...step, status: 'running' }
+                : step
+            )
+          );
+          setTimeout(() => {
+            startDataPredictionProcess();
+          }, 2000);
+        }
       }, 2000);
     }, 4000);
   };

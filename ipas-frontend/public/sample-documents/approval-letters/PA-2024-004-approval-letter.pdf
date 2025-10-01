@@ -1,0 +1,207 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/MediaBox [0 0 612 792]
+/Contents 6 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+6 0 obj
+<<
+/Length 2200
+>>
+stream
+BT
+/F1 20 Tf
+50 750 Td
+(PRIOR AUTHORIZATION DENIAL LETTER) Tj
+ET
+
+BT
+/F2 10 Tf
+50 720 Td
+(Date: January 12, 2024) Tj
+ET
+
+BT
+/F2 10 Tf
+50 700 Td
+(Case ID: PA-2024-004) Tj
+ET
+
+BT
+/F1 14 Tf
+50 670 Td
+(AUTHORIZATION DENIED - MISSING DOCUMENTATION) Tj
+ET
+
+BT
+/F2 10 Tf
+50 640 Td
+(Dear Dr. James Thompson,) Tj
+ET
+
+BT
+/F2 10 Tf
+50 610 Td
+(This letter is to inform you that the prior authorization request) Tj
+0 -15 Td
+(has been DENIED due to incomplete documentation.) Tj
+ET
+
+BT
+/F1 12 Tf
+50 560 Td
+(PATIENT INFORMATION) Tj
+ET
+
+BT
+/F2 10 Tf
+70 535 Td
+(Name: Lisa Wilson) Tj
+0 -15 Td
+(Member ID: INS2024004) Tj
+0 -15 Td
+(Date of Birth: 04/09/1980) Tj
+0 -15 Td
+(Insurance: Standard Coverage) Tj
+ET
+
+BT
+/F1 12 Tf
+50 440 Td
+(REQUESTED PROCEDURE) Tj
+ET
+
+BT
+/F2 10 Tf
+70 415 Td
+(Procedure: Colonoscopy) Tj
+0 -15 Td
+(CPT Code: 45378) Tj
+0 -15 Td
+(Diagnosis: Screening for colon cancer) Tj
+0 -15 Td
+(ICD-10 Code: Z12.11) Tj
+0 -15 Td
+(Requested Amount: $1,200.00) Tj
+ET
+
+BT
+/F1 14 Tf
+50 320 Td
+(REASON FOR DENIAL) Tj
+ET
+
+BT
+/F2 10 Tf
+70 295 Td
+(The following required documentation is MISSING:) Tj
+ET
+
+BT
+/F1 12 Tf
+70 270 Td
+(1. Documentation of prior colonoscopies) Tj
+0 -15 Td
+(2. Dates of previous colonoscopy procedures) Tj
+ET
+
+BT
+/F2 10 Tf
+70 230 Td
+(Per clinical guidelines, we require documentation of any previous) Tj
+0 -15 Td
+(colonoscopy procedures and their dates to determine the appropriate) Tj
+0 -15 Td
+(screening interval and medical necessity for this procedure.) Tj
+ET
+
+BT
+/F1 12 Tf
+50 160 Td
+(NEXT STEPS) Tj
+ET
+
+BT
+/F2 10 Tf
+70 135 Td
+(To proceed with this authorization request, please submit:) Tj
+0 -15 Td
+(1. Records of all prior colonoscopy procedures) Tj
+0 -15 Td
+(2. Exact dates of previous colonoscopies) Tj
+0 -15 Td
+(3. Pathology reports from previous procedures \(if applicable\)) Tj
+ET
+
+BT
+/F2 10 Tf
+70 75 Td
+(Once the required documentation is received, we will re-evaluate) Tj
+0 -15 Td
+(this authorization request within 48 hours.) Tj
+ET
+
+BT
+/F2 8 Tf
+50 35 Td
+(This denial is based on incomplete documentation only. You may resubmit with) Tj
+0 -10 Td
+(the required information. For questions, contact Provider Services at 1-888-XXX-XXXX.) Tj
+0 -10 Td
+(Member Services: 1-800-XXX-XXXX | Fax: 1-877-XXX-XXXX) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000000353 00000 n 
+0000000427 00000 n 
+trailer
+<<
+/Size 7
+/Root 1 0 R
+>>
+startxref
+2679
+%%EOF
