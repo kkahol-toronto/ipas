@@ -12,7 +12,17 @@ import {
   Paper,
   Chip,
   Box,
-  IconButton
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel
 } from '@mui/material';
 import {
   Visibility as VisibilityIcon,
@@ -21,7 +31,8 @@ import {
   Cancel as CancelIcon,
   Schedule as ScheduleIcon,
   Download as DownloadIcon,
-  Description as DescriptionIcon
+  Description as DescriptionIcon,
+  Share as ShareIcon
 } from '@mui/icons-material';
 
 interface Case {
@@ -41,6 +52,11 @@ interface RecentCasesTableProps {
 
 const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   const [caseStatuses, setCaseStatuses] = React.useState<{[key: string]: Case['status']}>({});
+  const [editDialogOpen, setEditDialogOpen] = React.useState(false);
+  const [selectedCase, setSelectedCase] = React.useState<Case | null>(null);
+  const [clinicalNotes, setClinicalNotes] = React.useState('');
+  const [shareDialogOpen, setShareDialogOpen] = React.useState(false);
+  const [selectedReviewers, setSelectedReviewers] = React.useState<string[]>([]);
 
   // Check localStorage for case completion status
   React.useEffect(() => {
@@ -159,6 +175,58 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
     return colors[priority];
   };
 
+  const handleDownloadEMR = (caseItem: Case) => {
+    // Get current status for this case
+    const currentCaseStatus = caseStatuses[caseItem.id] || caseItem.status;
+    
+    // Generate EMR_insert.json for the case
+    const emrData = {
+      case_id: caseItem.id,
+      patient: {
+        name: caseItem.patientName,
+        member_id: caseItem.id.replace('PA-', 'INS'),
+        date_of_birth: caseItem.id === 'PA-2024-001' ? '1975-03-15' : '1968-05-22'
+      },
+      provider: {
+        name: caseItem.provider,
+        npi: '1234567890'
+      },
+      procedure: {
+        name: caseItem.procedure,
+        cpt_code: caseItem.id === 'PA-2024-001' ? '70553' : '93458',
+        amount: caseItem.amount
+      },
+      authorization: {
+        status: currentCaseStatus,
+        priority: caseItem.priority,
+        submitted_date: caseItem.submittedDate,
+        decision_date: new Date().toISOString().split('T')[0]
+      },
+      clinical_data: {
+        diagnosis: caseItem.id === 'PA-2024-001' ? 'Headache with neurological symptoms' : 'Coronary artery disease with angina',
+        icd10_code: caseItem.id === 'PA-2024-001' ? 'G44.1' : 'I25.119',
+        clinical_notes: clinicalNotes || 'Standard clinical assessment completed'
+      }
+    };
+
+    const blob = new Blob([JSON.stringify(emrData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `EMR_insert_${caseItem.id}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const availableReviewers = [
+    'Dr. Sarah Wilson - Cardiologist',
+    'Dr. Michael Chen - Medical Director', 
+    'Dr. Emily Rodriguez - Clinical Specialist',
+    'Dr. James Thompson - Quality Assurance',
+    'Dr. Lisa Anderson - Internal Medicine',
+    'Dr. Robert Martinez - Cardiothoracic Surgery'
+  ];
+
   return (
     <Card>
       <CardContent>
@@ -262,10 +330,34 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                       <IconButton 
                         size="small" 
                         color="secondary"
-                        onClick={() => onCaseClick?.(caseItem.id)}
-                        title="Edit Case"
+                        onClick={() => {
+                          setSelectedCase(caseItem);
+                          setClinicalNotes(`Clinical notes for ${caseItem.patientName}:\n\nProcedure: ${caseItem.procedure}\nStatus: ${currentStatus}\nPriority: ${caseItem.priority}\n\nAdd your clinical observations here...`);
+                          setEditDialogOpen(true);
+                        }}
+                        title="Edit Clinical Notes"
                       >
                         <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        color="info"
+                        onClick={() => handleDownloadEMR(caseItem)}
+                        title="Download EMR Insert JSON"
+                      >
+                        <DownloadIcon />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        color="success"
+                        onClick={() => {
+                          setSelectedCase(caseItem);
+                          setSelectedReviewers([]);
+                          setShareDialogOpen(true);
+                        }}
+                        title="Share with Reviewers"
+                      >
+                        <ShareIcon />
                       </IconButton>
                     </Box>
                   </TableCell>
@@ -276,6 +368,96 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
           </Table>
         </TableContainer>
       </CardContent>
+
+      {/* Edit Clinical Notes Dialog */}
+      <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle>
+          Edit Clinical Notes - {selectedCase?.id}
+        </DialogTitle>
+        <DialogContent>
+          <TextField
+            fullWidth
+            multiline
+            rows={10}
+            value={clinicalNotes}
+            onChange={(e) => setClinicalNotes(e.target.value)}
+            placeholder="Enter clinical notes..."
+            sx={{ mt: 2 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
+          <Button 
+            variant="contained" 
+            onClick={() => {
+              setEditDialogOpen(false);
+              // In a real app, save notes to backend
+              alert('Clinical notes saved successfully!');
+            }}
+          >
+            Save Notes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Share with Reviewers Dialog */}
+      <Dialog open={shareDialogOpen} onClose={() => setShareDialogOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>
+          Share Case - {selectedCase?.id}
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="body2" sx={{ mb: 2 }}>
+            Select reviewers to share this case with:
+          </Typography>
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel>Select Reviewers</InputLabel>
+            <Select
+              multiple
+              value={selectedReviewers}
+              onChange={(e) => setSelectedReviewers(e.target.value as string[])}
+              label="Select Reviewers"
+            >
+              {availableReviewers.map((reviewer) => (
+                <MenuItem key={reviewer} value={reviewer}>
+                  {reviewer}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          {selectedReviewers.length > 0 && (
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="caption" color="text.secondary">
+                Selected: {selectedReviewers.length} reviewer(s)
+              </Typography>
+              <Box sx={{ mt: 1 }}>
+                {selectedReviewers.map((reviewer) => (
+                  <Chip
+                    key={reviewer}
+                    label={reviewer}
+                    size="small"
+                    sx={{ mr: 1, mb: 1 }}
+                    onDelete={() => setSelectedReviewers(prev => prev.filter(r => r !== reviewer))}
+                  />
+                ))}
+              </Box>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShareDialogOpen(false)}>Cancel</Button>
+          <Button 
+            variant="contained"
+            disabled={selectedReviewers.length === 0}
+            onClick={() => {
+              setShareDialogOpen(false);
+              alert(`Case ${selectedCase?.id} shared with ${selectedReviewers.length} reviewer(s):\n${selectedReviewers.join('\n')}`);
+              setSelectedReviewers([]);
+            }}
+          >
+            Share Case
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 };
