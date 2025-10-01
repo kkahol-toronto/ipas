@@ -232,7 +232,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     ];
   }, [caseId]);
 
-  const [processSteps, setProcessSteps] = useState<ProcessStep[]>(getInitialProcessSteps());
+  const [processSteps, setProcessSteps] = useState<ProcessStep[]>(() => {
+    const steps = getInitialProcessSteps();
+    console.log('Initial process steps for case', caseId, ':', steps.map(s => ({ id: s.id, position: s.position })));
+    return steps;
+  });
 
   // Load session state from localStorage on component mount
   useEffect(() => {
@@ -241,6 +245,14 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       const savedSession = localStorage.getItem(sessionKey);
       
       console.log('Loading orchestration session:', { sessionKey, savedSession });
+      
+      // Force clear old sessions for PA-2024-002 to ensure new layout loads
+      if (caseId === 'PA-2024-002' && savedSession) {
+        console.log('Clearing old PA-2024-002 session to load new 11-stage layout');
+        localStorage.removeItem(sessionKey);
+        setSessionLoaded(true);
+        return;
+      }
       
       if (savedSession) {
         try {
@@ -929,8 +941,22 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     const dx = toCenterX - fromCenterX;
     const dy = toCenterY - fromCenterY;
     
+    // Special case: Gap Assessment to Data Prediction (right to top)
+    if (fromStep.id === 'gap-assessment' && toStep.id === 'data-prediction') {
+      // Connect from right edge to top center
+      fromX = 1500; // Gap Assessment right edge (1300 + 200)
+      fromY = 135;  // Gap Assessment middle (50 + 85)
+      toX = 150;    // Data Prediction top center (50 + 100)
+      toY = 245;    // Data Prediction TOP edge - 5px above (position.y - 5)
+      console.log('Gap Assessment to Data Prediction connector:', { 
+        from: `(${fromX}, ${fromY})`, 
+        to: `(${toX}, ${toY})`,
+        fromDesc: 'Gap Assessment right edge',
+        toDesc: 'Data Prediction TOP center'
+      });
+    } 
     // Special case: Clinical Decisioning to Provider Notification (bottom to top)
-    if (fromStep.id === 'clinical-decisioning' && toStep.id === 'provider-notification') {
+    else if (fromStep.id === 'clinical-decisioning' && toStep.id === 'provider-notification') {
       fromX = fromStep.position.x + 100; // Center of Clinical Decisioning
       fromY = fromStep.position.y + 170; // Bottom edge (assuming ~170px height)
       toX = toStep.position.x + 100; // Center top of Provider Notification
@@ -952,8 +978,16 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Calculate right-angle path
     let pathData: string;
     
+    // Special handling for Gap Assessment to Data Prediction (right, down, left)
+    if (fromStep.id === 'gap-assessment' && toStep.id === 'data-prediction') {
+      // Go right 50px, down to target row, then left to target
+      const rightExtend = fromX + 50;
+      pathData = `M ${fromX} ${fromY} L ${rightExtend} ${fromY} L ${rightExtend} ${toY} L ${toX} ${toY}`;
+      console.log('Gap Assessment to Data Prediction path:', pathData);
+      console.log('This should arrive at TOP center of Data Prediction');
+    }
     // Special handling for Clinical Decisioning to Provider Notification (straight down)
-    if (fromStep.id === 'clinical-decisioning' && toStep.id === 'provider-notification') {
+    else if (fromStep.id === 'clinical-decisioning' && toStep.id === 'provider-notification') {
       // Straight vertical line from bottom to top
       pathData = `M ${fromX} ${fromY} L ${toX} ${toY}`;
     } else if (Math.abs(dx) > Math.abs(dy)) {
@@ -975,6 +1009,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
              const shouldAnimateTriageToNotification = isAnimating && animationStep >= 28 && fromStep.id === 'auth-triage' && toStep.id === 'provider-notification';
              const shouldAnimate = shouldAnimateStartToIntake || shouldAnimateIntakeToTriage || shouldAnimateTriageToNotification;
              
+             // Use downward arrowhead for Gap Assessment to Data Prediction
+             const markerType = (fromStep.id === 'gap-assessment' && toStep.id === 'data-prediction') 
+               ? 'url(#arrowhead-down)' 
+               : 'url(#arrowhead)';
+             
              return (
                <g key={`${fromStep.id}-${toStep.id}`}>
                  <path
@@ -982,19 +1021,21 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                    stroke={getStatusColor(fromStep.status)}
                    strokeWidth={shouldAnimate ? "4" : "2"}
                    fill="none"
-                   markerEnd="url(#arrowhead)"
+                   markerEnd={markerType}
                    style={{ 
                      filter: condition ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' : 'none',
                      cursor: 'pointer',
-                     transition: 'stroke-width 0.2s ease',
+                     transition: 'stroke-width 0.2s ease, stroke 0.2s ease',
                      strokeDasharray: shouldAnimate ? '10,5' : 'none',
                      animation: shouldAnimate ? 'dash 1s linear infinite' : 'none'
                    }}
                    onMouseEnter={(e) => {
                      e.currentTarget.style.strokeWidth = '3';
+                     e.currentTarget.style.stroke = '#9c27b0'; // Violet color
                    }}
                    onMouseLeave={(e) => {
                      e.currentTarget.style.strokeWidth = shouldAnimate ? '4' : '2';
+                     e.currentTarget.style.stroke = getStatusColor(fromStep.status);
                    }}
                  />
                  {condition && (
@@ -1078,17 +1119,16 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           sx={{ 
             height: 700, 
             width: '100%',
-            minWidth: 1600,
             border: '1px solid #e0e0e0', 
             borderRadius: 2,
             position: 'relative',
             overflow: 'auto',
-            overflowX: 'scroll',
-            overflowY: 'scroll',
+            overflowX: 'auto',
+            overflowY: 'auto',
             backgroundColor: '#fafafa'
           }}
         >
-          <svg width="1600" height="600" style={{ position: 'absolute', top: 0, left: 0 }}>
+          <svg width="2000" height="700" style={{ position: 'absolute', top: 0, left: 0, minWidth: '2000px' }}>
             <defs>
               <marker
                 id="arrowhead"
@@ -1100,6 +1140,19 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
               >
                 <polygon
                   points="0 0, 10 3.5, 0 7"
+                  fill="#666"
+                />
+              </marker>
+              <marker
+                id="arrowhead-down"
+                markerWidth="7"
+                markerHeight="10"
+                refX="3.5"
+                refY="0"
+                orient="360"
+              >
+                <polygon
+                  points="0 0, 3.5 10, 7 0"
                   fill="#666"
                 />
               </marker>
