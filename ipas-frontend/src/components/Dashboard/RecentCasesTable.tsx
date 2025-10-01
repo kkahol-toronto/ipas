@@ -70,6 +70,18 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       if (localStorage.getItem('ipas_letter_generated_PA-2024-002')) {
         statuses['PA-2024-002'] = 'approved';
       }
+      if (localStorage.getItem('ipas_letter_generated_PA-2024-003')) {
+        statuses['PA-2024-003'] = 'partially-approved';
+      }
+      if (localStorage.getItem('ipas_letter_generated_PA-2024-004')) {
+        statuses['PA-2024-004'] = 'denied';
+      }
+      if (localStorage.getItem('ipas_letter_generated_PA-2024-005')) {
+        statuses['PA-2024-005'] = 'approved';
+      }
+      if (localStorage.getItem('ipas_letter_generated_PA-2024-006')) {
+        statuses['PA-2024-006'] = 'denied';
+      }
       
       setCaseStatuses(statuses);
     };

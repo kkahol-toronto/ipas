@@ -1393,9 +1393,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       );
       
       // Mark letter as generated in localStorage for dashboard notification
-      if (caseId === 'PA-2024-001') {
-        localStorage.setItem('ipas_letter_generated_PA-2024-001', new Date().toISOString());
-      }
+      localStorage.setItem(`ipas_letter_generated_${caseId}`, new Date().toISOString());
       
       setIsAnimating(false);
     }, 7000);
