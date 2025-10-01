@@ -493,6 +493,122 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       ];
     }
     
+    // Case PA-2024-006: Full review workflow ending in denial (insufficient clinical justification)
+    if (caseId === 'PA-2024-006') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 300, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation, guideline matching, and approval determination',
+          subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+          nextSteps: ['member-verification'],
+          position: { x: 550, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['data-enrichment'],
+          position: { x: 800, y: 50 }
+        },
+        {
+          id: 'data-enrichment',
+          name: 'Data Enrichment',
+          type: 'process',
+          status: 'pending',
+          description: 'Enrich case data with additional clinical information',
+          subSteps: ['Medical History', 'Lab Results', 'External Records'],
+          nextSteps: ['gap-assessment'],
+          position: { x: 1050, y: 50 }
+        },
+        {
+          id: 'gap-assessment',
+          name: 'Gap Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'Identify and assess data gaps',
+          subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
+          nextSteps: ['data-prediction'],
+          position: { x: 1300, y: 50 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Data Prediction',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
+          nextSteps: ['clinical-summarization'],
+          position: { x: 50, y: 250 }
+        },
+        {
+          id: 'clinical-summarization',
+          name: 'Clinical Summarization',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate comprehensive clinical summary',
+          subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['clinical-review-planning'],
+          position: { x: 300, y: 250 }
+        },
+        {
+          id: 'clinical-review-planning',
+          name: 'Clinical Review Planning',
+          type: 'process',
+          status: 'pending',
+          description: 'Plan clinical review strategy',
+          subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
+          nextSteps: ['clinical-decisioning'],
+          position: { x: 550, y: 250 }
+        },
+        {
+          id: 'clinical-decisioning',
+          name: 'Clinical Decisioning',
+          type: 'decision',
+          status: 'pending',
+          description: 'Final clinical decision on authorization',
+          subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
+          nextSteps: ['provider-notification'],
+          position: { x: 800, y: 250 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate denial letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
+          nextSteps: [],
+          position: { x: 800, y: 450 }
+        }
+      ];
+    }
+    
     // Case PA-2024-001: Simple automated approval workflow (gold status)
     return [
     {
@@ -1189,8 +1305,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           setTimeout(() => {
             startProviderNotificationProcess();
           }, 2000);
-        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005') {
-          // Case-002, Case-003, Case-004 & Case-005: Proceed to Member Verification
+        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006') {
+          // Case-002, Case-003, Case-004, Case-005 & Case-006: Proceed to Member Verification
           setShowMessage('Proceeding to Member Verification...');
           setAnimationStep(28);
           setProcessSteps(prev => 
@@ -1215,7 +1331,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     // Step 1: Letter Creation
     setTimeout(() => {
-      if (caseId === 'PA-2024-004') {
+      if (caseId === 'PA-2024-004' || caseId === 'PA-2024-006') {
         setShowMessage('Creating denial letter...');
       } else {
         setShowMessage('Creating approval letter...');
@@ -1237,6 +1353,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-004') {
         setShowMessage('✓ Denial letter generated - Missing documentation noted');
+      } else if (caseId === 'PA-2024-006') {
+        setShowMessage('✓ Denial letter generated - Insufficient medical justification');
       } else {
         setShowMessage('✓ Approval letter generated');
       }
@@ -1258,6 +1376,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-004') {
         setShowMessage('❌ Authorization Denied - Letter available for download');
+      } else if (caseId === 'PA-2024-006') {
+        setShowMessage('❌ Authorization Denied - Insufficient Medical Justification');
       } else {
         setShowMessage('🎉 Provider Notification Complete - Letter available for download!');
       }
@@ -1355,6 +1475,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         setShowMessage('📊 X-ray and MRI results found');
       } else if (caseId === 'PA-2024-005') {
         setShowMessage('📊 Previous chest X-ray and lab results found');
+      } else if (caseId === 'PA-2024-006') {
+        setShowMessage('📊 Limited clinical data found - No prior cardiac events documented');
       } else {
         setShowMessage('📊 Stress test results found');
       }
@@ -1376,6 +1498,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         setShowMessage('✓ Meets clinical guidelines for knee arthroscopy');
       } else if (caseId === 'PA-2024-005') {
         setShowMessage('✓ Meets clinical guidelines for CT chest with contrast');
+      } else if (caseId === 'PA-2024-006') {
+        setShowMessage('⚠️ Weak clinical justification for echocardiogram');
       } else {
         setShowMessage('✓ Meets clinical guidelines for cardiac catheterization');
       }
@@ -1392,6 +1516,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         setShowMessage('✓ 65% of similar patients were partially approved');
       } else if (caseId === 'PA-2024-005') {
         setShowMessage('✓ 92% of similar patients were approved');
+      } else if (caseId === 'PA-2024-006') {
+        setShowMessage('⚠️ Only 38% of similar cases were approved');
       } else {
         setShowMessage('✓ 87% of similar patients were approved');
       }
@@ -1551,6 +1677,13 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             content: `I've analyzed Case PA-2024-005 (David Brown - CT Chest with Contrast). The imaging is medically necessary based on clinical symptoms and meets all guidelines. Similar cases show a 92% approval rate. The $1,800 cost is reasonable and within coverage. My recommendation is APPROVE. Do you have any questions about the case?`
           }
         ]);
+      } else if (caseId === 'PA-2024-006') {
+        setChatMessages([
+          {
+            role: 'assistant',
+            content: `I've analyzed Case PA-2024-006 (Jennifer Taylor - Echocardiogram). CAUTION: The clinical justification is weak. No documented prior cardiac events, symptoms are non-specific, and only 38% of similar cases were approved. The request does not clearly meet medical necessity criteria. My recommendation is LIKELY DENIAL, but this should go to clinical panel review for final determination. Do you have questions?`
+          }
+        ]);
       } else {
         setChatMessages([
           {
@@ -1686,57 +1819,95 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     // Reviewer 1: Cardiologist
     setTimeout(() => {
-      setShowMessage('👨‍⚕️ Cardiologist: Reviewing cardiac catheterization necessity...');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('👨‍⚕️ Cardiologist: Reviewing echocardiogram medical necessity...');
+      } else {
+        setShowMessage('👨‍⚕️ Cardiologist: Reviewing cardiac catheterization necessity...');
+      }
       setAnimationStep(75);
     }, 4000);
 
     setTimeout(() => {
-      setShowMessage('✓ Cardiologist recommends: APPROVE');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('❌ Cardiologist recommends: DENY - Insufficient clinical justification');
+      } else {
+        setShowMessage('✓ Cardiologist recommends: APPROVE');
+      }
       setAnimationStep(76);
     }, 5500);
 
     // Reviewer 2: Medical Director
     setTimeout(() => {
-      setShowMessage('👩‍⚕️ Medical Director: Reviewing cost-benefit analysis...');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('👩‍⚕️ Medical Director: Evaluating symptom severity and history...');
+      } else {
+        setShowMessage('👩‍⚕️ Medical Director: Reviewing cost-benefit analysis...');
+      }
       setAnimationStep(77);
     }, 6500);
 
     setTimeout(() => {
-      setShowMessage('✓ Medical Director recommends: APPROVE');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('❌ Medical Director recommends: DENY - Non-specific symptoms, no cardiac history');
+      } else {
+        setShowMessage('✓ Medical Director recommends: APPROVE');
+      }
       setAnimationStep(78);
     }, 8000);
 
     // Reviewer 3: Clinical Specialist
     setTimeout(() => {
-      setShowMessage('👨‍⚕️ Clinical Specialist: Reviewing patient history and risk factors...');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('👨‍⚕️ Clinical Specialist: Reviewing alternative diagnostic options...');
+      } else {
+        setShowMessage('👨‍⚕️ Clinical Specialist: Reviewing patient history and risk factors...');
+      }
       setAnimationStep(79);
     }, 9000);
 
     setTimeout(() => {
-      setShowMessage('✓ Clinical Specialist recommends: APPROVE');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('⚠️ Clinical Specialist recommends: UNCERTAIN - Try conservative management');
+      } else {
+        setShowMessage('✓ Clinical Specialist recommends: APPROVE');
+      }
       setAnimationStep(80);
     }, 10500);
 
     // Reviewer 4: Quality Assurance
     setTimeout(() => {
-      setShowMessage('👩‍⚕️ Quality Assurance: Reviewing compliance and guidelines...');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('👩‍⚕️ Quality Assurance: Checking clinical necessity guidelines...');
+      } else {
+        setShowMessage('👩‍⚕️ Quality Assurance: Reviewing compliance and guidelines...');
+      }
       setAnimationStep(81);
     }, 11500);
 
     setTimeout(() => {
-      setShowMessage('✓ Quality Assurance recommends: APPROVE');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('❌ Quality Assurance recommends: DENY - Does not meet clinical necessity');
+      } else {
+        setShowMessage('✓ Quality Assurance recommends: APPROVE');
+      }
       setAnimationStep(82);
     }, 13000);
 
     // Panel consensus
     setTimeout(() => {
-      setShowMessage('🎯 Panel Consensus: All 4 reviewers agree - APPROVE');
+      if (caseId === 'PA-2024-006') {
+        setShowMessage('❌ Panel Consensus: 3 of 4 reviewers recommend DENIAL (insufficient justification)');
+      } else {
+        setShowMessage('🎯 Panel Consensus: All 4 reviewers agree - APPROVE');
+      }
       setAnimationStep(83);
     }, 14000);
 
     setTimeout(() => {
       if (caseId === 'PA-2024-003') {
         setShowMessage('✓ Final Recommendation: PARTIAL APPROVAL ($4,000 of $8,000)');
+      } else if (caseId === 'PA-2024-006') {
+        setShowMessage('❌ Final Recommendation: DENY - Insufficient medical justification');
       } else {
         setShowMessage('✓ Final Recommendation: APPROVE');
       }

@@ -1,0 +1,227 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/MediaBox [0 0 612 792]
+/Contents 6 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+6 0 obj
+<<
+/Length 2800
+>>
+stream
+BT
+/F1 20 Tf
+50 750 Td
+(PRIOR AUTHORIZATION DENIAL LETTER) Tj
+ET
+
+BT
+/F2 10 Tf
+50 720 Td
+(Date: January 10, 2024) Tj
+ET
+
+BT
+/F2 10 Tf
+50 700 Td
+(Case ID: PA-2024-006) Tj
+ET
+
+BT
+/F1 14 Tf
+50 670 Td
+(AUTHORIZATION DENIED - INSUFFICIENT MEDICAL JUSTIFICATION) Tj
+ET
+
+BT
+/F2 10 Tf
+50 640 Td
+(Dear Dr. Michael Chen,) Tj
+ET
+
+BT
+/F2 10 Tf
+50 610 Td
+(This letter is to inform you that the prior authorization request) Tj
+0 -15 Td
+(has been DENIED due to insufficient clinical justification.) Tj
+ET
+
+BT
+/F1 12 Tf
+50 560 Td
+(PATIENT INFORMATION) Tj
+ET
+
+BT
+/F2 10 Tf
+70 535 Td
+(Name: Jennifer Taylor) Tj
+0 -15 Td
+(Member ID: INS2024006) Tj
+0 -15 Td
+(Date of Birth: 05/14/1987) Tj
+0 -15 Td
+(Insurance: Standard Coverage) Tj
+ET
+
+BT
+/F1 12 Tf
+50 440 Td
+(REQUESTED PROCEDURE) Tj
+ET
+
+BT
+/F2 10 Tf
+70 415 Td
+(Procedure: Echocardiogram) Tj
+0 -15 Td
+(CPT Code: 93306) Tj
+0 -15 Td
+(Diagnosis: Non-specific chest discomfort) Tj
+0 -15 Td
+(ICD-10 Code: R07.89) Tj
+0 -15 Td
+(Requested Amount: $900.00) Tj
+ET
+
+BT
+/F1 14 Tf
+50 320 Td
+(CLINICAL REVIEW PANEL DECISION) Tj
+ET
+
+BT
+/F2 10 Tf
+70 295 Td
+(A panel of four clinical reviewers evaluated this case:) Tj
+ET
+
+BT
+/F2 10 Tf
+90 270 Td
+(1. Cardiologist: DENY - Insufficient clinical justification) Tj
+0 -15 Td
+(2. Medical Director: DENY - Non-specific symptoms, no cardiac history) Tj
+0 -15 Td
+(3. Clinical Specialist: UNCERTAIN - Try conservative management first) Tj
+0 -15 Td
+(4. Quality Assurance: DENY - Does not meet clinical necessity criteria) Tj
+ET
+
+BT
+/F1 12 Tf
+70 195 Td
+(Panel Consensus: 3 of 4 reviewers recommend DENIAL) Tj
+ET
+
+BT
+/F1 12 Tf
+50 160 Td
+(REASON FOR DENIAL) Tj
+ET
+
+BT
+/F2 10 Tf
+70 135 Td
+(The following clinical deficiencies were identified:) Tj
+ET
+
+BT
+/F2 10 Tf
+90 110 Td
+(- No documented history of cardiac events or disease) Tj
+0 -15 Td
+(- Non-specific symptoms that do not meet clinical guidelines) Tj
+0 -15 Td
+(- Lack of supporting clinical evidence for echocardiogram necessity) Tj
+0 -15 Td
+(- Conservative management options not yet attempted) Tj
+0 -15 Td
+(- Only 38% of similar cases with this presentation were approved) Tj
+ET
+
+BT
+/F1 12 Tf
+50 15 Td
+(CLINICAL RATIONALE) Tj
+ET
+
+BT
+/F2 10 Tf
+70 -10 Td
+(Per established clinical guidelines, echocardiography is typically indicated for) Tj
+0 -15 Td
+(patients with documented cardiac conditions, significant symptoms, or specific) Tj
+0 -15 Td
+(clinical findings. The submitted request does not demonstrate sufficient medical) Tj
+0 -15 Td
+(necessity to warrant this imaging study at this time.) Tj
+ET
+
+BT
+/F2 8 Tf
+50 -70 Td
+(This denial is based on clinical panel review following comprehensive evaluation.) Tj
+0 -10 Td
+(You may appeal this decision with additional clinical documentation demonstrating) Tj
+0 -10 Td
+(medical necessity. Contact Provider Services at 1-888-XXX-XXXX for appeal process.) Tj
+0 -10 Td
+(Member Services: 1-800-XXX-XXXX | Fax: 1-877-XXX-XXXX) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000000353 00000 n 
+0000000427 00000 n 
+trailer
+<<
+/Size 7
+/Root 1 0 R
+>>
+startxref
+3279
+%%EOF
