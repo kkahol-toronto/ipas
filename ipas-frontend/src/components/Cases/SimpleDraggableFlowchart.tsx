@@ -1311,13 +1311,68 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 2000);
 
     setTimeout(() => {
-      setShowMessage('✓ Recommendation: APPROVE');
+      setShowMessage('🏥 Convening Clinical Panel Review...');
       setAnimationStep(74);
     }, 3000);
 
+    // Reviewer 1: Cardiologist
+    setTimeout(() => {
+      setShowMessage('👨‍⚕️ Cardiologist: Reviewing cardiac catheterization necessity...');
+      setAnimationStep(75);
+    }, 4000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Cardiologist recommends: APPROVE');
+      setAnimationStep(76);
+    }, 5500);
+
+    // Reviewer 2: Medical Director
+    setTimeout(() => {
+      setShowMessage('👩‍⚕️ Medical Director: Reviewing cost-benefit analysis...');
+      setAnimationStep(77);
+    }, 6500);
+
+    setTimeout(() => {
+      setShowMessage('✓ Medical Director recommends: APPROVE');
+      setAnimationStep(78);
+    }, 8000);
+
+    // Reviewer 3: Clinical Specialist
+    setTimeout(() => {
+      setShowMessage('👨‍⚕️ Clinical Specialist: Reviewing patient history and risk factors...');
+      setAnimationStep(79);
+    }, 9000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Clinical Specialist recommends: APPROVE');
+      setAnimationStep(80);
+    }, 10500);
+
+    // Reviewer 4: Quality Assurance
+    setTimeout(() => {
+      setShowMessage('👩‍⚕️ Quality Assurance: Reviewing compliance and guidelines...');
+      setAnimationStep(81);
+    }, 11500);
+
+    setTimeout(() => {
+      setShowMessage('✓ Quality Assurance recommends: APPROVE');
+      setAnimationStep(82);
+    }, 13000);
+
+    // Panel consensus
+    setTimeout(() => {
+      setShowMessage('🎯 Panel Consensus: All 4 reviewers agree - APPROVE');
+      setAnimationStep(83);
+    }, 14000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Final Recommendation: APPROVE');
+      setAnimationStep(84);
+    }, 15500);
+
     setTimeout(() => {
       setShowMessage('⏸️ Awaiting decision confirmation...');
-      setAnimationStep(75);
+      setAnimationStep(85);
       
       setProcessSteps(prev => 
         prev.map(step => 
@@ -1330,7 +1385,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       // Show decision dialog
       setIsAnimating(false);
       setDecisionDialogOpen(true);
-    }, 4000);
+    }, 16500);
   };
 
   const clearSession = () => {
