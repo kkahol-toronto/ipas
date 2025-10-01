@@ -163,7 +163,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate letter and notify provider',
           subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
           nextSteps: [],
-          position: { x: 50, y: 450 }
+          position: { x: 1300, y: 250 }
         }
       ];
     }
@@ -1068,7 +1068,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           sx={{ 
             height: 700, 
             width: '100%',
-            minWidth: 1400,
+            minWidth: 1600,
             border: '1px solid #e0e0e0', 
             borderRadius: 2,
             position: 'relative',
@@ -1078,7 +1078,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             backgroundColor: '#fafafa'
           }}
         >
-          <svg width="1400" height="600" style={{ position: 'absolute', top: 0, left: 0 }}>
+          <svg width="1600" height="600" style={{ position: 'absolute', top: 0, left: 0 }}>
             <defs>
               <marker
                 id="arrowhead"
