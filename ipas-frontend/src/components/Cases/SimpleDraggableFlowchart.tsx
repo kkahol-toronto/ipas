@@ -113,7 +113,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Identify and assess data gaps',
           subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
           nextSteps: ['data-prediction'],
-          position: { x: 50, y: 250 }
+          position: { x: 1300, y: 50 }
         },
         {
           id: 'data-prediction',
@@ -123,7 +123,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'ML-based prediction and risk assessment',
           subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-summarization'],
-          position: { x: 300, y: 250 }
+          position: { x: 50, y: 250 }
         },
         {
           id: 'clinical-summarization',
@@ -133,7 +133,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
           nextSteps: ['clinical-review-planning'],
-          position: { x: 550, y: 250 }
+          position: { x: 300, y: 250 }
         },
         {
           id: 'clinical-review-planning',
@@ -143,7 +143,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Plan clinical review strategy',
           subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
           nextSteps: ['clinical-decisioning'],
-          position: { x: 800, y: 250 }
+          position: { x: 550, y: 250 }
         },
         {
           id: 'clinical-decisioning',
@@ -153,7 +153,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Final clinical decision on authorization',
           subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
           nextSteps: ['provider-notification'],
-          position: { x: 1050, y: 250 }
+          position: { x: 800, y: 250 }
         },
         {
           id: 'provider-notification',
@@ -163,7 +163,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate letter and notify provider',
           subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
           nextSteps: [],
-          position: { x: 1050, y: 450 }
+          position: { x: 800, y: 450 }
         }
       ];
     }
@@ -929,10 +929,10 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     const dx = toCenterX - fromCenterX;
     const dy = toCenterY - fromCenterY;
     
-    // Special case: Clinical Decisioning to Provider Notification (right to top)
+    // Special case: Clinical Decisioning to Provider Notification (bottom to top)
     if (fromStep.id === 'clinical-decisioning' && toStep.id === 'provider-notification') {
-      fromX = fromRight; // Right edge of Clinical Decisioning
-      fromY = fromStep.position.y + 85; // 85px from top
+      fromX = fromStep.position.x + 100; // Center of Clinical Decisioning
+      fromY = fromStep.position.y + 170; // Bottom edge (assuming ~170px height)
       toX = toStep.position.x + 100; // Center top of Provider Notification
       toY = toStep.position.y; // Top edge
     } else if (dx > 0) {
@@ -952,11 +952,10 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Calculate right-angle path
     let pathData: string;
     
-    // Special handling for Clinical Decisioning to Provider Notification
+    // Special handling for Clinical Decisioning to Provider Notification (straight down)
     if (fromStep.id === 'clinical-decisioning' && toStep.id === 'provider-notification') {
-      // Go right, then down
-      const midX = fromX + 50; // 50px to the right
-      pathData = `M ${fromX} ${fromY} L ${midX} ${fromY} L ${midX} ${toY} L ${toX} ${toY}`;
+      // Straight vertical line from bottom to top
+      pathData = `M ${fromX} ${fromY} L ${toX} ${toY}`;
     } else if (Math.abs(dx) > Math.abs(dy)) {
       // Horizontal connection: go right/left first, then up/down
       const midX = fromX + (toX - fromX) / 2;
