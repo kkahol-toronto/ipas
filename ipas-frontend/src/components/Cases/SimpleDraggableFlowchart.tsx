@@ -1058,14 +1058,44 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           '4': new Date().toISOString(),
           '5': new Date().toISOString()
         },
-        // Add extracted data fields for Case 001 to ensure success
+        // Add extracted data fields for all cases to ensure success
         extractedData: {
-          email: 'john.doe@email.com',
-          mail: '123 Main St, Anytown, USA',
-          fax: '+1-555-123-4567',
-          phone: '+1-555-987-6543',
-          edi_fhir: 'FHIR-R4-Resource',
-          auth_id: 'AUTH-2024-001'
+          email: caseId === 'PA-2024-001' ? 'john.doe@email.com' : 
+                 caseId === 'PA-2024-002' ? 'mary.johnson@email.com' :
+                 caseId === 'PA-2024-003' ? 'robert.davis@email.com' :
+                 caseId === 'PA-2024-004' ? 'lisa.wilson@email.com' :
+                 caseId === 'PA-2024-005' ? 'david.brown@email.com' :
+                 caseId === 'PA-2024-006' ? 'jennifer.taylor@email.com' : 'patient@email.com',
+          mail: caseId === 'PA-2024-001' ? '123 Main St, Anytown, USA' :
+                caseId === 'PA-2024-002' ? '456 Oak Ave, Springfield, USA' :
+                caseId === 'PA-2024-003' ? '789 Pine Rd, Riverside, USA' :
+                caseId === 'PA-2024-004' ? '321 Elm St, Lakeside, USA' :
+                caseId === 'PA-2024-005' ? '654 Maple Dr, Hillside, USA' :
+                caseId === 'PA-2024-006' ? '987 Cedar Ln, Valley, USA' : '123 Patient St',
+          fax: caseId === 'PA-2024-001' ? '+1-555-123-4567' :
+               caseId === 'PA-2024-002' ? '+1-555-234-5678' :
+               caseId === 'PA-2024-003' ? '+1-555-345-6789' :
+               caseId === 'PA-2024-004' ? '+1-555-456-7890' :
+               caseId === 'PA-2024-005' ? '+1-555-567-8901' :
+               caseId === 'PA-2024-006' ? '+1-555-678-9012' : '+1-555-000-0000',
+          phone: caseId === 'PA-2024-001' ? '+1-555-987-6543' :
+                 caseId === 'PA-2024-002' ? '+1-555-876-5432' :
+                 caseId === 'PA-2024-003' ? '+1-555-765-4321' :
+                 caseId === 'PA-2024-004' ? '+1-555-654-3210' :
+                 caseId === 'PA-2024-005' ? '+1-555-543-2109' :
+                 caseId === 'PA-2024-006' ? '+1-555-432-1098' : '+1-555-000-0000',
+          edi_fhir: caseId === 'PA-2024-001' ? 'FHIR-R4-Resource' :
+                    caseId === 'PA-2024-002' ? 'FHIR-R4-Cardiology' :
+                    caseId === 'PA-2024-003' ? 'FHIR-R4-Orthopedic' :
+                    caseId === 'PA-2024-004' ? 'FHIR-R4-Gastroenterology' :
+                    caseId === 'PA-2024-005' ? 'FHIR-R4-Radiology' :
+                    caseId === 'PA-2024-006' ? 'FHIR-R4-Cardiology' : 'FHIR-R4-Resource',
+          auth_id: caseId === 'PA-2024-001' ? 'AUTH-2024-001' :
+                   caseId === 'PA-2024-002' ? 'AUTH-2024-002' :
+                   caseId === 'PA-2024-003' ? 'AUTH-2024-003' :
+                   caseId === 'PA-2024-004' ? 'AUTH-2024-004' :
+                   caseId === 'PA-2024-005' ? 'AUTH-2024-005' :
+                   caseId === 'PA-2024-006' ? 'AUTH-2024-006' : 'AUTH-2024-000'
         }
       };
       localStorage.setItem(storageKey, JSON.stringify(extractionData));
@@ -1177,8 +1207,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         return true;
       }
       
-      // For Case 001, ensure all fields are found for demo purposes
-      if (caseId === 'PA-2024-001' || caseId === '001') {
+      // For Case 001 and Case 002, ensure all fields are found for demo purposes
+      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002') {
         return true;
       }
       
