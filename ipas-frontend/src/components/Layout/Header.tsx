@@ -22,7 +22,7 @@ import { useCases } from '../../contexts/CaseContext';
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth();
-  const { notifications } = useCases();
+  const { notifications, markAllNotificationsRead } = useCases();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [notificationAnchor, setNotificationAnchor] = React.useState<null | HTMLElement>(null);
 
@@ -36,6 +36,8 @@ const Header: React.FC = () => {
 
   const handleNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
     setNotificationAnchor(event.currentTarget);
+    // Mark all notifications as read when the menu is opened
+    markAllNotificationsRead();
   };
 
   const handleNotificationClose = () => {

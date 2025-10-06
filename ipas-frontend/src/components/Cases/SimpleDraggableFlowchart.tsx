@@ -69,8 +69,54 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
   // Get initial process steps based on case ID
   const getInitialProcessSteps = useCallback((): ProcessStep[] => {
+    // Case PA-2024-001: Gold status - Auto approval workflow (4 stages)
+    if (caseId === 'PA-2024-001' || caseId === '001') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 300, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Gold status verification and auto-approval',
+          subSteps: ['Gold Status Check', 'Auto-Approval', 'Coverage Verification'],
+          nextSteps: ['provider-notification'],
+          position: { x: 550, y: 50 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate approval letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+          nextSteps: [],
+          position: { x: 800, y: 50 }
+        }
+      ];
+    }
+    
     // Case PA-2024-002: Complex review workflow (non-gold, high amount)
-    if (caseId === 'PA-2024-002') {
+    if (caseId === 'PA-2024-002' || caseId === '002') {
       return [
         {
           id: 'start',
@@ -670,6 +716,344 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       nextSteps: [],
       position: { x: 800, y: 100 }
     }
+    ];
+    
+    // Case PA-2024-003: Partial approval workflow (11 stages)
+    if (caseId === 'PA-2024-003' || caseId === '003') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 200, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation, guideline matching, and approval determination',
+          subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+          nextSteps: ['member-verification'],
+          position: { x: 350, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['data-enrichment'],
+          position: { x: 500, y: 50 }
+        },
+        {
+          id: 'data-enrichment',
+          name: 'Data Enrichment',
+          type: 'process',
+          status: 'pending',
+          description: 'Enhance case data with additional information',
+          subSteps: ['Data Enhancement', 'External Data Sources', 'Risk Assessment'],
+          nextSteps: ['clinical-decisioning'],
+          position: { x: 650, y: 50 }
+        },
+        {
+          id: 'clinical-decisioning',
+          name: 'Clinical Decisioning',
+          type: 'decision',
+          status: 'pending',
+          description: 'Clinical review and decision making',
+          subSteps: ['Clinical Review', 'Panel Decision', 'Coverage Limits'],
+          nextSteps: ['provider-notification'],
+          position: { x: 800, y: 50 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate partial approval letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+          nextSteps: [],
+          position: { x: 950, y: 50 }
+        }
+      ];
+    }
+    
+    // Case PA-2024-004: Denial workflow (7 stages)
+    if (caseId === 'PA-2024-004' || caseId === '004') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 200, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation and missing documentation check',
+          subSteps: ['Data Completeness', 'Documentation Check', 'Missing Docs'],
+          nextSteps: ['member-verification'],
+          position: { x: 350, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['clinical-decisioning'],
+          position: { x: 500, y: 50 }
+        },
+        {
+          id: 'clinical-decisioning',
+          name: 'Clinical Decisioning',
+          type: 'decision',
+          status: 'pending',
+          description: 'Clinical review and denial decision',
+          subSteps: ['Clinical Review', 'Missing Documentation', 'Denial Decision'],
+          nextSteps: ['provider-notification'],
+          position: { x: 650, y: 50 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate denial letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+          nextSteps: [],
+          position: { x: 800, y: 50 }
+        }
+      ];
+    }
+    
+    // Case PA-2024-005: High confidence approval workflow (11 stages)
+    if (caseId === 'PA-2024-005' || caseId === '005') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 200, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation, guideline matching, and approval determination',
+          subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+          nextSteps: ['member-verification'],
+          position: { x: 350, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['data-enrichment'],
+          position: { x: 500, y: 50 }
+        },
+        {
+          id: 'data-enrichment',
+          name: 'Data Enrichment',
+          type: 'process',
+          status: 'pending',
+          description: 'Enhance case data with additional information',
+          subSteps: ['Data Enhancement', 'External Data Sources', 'Risk Assessment'],
+          nextSteps: ['clinical-decisioning'],
+          position: { x: 650, y: 50 }
+        },
+        {
+          id: 'clinical-decisioning',
+          name: 'Clinical Decisioning',
+          type: 'decision',
+          status: 'pending',
+          description: 'Clinical review with high confidence approval',
+          subSteps: ['Clinical Review', 'High Confidence', 'Approval Decision'],
+          nextSteps: ['provider-notification'],
+          position: { x: 800, y: 50 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate approval letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+          nextSteps: [],
+          position: { x: 950, y: 50 }
+        }
+      ];
+    }
+    
+    // Case PA-2024-006: Panel disagreement denial workflow (11 stages)
+    if (caseId === 'PA-2024-006' || caseId === '006') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 200, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation, guideline matching, and approval determination',
+          subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+          nextSteps: ['member-verification'],
+          position: { x: 350, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['data-enrichment'],
+          position: { x: 500, y: 50 }
+        },
+        {
+          id: 'data-enrichment',
+          name: 'Data Enrichment',
+          type: 'process',
+          status: 'pending',
+          description: 'Enhance case data with additional information',
+          subSteps: ['Data Enhancement', 'External Data Sources', 'Risk Assessment'],
+          nextSteps: ['clinical-decisioning'],
+          position: { x: 650, y: 50 }
+        },
+        {
+          id: 'clinical-decisioning',
+          name: 'Clinical Decisioning',
+          type: 'decision',
+          status: 'pending',
+          description: 'Clinical review with panel disagreement',
+          subSteps: ['Clinical Review', 'Panel Disagreement', 'Denial Decision'],
+          nextSteps: ['provider-notification'],
+          position: { x: 800, y: 50 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate denial letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+          nextSteps: [],
+          position: { x: 950, y: 50 }
+        }
+      ];
+    }
+    
+    // Default fallback for unknown cases
+    return [
+      {
+        id: 'start',
+        name: 'Start',
+        type: 'start',
+        status: 'pending',
+        description: 'Initiates the prior authorization case processing workflow',
+        subSteps: ['Case ID Generation', 'Initial Data Collection'],
+        nextSteps: ['auth-intake'],
+        position: { x: 50, y: 50 }
+      },
+      {
+        id: 'auth-intake',
+        name: 'Auth Intake',
+        type: 'process',
+        status: 'pending',
+        description: 'Multi-modal document ingestion and data extraction',
+        subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+        nextSteps: ['auth-triage'],
+        position: { x: 300, y: 50 }
+      },
+      {
+        id: 'auth-triage',
+        name: 'Auth Triage',
+        type: 'process',
+        status: 'pending',
+        description: 'Data validation, guideline matching, and approval determination',
+        subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+        nextSteps: ['provider-notification'],
+        position: { x: 550, y: 50 }
+      },
+      {
+        id: 'provider-notification',
+        name: 'Provider Notification',
+        type: 'process',
+        status: 'pending',
+        description: 'Generate letter and notify provider',
+        subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+        nextSteps: [],
+        position: { x: 800, y: 50 }
+      }
     ];
   }, [caseId]);
 
@@ -1402,16 +1786,27 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       setAnimationStep(35);
     }, 6000);
 
-    // Step 4: Complete
+    // Step 4: Epic Integration
+    setTimeout(() => {
+      setShowMessage('Sending authorization data to Epic medical records...');
+      setAnimationStep(36);
+    }, 7000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Data transmitted to Epic successfully');
+      setAnimationStep(37);
+    }, 8000);
+
+    // Step 5: Complete
     setTimeout(() => {
       if (caseId === 'PA-2024-004') {
         setShowMessage('❌ Authorization Denied - Letter available for download');
       } else if (caseId === 'PA-2024-006') {
         setShowMessage('❌ Authorization Denied - Insufficient Medical Justification');
       } else {
-        setShowMessage('🎉 Provider Notification Complete - Letter available for download!');
+        setShowMessage('🎉 Authorization Complete - Letter available for download!');
       }
-      setAnimationStep(36);
+      setAnimationStep(38);
       
       // Update Provider Notification status to completed
       setProcessSteps(prev => 
@@ -1426,7 +1821,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       localStorage.setItem(`ipas_letter_generated_${caseId}`, new Date().toISOString());
       
       setIsAnimating(false);
-    }, 7000);
+    }, 9000);
   };
 
   const startMemberVerificationProcess = () => {
@@ -2159,6 +2554,32 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             >
               {showMessage}
             </Typography>
+            
+            {/* Epic Medical Record Link */}
+            {showMessage.includes('Data transmitted to Epic successfully') && (
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<DocumentIcon />}
+                  onClick={() => {
+                    // Open Epic medical record in new tab
+                    window.open('https://epic-demo.healthcare.com/patient/medical-records', '_blank');
+                  }}
+                  sx={{
+                    backgroundColor: '#1976d2',
+                    '&:hover': {
+                      backgroundColor: '#1565c0'
+                    }
+                  }}
+                >
+                  View Updated Medical Record in Epic
+                </Button>
+                <Typography variant="caption" sx={{ display: 'block', mt: 1, color: 'text.secondary' }}>
+                  Authorization data has been integrated into the patient's Epic medical record
+                </Typography>
+              </Box>
+            )}
           </Box>
         )}
 

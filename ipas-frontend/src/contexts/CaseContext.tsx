@@ -10,6 +10,7 @@ interface CaseContextType {
   updateCase: (caseId: string, updates: Partial<PriorAuthRequest>) => void;
   addNotification: (notification: Notification) => void;
   markNotificationRead: (notificationId: string) => void;
+  markAllNotificationsRead: () => void;
   isLoading: boolean;
 }
 
@@ -294,6 +295,12 @@ export const CaseProvider: React.FC<CaseProviderProps> = ({ children }) => {
     );
   };
 
+  const markAllNotificationsRead = () => {
+    setNotifications(prev =>
+      prev.map(notification => ({ ...notification, read: true }))
+    );
+  };
+
   return (
     <CaseContext.Provider value={{
       cases,
@@ -304,6 +311,7 @@ export const CaseProvider: React.FC<CaseProviderProps> = ({ children }) => {
       updateCase,
       addNotification,
       markNotificationRead,
+      markAllNotificationsRead,
       isLoading
     }}>
       {children}
