@@ -1,4 +1,5 @@
 {
+    "documentType": "Doctor Notes",
     "resourceType": "Bundle",
     "type": "document",
     "entry": [

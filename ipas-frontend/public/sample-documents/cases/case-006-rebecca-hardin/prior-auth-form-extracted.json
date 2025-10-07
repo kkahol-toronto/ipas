@@ -1,4 +1,5 @@
 {
+    "documentType": "Prior Authorization Request Form",
     "priorAuthorizationRequest": {
       "metadata": {
         "formType": "Outpatient Authorization Form",

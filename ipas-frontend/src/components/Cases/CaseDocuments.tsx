@@ -37,7 +37,7 @@ interface CaseDocument {
   id: string;
   name: string;
   type: 'pdf' | 'image' | 'doc' | 'other';
-  category: 'prior-auth' | 'medical-records' | 'imaging' | 'insurance' | 'clinical-notes';
+  category: 'prior-auth' | 'medical-records' | 'imaging' | 'insurance' | 'clinical-notes' | 'diagnostics';
   size: string;
   uploadDate: string;
   status: 'uploaded' | 'processing' | 'ready' | 'error';
@@ -555,6 +555,78 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           originalUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf',
           extractedUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf',
           jsonUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.json',
+          isExtracted: false
+        }
+      ],
+      'PA-2024-006': [
+        {
+          id: '1',
+          name: 'Prior Authorization Request Form',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '2.1 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+          originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+          jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-extracted.json',
+          isExtracted: false
+        },
+        {
+          id: '2',
+          name: 'Medical Records',
+          type: 'pdf',
+          category: 'medical-records',
+          size: '3.2 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf',
+          originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf',
+          jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/medical_records.json',
+          isExtracted: false
+        },
+        {
+          id: '3',
+          name: 'Polysomnography Report',
+          type: 'pdf',
+          category: 'diagnostics',
+          size: '1.8 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-006-rebecca-hardin/polysomnography.pdf',
+          originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/polysomnography.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/polysomnography.pdf',
+          jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/polysomnography.json',
+          isExtracted: false
+        },
+        {
+          id: '4',
+          name: 'Doctor Notes',
+          type: 'pdf',
+          category: 'clinical-notes',
+          size: '1.2 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-006-rebecca-hardin/doctor-notes.pdf',
+          originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/doctor-notes.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/doctor-notes.pdf',
+          jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/doctor-notes.json',
+          isExtracted: false
+        },
+        {
+          id: '5',
+          name: 'Insurance Card',
+          type: 'pdf',
+          category: 'insurance',
+          size: '0.9 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.pdf',
+          originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.pdf',
+          jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.json',
           isExtracted: false
         }
       ]

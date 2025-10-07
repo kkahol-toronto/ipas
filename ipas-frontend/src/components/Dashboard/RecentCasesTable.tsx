@@ -147,13 +147,13 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
     },
     {
       id: 'PA-2024-006',
-      patientName: 'Jennifer Taylor',
-      provider: 'Dr. Michael Chen',
-      procedure: 'Echocardiogram',
+      patientName: 'Rebecca Hardin',
+      provider: 'Amy Diane Kelly, NP',
+      procedure: 'CPAP Device Replacement',
       status: 'pending',
-      submittedDate: '2024-01-10',
+      submittedDate: '2024-04-25',
       priority: 'medium',
-      amount: 900
+      amount: 2500
     }
   ];
 

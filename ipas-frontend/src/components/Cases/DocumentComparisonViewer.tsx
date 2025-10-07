@@ -613,44 +613,138 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
 
       // Document-specific fields based on document type
       if (jsonContent.documentType === 'Prior Authorization Request Form') {
-        if (jsonContent.formData) {
-          const formFields = [];
-          if (jsonContent.formData.issuerName) formFields.push({ label: 'Issuer Name', value: jsonContent.formData.issuerName });
-          if (jsonContent.formData.issuerPhone) formFields.push({ label: 'Issuer Phone', value: jsonContent.formData.issuerPhone });
-          if (jsonContent.formData.issuerFax) formFields.push({ label: 'Issuer Fax', value: jsonContent.formData.issuerFax });
-          if (jsonContent.formData.requestDate) formFields.push({ label: 'Request Date', value: jsonContent.formData.requestDate });
-          if (jsonContent.formData.reviewType) formFields.push({ label: 'Review Type', value: jsonContent.formData.reviewType });
-          if (jsonContent.formData.requestType) formFields.push({ label: 'Request Type', value: jsonContent.formData.requestType });
+        // Handle case-006 specific structure with priorAuthorizationRequest
+        if (jsonContent.priorAuthorizationRequest) {
+          const authRequest = jsonContent.priorAuthorizationRequest;
           
-          if (formFields.length > 0) {
-            tableData.push({ category: 'Form Data', fields: formFields });
+          // Metadata
+          if (authRequest.metadata) {
+            const metadataFields = [];
+            if (authRequest.metadata.formType) metadataFields.push({ label: 'Form Type', value: authRequest.metadata.formType });
+            if (authRequest.metadata.source) metadataFields.push({ label: 'Source', value: authRequest.metadata.source });
+            if (authRequest.metadata.submissionDate) metadataFields.push({ label: 'Submission Date', value: authRequest.metadata.submissionDate });
+            if (authRequest.metadata.faxNumber) metadataFields.push({ label: 'Fax Number', value: authRequest.metadata.faxNumber });
+            if (authRequest.metadata.standardRequest !== undefined) metadataFields.push({ label: 'Standard Request', value: authRequest.metadata.standardRequest ? 'Yes' : 'No' });
+            if (authRequest.metadata.urgentRequest !== undefined) metadataFields.push({ label: 'Urgent Request', value: authRequest.metadata.urgentRequest ? 'Yes' : 'No' });
+            
+            if (metadataFields.length > 0) {
+              tableData.push({ category: 'Form Metadata', fields: metadataFields });
+            }
           }
-        }
 
-        if (jsonContent.requestedService) {
-          const serviceFields = [];
-          if (jsonContent.requestedService.procedure) serviceFields.push({ label: 'Procedure', value: jsonContent.requestedService.procedure });
-          if (jsonContent.requestedService.code) serviceFields.push({ label: 'Code', value: jsonContent.requestedService.code });
-          if (jsonContent.requestedService.startDate) serviceFields.push({ label: 'Start Date', value: jsonContent.requestedService.startDate });
-          if (jsonContent.requestedService.endDate) serviceFields.push({ label: 'End Date', value: jsonContent.requestedService.endDate });
-          if (jsonContent.requestedService.diagnosis?.description) serviceFields.push({ label: 'Diagnosis', value: jsonContent.requestedService.diagnosis.description });
-          if (jsonContent.requestedService.diagnosis?.code) serviceFields.push({ label: 'Diagnosis Code', value: jsonContent.requestedService.diagnosis.code });
-          if (jsonContent.requestedService.setting) serviceFields.push({ label: 'Setting', value: jsonContent.requestedService.setting });
-          if (jsonContent.requestedService.numberOfSessions) serviceFields.push({ label: 'Number of Sessions', value: jsonContent.requestedService.numberOfSessions });
-          
-          if (serviceFields.length > 0) {
-            tableData.push({ category: 'Requested Service', fields: serviceFields });
+          // Member Information
+          if (authRequest.memberInformation) {
+            const memberFields = [];
+            if (authRequest.memberInformation.memberId) memberFields.push({ label: 'Member ID', value: authRequest.memberInformation.memberId });
+            if (authRequest.memberInformation.firstName && authRequest.memberInformation.lastName) {
+              memberFields.push({ label: 'Name', value: `${authRequest.memberInformation.firstName} ${authRequest.memberInformation.lastName}` });
+            }
+            if (authRequest.memberInformation.dateOfBirth) memberFields.push({ label: 'Date of Birth', value: authRequest.memberInformation.dateOfBirth });
+            if (authRequest.memberInformation.address) memberFields.push({ label: 'Address', value: authRequest.memberInformation.address });
+            if (authRequest.memberInformation.phone) memberFields.push({ label: 'Phone', value: authRequest.memberInformation.phone });
+            if (authRequest.memberInformation.sex) memberFields.push({ label: 'Sex', value: authRequest.memberInformation.sex });
+            if (authRequest.memberInformation.mrn) memberFields.push({ label: 'MRN', value: authRequest.memberInformation.mrn });
+            if (authRequest.memberInformation.ssn) memberFields.push({ label: 'SSN', value: authRequest.memberInformation.ssn });
+            
+            if (authRequest.memberInformation.insurance) {
+              const insurance = authRequest.memberInformation.insurance;
+              if (insurance.payor) memberFields.push({ label: 'Insurance Payor', value: insurance.payor });
+              if (insurance.plan) memberFields.push({ label: 'Plan', value: insurance.plan });
+              if (insurance.groupNumber) memberFields.push({ label: 'Group Number', value: insurance.groupNumber });
+              if (insurance.subscriberId) memberFields.push({ label: 'Subscriber ID', value: insurance.subscriberId });
+            }
+            
+            if (memberFields.length > 0) {
+              tableData.push({ category: 'Member Information', fields: memberFields });
+            }
           }
-        }
 
-        if (jsonContent.clinicalJustification) {
-          const justificationFields = [];
-          if (jsonContent.clinicalJustification.medicalNecessity) justificationFields.push({ label: 'Medical Necessity', value: jsonContent.clinicalJustification.medicalNecessity });
-          if (jsonContent.clinicalJustification.clinicalFindings) justificationFields.push({ label: 'Clinical Findings', value: Array.isArray(jsonContent.clinicalJustification.clinicalFindings) ? jsonContent.clinicalJustification.clinicalFindings.join(', ') : jsonContent.clinicalJustification.clinicalFindings });
-          if (jsonContent.clinicalJustification.priorTreatments) justificationFields.push({ label: 'Prior Treatments', value: Array.isArray(jsonContent.clinicalJustification.priorTreatments) ? jsonContent.clinicalJustification.priorTreatments.join(', ') : jsonContent.clinicalJustification.priorTreatments });
-          
-          if (justificationFields.length > 0) {
-            tableData.push({ category: 'Clinical Justification', fields: justificationFields });
+          // Requesting Provider
+          if (authRequest.requestingProvider) {
+            const providerFields = [];
+            if (authRequest.requestingProvider.name) providerFields.push({ label: 'Provider Name', value: authRequest.requestingProvider.name });
+            if (authRequest.requestingProvider.npi) providerFields.push({ label: 'NPI', value: authRequest.requestingProvider.npi });
+            if (authRequest.requestingProvider.tin) providerFields.push({ label: 'TIN', value: authRequest.requestingProvider.tin });
+            if (authRequest.requestingProvider.phone) providerFields.push({ label: 'Phone', value: authRequest.requestingProvider.phone });
+            if (authRequest.requestingProvider.fax) providerFields.push({ label: 'Fax', value: authRequest.requestingProvider.fax });
+            if (authRequest.requestingProvider.specialty) providerFields.push({ label: 'Specialty', value: authRequest.requestingProvider.specialty });
+            
+            if (authRequest.requestingProvider.facility) {
+              const facility = authRequest.requestingProvider.facility;
+              if (facility.name) providerFields.push({ label: 'Facility Name', value: facility.name });
+              if (facility.address) providerFields.push({ label: 'Facility Address', value: facility.address });
+              if (facility.phone) providerFields.push({ label: 'Facility Phone', value: facility.phone });
+              if (facility.fax) providerFields.push({ label: 'Facility Fax', value: facility.fax });
+            }
+            
+            if (providerFields.length > 0) {
+              tableData.push({ category: 'Requesting Provider', fields: providerFields });
+            }
+          }
+
+          // Servicing Provider
+          if (authRequest.servicingProvider) {
+            const servicingFields = [];
+            if (authRequest.servicingProvider.name) servicingFields.push({ label: 'Provider Name', value: authRequest.servicingProvider.name });
+            if (authRequest.servicingProvider.facilityName) servicingFields.push({ label: 'Facility Name', value: authRequest.servicingProvider.facilityName });
+            if (authRequest.servicingProvider.npi) servicingFields.push({ label: 'NPI', value: authRequest.servicingProvider.npi });
+            if (authRequest.servicingProvider.tin) servicingFields.push({ label: 'TIN', value: authRequest.servicingProvider.tin });
+            if (authRequest.servicingProvider.phone) servicingFields.push({ label: 'Phone', value: authRequest.servicingProvider.phone });
+            if (authRequest.servicingProvider.fax) servicingFields.push({ label: 'Fax', value: authRequest.servicingProvider.fax });
+            if (authRequest.servicingProvider.notificationEmail) servicingFields.push({ label: 'Email', value: authRequest.servicingProvider.notificationEmail });
+            if (authRequest.servicingProvider.location) servicingFields.push({ label: 'Location', value: authRequest.servicingProvider.location });
+            
+            if (servicingFields.length > 0) {
+              tableData.push({ category: 'Servicing Provider', fields: servicingFields });
+            }
+          }
+
+          // Authorization Request
+          if (authRequest.authorizationRequest) {
+            const authFields = [];
+            if (authRequest.authorizationRequest.primaryProcedure) {
+              const primary = authRequest.authorizationRequest.primaryProcedure;
+              if (primary.code) authFields.push({ label: 'Primary Procedure Code', value: primary.code });
+              if (primary.description) authFields.push({ label: 'Primary Procedure Description', value: primary.description });
+              if (primary.hcpcsCategory) authFields.push({ label: 'HCPCS Category', value: primary.hcpcsCategory });
+            }
+            
+            if (authRequest.authorizationRequest.additionalProcedures && Array.isArray(authRequest.authorizationRequest.additionalProcedures)) {
+              authRequest.authorizationRequest.additionalProcedures.forEach((proc: any, index: number) => {
+                if (proc.code) authFields.push({ label: `Additional Procedure ${index + 1} Code`, value: proc.code });
+                if (proc.description) authFields.push({ label: `Additional Procedure ${index + 1} Description`, value: proc.description });
+                if (proc.hcpcsCategory) authFields.push({ label: `Additional Procedure ${index + 1} Category`, value: proc.hcpcsCategory });
+              });
+            }
+            
+            if (authRequest.authorizationRequest.diagnosis) {
+              const diagnosis = authRequest.authorizationRequest.diagnosis;
+              if (diagnosis.icd10) authFields.push({ label: 'Diagnosis Code', value: diagnosis.icd10 });
+              if (diagnosis.description) authFields.push({ label: 'Diagnosis Description', value: diagnosis.description });
+            }
+            
+            if (authRequest.authorizationRequest.startDate) authFields.push({ label: 'Start Date', value: authRequest.authorizationRequest.startDate });
+            if (authRequest.authorizationRequest.endDate) authFields.push({ label: 'End Date', value: authRequest.authorizationRequest.endDate });
+            if (authRequest.authorizationRequest.totalUnits) authFields.push({ label: 'Total Units', value: authRequest.authorizationRequest.totalUnits });
+            if (authRequest.authorizationRequest.serviceTypeCode) authFields.push({ label: 'Service Type Code', value: authRequest.authorizationRequest.serviceTypeCode });
+            if (authRequest.authorizationRequest.serviceTypeDescription) authFields.push({ label: 'Service Type Description', value: authRequest.authorizationRequest.serviceTypeDescription });
+            if (authRequest.authorizationRequest.setting) authFields.push({ label: 'Setting', value: authRequest.authorizationRequest.setting });
+            
+            if (authFields.length > 0) {
+              tableData.push({ category: 'Authorization Request', fields: authFields });
+            }
+          }
+
+          // Patient Vitals
+          if (authRequest.patientVitals) {
+            const vitalsFields = [];
+            if (authRequest.patientVitals.date) vitalsFields.push({ label: 'Date', value: authRequest.patientVitals.date });
+            if (authRequest.patientVitals.weightKg) vitalsFields.push({ label: 'Weight (kg)', value: `${authRequest.patientVitals.weightKg} kg` });
+            if (authRequest.patientVitals.weightLbs) vitalsFields.push({ label: 'Weight (lbs)', value: `${authRequest.patientVitals.weightLbs} lbs` });
+            
+            if (vitalsFields.length > 0) {
+              tableData.push({ category: 'Patient Vitals', fields: vitalsFields });
+            }
           }
         }
       }
@@ -889,6 +983,936 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
         
         if (insuranceFields.length > 0) {
           tableData.push({ category: 'Insurance Information', fields: insuranceFields });
+        }
+      }
+
+      // Case-006 specific document types
+      if (jsonContent.documentType === 'Doctor Notes' || jsonContent.documentType === 'Clinical Notes') {
+        // Handle FHIR Bundle structure for doctor notes - COMPREHENSIVE EXTRACTION
+        if (jsonContent.entry && Array.isArray(jsonContent.entry)) {
+          
+          // Patient Information
+          const patient = jsonContent.entry.find((entry: any) => entry.resource?.resourceType === 'Patient');
+          if (patient && patient.resource) {
+            const patientFields = [];
+            if (patient.resource.id) patientFields.push({ label: '🆔 Patient ID', value: patient.resource.id });
+            if (patient.resource.name && Array.isArray(patient.resource.name)) {
+              const name = patient.resource.name[0];
+              if (name.family && name.given) {
+                patientFields.push({ label: '👤 Patient Name', value: `${name.given.join(' ')} ${name.family}` });
+              }
+            }
+            if (patient.resource.gender) patientFields.push({ label: '⚧ Gender', value: patient.resource.gender });
+            if (patient.resource.birthDate) patientFields.push({ label: '🎂 Date of Birth', value: patient.resource.birthDate });
+            if (patient.resource.address && Array.isArray(patient.resource.address)) {
+              const address = patient.resource.address[0];
+              if (address.line && address.city && address.state) {
+                patientFields.push({ label: '🏠 Address', value: `${address.line.join(' ')}, ${address.city}, ${address.state} ${address.postalCode}` });
+              }
+            }
+            if (patient.resource.telecom && Array.isArray(patient.resource.telecom)) {
+              patient.resource.telecom.forEach((tel: any, idx: number) => {
+                if (tel.value) {
+                  const useLabel = tel.use ? ` (${tel.use})` : '';
+                  patientFields.push({ label: `📞 ${tel.system || 'Contact'} ${idx + 1}${useLabel}`, value: tel.value });
+                }
+              });
+            }
+            
+            if (patientFields.length > 0) {
+              tableData.push({ category: '👤 Patient Information', fields: patientFields });
+            }
+          }
+
+          // Practitioner Information
+          const practitioners = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'Practitioner');
+          if (practitioners.length > 0) {
+            const practitionerFields: Array<{ label: string; value: string }> = [];
+            practitioners.forEach((practitioner: any, index: number) => {
+              if (practitioner.resource?.id) practitionerFields.push({ label: `👨‍⚕️ Practitioner ${index + 1} ID`, value: practitioner.resource.id });
+              if (practitioner.resource?.name && Array.isArray(practitioner.resource.name)) {
+                const name = practitioner.resource.name[0];
+                const fullName = `${name.given?.join(' ') || ''} ${name.family || ''} ${name.suffix?.join(', ') || ''}`.trim();
+                practitionerFields.push({ label: `Practitioner ${index + 1} Name`, value: fullName });
+              }
+              if (practitioner.resource?.identifier && Array.isArray(practitioner.resource.identifier)) {
+                practitioner.resource.identifier.forEach((id: any, idIdx: number) => {
+                  const systemName = id.system?.includes('npi') ? 'NPI' : id.system?.includes('dea') ? 'DEA' : 'ID';
+                  if (id.value) practitionerFields.push({ label: `${systemName} ${index + 1}.${idIdx + 1}`, value: id.value });
+                });
+              }
+            });
+            
+            if (practitionerFields.length > 0) {
+              tableData.push({ category: '👨‍⚕️ Healthcare Provider', fields: practitionerFields });
+            }
+          }
+
+          // Clinical Notes Composition - MAIN DOCUMENT
+          const composition = jsonContent.entry.find((entry: any) => entry.resource?.resourceType === 'Composition');
+          if (composition && composition.resource) {
+            const comp = composition.resource;
+            
+            // Document Information
+            const docFields = [];
+            if (comp.id) docFields.push({ label: '🆔 Document ID', value: comp.id });
+            if (comp.title) docFields.push({ label: '📄 Title', value: comp.title });
+            if (comp.date) docFields.push({ label: '📅 Date', value: comp.date });
+            if (comp.status) docFields.push({ label: '📊 Status', value: comp.status.toUpperCase() });
+            if (comp.type?.text) docFields.push({ label: '📋 Note Type', value: comp.type.text });
+            if (comp.type?.coding && Array.isArray(comp.type.coding)) {
+              comp.type.coding.forEach((coding: any, codIdx: number) => {
+                if (coding.system && coding.code && coding.display) {
+                  const systemName = coding.system.includes('loinc') ? 'LOINC' : 'Code';
+                  docFields.push({ 
+                    label: `🏷️ ${systemName} Code ${codIdx + 1}`, 
+                    value: `[${coding.code}] ${coding.display}` 
+                  });
+                }
+              });
+            }
+            if (comp.subject?.reference) docFields.push({ label: '👤 Patient Reference', value: comp.subject.reference });
+            if (comp.author && Array.isArray(comp.author)) {
+              comp.author.forEach((author: any, authIdx: number) => {
+                if (author.reference) docFields.push({ label: `👨‍⚕️ Author ${authIdx + 1}`, value: author.reference });
+              });
+            }
+            
+            if (docFields.length > 0) {
+              tableData.push({ category: '📄 Clinical Note Information', fields: docFields });
+            }
+
+            // Clinical Sections (SOAP notes) - DETAILED EXTRACTION
+            if (comp.section && Array.isArray(comp.section)) {
+              comp.section.forEach((section: any, index: number) => {
+                if (section.title && section.text?.div) {
+                  const sectionFields = [];
+                  // Clean HTML tags from the text
+                  const cleanText = section.text.div.replace(/<[^>]*>/g, '').trim();
+                  sectionFields.push({ label: section.title, value: cleanText });
+                  
+                  // Also check for any nested entries in the section
+                  if (section.entry && Array.isArray(section.entry)) {
+                    section.entry.forEach((entry: any, entryIndex: number) => {
+                      if (entry.resource) {
+                        const resource = entry.resource;
+                        if (resource.resourceType === 'Observation' && resource.code?.coding) {
+                          const coding = Array.isArray(resource.code.coding) ? resource.code.coding[0] : resource.code.coding;
+                          if (coding.display) {
+                            sectionFields.push({ 
+                              label: `🔬 Observation ${entryIndex + 1}`, 
+                              value: coding.display 
+                            });
+                          }
+                          if (resource.valueString) {
+                            sectionFields.push({ 
+                              label: `📈 Value ${entryIndex + 1}`, 
+                              value: resource.valueString 
+                            });
+                          }
+                        }
+                      }
+                    });
+                  }
+                  
+                  if (sectionFields.length > 0) {
+                    tableData.push({ category: `📋 ${section.title}`, fields: sectionFields });
+                  }
+                }
+              });
+            }
+          }
+
+          // Medical Conditions
+          const conditions = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'Condition');
+          if (conditions.length > 0) {
+            conditions.forEach((condition: any, index: number) => {
+              const conditionFields: Array<{ label: string; value: string }> = [];
+              const res = condition.resource;
+              
+              if (res?.id) conditionFields.push({ label: '🆔 Condition ID', value: res.id });
+              
+              // Clinical Status
+              if (res?.clinicalStatus?.coding) {
+                const statusCoding = Array.isArray(res.clinicalStatus.coding) ? res.clinicalStatus.coding[0] : res.clinicalStatus.coding;
+                if (statusCoding.code) conditionFields.push({ label: '📊 Clinical Status', value: statusCoding.code.toUpperCase() });
+              }
+              
+              // Diagnosis Codes - CLEARLY SHOWN
+              if (res?.code?.coding && Array.isArray(res.code.coding)) {
+                res.code.coding.forEach((coding: any, codIdx: number) => {
+                  if (coding.system && coding.code && coding.display) {
+                    const systemName = coding.system.includes('icd-10') ? 'ICD-10' : coding.system.includes('snomed') ? 'SNOMED' : 'Code System';
+                    conditionFields.push({ 
+                      label: `🏷️ ${systemName} Code ${codIdx + 1}`, 
+                      value: `[${coding.code}] ${coding.display}` 
+                    });
+                  }
+                });
+              }
+              
+              // Onset Date
+              if (res?.onsetDateTime) conditionFields.push({ label: '📅 Onset Date', value: res.onsetDateTime });
+              
+              if (conditionFields.length > 0) {
+                tableData.push({ category: `🩺 Medical Condition ${index + 1}`, fields: conditionFields });
+              }
+            });
+          }
+
+          // Device Requests (DME Orders)
+          const deviceRequests = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'DeviceRequest');
+          if (deviceRequests.length > 0) {
+            deviceRequests.forEach((device: any, index: number) => {
+              const deviceFields: Array<{ label: string; value: string }> = [];
+              const res = device.resource;
+              
+              if (res?.id) deviceFields.push({ label: '🆔 Request ID', value: res.id });
+              if (res?.status) deviceFields.push({ label: '📊 Status', value: res.status.toUpperCase() });
+              if (res?.intent) deviceFields.push({ label: 'Intent', value: res.intent.toUpperCase() });
+              
+              // Device Code - CLEARLY SHOWN
+              if (res?.codeCodeableConcept) {
+                if (res.codeCodeableConcept.text) deviceFields.push({ label: '🏥 Device Description', value: res.codeCodeableConcept.text });
+                if (res.codeCodeableConcept.coding && Array.isArray(res.codeCodeableConcept.coding)) {
+                  res.codeCodeableConcept.coding.forEach((coding: any, codIdx: number) => {
+                    if (coding.system && coding.code && coding.display) {
+                      const systemName = coding.system.includes('HCPCS') ? 'HCPCS' : 'Code';
+                      deviceFields.push({ 
+                        label: `🏷️ ${systemName} Code ${codIdx + 1}`, 
+                        value: `[${coding.code}] ${coding.display}` 
+                      });
+                    }
+                  });
+                }
+              }
+              
+              // Parameters (device settings and supplies)
+              if (res?.parameter && Array.isArray(res.parameter)) {
+                res.parameter.forEach((param: any, paramIdx: number) => {
+                  if (param.code?.text) {
+                    let paramValue = '';
+                    if (param.valueCodeableConcept?.coding && Array.isArray(param.valueCodeableConcept.coding)) {
+                      const codingArray = param.valueCodeableConcept.coding;
+                      const codeValues = codingArray.map((coding: any) => {
+                        if (coding.code) return `[${coding.code}]`;
+                        return '';
+                      }).filter(Boolean);
+                      if (codeValues.length > 0) {
+                        paramValue = codeValues.join(', ');
+                      }
+                    } else if (param.valueInteger) {
+                      paramValue = param.valueInteger.toString();
+                    } else if (param.valueString) {
+                      paramValue = param.valueString;
+                    }
+                    if (paramValue) {
+                      deviceFields.push({ 
+                        label: `⚙️ ${param.code.text}`, 
+                        value: paramValue 
+                      });
+                    }
+                  }
+                });
+              }
+              
+              // Reason for Request
+              if (res?.reasonReference && Array.isArray(res.reasonReference)) {
+                res.reasonReference.forEach((reason: any, reasonIdx: number) => {
+                  if (reason.reference) deviceFields.push({ label: `Clinical Justification ${reasonIdx + 1}`, value: reason.reference });
+                });
+              }
+              
+              // Dates
+              if (res?.authoredOn) deviceFields.push({ label: '📅 Order Date', value: res.authoredOn });
+              
+              // Requester
+              if (res?.requester?.reference) deviceFields.push({ label: '👨‍⚕️ Ordering Provider', value: res.requester.reference });
+              
+              if (deviceFields.length > 0) {
+                tableData.push({ category: `🛠️ Device Request ${index + 1}`, fields: deviceFields });
+              }
+            });
+          }
+        }
+      }
+
+      if (jsonContent.documentType === 'Polysomnography Report' || jsonContent.documentType === 'Sleep Study') {
+        // Handle FHIR Bundle structure for polysomnography - COMPREHENSIVE EXTRACTION
+        if (jsonContent.entry && Array.isArray(jsonContent.entry)) {
+          
+          // Patient Information
+          const patient = jsonContent.entry.find((entry: any) => entry.resource?.resourceType === 'Patient');
+          if (patient && patient.resource) {
+            const patientFields = [];
+            if (patient.resource.id) patientFields.push({ label: '🆔 Patient ID', value: patient.resource.id });
+            if (patient.resource.name && Array.isArray(patient.resource.name)) {
+              const name = patient.resource.name[0];
+              if (name.family && name.given) {
+                patientFields.push({ label: '👤 Patient Name', value: `${name.given.join(' ')} ${name.family}` });
+              }
+            }
+            if (patient.resource.gender) patientFields.push({ label: '⚧ Gender', value: patient.resource.gender });
+            if (patient.resource.birthDate) patientFields.push({ label: '🎂 Date of Birth', value: patient.resource.birthDate });
+            if (patient.resource.address && Array.isArray(patient.resource.address)) {
+              const address = patient.resource.address[0];
+              if (address.line && address.city && address.state) {
+                patientFields.push({ label: '🏠 Address', value: `${address.line.join(' ')}, ${address.city}, ${address.state} ${address.postalCode}` });
+              }
+            }
+            if (patient.resource.telecom && Array.isArray(patient.resource.telecom)) {
+              patient.resource.telecom.forEach((tel: any, idx: number) => {
+                if (tel.value) {
+                  const useLabel = tel.use ? ` (${tel.use})` : '';
+                  patientFields.push({ label: `📞 ${tel.system || 'Contact'} ${idx + 1}${useLabel}`, value: tel.value });
+                }
+              });
+            }
+            if (patient.resource.identifier && Array.isArray(patient.resource.identifier)) {
+              patient.resource.identifier.forEach((id: any) => {
+                const systemName = id.system?.includes('mrn') ? 'MRN' : 'Identifier';
+                if (id.value) patientFields.push({ label: `🆔 ${systemName}`, value: id.value });
+              });
+            }
+            
+            if (patientFields.length > 0) {
+              tableData.push({ category: '👤 Patient Information', fields: patientFields });
+            }
+          }
+
+          // Coverage Information
+          const coverage = jsonContent.entry.find((entry: any) => entry.resource?.resourceType === 'Coverage');
+          if (coverage && coverage.resource) {
+            const coverageFields = [];
+            if (coverage.resource.id) coverageFields.push({ label: '🆔 Coverage ID', value: coverage.resource.id });
+            if (coverage.resource.status) coverageFields.push({ label: '🟢 Status', value: coverage.resource.status.toUpperCase() });
+            if (coverage.resource.payor && Array.isArray(coverage.resource.payor)) {
+              coverage.resource.payor.forEach((payor: any, idx: number) => {
+                if (payor.display) coverageFields.push({ label: `🏥 Insurance Payor ${idx + 1}`, value: payor.display });
+              });
+            }
+            if (coverage.resource.subscriberId) coverageFields.push({ label: '🔢 Subscriber ID', value: coverage.resource.subscriberId });
+            if (coverage.resource.class && Array.isArray(coverage.resource.class)) {
+              coverage.resource.class.forEach((cls: any, idx: number) => {
+                if (cls.type?.text && cls.value) {
+                  coverageFields.push({ label: `${cls.type.text} ${idx + 1}`.toUpperCase(), value: cls.value });
+                }
+              });
+            }
+            
+            if (coverageFields.length > 0) {
+              tableData.push({ category: '🏥 Insurance Coverage', fields: coverageFields });
+            }
+          }
+
+          // Practitioners
+          const practitioners = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'Practitioner');
+          if (practitioners.length > 0) {
+            const practitionerFields: Array<{ label: string; value: string }> = [];
+            practitioners.forEach((practitioner: any, index: number) => {
+              if (practitioner.resource?.id) practitionerFields.push({ label: `👨‍⚕️ Practitioner ${index + 1} ID`, value: practitioner.resource.id });
+              if (practitioner.resource?.name && Array.isArray(practitioner.resource.name)) {
+                const name = practitioner.resource.name[0];
+                const fullName = `${name.given?.join(' ') || ''} ${name.family || ''} ${name.suffix?.join(', ') || ''}`.trim();
+                practitionerFields.push({ label: `Practitioner ${index + 1} Name`, value: fullName });
+              }
+              if (practitioner.resource?.identifier && Array.isArray(practitioner.resource.identifier)) {
+                practitioner.resource.identifier.forEach((id: any, idIdx: number) => {
+                  const systemName = id.system?.includes('npi') ? 'NPI' : id.system?.includes('dea') ? 'DEA' : 'ID';
+                  if (id.value) practitionerFields.push({ label: `${systemName} ${index + 1}.${idIdx + 1}`, value: id.value });
+                });
+              }
+            });
+            
+            if (practitionerFields.length > 0) {
+              tableData.push({ category: '👨‍⚕️ Healthcare Providers', fields: practitionerFields });
+            }
+          }
+
+          // Polysomnography Observation - MAIN SLEEP STUDY DATA
+          const observation = jsonContent.entry.find((entry: any) => entry.resource?.resourceType === 'Observation');
+          if (observation && observation.resource) {
+            const obs = observation.resource;
+            
+            // Test Information
+            const testFields = [];
+            if (obs.id) testFields.push({ label: '🆔 Study ID', value: obs.id });
+            if (obs.status) testFields.push({ label: '📊 Status', value: obs.status.toUpperCase() });
+            if (obs.code?.text) testFields.push({ label: '🔬 Test Type', value: obs.code.text });
+            if (obs.code?.coding && Array.isArray(obs.code.coding)) {
+              obs.code.coding.forEach((coding: any, codIdx: number) => {
+                if (coding.system && coding.code && coding.display) {
+                  const systemName = coding.system.includes('loinc') ? 'LOINC' : 'Code';
+                  testFields.push({ 
+                    label: `🏷️ ${systemName} Code ${codIdx + 1}`, 
+                    value: `[${coding.code}] ${coding.display}` 
+                  });
+                }
+              });
+            }
+            if (obs.effectiveDateTime) testFields.push({ label: '📅 Study Date', value: obs.effectiveDateTime });
+            if (obs.performer && Array.isArray(obs.performer)) {
+              obs.performer.forEach((perf: any, perfIdx: number) => {
+                if (perf.reference) testFields.push({ label: `👨‍⚕️ Performer ${perfIdx + 1}`, value: perf.reference });
+              });
+            }
+            if (obs.category && Array.isArray(obs.category)) {
+              obs.category.forEach((cat: any, catIdx: number) => {
+                if (cat.coding && Array.isArray(cat.coding)) {
+                  cat.coding.forEach((catCoding: any) => {
+                    if (catCoding.code) testFields.push({ label: `Category ${catIdx + 1}`, value: catCoding.code });
+                    if (catCoding.display) testFields.push({ label: `Category Display ${catIdx + 1}`, value: catCoding.display });
+                  });
+                }
+              });
+            }
+            
+            if (testFields.length > 0) {
+              tableData.push({ category: '🔬 Sleep Study Information', fields: testFields });
+            }
+
+            // Study Summary
+            if (obs.valueString) {
+              const resultsFields = [];
+              resultsFields.push({ label: '📈 Study Summary', value: obs.valueString });
+              
+              if (resultsFields.length > 0) {
+                tableData.push({ category: '📊 Study Results Summary', fields: resultsFields });
+              }
+            }
+
+            // Component Results - DETAILED SLEEP METRICS
+            if (obs.component && Array.isArray(obs.component)) {
+              const componentFields: Array<{ label: string; value: string }> = [];
+              obs.component.forEach((comp: any, index: number) => {
+                if (comp.code?.text && comp.valueQuantity) {
+                  componentFields.push({ 
+                    label: `📊 ${comp.code.text}`, 
+                    value: `${comp.valueQuantity.value} ${comp.valueQuantity.unit || ''}`.trim() 
+                  });
+                } else if (comp.code?.coding && Array.isArray(comp.code.coding)) {
+                  comp.code.coding.forEach((coding: any, codIdx: number) => {
+                    if (coding.display && comp.valueQuantity) {
+                      componentFields.push({ 
+                        label: `📊 ${coding.display}`, 
+                        value: `${comp.valueQuantity.value} ${comp.valueQuantity.unit || ''}`.trim() 
+                      });
+                    }
+                  });
+                }
+              });
+              
+              if (componentFields.length > 0) {
+                tableData.push({ category: '📊 Sleep Study Metrics', fields: componentFields });
+              }
+            }
+
+            // Interpretation - CLINICAL ASSESSMENT
+            if (obs.interpretation && Array.isArray(obs.interpretation)) {
+              const interpretationFields: Array<{ label: string; value: string }> = [];
+              obs.interpretation.forEach((interp: any, interpIdx: number) => {
+                if (interp.text) interpretationFields.push({ label: `💡 Clinical Interpretation ${interpIdx + 1}`, value: interp.text });
+                if (interp.coding && Array.isArray(interp.coding)) {
+                  interp.coding.forEach((coding: any, codIdx: number) => {
+                    if (coding.code && coding.display) {
+                      interpretationFields.push({ 
+                        label: `🏷️ Interpretation Code ${interpIdx + 1}.${codIdx + 1}`, 
+                        value: `[${coding.code}] ${coding.display}` 
+                      });
+                    }
+                  });
+                }
+              });
+              
+              if (interpretationFields.length > 0) {
+                tableData.push({ category: '💡 Clinical Interpretation', fields: interpretationFields });
+              }
+            }
+          }
+
+          // Device Request - CPAP PRESCRIPTION
+          const deviceRequests = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'DeviceRequest');
+          if (deviceRequests.length > 0) {
+            deviceRequests.forEach((device: any, index: number) => {
+              const deviceFields: Array<{ label: string; value: string }> = [];
+              const res = device.resource;
+              
+              if (res?.id) deviceFields.push({ label: '🆔 Prescription ID', value: res.id });
+              if (res?.status) deviceFields.push({ label: '📊 Status', value: res.status.toUpperCase() });
+              if (res?.intent) deviceFields.push({ label: 'Intent', value: res.intent.toUpperCase() });
+              if (res?.priority) deviceFields.push({ label: 'Priority', value: res.priority.toUpperCase() });
+              
+              // Device Code - CLEARLY SHOWN
+              if (res?.codeCodeableConcept) {
+                if (res.codeCodeableConcept.text) deviceFields.push({ label: '🏥 Device Description', value: res.codeCodeableConcept.text });
+                if (res.codeCodeableConcept.coding && Array.isArray(res.codeCodeableConcept.coding)) {
+                  res.codeCodeableConcept.coding.forEach((coding: any, codIdx: number) => {
+                    if (coding.system && coding.code && coding.display) {
+                      const systemName = coding.system.includes('HCPCS') ? 'HCPCS' : 'Code';
+                      deviceFields.push({ 
+                        label: `🏷️ ${systemName} Code ${codIdx + 1}`, 
+                        value: `[${coding.code}] ${coding.display}` 
+                      });
+                    }
+                  });
+                }
+              }
+              
+              // Quantity
+              if (res?.quantityQuantity) {
+                deviceFields.push({ 
+                  label: 'Quantity', 
+                  value: `${res.quantityQuantity.value} ${res.quantityQuantity.unit || ''}`.trim() 
+                });
+              }
+              
+              // Parameters (device settings)
+              if (res?.parameter && Array.isArray(res.parameter)) {
+                res.parameter.forEach((param: any, paramIdx: number) => {
+                  if (param.code?.text) {
+                    let paramValue = '';
+                    if (param.valueCodeableConcept?.coding && Array.isArray(param.valueCodeableConcept.coding)) {
+                      const coding = param.valueCodeableConcept.coding[0];
+                      if (coding.code && coding.display) {
+                        paramValue = `[${coding.code}] ${coding.display}`;
+                      }
+                    } else if (param.valueInteger) {
+                      paramValue = param.valueInteger.toString();
+                    } else if (param.valueString) {
+                      paramValue = param.valueString;
+                    }
+                    if (paramValue) {
+                      deviceFields.push({ 
+                        label: `⚙️ ${param.code.text}`, 
+                        value: paramValue 
+                      });
+                    }
+                  }
+                });
+              }
+              
+              // Reason for Request - DIAGNOSIS CODES
+              if (res?.reasonCode && Array.isArray(res.reasonCode)) {
+                res.reasonCode.forEach((reason: any, reasonIdx: number) => {
+                  if (reason.coding && Array.isArray(reason.coding)) {
+                    reason.coding.forEach((coding: any, codIdx: number) => {
+                      if (coding.system && coding.code && coding.display) {
+                        const systemName = coding.system.includes('icd-10') ? 'ICD-10' : 'Code';
+                        deviceFields.push({ 
+                          label: `🏷️ ${systemName} Diagnosis ${reasonIdx + 1}.${codIdx + 1}`, 
+                          value: `[${coding.code}] ${coding.display}` 
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+              
+              // Dates
+              if (res?.authoredOn) deviceFields.push({ label: '📅 Prescription Date', value: res.authoredOn });
+              
+              // Requester
+              if (res?.requester?.reference) deviceFields.push({ label: '👨‍⚕️ Prescribing Provider', value: res.requester.reference });
+              
+              if (deviceFields.length > 0) {
+                tableData.push({ category: `🛠️ CPAP Prescription ${index + 1}`, fields: deviceFields });
+              }
+            });
+          }
+        }
+      }
+
+      if (jsonContent.documentType === 'Medical Records' || jsonContent.documentType === 'FHIR Bundle') {
+        // Handle FHIR Bundle structure for medical records
+        if (jsonContent.entry && Array.isArray(jsonContent.entry)) {
+          // Patient Demographics
+          const patient = jsonContent.entry.find((entry: any) => entry.resource?.resourceType === 'Patient');
+          if (patient && patient.resource) {
+            const patientFields = [];
+            if (patient.resource.id) patientFields.push({ label: 'Patient ID', value: patient.resource.id });
+            if (patient.resource.name && Array.isArray(patient.resource.name)) {
+              const name = patient.resource.name[0];
+              if (name.family && name.given) {
+                patientFields.push({ label: 'Name', value: `${name.given.join(' ')} ${name.family}` });
+              }
+            }
+            if (patient.resource.gender) patientFields.push({ label: 'Gender', value: patient.resource.gender });
+            if (patient.resource.birthDate) patientFields.push({ label: 'Date of Birth', value: patient.resource.birthDate });
+            if (patient.resource.address && Array.isArray(patient.resource.address)) {
+              const address = patient.resource.address[0];
+              if (address.line && address.city && address.state) {
+                patientFields.push({ label: 'Address', value: `${address.line.join(' ')}, ${address.city}, ${address.state} ${address.postalCode}` });
+              }
+            }
+            if (patient.resource.telecom && Array.isArray(patient.resource.telecom)) {
+              patient.resource.telecom.forEach((tel: any, idx: number) => {
+                if (tel.value) {
+                  const useLabel = tel.use ? ` (${tel.use})` : '';
+                  patientFields.push({ label: `${tel.system || 'Contact'} ${idx + 1}${useLabel}`, value: tel.value });
+                }
+              });
+            }
+            if (patient.resource.identifier && Array.isArray(patient.resource.identifier)) {
+              patient.resource.identifier.forEach((id: any) => {
+                const systemName = id.system?.includes('mrn') ? 'MRN' : 'Identifier';
+                if (id.value) patientFields.push({ label: systemName, value: id.value });
+              });
+            }
+            
+            if (patientFields.length > 0) {
+              tableData.push({ category: '📋 Patient Demographics', fields: patientFields });
+            }
+          }
+
+          // Coverage Information
+          const coverage = jsonContent.entry.find((entry: any) => entry.resource?.resourceType === 'Coverage');
+          if (coverage && coverage.resource) {
+            const coverageFields = [];
+            if (coverage.resource.id) coverageFields.push({ label: 'Coverage ID', value: coverage.resource.id });
+            if (coverage.resource.status) coverageFields.push({ label: '🟢 Status', value: coverage.resource.status.toUpperCase() });
+            if (coverage.resource.payor && Array.isArray(coverage.resource.payor)) {
+              coverage.resource.payor.forEach((payor: any, idx: number) => {
+                if (payor.display) coverageFields.push({ label: `Insurance Payor ${idx + 1}`, value: payor.display });
+              });
+            }
+            if (coverage.resource.subscriberId) coverageFields.push({ label: '🔢 Subscriber ID', value: coverage.resource.subscriberId });
+            if (coverage.resource.class && Array.isArray(coverage.resource.class)) {
+              coverage.resource.class.forEach((cls: any, idx: number) => {
+                if (cls.type?.text && cls.value) {
+                  coverageFields.push({ label: `${cls.type.text} ${idx + 1}`.toUpperCase(), value: cls.value });
+                }
+              });
+            }
+            
+            if (coverageFields.length > 0) {
+              tableData.push({ category: '🏥 Coverage Information', fields: coverageFields });
+            }
+          }
+
+          // Practitioners
+          const practitioners = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'Practitioner');
+          if (practitioners.length > 0) {
+            const practitionerFields: Array<{ label: string; value: string }> = [];
+            practitioners.forEach((practitioner: any, index: number) => {
+              if (practitioner.resource?.id) practitionerFields.push({ label: `👨‍⚕️ Practitioner ${index + 1} ID`, value: practitioner.resource.id });
+              if (practitioner.resource?.name && Array.isArray(practitioner.resource.name)) {
+                const name = practitioner.resource.name[0];
+                const fullName = `${name.given?.join(' ') || ''} ${name.family || ''} ${name.suffix?.join(', ') || ''}`.trim();
+                practitionerFields.push({ label: `Practitioner ${index + 1} Name`, value: fullName });
+              }
+              if (practitioner.resource?.identifier && Array.isArray(practitioner.resource.identifier)) {
+                practitioner.resource.identifier.forEach((id: any, idIdx: number) => {
+                  const systemName = id.system?.includes('npi') ? 'NPI' : id.system?.includes('dea') ? 'DEA' : 'ID';
+                  if (id.value) practitionerFields.push({ label: `${systemName} ${index + 1}.${idIdx + 1}`, value: id.value });
+                });
+              }
+            });
+            
+            if (practitionerFields.length > 0) {
+              tableData.push({ category: '👨‍⚕️ Healthcare Practitioners', fields: practitionerFields });
+            }
+          }
+
+          // Conditions (Diagnoses)
+          const conditions = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'Condition');
+          if (conditions.length > 0) {
+            conditions.forEach((condition: any, index: number) => {
+              const conditionFields: Array<{ label: string; value: string }> = [];
+              const res = condition.resource;
+              
+              if (res?.id) conditionFields.push({ label: '🆔 Condition ID', value: res.id });
+              
+              // Clinical Status
+              if (res?.clinicalStatus?.coding) {
+                const statusCoding = Array.isArray(res.clinicalStatus.coding) ? res.clinicalStatus.coding[0] : res.clinicalStatus.coding;
+                if (statusCoding.code) conditionFields.push({ label: '📊 Clinical Status', value: statusCoding.code.toUpperCase() });
+              }
+              
+              // Verification Status
+              if (res?.verificationStatus?.coding) {
+                const verCoding = Array.isArray(res.verificationStatus.coding) ? res.verificationStatus.coding[0] : res.verificationStatus.coding;
+                if (verCoding.code) conditionFields.push({ label: '✓ Verification', value: verCoding.code.toUpperCase() });
+              }
+              
+              // Category
+              if (res?.category && Array.isArray(res.category)) {
+                res.category.forEach((cat: any, catIdx: number) => {
+                  if (cat.coding && Array.isArray(cat.coding)) {
+                    cat.coding.forEach((catCoding: any) => {
+                      if (catCoding.code) conditionFields.push({ label: `Category ${catIdx + 1}`, value: catCoding.code });
+                    });
+                  }
+                });
+              }
+              
+              // Diagnosis Codes - CLEARLY SHOWN
+              if (res?.code?.coding && Array.isArray(res.code.coding)) {
+                res.code.coding.forEach((coding: any, codIdx: number) => {
+                  if (coding.system && coding.code && coding.display) {
+                    const systemName = coding.system.includes('icd-10') ? 'ICD-10' : coding.system.includes('snomed') ? 'SNOMED' : 'Code System';
+                    conditionFields.push({ 
+                      label: `🏷️ ${systemName} Code ${codIdx + 1}`, 
+                      value: `[${coding.code}] ${coding.display}` 
+                    });
+                  }
+                });
+              }
+              
+              // Onset Date
+              if (res?.onsetDateTime) conditionFields.push({ label: '📅 Onset Date', value: res.onsetDateTime });
+              if (res?.recordedDate) conditionFields.push({ label: '📅 Recorded Date', value: res.recordedDate });
+              
+              if (conditionFields.length > 0) {
+                tableData.push({ category: `🩺 Medical Condition ${index + 1}`, fields: conditionFields });
+              }
+            });
+          }
+
+          // Observations (Lab Results, Vitals, Sleep Studies)
+          const observations = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'Observation');
+          if (observations.length > 0) {
+            observations.forEach((observation: any, index: number) => {
+              const observationFields: Array<{ label: string; value: string }> = [];
+              const res = observation.resource;
+              
+              if (res?.id) observationFields.push({ label: '🆔 Observation ID', value: res.id });
+              if (res?.status) observationFields.push({ label: '📊 Status', value: res.status.toUpperCase() });
+              
+              // Category
+              if (res?.category && Array.isArray(res.category)) {
+                res.category.forEach((cat: any, catIdx: number) => {
+                  if (cat.coding && Array.isArray(cat.coding)) {
+                    cat.coding.forEach((catCoding: any) => {
+                      if (catCoding.code) observationFields.push({ label: `Category ${catIdx + 1}`, value: catCoding.code });
+                      if (catCoding.display) observationFields.push({ label: `Category Display ${catIdx + 1}`, value: catCoding.display });
+                    });
+                  }
+                });
+              }
+              
+              // Observation Code - CLEARLY SHOWN
+              if (res?.code) {
+                if (res.code.text) observationFields.push({ label: '🔬 Test Name', value: res.code.text });
+                if (res.code.coding && Array.isArray(res.code.coding)) {
+                  res.code.coding.forEach((coding: any, codIdx: number) => {
+                    if (coding.system && coding.code && coding.display) {
+                      const systemName = coding.system.includes('loinc') ? 'LOINC' : coding.system.includes('snomed') ? 'SNOMED' : 'Code';
+                      observationFields.push({ 
+                        label: `🏷️ ${systemName} Code ${codIdx + 1}`, 
+                        value: `[${coding.code}] ${coding.display}` 
+                      });
+                    }
+                  });
+                }
+              }
+              
+              // Observation Date
+              if (res?.effectiveDateTime) observationFields.push({ label: '📅 Date', value: res.effectiveDateTime });
+              
+              // Performer
+              if (res?.performer && Array.isArray(res.performer)) {
+                res.performer.forEach((perf: any, perfIdx: number) => {
+                  if (perf.reference) observationFields.push({ label: `Performer ${perfIdx + 1}`, value: perf.reference });
+                });
+              }
+              
+              // Value
+              if (res?.valueString) observationFields.push({ label: '📈 Result Summary', value: res.valueString });
+              if (res?.valueQuantity) {
+                observationFields.push({ 
+                  label: '📈 Result Value', 
+                  value: `${res.valueQuantity.value} ${res.valueQuantity.unit || ''}`.trim() 
+                });
+              }
+              
+              // Components (for multi-part observations like vitals)
+              if (res?.component && Array.isArray(res.component)) {
+                res.component.forEach((comp: any, compIdx: number) => {
+                  if (comp.code?.text) {
+                    let compValue = '';
+                    if (comp.valueQuantity) {
+                      compValue = `${comp.valueQuantity.value} ${comp.valueQuantity.unit || ''}`.trim();
+                    } else if (comp.valueString) {
+                      compValue = comp.valueString;
+                    }
+                    if (compValue) {
+                      observationFields.push({ 
+                        label: `📊 ${comp.code.text}`, 
+                        value: compValue 
+                      });
+                    }
+                  }
+                });
+              }
+              
+              // Interpretation
+              if (res?.interpretation && Array.isArray(res.interpretation)) {
+                res.interpretation.forEach((interp: any, interpIdx: number) => {
+                  if (interp.text) observationFields.push({ label: `💡 Interpretation ${interpIdx + 1}`, value: interp.text });
+                  if (interp.coding && Array.isArray(interp.coding)) {
+                    interp.coding.forEach((coding: any, codIdx: number) => {
+                      if (coding.code && coding.display) {
+                        observationFields.push({ 
+                          label: `🏷️ Interpretation Code ${interpIdx + 1}.${codIdx + 1}`, 
+                          value: `[${coding.code}] ${coding.display}` 
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+              
+              if (observationFields.length > 0) {
+                const obsTitle = res?.code?.text || `Observation ${index + 1}`;
+                tableData.push({ category: `🔬 ${obsTitle}`, fields: observationFields });
+              }
+            });
+          }
+
+          // Device Requests (DME Orders)
+          const deviceRequests = jsonContent.entry.filter((entry: any) => entry.resource?.resourceType === 'DeviceRequest');
+          if (deviceRequests.length > 0) {
+            deviceRequests.forEach((device: any, index: number) => {
+              const deviceFields: Array<{ label: string; value: string }> = [];
+              const res = device.resource;
+              
+              if (res?.id) deviceFields.push({ label: '🆔 Request ID', value: res.id });
+              if (res?.status) deviceFields.push({ label: '📊 Status', value: res.status.toUpperCase() });
+              if (res?.intent) deviceFields.push({ label: 'Intent', value: res.intent.toUpperCase() });
+              if (res?.priority) deviceFields.push({ label: 'Priority', value: res.priority.toUpperCase() });
+              
+              // Device Code - CLEARLY SHOWN
+              if (res?.codeCodeableConcept) {
+                if (res.codeCodeableConcept.text) deviceFields.push({ label: '🏥 Device Description', value: res.codeCodeableConcept.text });
+                if (res.codeCodeableConcept.coding && Array.isArray(res.codeCodeableConcept.coding)) {
+                  res.codeCodeableConcept.coding.forEach((coding: any, codIdx: number) => {
+                    if (coding.system && coding.code && coding.display) {
+                      const systemName = coding.system.includes('HCPCS') ? 'HCPCS' : 'Code';
+                      deviceFields.push({ 
+                        label: `🏷️ ${systemName} Code ${codIdx + 1}`, 
+                        value: `[${coding.code}] ${coding.display}` 
+                      });
+                    }
+                  });
+                }
+              }
+              
+              // Quantity
+              if (res?.quantityQuantity) {
+                deviceFields.push({ 
+                  label: 'Quantity', 
+                  value: `${res.quantityQuantity.value} ${res.quantityQuantity.unit || ''}`.trim() 
+                });
+              }
+              
+              // Parameters (device settings)
+              if (res?.parameter && Array.isArray(res.parameter)) {
+                res.parameter.forEach((param: any, paramIdx: number) => {
+                  if (param.code?.text) {
+                    let paramValue = '';
+                    if (param.valueCodeableConcept?.coding && Array.isArray(param.valueCodeableConcept.coding)) {
+                      const coding = param.valueCodeableConcept.coding[0];
+                      if (coding.code && coding.display) {
+                        paramValue = `[${coding.code}] ${coding.display}`;
+                      }
+                    } else if (param.valueInteger) {
+                      paramValue = param.valueInteger.toString();
+                    } else if (param.valueString) {
+                      paramValue = param.valueString;
+                    }
+                    if (paramValue) {
+                      deviceFields.push({ 
+                        label: `⚙️ ${param.code.text}`, 
+                        value: paramValue 
+                      });
+                    }
+                  }
+                });
+              }
+              
+              // Reason for Request
+              if (res?.reasonReference && Array.isArray(res.reasonReference)) {
+                res.reasonReference.forEach((reason: any, reasonIdx: number) => {
+                  if (reason.reference) deviceFields.push({ label: `Clinical Justification ${reasonIdx + 1}`, value: reason.reference });
+                });
+              }
+              
+              // Dates
+              if (res?.authoredOn) deviceFields.push({ label: '📅 Order Date', value: res.authoredOn });
+              
+              // Requester
+              if (res?.requester?.reference) deviceFields.push({ label: '👨‍⚕️ Ordering Provider', value: res.requester.reference });
+              
+              if (deviceFields.length > 0) {
+                tableData.push({ category: `🛠️ Device Request ${index + 1}`, fields: deviceFields });
+              }
+            });
+          }
+        }
+      }
+
+      // Insurance Card specific handling
+      if (jsonContent.documentType === 'Insurance Card') {
+        if (jsonContent.insuranceCard) {
+          const card = jsonContent.insuranceCard;
+          
+          // Insurance Company Information
+          const companyFields = [];
+          if (card.insuranceCompany) companyFields.push({ label: 'Insurance Company', value: card.insuranceCompany });
+          if (card.planName) companyFields.push({ label: 'Plan Name', value: card.planName });
+          if (card.groupNumber) companyFields.push({ label: 'Group Number', value: card.groupNumber });
+          
+          if (companyFields.length > 0) {
+            tableData.push({ category: 'Insurance Company', fields: companyFields });
+          }
+
+          // Member Information
+          if (card.memberInformation) {
+            const memberFields = [];
+            if (card.memberInformation.memberName) memberFields.push({ label: 'Member Name', value: card.memberInformation.memberName });
+            if (card.memberInformation.memberId) memberFields.push({ label: 'Member ID', value: card.memberInformation.memberId });
+            if (card.memberInformation.dateOfBirth) memberFields.push({ label: 'Date of Birth', value: card.memberInformation.dateOfBirth });
+            if (card.memberInformation.address) memberFields.push({ label: 'Address', value: card.memberInformation.address });
+            if (card.memberInformation.phoneNumber) memberFields.push({ label: 'Phone Number', value: card.memberInformation.phoneNumber });
+            
+            if (memberFields.length > 0) {
+              tableData.push({ category: 'Member Information', fields: memberFields });
+            }
+          }
+
+          // Provider Information
+          if (card.providerInformation) {
+            const providerFields = [];
+            if (card.providerInformation.customerService) providerFields.push({ label: 'Customer Service', value: card.providerInformation.customerService });
+            if (card.providerInformation.claimsFax) providerFields.push({ label: 'Claims Fax', value: card.providerInformation.claimsFax });
+            
+            if (providerFields.length > 0) {
+              tableData.push({ category: 'Provider Information', fields: providerFields });
+            }
+          }
+
+          // Medical Information
+          if (card.medicalInformation) {
+            const medicalFields = [];
+            if (card.medicalInformation.primaryDiagnosis) medicalFields.push({ label: 'Primary Diagnosis', value: card.medicalInformation.primaryDiagnosis });
+            
+            if (medicalFields.length > 0) {
+              tableData.push({ category: 'Medical Information', fields: medicalFields });
+            }
+          }
+
+          // Metadata
+          if (card.metadata) {
+            const metadataFields = [];
+            if (card.metadata.mrn) metadataFields.push({ label: 'MRN', value: card.metadata.mrn });
+            if (card.metadata.ssn) metadataFields.push({ label: 'SSN', value: card.metadata.ssn });
+            if (card.metadata.sampleDisclaimer) metadataFields.push({ label: 'Disclaimer', value: card.metadata.sampleDisclaimer });
+            if (card.metadata.barcode !== undefined) metadataFields.push({ label: 'Barcode', value: card.metadata.barcode ? 'Yes' : 'No' });
+            
+            if (metadataFields.length > 0) {
+              tableData.push({ category: 'Metadata', fields: metadataFields });
+            }
+          }
         }
       }
 

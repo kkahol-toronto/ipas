@@ -97,17 +97,81 @@ const HospitalPortal: React.FC = () => {
       const details = notification.details;
       
       if (!ordersMap.has(caseId)) {
+        // Case-specific information
+        const getCaseInfo = (caseId: string) => {
+          switch (caseId) {
+            case 'PA-2024-001':
+              return {
+                patientName: 'John Doe',
+                patientId: 'P-2024-001',
+                procedure: 'MRI Brain with Contrast',
+                provider: 'Dr. Sarah Johnson',
+                hospital: 'UCLA Medical Center'
+              };
+            case 'PA-2024-002':
+              return {
+                patientName: 'Mary Johnson',
+                patientId: 'P-2024-002',
+                procedure: 'Cardiac Catheterization',
+                provider: 'Dr. Michael Chen',
+                hospital: 'Cedars-Sinai Medical Center'
+              };
+            case 'PA-2024-003':
+              return {
+                patientName: 'Robert Davis',
+                patientId: 'P-2024-003',
+                procedure: 'Knee Arthroscopy',
+                provider: 'Dr. Lisa Wilson',
+                hospital: 'Kaiser Permanente'
+              };
+            case 'PA-2024-004':
+              return {
+                patientName: 'Sarah Wilson',
+                patientId: 'P-2024-004',
+                procedure: 'CT Abdomen with Contrast',
+                provider: 'Dr. David Brown',
+                hospital: 'Stanford Health Care'
+              };
+            case 'PA-2024-005':
+              return {
+                patientName: 'David Brown',
+                patientId: 'P-2024-005',
+                procedure: 'CT Chest with Contrast',
+                provider: 'Dr. Jennifer Taylor',
+                hospital: 'UCSF Medical Center'
+              };
+            case 'PA-2024-006':
+              return {
+                patientName: 'Rebecca Hardin',
+                patientId: 'P-2024-006',
+                procedure: 'CPAP Device Replacement',
+                provider: 'Amy Diane Kelly, NP',
+                hospital: 'Prisma Health Pulmonology - Sumter'
+              };
+            default:
+              return {
+                patientName: 'Unknown Patient',
+                patientId: 'P-2024-000',
+                procedure: 'Unknown Procedure',
+                provider: 'Unknown Provider',
+                hospital: 'Unknown Hospital'
+              };
+          }
+        };
+
+        const caseInfo = getCaseInfo(caseId);
+        
         ordersMap.set(caseId, {
           id: `ORD_${caseId}`,
-          patientName: 'John Smith', // Mock patient name
-          patientId: 'P-2024-001',
+          patientName: caseInfo.patientName,
+          patientId: caseInfo.patientId,
           caseId,
-          procedure: 'MRI Brain with Contrast',
+          procedure: caseInfo.procedure,
           authorizationNumber: details.authorizationNumber || `AUTH_${caseId}`,
           status: 'pending',
           receivedAt: notification.timestamp,
-          provider: 'Dr. Sarah Johnson',
-          hospital: 'UCLA Medical Center'
+          provider: caseInfo.provider,
+          hospital: caseInfo.hospital
         });
       }
 

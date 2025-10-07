@@ -541,7 +541,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       ];
     }
     
-    // Case PA-2024-006: Full review workflow ending in denial (insufficient clinical justification)
+    // Case PA-2024-006: Full review workflow ending in approval (CPAP replacement - compliant patient)
     if (caseId === 'PA-2024-006') {
       return [
         {
@@ -938,7 +938,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       ];
     }
     
-    // Case PA-2024-006: Panel disagreement denial workflow (11 stages)
+    // Case PA-2024-006: Panel consensus approval workflow (11 stages) - CPAP replacement
     if (caseId === 'PA-2024-006' || caseId === '006') {
       return [
         {
@@ -1451,7 +1451,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                  caseId === 'PA-2024-003' ? 'robert.davis@email.com' :
                  caseId === 'PA-2024-004' ? 'lisa.wilson@email.com' :
                  caseId === 'PA-2024-005' ? 'david.brown@email.com' :
-                 caseId === 'PA-2024-006' ? 'jennifer.taylor@email.com' : 'patient@email.com',
+                 caseId === 'PA-2024-006' ? 'rebecca.hardin@email.com' : 'patient@email.com',
           mail: caseId === 'PA-2024-001' ? '123 Main St, Anytown, USA' :
                 caseId === 'PA-2024-002' ? '456 Oak Ave, Springfield, USA' :
                 caseId === 'PA-2024-003' ? '789 Pine Rd, Riverside, USA' :
@@ -1475,7 +1475,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                     caseId === 'PA-2024-003' ? 'FHIR-R4-Orthopedic' :
                     caseId === 'PA-2024-004' ? 'FHIR-R4-Gastroenterology' :
                     caseId === 'PA-2024-005' ? 'FHIR-R4-Radiology' :
-                    caseId === 'PA-2024-006' ? 'FHIR-R4-Cardiology' : 'FHIR-R4-Resource',
+                    caseId === 'PA-2024-006' ? 'FHIR-R4-DME-Pulmonology' : 'FHIR-R4-Resource',
           auth_id: caseId === 'PA-2024-001' ? 'AUTH-2024-001' :
                    caseId === 'PA-2024-002' ? 'AUTH-2024-002' :
                    caseId === 'PA-2024-003' ? 'AUTH-2024-003' :
@@ -1593,8 +1593,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         return true;
       }
       
-      // For Case 001 and Case 002, ensure all fields are found for demo purposes
-      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002') {
+      // For Case 001, Case 002, and Case 006, ensure all fields are found for demo purposes
+      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002' || caseId === 'PA-2024-006' || caseId === '006') {
         return true;
       }
       
@@ -1670,6 +1670,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       if (caseId === 'PA-2024-002') {
         setShowMessage('✓ High priority assigned (Amount > $5,000)');
       } else if (caseId === 'PA-2024-003') {
+        setShowMessage('✓ Medium priority assigned');
+      } else if (caseId === 'PA-2024-006') {
         setShowMessage('✓ Medium priority assigned');
       } else {
         setShowMessage('✓ High priority assigned');
@@ -1747,7 +1749,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     // Step 1: Letter Creation
     setTimeout(() => {
-      if (caseId === 'PA-2024-004' || caseId === 'PA-2024-006') {
+      if (caseId === 'PA-2024-004') {
         setShowMessage('Creating denial letter...');
       } else {
         setShowMessage('Creating approval letter...');
@@ -1770,7 +1772,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       if (caseId === 'PA-2024-004') {
         setShowMessage('✓ Denial letter generated - Missing documentation noted');
       } else if (caseId === 'PA-2024-006') {
-        setShowMessage('✓ Denial letter generated - Insufficient medical justification');
+        setShowMessage('✓ Approval letter generated - CPAP replacement approved');
       } else {
         setShowMessage('✓ Approval letter generated');
       }
@@ -1833,7 +1835,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       if (caseId === 'PA-2024-004') {
         setShowMessage('❌ Authorization Denied - Letter available for download');
       } else if (caseId === 'PA-2024-006') {
-        setShowMessage('❌ Authorization Denied - Insufficient Medical Justification');
+        setShowMessage('✅ Authorization Approved - CPAP Replacement Authorized');
       } else {
         setShowMessage('🎉 Authorization Complete - Letter available for download!');
       }
@@ -1852,7 +1854,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       localStorage.setItem(`ipas_letter_generated_${caseId}`, new Date().toISOString());
       
       // Update case status to approved/denied based on the decision
-      const finalStatus = (caseId === 'PA-2024-004' || caseId === 'PA-2024-006') ? 'denied' : 'approved';
+      const finalStatus = (caseId === 'PA-2024-004') ? 'denied' : 'approved';
       console.log(`✓ Updating case ${caseId} status to: ${finalStatus}`);
       statusTracker.updateCaseStatus(
         caseId, 
@@ -1942,7 +1944,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       } else if (caseId === 'PA-2024-005') {
         setShowMessage('📊 Previous chest X-ray and lab results found');
       } else if (caseId === 'PA-2024-006') {
-        setShowMessage('📊 Limited clinical data found - No prior cardiac events documented');
+        setShowMessage('📊 Sleep study results found - OSA diagnosis confirmed (AHI 8.9/hr)');
       } else {
         setShowMessage('📊 Stress test results found');
       }
@@ -1965,7 +1967,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       } else if (caseId === 'PA-2024-005') {
         setShowMessage('✓ Meets clinical guidelines for CT chest with contrast');
       } else if (caseId === 'PA-2024-006') {
-        setShowMessage('⚠️ Weak clinical justification for echocardiogram');
+        setShowMessage('✓ Meets DME replacement guidelines - Device >5 years old, compliant patient');
       } else {
         setShowMessage('✓ Meets clinical guidelines for cardiac catheterization');
       }
@@ -1983,7 +1985,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       } else if (caseId === 'PA-2024-005') {
         setShowMessage('✓ 92% of similar patients were approved');
       } else if (caseId === 'PA-2024-006') {
-        setShowMessage('⚠️ Only 38% of similar cases were approved');
+        setShowMessage('✓ 87% of similar DME replacement cases were approved');
       } else {
         setShowMessage('✓ 87% of similar patients were approved');
       }
@@ -2147,14 +2149,14 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         setChatMessages([
           {
             role: 'assistant',
-            content: `I've analyzed Case PA-2024-006 (Jennifer Taylor - Echocardiogram). CAUTION: The clinical justification is weak. No documented prior cardiac events, symptoms are non-specific, and only 38% of similar cases were approved. The request does not clearly meet medical necessity criteria. My recommendation is LIKELY DENIAL, but this should go to clinical panel review for final determination. Do you have questions?`
+            content: `I've analyzed Case PA-2024-006 (Rebecca Hardin - CPAP Device Replacement). Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision. The patient has documented OSA with AHI 8.9/hr, compliant with current CPAP therapy, and device replacement is medically necessary. My recommendation is APPROVE. Do you have questions?`
           }
         ]);
       } else {
         setChatMessages([
           {
             role: 'assistant',
-            content: `I've analyzed Case PA-2024-002 (Mary Johnson - Cardiac Catheterization). Based on clinical guidelines, similar patient outcomes (87% approval rate), and medical necessity, my prediction is that this case can be APPROVED. Do you have any questions about the case?`
+            content: `I've analyzed Case PA-2024-002 (Mary Johnson - Cardiac Catheterization). Based on clinical guidelines, similar patient outcomes (77% approval rate), and medical necessity, my prediction is that this case can be APPROVED. Do you have any questions about the case?`
           }
         ]);
       }
@@ -2286,7 +2288,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Reviewer 1: Cardiologist
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('👨‍⚕️ Cardiologist: Reviewing echocardiogram medical necessity...');
+        setShowMessage('👨‍⚕️ Pulmonologist: Reviewing CPAP replacement medical necessity...');
       } else {
         setShowMessage('👨‍⚕️ Cardiologist: Reviewing cardiac catheterization necessity...');
       }
@@ -2295,7 +2297,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('❌ Cardiologist recommends: DENY - Insufficient clinical justification');
+        setShowMessage('✓ Pulmonologist recommends: APPROVE - Clear OSA diagnosis, compliant patient');
       } else {
         setShowMessage('✓ Cardiologist recommends: APPROVE');
       }
@@ -2305,7 +2307,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Reviewer 2: Medical Director
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('👩‍⚕️ Medical Director: Evaluating symptom severity and history...');
+        setShowMessage('👩‍⚕️ Medical Director: Evaluating CPAP compliance and device age...');
       } else {
         setShowMessage('👩‍⚕️ Medical Director: Reviewing cost-benefit analysis...');
       }
@@ -2314,7 +2316,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('❌ Medical Director recommends: DENY - Non-specific symptoms, no cardiac history');
+        setShowMessage('✓ Medical Director recommends: APPROVE - Device replacement medically necessary');
       } else {
         setShowMessage('✓ Medical Director recommends: APPROVE');
       }
@@ -2324,7 +2326,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Reviewer 3: Clinical Specialist
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('👨‍⚕️ Clinical Specialist: Reviewing alternative diagnostic options...');
+        setShowMessage('👨‍⚕️ Clinical Specialist: Reviewing sleep study results and therapy compliance...');
       } else {
         setShowMessage('👨‍⚕️ Clinical Specialist: Reviewing patient history and risk factors...');
       }
@@ -2333,7 +2335,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('⚠️ Clinical Specialist recommends: UNCERTAIN - Try conservative management');
+        setShowMessage('✓ Clinical Specialist recommends: APPROVE - Excellent compliance, clear OSA');
       } else {
         setShowMessage('✓ Clinical Specialist recommends: APPROVE');
       }
@@ -2343,7 +2345,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Reviewer 4: Quality Assurance
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('👩‍⚕️ Quality Assurance: Checking clinical necessity guidelines...');
+        setShowMessage('👩‍⚕️ Quality Assurance: Checking DME replacement guidelines...');
       } else {
         setShowMessage('👩‍⚕️ Quality Assurance: Reviewing compliance and guidelines...');
       }
@@ -2352,7 +2354,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('❌ Quality Assurance recommends: DENY - Does not meet clinical necessity');
+        setShowMessage('✓ Quality Assurance recommends: APPROVE - Meets all DME replacement criteria');
       } else {
         setShowMessage('✓ Quality Assurance recommends: APPROVE');
       }
@@ -2362,7 +2364,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Panel consensus
     setTimeout(() => {
       if (caseId === 'PA-2024-006') {
-        setShowMessage('❌ Panel Consensus: 3 of 4 reviewers recommend DENIAL (insufficient justification)');
+        setShowMessage('🎯 Panel Consensus: All 4 reviewers agree - APPROVE CPAP replacement');
       } else {
         setShowMessage('🎯 Panel Consensus: All 4 reviewers agree - APPROVE');
       }
@@ -2373,7 +2375,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       if (caseId === 'PA-2024-003') {
         setShowMessage('✓ Final Recommendation: PARTIAL APPROVAL ($4,000 of $8,000)');
       } else if (caseId === 'PA-2024-006') {
-        setShowMessage('❌ Final Recommendation: DENY - Insufficient medical justification');
+        setShowMessage('✓ Final Recommendation: APPROVE - CPAP replacement with supplies');
       } else {
         setShowMessage('✓ Final Recommendation: APPROVE');
       }
@@ -3010,17 +3012,35 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                     
                     // Simulate AI response
                     setTimeout(() => {
-                      const responses: {[key: string]: string} = {
-                        'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 87% approval rate for similar cases supports an approval decision.',
-                        'risk': 'The risk assessment indicates a favorable outcome. Patient has stable vitals and meets all clinical criteria for the procedure.',
-                        'cost': 'The $15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
-                        'guidelines': 'The case meets all clinical guidelines for cardiac catheterization as per the American College of Cardiology standards.',
-                      };
+                      let responses: {[key: string]: string} = {};
+                      
+                      // Case-specific responses
+                      if (caseId === 'PA-2024-006') {
+                        responses = {
+                          'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
+                          'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
+                          'cost': 'The $2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
+                          'guidelines': 'The case meets all clinical guidelines for DME replacement as per Medicare LCD and policy requirements.',
+                          'symptoms': 'Patient presented with documented Obstructive Sleep Apnea (AHI 8.9/hr on diagnostic sleep study). Current symptoms include daytime sleepiness (Epworth score 3/24 - indicating excellent control with current therapy). Patient is highly compliant with CPAP therapy and requires device replacement as current unit is 5+ years old.',
+                          'diagnosis': 'The patient has a confirmed diagnosis of Obstructive Sleep Apnea (ICD-10: G47.33) documented via polysomnography. The AHI of 8.9/hr falls within the mild-to-moderate range, clearly meeting medical necessity criteria for CPAP therapy.',
+                          'medically necessary': 'This CPAP replacement is medically necessary because: 1) Patient has documented OSA with AHI 8.9/hr requiring ongoing therapy, 2) Current device is 5+ years old and approaching end of functional life, 3) Patient demonstrates excellent compliance with therapy (Epworth score 3/24), 4) Device replacement is standard practice per Medicare LCD guidelines for DME >5 years old, 5) Continued CPAP therapy prevents serious complications including cardiovascular events, cognitive impairment, and motor vehicle accidents.',
+                        };
+                      } else {
+                        responses = {
+                          'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
+                          'risk': 'The risk assessment indicates a favorable outcome. Patient has stable vitals and meets all clinical criteria for the procedure.',
+                          'cost': 'The $15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
+                          'guidelines': 'The case meets all clinical guidelines for cardiac catheterization as per the American College of Cardiology standards.',
+                        };
+                      }
                       
                       let response = responses.default;
                       if (userMessage.toLowerCase().includes('risk')) response = responses.risk;
                       if (userMessage.toLowerCase().includes('cost') || userMessage.toLowerCase().includes('amount')) response = responses.cost;
                       if (userMessage.toLowerCase().includes('guideline')) response = responses.guidelines;
+                      if (userMessage.toLowerCase().includes('symptom')) response = responses.symptoms || responses.default;
+                      if (userMessage.toLowerCase().includes('diagnosis') || userMessage.toLowerCase().includes('diagnose')) response = responses.diagnosis || responses.default;
+                      if (userMessage.toLowerCase().includes('medically necessary') || userMessage.toLowerCase().includes('why is it medically necessary') || userMessage.toLowerCase().includes('medical necessity')) response = responses['medically necessary'] || responses.default;
                       
                       setChatMessages(prev => [...prev, { role: 'assistant', content: response }]);
                     }, 1000);
@@ -3037,9 +3057,39 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                     setChatInput('');
                     
                     setTimeout(() => {
+                      let responses: {[key: string]: string} = {};
+                      
+                      // Case-specific responses
+                      if (caseId === 'PA-2024-006') {
+                        responses = {
+                          'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
+                          'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
+                          'cost': 'The $2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
+                          'guidelines': 'The case meets all clinical guidelines for DME replacement as per Medicare LCD and policy requirements.',
+                          'symptoms': 'Patient presented with documented Obstructive Sleep Apnea (AHI 8.9/hr on diagnostic sleep study). Current symptoms include daytime sleepiness (Epworth score 3/24 - indicating excellent control with current therapy). Patient is highly compliant with CPAP therapy and requires device replacement as current unit is 5+ years old.',
+                          'diagnosis': 'The patient has a confirmed diagnosis of Obstructive Sleep Apnea (ICD-10: G47.33) documented via polysomnography. The AHI of 8.9/hr falls within the mild-to-moderate range, clearly meeting medical necessity criteria for CPAP therapy.',
+                          'medically necessary': 'This CPAP replacement is medically necessary because: 1) Patient has documented OSA with AHI 8.9/hr requiring ongoing therapy, 2) Current device is 5+ years old and approaching end of functional life, 3) Patient demonstrates excellent compliance with therapy (Epworth score 3/24), 4) Device replacement is standard practice per Medicare LCD guidelines for DME >5 years old, 5) Continued CPAP therapy prevents serious complications including cardiovascular events, cognitive impairment, and motor vehicle accidents.',
+                        };
+                      } else {
+                        responses = {
+                          'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity.',
+                          'risk': 'The risk assessment indicates a favorable outcome. Patient has stable vitals and meets all clinical criteria for the procedure.',
+                          'cost': 'The $15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
+                          'guidelines': 'The case meets all clinical guidelines for cardiac catheterization as per the American College of Cardiology standards.',
+                        };
+                      }
+                      
+                      let response = responses.default;
+                      if (userMessage.toLowerCase().includes('risk')) response = responses.risk;
+                      if (userMessage.toLowerCase().includes('cost') || userMessage.toLowerCase().includes('amount')) response = responses.cost;
+                      if (userMessage.toLowerCase().includes('guideline')) response = responses.guidelines;
+                      if (userMessage.toLowerCase().includes('symptom')) response = responses.symptoms || responses.default;
+                      if (userMessage.toLowerCase().includes('diagnosis') || userMessage.toLowerCase().includes('diagnose')) response = responses.diagnosis || responses.default;
+                      if (userMessage.toLowerCase().includes('medically necessary') || userMessage.toLowerCase().includes('why is it medically necessary') || userMessage.toLowerCase().includes('medical necessity')) response = responses['medically necessary'] || responses.default;
+                      
                       setChatMessages(prev => [...prev, { 
                         role: 'assistant', 
-                        content: 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity.'
+                        content: response
                       }]);
                     }, 1000);
                   }

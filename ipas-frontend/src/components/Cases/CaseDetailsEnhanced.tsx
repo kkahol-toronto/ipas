@@ -196,6 +196,43 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           recommendedAction: 'Approve with coverage limit',
           confidence: 0.87
         }
+      },
+      'PA-2024-006': {
+        id: 'PA-2024-006',
+        patientName: 'Rebecca Hardin',
+        patientId: 'P-2024-006',
+        dateOfBirth: '1976-08-25',
+        provider: 'Amy Diane Kelly, NP',
+        providerId: 'PR-006',
+        hospital: 'Prisma Health Pulmonology - Sumter',
+        procedure: 'CPAP Device Replacement',
+        diagnosis: 'Obstructive Sleep Apnea (G47.33)',
+        status: 'In Review',
+        priority: 'Medium',
+        submittedDate: '2024-04-25T12:16:34Z',
+        lastUpdated: '2024-04-25T15:48:00Z',
+        insurance: 'Ambetter / Absolute Total Care',
+        policyNumber: 'U7131533302',
+        estimatedCost: 2500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Polysomnography Report.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Doctor Notes.pdf', type: 'PDF', size: '1.2 MB', status: 'Processed' },
+          { id: 'doc5', name: 'Insurance Card.pdf', type: 'PDF', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2024-04-24T15:05:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2024-04-24T15:48:00Z', note: 'CPAP device replacement needed - current device 5+ years old', author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2024-04-25T12:16:34Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.96,
+          coverageEligibility: 0.94,
+          riskAssessment: 'Low',
+          recommendedAction: 'Approve - clear medical necessity',
+          confidence: 0.95
+        }
       }
     };
 
@@ -332,7 +369,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="info"
                   onClick={async () => {
                     try {
-                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : 'case-005-david-brown';
+                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe';
                       const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
                       const data = await response.json();
                       setObservabilityData(data);
@@ -351,7 +388,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="success"
                   onClick={() => {
                     const link = document.createElement('a');
-                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : 'case-005-david-brown'}/observability_and_explanation.json`;
+                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
                     link.download = `observability_and_explanation_${caseId}.json`;
                     link.click();
                   }}
@@ -851,7 +888,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : 'case-005-david-brown'}/observability_and_explanation.json`;
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
               link.download = `observability_and_explanation_${caseId}.json`;
               link.click();
             }}
