@@ -1,0 +1,217 @@
+{
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "fullUrl": "urn:uuid:patient-rebecca-hardin",
+        "resource": {
+          "resourceType": "Patient",
+          "id": "rebecca-hardin",
+          "name": [{ "family": "Hardin", "given": ["Rebecca"] }],
+          "gender": "female",
+          "birthDate": "1976-08-25",
+          "address": [
+            {
+              "line": ["2045 Lloyd Dr"],
+              "city": "Sumter",
+              "state": "SC",
+              "postalCode": "29154-9233"
+            }
+          ],
+          "telecom": [
+            { "system": "phone", "value": "803-607-6918", "use": "home" }
+          ],
+          "identifier": [
+            { "system": "http://hospital.smarthealth.org/mrn", "value": "976457669" }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:coverage-ambetter",
+        "resource": {
+          "resourceType": "Coverage",
+          "id": "ambetter-coverage",
+          "status": "active",
+          "beneficiary": { "reference": "urn:uuid:patient-rebecca-hardin" },
+          "payor": [{ "display": "Ambetter / Absolute Total Care" }],
+          "class": [
+            { "type": { "text": "plan" }, "value": "AMBETTER EXCHANGE-ALL" },
+            { "type": { "text": "group" }, "value": "412101" }
+          ],
+          "subscriberId": "U7131533302"
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:practitioner-amy-kelly",
+        "resource": {
+          "resourceType": "Practitioner",
+          "id": "amy-kelly",
+          "name": [
+            { "family": "Kelly", "given": ["Amy", "Diane"], "suffix": ["NP"] }
+          ],
+          "identifier": [
+            { "system": "http://hl7.org/fhir/sid/us-npi", "value": "1578173555" },
+            { "system": "http://hl7.org/fhir/sid/dea", "value": "MK6112560" }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:practitioner-paul-evangelisti",
+        "resource": {
+          "resourceType": "Practitioner",
+          "id": "paul-evangelisti",
+          "name": [
+            { "family": "Evangelisti", "given": ["Paul", "Andrew"], "suffix": ["MD"] }
+          ],
+          "identifier": [
+            { "system": "http://hl7.org/fhir/sid/us-npi", "value": "1982625745" }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:observation-sleepstudy",
+        "resource": {
+          "resourceType": "Observation",
+          "id": "sleepstudy-results",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "procedure",
+                  "display": "Procedure"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              { "system": "http://loinc.org", "code": "8352-6", "display": "Polysomnography study" }
+            ],
+            "text": "Home Sleep Test (HST)"
+          },
+          "subject": { "reference": "urn:uuid:patient-rebecca-hardin" },
+          "effectiveDateTime": "2022-08-16",
+          "performer": [{ "reference": "urn:uuid:practitioner-paul-evangelisti" }],
+          "valueString": "Mild obstructive sleep apnea with AHI 8.9/hr and oxygen nadir 69%",
+          "component": [
+            { "code": { "text": "Apnea-Hypopnea Index (AHI)" }, "valueQuantity": { "value": 8.9, "unit": "events/hour" } },
+            { "code": { "text": "Lowest SpO2" }, "valueQuantity": { "value": 69, "unit": "%" } },
+            { "code": { "text": "Mean SpO2" }, "valueQuantity": { "value": 92, "unit": "%" } },
+            { "code": { "text": "Mean Heart Rate During Sleep" }, "valueQuantity": { "value": 58.1, "unit": "bpm" } }
+          ],
+          "interpretation": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-interpretation",
+                  "code": "M",
+                  "display": "Mild abnormal"
+                }
+              ],
+              "text": "Mild OSA"
+            }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:condition-osa",
+        "resource": {
+          "resourceType": "Condition",
+          "id": "osa-condition",
+          "clinicalStatus": { "coding": [{ "code": "active" }] },
+          "verificationStatus": { "coding": [{ "code": "confirmed" }] },
+          "category": [{ "coding": [{ "code": "problem-list-item" }] }],
+          "code": {
+            "coding": [{ "system": "http://hl7.org/fhir/sid/icd-10", "code": "G47.33", "display": "Obstructive Sleep Apnea" }]
+          },
+          "subject": { "reference": "urn:uuid:patient-rebecca-hardin" },
+          "onsetDateTime": "2022-10-27"
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:condition-obesity",
+        "resource": {
+          "resourceType": "Condition",
+          "id": "severe-obesity",
+          "clinicalStatus": { "coding": [{ "code": "active" }] },
+          "verificationStatus": { "coding": [{ "code": "confirmed" }] },
+          "category": [{ "coding": [{ "code": "problem-list-item" }] }],
+          "code": {
+            "coding": [
+              { "system": "http://hl7.org/fhir/sid/icd-10", "code": "E66.01", "display": "Morbid (severe) obesity due to excess calories" },
+              { "system": "http://hl7.org/fhir/sid/icd-10", "code": "Z68.42", "display": "BMI 45.0–49.9, adult" }
+            ]
+          },
+          "subject": { "reference": "urn:uuid:patient-rebecca-hardin" },
+          "recordedDate": "2025-03-20"
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:devicerequest-cpap",
+        "resource": {
+          "resourceType": "DeviceRequest",
+          "id": "cpap-request",
+          "status": "active",
+          "intent": "order",
+          "priority": "routine",
+          "subject": { "reference": "urn:uuid:patient-rebecca-hardin" },
+          "authoredOn": "2025-04-24T15:48:00-05:00",
+          "requester": { "reference": "urn:uuid:practitioner-amy-kelly" },
+          "codeCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
+                "code": "E0601",
+                "display": "Continuous Positive Airway Pressure (CPAP) device"
+              }
+            ],
+            "text": "ResMed AutoSet CPAP replacement with 4–20 cmH2O pressure"
+          },
+          "quantityQuantity": { "value": 1, "unit": "each" },
+          "parameter": [
+            {
+              "code": { "text": "Heated Humidifier" },
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
+                    "code": "E0562",
+                    "display": "Heated humidifier"
+                  }
+                ]
+              }
+            },
+            { "code": { "text": "Length of Need" }, "valueInteger": 99 },
+            { "code": { "text": "EPR" }, "valueString": "Patient preference" },
+            { "code": { "text": "Ramp" }, "valueString": "Patient preference" }
+          ],
+          "reasonReference": [
+            { "reference": "urn:uuid:condition-osa" },
+            { "reference": "urn:uuid:condition-obesity" }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:observation-vitals",
+        "resource": {
+          "resourceType": "Observation",
+          "id": "vitals-visit-2025",
+          "status": "final",
+          "category": [{ "coding": [{ "code": "vital-signs" }] }],
+          "code": { "text": "Vital Signs" },
+          "subject": { "reference": "urn:uuid:patient-rebecca-hardin" },
+          "effectiveDateTime": "2025-04-24T15:05:00-05:00",
+          "component": [
+            { "code": { "text": "Blood Pressure" }, "valueString": "118/69 mmHg" },
+            { "code": { "text": "Heart Rate" }, "valueQuantity": { "value": 68, "unit": "bpm" } },
+            { "code": { "text": "SpO2" }, "valueQuantity": { "value": 94, "unit": "%" } },
+            { "code": { "text": "Weight" }, "valueQuantity": { "value": 136, "unit": "kg" } },
+            { "code": { "text": "BMI" }, "valueQuantity": { "value": 45.6, "unit": "kg/m2" } }
+          ]
+        }
+      }
+    ]
+  }
+  

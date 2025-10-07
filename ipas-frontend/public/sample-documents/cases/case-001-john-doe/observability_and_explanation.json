@@ -1,0 +1,136 @@
+{
+  "caseId": "PA-2024-001",
+  "patientName": "John Smith",
+  "procedure": "MRI Brain with Contrast",
+  "finalDecision": "APPROVED",
+  "processingTimeline": {
+    "startTime": "2024-01-10T08:30:00Z",
+    "endTime": "2024-01-10T08:35:00Z",
+    "totalDuration": "5 minutes"
+  },
+  "workflowSteps": [
+    {
+      "step": 1,
+      "action": "Case Initiation",
+      "timestamp": "2024-01-10T08:30:00Z",
+      "status": "Completed",
+      "details": "Prior authorization request submitted by Dr. Sarah Johnson",
+      "outcome": "Case PA-2024-001 created and queued for processing",
+      "comments": "High priority case - suspected brain tumor"
+    },
+    {
+      "step": 2,
+      "action": "Document Collection",
+      "timestamp": "2024-01-10T08:30:15Z",
+      "status": "Completed",
+      "details": "Collected 5 documents: Prior Auth Form, Patient Medical History, MRI Report, Physician Notes, Insurance Card",
+      "outcome": "All required documents present",
+      "comments": "Document completeness check passed - 100% documentation"
+    },
+    {
+      "step": 3,
+      "action": "Document Extraction",
+      "timestamp": "2024-01-10T08:30:30Z",
+      "status": "Completed",
+      "details": "AI-powered OCR and data extraction from all documents",
+      "outcome": "Successfully extracted: Patient demographics, Clinical history, Diagnosis (ICD-10: C71.9), Procedure code (CPT: 70553), Insurance details",
+      "comments": "Extraction confidence: 98.5% - High quality scans"
+    },
+    {
+      "step": 4,
+      "action": "Authorization Triage",
+      "timestamp": "2024-01-10T08:31:00Z",
+      "status": "Completed",
+      "details": "Rules engine evaluation: Coverage verified, Gold status patient, Standard procedure cost $2,500",
+      "outcome": "Auto-approval criteria met - No clinical review required",
+      "comments": "Patient has Gold status coverage with no coverage limits. Standard neurological procedure within policy guidelines."
+    },
+    {
+      "step": 5,
+      "action": "Coverage Verification",
+      "timestamp": "2024-01-10T08:31:15Z",
+      "status": "Completed",
+      "details": "Blue Cross Blue Shield (BC123456789) - Gold Plan",
+      "outcome": "Active coverage confirmed. Deductible: $500 met. Coverage limit: None for diagnostic imaging",
+      "comments": "Patient eligible for procedure. No prior authorization denials in history."
+    },
+    {
+      "step": 6,
+      "action": "Clinical Guidelines Check",
+      "timestamp": "2024-01-10T08:31:30Z",
+      "status": "Completed",
+      "details": "Evaluated against ACR Appropriateness Criteria for brain MRI",
+      "outcome": "Procedure appropriate for suspected brain tumor. Meets medical necessity criteria.",
+      "comments": "Supporting evidence: Progressive headaches, visual disturbances, neurological deficits. Appropriate imaging modality selected."
+    },
+    {
+      "step": 7,
+      "action": "AI Recommendation",
+      "timestamp": "2024-01-10T08:32:00Z",
+      "status": "Completed",
+      "details": "AI analysis of clinical data, guidelines, and policy",
+      "outcome": "APPROVE - Confidence: 96%",
+      "comments": "Strong clinical justification. No red flags identified. Procedure code matches diagnosis. Standard of care met."
+    },
+    {
+      "step": 8,
+      "action": "Auto-Approval Decision",
+      "timestamp": "2024-01-10T08:32:15Z",
+      "status": "Completed",
+      "details": "Automated approval based on AI recommendation and policy rules",
+      "outcome": "Authorization APPROVED - Auth Number: AUTH-PA-2024-001",
+      "comments": "Case meets all criteria for automated approval. No human review required."
+    },
+    {
+      "step": 9,
+      "action": "Letter Generation",
+      "timestamp": "2024-01-10T08:33:00Z",
+      "status": "Completed",
+      "details": "Generated approval letter with authorization details",
+      "outcome": "Approval letter created (PA-2024-001-approval-letter.pdf)",
+      "comments": "Letter includes: Authorization number, approved procedure, valid dates (30 days), provider instructions"
+    },
+    {
+      "step": 10,
+      "action": "Provider Notification",
+      "timestamp": "2024-01-10T08:34:00Z",
+      "status": "Completed",
+      "details": "Notification sent to Dr. Sarah Johnson at UCLA Medical Center",
+      "outcome": "Email notification delivered successfully",
+      "comments": "Provider portal updated with approval status and downloadable letter"
+    },
+    {
+      "step": 11,
+      "action": "EMR Integration",
+      "timestamp": "2024-01-10T08:34:30Z",
+      "status": "Completed",
+      "details": "Authorization data transmitted to Epic EMR system",
+      "outcome": "Epic Patient ID: EPIC_5A3D7F92, Order placed successfully",
+      "comments": "EMR integration successful. Hospital notified. Order ID: ORD_7K2M9P4N8Q"
+    }
+  ],
+  "keyFindings": {
+    "clinicalJustification": "Patient presents with progressive neurological symptoms (headaches, visual disturbances) requiring diagnostic imaging to rule out intracranial pathology",
+    "medicalNecessity": "MRI with contrast is medically necessary for suspected brain tumor diagnosis per ACR guidelines",
+    "policyCompliance": "Procedure covered under patient's Gold plan with no restrictions or limits",
+    "costEfficiency": "Standard procedure cost of $2,500 is within expected range for brain MRI with contrast"
+  },
+  "approvalDetails": {
+    "authorizationNumber": "AUTH-PA-2024-001",
+    "approvedProcedure": "MRI Brain with Contrast (CPT: 70553)",
+    "approvalDate": "2024-01-10",
+    "validUntil": "2024-02-09",
+    "approvedAmount": "$2,500",
+    "approvedBy": "IPAS Automated System",
+    "reviewType": "Automated Review - No Clinical Panel Required"
+  },
+  "qualityMetrics": {
+    "processingTime": "5 minutes",
+    "documentationCompleteness": "100%",
+    "extractionAccuracy": "98.5%",
+    "aiConfidence": "96%",
+    "policyCompliance": "100%",
+    "patientSatisfactionImpact": "High - Fast approval reduces wait time"
+  }
+}
+

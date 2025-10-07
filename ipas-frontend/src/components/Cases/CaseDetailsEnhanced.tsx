@@ -21,7 +21,13 @@ import {
   MenuItem,
   Select,
   FormControl,
-  InputLabel
+  InputLabel,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
 } from '@mui/material';
 import {
   Person as PersonIcon,
@@ -33,7 +39,8 @@ import {
   Download as DownloadIcon,
   Edit as EditIcon,
   Share as ShareIcon,
-  Computer as ComputerIcon
+  Computer as ComputerIcon,
+  Visibility as VisibilityIcon
 } from '@mui/icons-material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
 import CaseDocuments from './CaseDocuments';
@@ -76,6 +83,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [shareNote, setShareNote] = useState('');
   const [editNotesOpen, setEditNotesOpen] = useState(false);
   const [clinicalNotes, setClinicalNotes] = useState('');
+  const [observabilityDialogOpen, setObservabilityDialogOpen] = useState(false);
+  const [observabilityData, setObservabilityData] = useState<any>(null);
 
   // Dynamic case data based on caseId
   const getCaseData = (caseId: string) => {
@@ -313,6 +322,38 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                     link.download = `EMR_insert_${caseData.id}.json`;
                     link.click();
                     URL.revokeObjectURL(url);
+                  }}
+                >
+                  <DownloadIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="View Observability & Explanation">
+                <IconButton
+                  color="info"
+                  onClick={async () => {
+                    try {
+                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : 'case-005-david-brown';
+                      const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
+                      const data = await response.json();
+                      setObservabilityData(data);
+                      setObservabilityDialogOpen(true);
+                    } catch (error) {
+                      console.error('Error loading observability data:', error);
+                      alert('Observability report not available for this case');
+                    }
+                  }}
+                >
+                  <VisibilityIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Download Observability & Explanation Report">
+                <IconButton
+                  color="success"
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : 'case-005-david-brown'}/observability_and_explanation.json`;
+                    link.download = `observability_and_explanation_${caseId}.json`;
+                    link.click();
                   }}
                 >
                   <DownloadIcon />
@@ -649,6 +690,176 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             }}
           >
             Share Case
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Observability & Explanation Dialog */}
+      <Dialog
+        open={observabilityDialogOpen}
+        onClose={() => setObservabilityDialogOpen(false)}
+        maxWidth="lg"
+        fullWidth
+      >
+        <DialogTitle>
+          <Typography variant="h6">
+            Observability & Explanation Report - {caseId}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            Complete workflow transparency and decision reasoning
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          {observabilityData && (
+            <Box>
+              {/* Summary Section */}
+              <Paper sx={{ p: 2, mb: 3, bgcolor: '#f5f5f5' }}>
+                <Grid container spacing={2}>
+                  <Grid size={{ xs: 6, md: 3 }}>
+                    <Typography variant="caption" color="text.secondary">Patient</Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.patientName}</Typography>
+                  </Grid>
+                  <Grid size={{ xs: 6, md: 3 }}>
+                    <Typography variant="caption" color="text.secondary">Procedure</Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.procedure}</Typography>
+                  </Grid>
+                  <Grid size={{ xs: 6, md: 3 }}>
+                    <Typography variant="caption" color="text.secondary">Final Decision</Typography>
+                    <Chip 
+                      label={observabilityData.finalDecision} 
+                      color={observabilityData.finalDecision === 'APPROVED' ? 'success' : 'error'}
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid size={{ xs: 6, md: 3 }}>
+                    <Typography variant="caption" color="text.secondary">Processing Time</Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.processingTimeline.totalDuration}</Typography>
+                  </Grid>
+                </Grid>
+              </Paper>
+
+              {/* Workflow Steps Table */}
+              <Typography variant="h6" sx={{ mb: 2 }}>Workflow Steps</Typography>
+              <TableContainer component={Paper} variant="outlined" sx={{ mb: 3 }}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow sx={{ bgcolor: '#f5f5f5' }}>
+                      <TableCell sx={{ fontWeight: 'bold', width: '5%' }}>Step</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', width: '15%' }}>Action</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', width: '10%' }}>Status</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', width: '25%' }}>Details</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', width: '25%' }}>Outcome</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', width: '20%' }}>Comments</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {observabilityData.workflowSteps.map((step: any) => (
+                      <TableRow key={step.step}>
+                        <TableCell>{step.step}</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold' }}>{step.action}</TableCell>
+                        <TableCell>
+                          <Chip 
+                            label={step.status} 
+                            color={step.status === 'Completed' ? 'success' : 'default'}
+                            size="small"
+                          />
+                        </TableCell>
+                        <TableCell sx={{ fontSize: '0.875rem' }}>{step.details}</TableCell>
+                        <TableCell sx={{ fontSize: '0.875rem' }}>{step.outcome}</TableCell>
+                        <TableCell sx={{ fontSize: '0.875rem', color: 'text.secondary' }}>{step.comments}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+
+              {/* Key Findings */}
+              <Typography variant="h6" sx={{ mb: 2 }}>Key Findings</Typography>
+              <Grid container spacing={2} sx={{ mb: 3 }}>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <Paper sx={{ p: 2, height: '100%' }}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Clinical Justification</Typography>
+                    <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.clinicalJustification}</Typography>
+                  </Paper>
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <Paper sx={{ p: 2, height: '100%' }}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Medical Necessity</Typography>
+                    <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.medicalNecessity}</Typography>
+                  </Paper>
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <Paper sx={{ p: 2, height: '100%' }}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Policy Compliance</Typography>
+                    <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.policyCompliance}</Typography>
+                  </Paper>
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <Paper sx={{ p: 2, height: '100%' }}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Cost Efficiency</Typography>
+                    <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.costEfficiency}</Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+
+              {/* Approval Details */}
+              <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
+              <Paper sx={{ p: 2, mb: 3 }}>
+                <Grid container spacing={2}>
+                  <Grid size={{ xs: 12, md: 4 }}>
+                    <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 4 }}>
+                    <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 4 }}>
+                    <Typography variant="caption" color="text.secondary">Valid Until</Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography variant="caption" color="text.secondary">Approved By</Typography>
+                    <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography variant="caption" color="text.secondary">Review Type</Typography>
+                    <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
+                  </Grid>
+                </Grid>
+              </Paper>
+
+              {/* Quality Metrics */}
+              <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
+              <Paper sx={{ p: 2 }}>
+                <Grid container spacing={2}>
+                  {Object.entries(observabilityData.qualityMetrics).map(([key, value]) => (
+                    <Grid size={{ xs: 6, md: 4 }} key={key}>
+                      <Typography variant="caption" color="text.secondary">
+                        {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
+                      </Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{String(value)}</Typography>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Paper>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            startIcon={<DownloadIcon />}
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : 'case-005-david-brown'}/observability_and_explanation.json`;
+              link.download = `observability_and_explanation_${caseId}.json`;
+              link.click();
+            }}
+          >
+            Download JSON
+          </Button>
+          <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">
+            Close
           </Button>
         </DialogActions>
       </Dialog>

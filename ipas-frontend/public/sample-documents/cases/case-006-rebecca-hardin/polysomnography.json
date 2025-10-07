@@ -1,0 +1,229 @@
+{
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "fullUrl": "urn:uuid:patient-rebecca-hardin",
+        "resource": {
+          "resourceType": "Patient",
+          "id": "rebecca-hardin",
+          "name": [
+            {
+              "family": "Hardin",
+              "given": ["Rebecca"]
+            }
+          ],
+          "gender": "female",
+          "birthDate": "1976-08-25",
+          "address": [
+            {
+              "line": ["2045 Lloyd Dr"],
+              "city": "Sumter",
+              "state": "SC",
+              "postalCode": "29154-9233"
+            }
+          ],
+          "telecom": [
+            { "system": "phone", "value": "803-607-6918", "use": "home" }
+          ],
+          "identifier": [
+            {
+              "system": "http://hospital.smarthealth.org/mrn",
+              "value": "976457669"
+            }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:coverage-ambetter",
+        "resource": {
+          "resourceType": "Coverage",
+          "id": "ambetter-coverage",
+          "status": "active",
+          "beneficiary": {
+            "reference": "urn:uuid:patient-rebecca-hardin"
+          },
+          "payor": [
+            {
+              "display": "Ambetter / Absolute Total Care"
+            }
+          ],
+          "class": [
+            {
+              "type": { "text": "plan" },
+              "value": "AMBETTER EXCHANGE-ALL"
+            },
+            {
+              "type": { "text": "group" },
+              "value": "412101"
+            }
+          ],
+          "subscriberId": "U7131533302"
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:practitioner-amy-kelly",
+        "resource": {
+          "resourceType": "Practitioner",
+          "id": "amy-kelly",
+          "name": [
+            {
+              "family": "Kelly",
+              "given": ["Amy", "Diane"],
+              "suffix": ["NP"]
+            }
+          ],
+          "identifier": [
+            { "system": "http://hl7.org/fhir/sid/us-npi", "value": "1578173555" },
+            { "system": "http://hl7.org/fhir/sid/dea", "value": "MK6112560" }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:practitioner-paul-evangelisti",
+        "resource": {
+          "resourceType": "Practitioner",
+          "id": "paul-evangelisti",
+          "name": [
+            {
+              "family": "Evangelisti",
+              "given": ["Paul", "Andrew"],
+              "suffix": ["MD"]
+            }
+          ],
+          "identifier": [
+            { "system": "http://hl7.org/fhir/sid/us-npi", "value": "1982625745" }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:observation-polysomnography",
+        "resource": {
+          "resourceType": "Observation",
+          "id": "polysomnography-results",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "procedure",
+                  "display": "Procedure"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "8352-6",
+                "display": "Polysomnography study"
+              }
+            ],
+            "text": "Home Sleep Test (HST)"
+          },
+          "subject": { "reference": "urn:uuid:patient-rebecca-hardin" },
+          "effectiveDateTime": "2022-08-16",
+          "performer": [
+            { "reference": "urn:uuid:practitioner-paul-evangelisti" }
+          ],
+          "valueString": "Mild Obstructive Sleep Apnea (AHI 8.9/hr, SpO2 nadir 69%)",
+          "component": [
+            {
+              "code": {
+                "text": "Apnea-Hypopnea Index (AHI)"
+              },
+              "valueQuantity": {
+                "value": 8.9,
+                "unit": "events/hour"
+              }
+            },
+            {
+              "code": { "text": "Oxygen Desaturation Nadir" },
+              "valueQuantity": { "value": 69, "unit": "%" }
+            },
+            {
+              "code": { "text": "Mean Oxygen Saturation" },
+              "valueQuantity": { "value": 92, "unit": "%" }
+            },
+            {
+              "code": { "text": "Mean Heart Rate During Sleep" },
+              "valueQuantity": { "value": 58.1, "unit": "bpm" }
+            }
+          ],
+          "interpretation": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-interpretation",
+                  "code": "M",
+                  "display": "Mild abnormal"
+                }
+              ],
+              "text": "Mild OSA"
+            }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:devicerequest-cpap",
+        "resource": {
+          "resourceType": "DeviceRequest",
+          "id": "cpap-prescription",
+          "status": "active",
+          "intent": "order",
+          "priority": "routine",
+          "subject": { "reference": "urn:uuid:patient-rebecca-hardin" },
+          "authoredOn": "2025-04-24T15:48:00-05:00",
+          "requester": { "reference": "urn:uuid:practitioner-amy-kelly" },
+          "codeCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
+                "code": "E0601",
+                "display": "Continuous Positive Airway Pressure (CPAP) device"
+              }
+            ],
+            "text": "ResMed S10 AutoSet CPAP, pressure range 4-20 cmH2O"
+          },
+          "quantityQuantity": { "value": 1, "unit": "each" },
+          "parameter": [
+            {
+              "code": { "text": "Heated Humidifier" },
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
+                    "code": "E0562",
+                    "display": "Heated Humidifier"
+                  }
+                ]
+              }
+            },
+            {
+              "code": { "text": "Length of Need" },
+              "valueInteger": 99
+            },
+            {
+              "code": { "text": "Ramp" },
+              "valueString": "Patient Preference"
+            },
+            {
+              "code": { "text": "EPR" },
+              "valueString": "Patient Preference"
+            }
+          ],
+          "reasonCode": [
+            {
+              "coding": [
+                { "system": "http://hl7.org/fhir/sid/icd-10", "code": "G47.33", "display": "Obstructive Sleep Apnea" },
+                { "system": "http://hl7.org/fhir/sid/icd-10", "code": "G47.36", "display": "Nocturnal Hypoxemia" }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+  

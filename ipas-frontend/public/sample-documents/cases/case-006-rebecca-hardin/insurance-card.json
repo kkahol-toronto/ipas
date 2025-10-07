@@ -1,0 +1,28 @@
+{
+    "insuranceCard": {
+      "insuranceCompany": "Ambetter / Absolute Total Care",
+      "planName": "AMBETTER EXCHANGE-ALL",
+      "groupNumber": "412101",
+      "memberInformation": {
+        "memberName": "Rebecca Hardin",
+        "memberId": "U7131533302",
+        "dateOfBirth": "1976-08-25",
+        "address": "2045 Lloyd Dr, Sumter, SC 29154-9233",
+        "phoneNumber": "803-607-6918"
+      },
+      "providerInformation": {
+        "customerService": "1-844-560-0799",
+        "claimsFax": "1-844-560-0799"
+      },
+      "medicalInformation": {
+        "primaryDiagnosis": "Obstructive sleep apnea (G47.33)"
+      },
+      "metadata": {
+        "mrn": "976457669",
+        "ssn": "XXX-XX-9971",
+        "sampleDisclaimer": "SAMPLE - NOT VALID FOR BILLING",
+        "barcode": true
+      }
+    }
+  }
+  

@@ -1,0 +1,85 @@
+{
+    "resourceType": "Bundle",
+    "type": "document",
+    "entry": [
+      {
+        "fullUrl": "urn:uuid:composition-visit-2025",
+        "resource": {
+          "resourceType": "Composition",
+          "id": "visit-2025",
+          "status": "final",
+          "type": {
+            "coding": [{ "system": "http://loinc.org", "code": "11488-4", "display": "Consult note" }],
+            "text": "Pulmonology progress note"
+          },
+          "date": "2025-04-24T15:48:00-05:00",
+          "title": "Pulmonology Follow-up Note - Rebecca Hardin",
+          "subject": { "reference": "Patient/rebecca-hardin" },
+          "author": [{ "reference": "Practitioner/amy-kelly" }],
+          "section": [
+            { "title": "Subjective", "text": { "status": "generated", "div": "<div>Compliant with CPAP; Epworth 3/24; no snoring or fatigue.</div>" } },
+            { "title": "Objective", "text": { "status": "generated", "div": "<div>Vitals: BP118/69, HR68, SpO2 94%, Weight 136 kg. Sleep study AHI 8.9/hr, SpO2 nadir 69%.</div>" } },
+            { "title": "Assessment", "text": { "status": "generated", "div": "<div>Mild OSA (G47.33), Nocturnal Hypoxemia (G47.36), Obesity (E66.01 Z68.42), Atrial Fib, Hypertension.</div>" } },
+            { "title": "Plan", "text": { "status": "generated", "div": "<div>Continue CPAP. Order replacement AutoSet CPAP (E0601,E0562,A7037,A4604,A7038). Length of Need 99 months. Follow-up 3 months.</div>" } }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:patient-rebecca-hardin",
+        "resource": {
+          "resourceType": "Patient",
+          "id": "rebecca-hardin",
+          "name": [{ "family": "Hardin", "given": ["Rebecca"] }],
+          "gender": "female",
+          "birthDate": "1976-08-25",
+          "address": [{ "line": ["2045 Lloyd Dr"], "city": "Sumter", "state": "SC", "postalCode": "29154-9233" }],
+          "telecom": [{ "system": "phone", "value": "803-607-6918" }]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:practitioner-amy-kelly",
+        "resource": {
+          "resourceType": "Practitioner",
+          "id": "amy-kelly",
+          "name": [{ "family": "Kelly", "given": ["Amy", "Diane"], "suffix": ["NP"] }],
+          "identifier": [
+            { "system": "http://hl7.org/fhir/sid/us-npi", "value": "1578173555" },
+            { "system": "http://hl7.org/fhir/sid/dea", "value": "MK6112560" }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:condition-osa",
+        "resource": {
+          "resourceType": "Condition",
+          "id": "osa-condition",
+          "code": { "coding": [{ "system": "http://hl7.org/fhir/sid/icd-10", "code": "G47.33", "display": "Obstructive Sleep Apnea" }] },
+          "subject": { "reference": "Patient/rebecca-hardin" },
+          "onsetDateTime": "2022-08-16",
+          "clinicalStatus": { "coding": [{ "code": "active" }] }
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:devicerequest-cpap",
+        "resource": {
+          "resourceType": "DeviceRequest",
+          "id": "cpap-replacement",
+          "status": "active",
+          "intent": "order",
+          "codeCodeableConcept": {
+            "coding": [{ "system": "http://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets", "code": "E0601", "display": "CPAP device" }],
+            "text": "ResMed S10 AutoSet CPAP with heated humidifier"
+          },
+          "parameter": [
+            { "code": { "text": "Heated Humidifier" }, "valueCodeableConcept": { "coding": [{ "code": "E0562" }] } },
+            { "code": { "text": "Tubing" }, "valueCodeableConcept": { "coding": [{ "code": "A7037" }, { "code": "A4604" }] } },
+            { "code": { "text": "Filter" }, "valueCodeableConcept": { "coding": [{ "code": "A7038" }] } }
+          ],
+          "reasonReference": [{ "reference": "Condition/osa-condition" }],
+          "authoredOn": "2025-04-24T15:48:00-05:00",
+          "requester": { "reference": "Practitioner/amy-kelly" }
+        }
+      }
+    ]
+  }
+  
