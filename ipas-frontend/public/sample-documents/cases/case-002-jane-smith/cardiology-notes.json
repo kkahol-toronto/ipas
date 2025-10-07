@@ -1,0 +1,77 @@
+{
+  "documentType": "Cardiology Notes",
+  "extractionTimestamp": "2024-01-16T13:00:00Z",
+  "patientInformation": {
+    "patientName": "Mary Johnson",
+    "patientId": "P-2024-002",
+    "dateOfBirth": "1972-08-22",
+    "gender": "Female"
+  },
+  "visitInformation": {
+    "visitDate": "2024-01-16",
+    "physician": "Dr. Michael Chen, MD",
+    "specialty": "Cardiology",
+    "visitType": "Consultation",
+    "chiefComplaint": "Chest pain and shortness of breath"
+  },
+  "clinicalAssessment": {
+    "historyOfPresentIllness": "52-year-old female with 3-day history of chest pain. Pain described as pressure-like, 7/10 intensity, radiating to left arm. Associated with shortness of breath and diaphoresis. No relief with rest.",
+    "reviewOfSystems": {
+      "cardiovascular": "Chest pain, palpitations",
+      "respiratory": "Shortness of breath, no cough",
+      "gastrointestinal": "No nausea or vomiting",
+      "neurological": "No dizziness or syncope"
+    },
+    "physicalExamination": {
+      "vitalSigns": "BP 140/90, HR 95, RR 18, O2 sat 95%",
+      "cardiovascular": "Regular rate and rhythm, no murmurs",
+      "respiratory": "Bilateral rales at bases",
+      "extremities": "No edema, pulses intact"
+    }
+  },
+  "diagnosticWorkup": {
+    "eKG": "ST depression in leads II, III, aVF, V4-V6",
+    "stressTest": "Positive for ischemia (completed 2024-01-15)",
+    "echocardiogram": "Pending",
+    "laboratory": "Troponin I elevated at 0.8 ng/mL",
+    "imaging": "Chest X-ray shows mild pulmonary congestion"
+  },
+  "assessmentAndPlan": {
+    "primaryDiagnosis": "Acute coronary syndrome, likely NSTEMI",
+    "differentialDiagnosis": [
+      "Unstable angina",
+      "NSTEMI",
+      "Pericarditis",
+      "Aortic dissection"
+    ],
+    "treatmentPlan": [
+      "Dual antiplatelet therapy (aspirin + clopidogrel)",
+      "Beta-blocker (metoprolol)",
+      "ACE inhibitor (lisinopril)",
+      "Statin therapy (atorvastatin)",
+      "Cardiac catheterization within 24-48 hours"
+    ],
+    "prognosis": "Good with appropriate intervention",
+    "followUp": "Cardiac catheterization scheduled for 2024-01-20"
+  },
+  "riskStratification": {
+    "timiRiskScore": "4 (intermediate risk)",
+    "graceScore": "140 (intermediate risk)",
+    "riskFactors": [
+      "Age >65",
+      "Diabetes",
+      "Hypertension",
+      "Hyperlipidemia"
+    ]
+  },
+  "patientEducation": {
+    "discussed": [
+      "Signs and symptoms of heart attack",
+      "Importance of medication compliance",
+      "Lifestyle modifications",
+      "Cardiac rehabilitation"
+    ],
+    "questionsAnswered": "Yes",
+    "patientUnderstanding": "Good"
+  }
+}

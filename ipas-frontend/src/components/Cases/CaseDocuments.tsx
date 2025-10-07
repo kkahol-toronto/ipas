@@ -68,7 +68,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
   const getCaseDocuments = (caseId: string): CaseDocument[] => {
     // Map case IDs to specific case folders and documents
     const caseDocumentMap: Record<string, CaseDocument[]> = {
-      '001': [
+      'PA-2024-001': [
         {
           id: '1',
           name: 'Prior Authorization Request Form',
@@ -427,10 +427,140 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           jsonUrl: '/sample-documents/cases/case-005-david-brown/urology-notes.json',
           isExtracted: false
         }
+      ],
+      'PA-2024-002': [
+        {
+          id: '1',
+          name: 'Prior Authorization Request Form',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '1.8 MB',
+          uploadDate: '2024-01-16',
+          status: 'ready',
+          url: '/sample-documents/cases/case-002-jane-smith/prior-auth-form-original.pdf',
+          originalUrl: '/sample-documents/cases/case-002-jane-smith/prior-auth-form-original.pdf',
+          extractedUrl: '/sample-documents/cases/case-002-jane-smith/prior-auth-request-form.pdf',
+          jsonUrl: '/sample-documents/cases/case-002-jane-smith/prior-auth-request-form.json',
+          isExtracted: false
+        },
+        {
+          id: '2',
+          name: 'Patient Medical History',
+          type: 'pdf',
+          category: 'medical-records',
+          size: '1.2 MB',
+          uploadDate: '2024-01-16',
+          status: 'ready',
+          url: '/sample-documents/cases/case-002-jane-smith/patient-medical-history.pdf',
+          originalUrl: '/sample-documents/cases/case-002-jane-smith/patient-medical-history.pdf',
+          extractedUrl: '/sample-documents/cases/case-002-jane-smith/patient-medical-history.pdf',
+          jsonUrl: '/sample-documents/cases/case-002-jane-smith/patient-medical-history.json',
+          isExtracted: false
+        },
+        {
+          id: '3',
+          name: 'Stress Test Results',
+          type: 'pdf',
+          category: 'medical-records',
+          size: '1.2 MB',
+          uploadDate: '2024-01-16',
+          status: 'ready',
+          url: '/sample-documents/cases/case-002-jane-smith/stress-test-results.pdf',
+          originalUrl: '/sample-documents/cases/case-002-jane-smith/stress-test-results.pdf',
+          extractedUrl: '/sample-documents/cases/case-002-jane-smith/stress-test-results.pdf',
+          jsonUrl: '/sample-documents/cases/case-002-jane-smith/stress-test-results.json',
+          isExtracted: false
+        },
+        {
+          id: '4',
+          name: 'Insurance Card',
+          type: 'image',
+          category: 'insurance',
+          size: '0.9 MB',
+          uploadDate: '2024-01-16',
+          status: 'ready',
+          url: '/sample-documents/cases/case-002-jane-smith/insurance-card.pdf',
+          originalUrl: '/sample-documents/cases/case-002-jane-smith/insurance-card.pdf',
+          extractedUrl: '/sample-documents/cases/case-002-jane-smith/insurance-card.pdf',
+          jsonUrl: '/sample-documents/cases/case-002-jane-smith/insurance-card.json',
+          isExtracted: false
+        },
+        {
+          id: '5',
+          name: 'Cardiology Notes',
+          type: 'pdf',
+          category: 'clinical-notes',
+          size: '1.1 MB',
+          uploadDate: '2024-01-16',
+          status: 'ready',
+          url: '/sample-documents/cases/case-002-jane-smith/cardiology-notes.pdf',
+          originalUrl: '/sample-documents/cases/case-002-jane-smith/cardiology-notes.pdf',
+          extractedUrl: '/sample-documents/cases/case-002-jane-smith/cardiology-notes.pdf',
+          jsonUrl: '/sample-documents/cases/case-002-jane-smith/cardiology-notes.json',
+          isExtracted: false
+        }
+      ],
+      'PA-2024-003': [
+        {
+          id: '1',
+          name: 'Prior Authorization Request Form',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '1.7 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/case-003-mike-johnson/prior-auth-form-original.pdf',
+          originalUrl: '/sample-documents/cases/case-003-mike-johnson/prior-auth-form-original.pdf',
+          extractedUrl: '/sample-documents/cases/case-003-mike-johnson/prior-auth-request-form.pdf',
+          jsonUrl: '/sample-documents/cases/case-003-mike-johnson/prior-auth-request-form.json',
+          isExtracted: false
+        },
+        {
+          id: '2',
+          name: 'MRI Knee Results',
+          type: 'pdf',
+          category: 'imaging',
+          size: '3.2 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.pdf',
+          originalUrl: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.pdf',
+          extractedUrl: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.pdf',
+          jsonUrl: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.json',
+          isExtracted: false
+        },
+        {
+          id: '3',
+          name: 'Physical Therapy Notes',
+          type: 'pdf',
+          category: 'medical-records',
+          size: '1.5 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/case-003-mike-johnson/pt-notes.pdf',
+          originalUrl: '/sample-documents/cases/case-003-mike-johnson/pt-notes.pdf',
+          extractedUrl: '/sample-documents/cases/case-003-mike-johnson/pt-notes.pdf',
+          jsonUrl: '/sample-documents/cases/case-003-mike-johnson/pt-notes.json',
+          isExtracted: false
+        },
+        {
+          id: '4',
+          name: 'Insurance Card',
+          type: 'image',
+          category: 'insurance',
+          size: '0.9 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf',
+          originalUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf',
+          extractedUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf',
+          jsonUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.json',
+          isExtracted: false
+        }
       ]
     };
 
-    return caseDocumentMap[caseId] || caseDocumentMap['001']; // Default to case 001 if not found
+    return caseDocumentMap[caseId] || caseDocumentMap['PA-2024-001']; // Default to PA-2024-001 if not found
   };
 
   const documents = getCaseDocuments(caseId);

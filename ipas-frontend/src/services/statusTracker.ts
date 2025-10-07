@@ -103,9 +103,11 @@ class StatusTracker {
       }
     };
 
-    // Only initialize if no data exists
-    if (!this.getAllStatuses()) {
+    // Only initialize if no data exists or is empty
+    const existingStatuses = this.getAllStatuses();
+    if (!existingStatuses || Object.keys(existingStatuses).length === 0) {
       this.saveAllStatuses(defaultStatuses);
+      console.log('✓ Initialized default case statuses');
     }
   }
 
@@ -147,9 +149,11 @@ class StatusTracker {
     const currentStatus = allStatuses[caseId];
 
     if (!currentStatus) {
-      console.warn(`Case ${caseId} not found in status tracking`);
+      console.warn(`⚠️ Case ${caseId} not found in status tracking - available cases:`, Object.keys(allStatuses));
       return;
     }
+
+    console.log(`📝 Updating case ${caseId} from ${currentStatus.currentStatus} to ${newStatus}`);
 
     const statusUpdate: StatusUpdate = {
       caseId,
@@ -170,6 +174,7 @@ class StatusTracker {
 
     allStatuses[caseId] = updatedStatus;
     this.saveAllStatuses(allStatuses);
+    console.log(`✅ Case ${caseId} status saved successfully. New status: ${newStatus}, isCompleted: ${updatedStatus.isCompleted}`);
 
     // Log the status update (NDJSON format)
     this.logStatusUpdate(statusUpdate);

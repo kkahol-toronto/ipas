@@ -77,43 +77,149 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [editNotesOpen, setEditNotesOpen] = useState(false);
   const [clinicalNotes, setClinicalNotes] = useState('');
 
-  // Mock case data
-  const caseData = {
-    id: caseId,
-    patientName: 'John Smith',
-    patientId: 'P-2024-001',
-    dateOfBirth: '1985-03-15',
-    provider: 'Dr. Sarah Johnson',
-    providerId: 'PR-001',
-    hospital: 'UCLA Medical Center',
-    procedure: 'MRI Brain with Contrast',
-    diagnosis: 'Suspected Brain Tumor',
-    status: 'In Review',
-    priority: 'High',
-    submittedDate: '2024-01-15T10:30:00Z',
-    lastUpdated: '2024-01-15T14:45:00Z',
-    insurance: 'Blue Cross Blue Shield',
-    policyNumber: 'BC123456789',
-    estimatedCost: 2500,
-    documents: [
-      { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
-      { id: 'doc2', name: 'MRI Scan - Brain.jpg', type: 'Image', size: '4.1 MB', status: 'Analyzed' },
-      { id: 'doc3', name: 'Patient Medical Records.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
-      { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
-    ],
-    clinicalNotes: [
-      { timestamp: '2024-01-15T10:30:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Dr. Sarah Johnson' },
-      { timestamp: '2024-01-15T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Dr. Sarah Johnson' },
-      { timestamp: '2024-01-15T12:00:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
-    ],
-    aiAnalysis: {
-      clinicalNecessity: 0.94,
-      coverageEligibility: 0.87,
-      riskAssessment: 'Medium',
-      recommendedAction: 'Approve with monitoring',
-      confidence: 0.91
-    }
+  // Dynamic case data based on caseId
+  const getCaseData = (caseId: string) => {
+    const caseDataMap: { [key: string]: any } = {
+      'PA-2024-001': {
+        id: 'PA-2024-001',
+        patientName: 'John Smith',
+        patientId: 'P-2024-001',
+        dateOfBirth: '1985-03-15',
+        provider: 'Dr. Sarah Johnson',
+        providerId: 'PR-001',
+        hospital: 'UCLA Medical Center',
+        procedure: 'MRI Brain with Contrast',
+        diagnosis: 'Suspected Brain Tumor',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2024-01-15T10:30:00Z',
+        lastUpdated: '2024-01-15T14:45:00Z',
+        insurance: 'Blue Cross Blue Shield',
+        policyNumber: 'BC123456789',
+        estimatedCost: 2500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
+          { id: 'doc2', name: 'MRI Scan - Brain.jpg', type: 'Image', size: '4.1 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Patient Medical Records.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2024-01-15T10:30:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Dr. Sarah Johnson' },
+          { timestamp: '2024-01-15T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Dr. Sarah Johnson' },
+          { timestamp: '2024-01-15T12:00:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.94,
+          coverageEligibility: 0.87,
+          riskAssessment: 'Medium',
+          recommendedAction: 'Approve with monitoring',
+          confidence: 0.91
+        }
+      },
+      'PA-2024-002': {
+        id: 'PA-2024-002',
+        patientName: 'Mary Johnson',
+        patientId: 'P-2024-002',
+        dateOfBirth: '1972-08-22',
+        provider: 'Dr. Michael Chen',
+        providerId: 'PR-002',
+        hospital: 'Cedars-Sinai Medical Center',
+        procedure: 'Cardiac Catheterization',
+        diagnosis: 'Coronary Artery Disease',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2024-01-16T09:15:00Z',
+        lastUpdated: '2024-01-16T13:20:00Z',
+        insurance: 'Aetna',
+        policyNumber: 'AET987654321',
+        estimatedCost: 15000,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc2', name: 'EKG Results.pdf', type: 'PDF', size: '0.8 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Stress Test Results.pdf', type: 'PDF', size: '1.2 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2024-01-16T09:15:00Z', note: 'Patient presents with chest pain and shortness of breath', author: 'Dr. Michael Chen' },
+          { timestamp: '2024-01-16T10:30:00Z', note: 'EKG shows ST elevation, cardiac catheterization recommended', author: 'Dr. Michael Chen' },
+          { timestamp: '2024-01-16T11:45:00Z', note: 'Prior authorization submitted for cardiac catheterization', author: 'Nurse Jennifer Lee' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.98,
+          coverageEligibility: 0.92,
+          riskAssessment: 'High',
+          recommendedAction: 'Approve immediately',
+          confidence: 0.95
+        }
+      },
+      'PA-2024-003': {
+        id: 'PA-2024-003',
+        patientName: 'Robert Davis',
+        patientId: 'P-2024-003',
+        dateOfBirth: '1965-12-03',
+        provider: 'Dr. Emily Rodriguez',
+        providerId: 'PR-003',
+        hospital: 'Kaiser Permanente',
+        procedure: 'Knee Arthroscopy',
+        diagnosis: 'Meniscal Tear',
+        status: 'In Review',
+        priority: 'Medium',
+        submittedDate: '2024-01-17T14:20:00Z',
+        lastUpdated: '2024-01-17T16:45:00Z',
+        insurance: 'Kaiser Permanente',
+        policyNumber: 'KP456789123',
+        estimatedCost: 8000,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.0 MB', status: 'Processed' },
+          { id: 'doc2', name: 'MRI Knee Results.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Physical Therapy Notes.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2024-01-17T14:20:00Z', note: 'Patient reports persistent knee pain and limited mobility', author: 'Dr. Emily Rodriguez' },
+          { timestamp: '2024-01-17T15:30:00Z', note: 'MRI confirms meniscal tear, arthroscopy recommended', author: 'Dr. Emily Rodriguez' },
+          { timestamp: '2024-01-17T16:00:00Z', note: 'Prior authorization submitted for knee arthroscopy', author: 'Nurse David Kim' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.89,
+          coverageEligibility: 0.85,
+          riskAssessment: 'Medium',
+          recommendedAction: 'Approve with coverage limit',
+          confidence: 0.87
+        }
+      }
+    };
+
+    return caseDataMap[caseId] || {
+      id: caseId,
+      patientName: 'Unknown Patient',
+      patientId: 'P-UNKNOWN',
+      dateOfBirth: 'Unknown',
+      provider: 'Unknown Provider',
+      providerId: 'PR-UNKNOWN',
+      hospital: 'Unknown Hospital',
+      procedure: 'Unknown Procedure',
+      diagnosis: 'Unknown Diagnosis',
+      status: 'Unknown',
+      priority: 'Unknown',
+      submittedDate: new Date().toISOString(),
+      lastUpdated: new Date().toISOString(),
+      insurance: 'Unknown Insurance',
+      policyNumber: 'UNKNOWN',
+      estimatedCost: 0,
+      documents: [],
+      clinicalNotes: [],
+      aiAnalysis: {
+        clinicalNecessity: 0,
+        coverageEligibility: 0,
+        riskAssessment: 'Unknown',
+        recommendedAction: 'Unknown',
+        confidence: 0
+      }
+    };
   };
+
+  const caseData = getCaseData(caseId);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -198,7 +304,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                         submitted_date: caseData.submittedDate,
                         last_updated: caseData.lastUpdated
                       },
-                      clinical_notes: clinicalNotes || caseData.clinicalNotes.map(n => n.note).join('\n')
+                      clinical_notes: clinicalNotes || caseData.clinicalNotes.map((n: any) => n.note).join('\n')
                     };
                     const blob = new Blob([JSON.stringify(emrData, null, 2)], { type: 'application/json' });
                     const url = URL.createObjectURL(blob);
@@ -215,7 +321,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               <Tooltip title="Edit Clinical Notes">
                 <IconButton
                   onClick={() => {
-                    setClinicalNotes(caseData.clinicalNotes.map(n => `[${new Date(n.timestamp).toLocaleString()}] ${n.author}:\n${n.note}`).join('\n\n'));
+                    setClinicalNotes(caseData.clinicalNotes.map((n: any) => `[${new Date(n.timestamp).toLocaleString()}] ${n.author}:\n${n.note}`).join('\n\n'));
                     setEditNotesOpen(true);
                   }}
                 >
@@ -314,7 +420,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           <Typography variant="h6" gutterBottom>
             Clinical Timeline
           </Typography>
-          {caseData.clinicalNotes.map((note, index) => (
+          {caseData.clinicalNotes.map((note: any, index: number) => (
             <Box key={index} sx={{ mb: 3 }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                 <Typography variant="subtitle2" color="primary">

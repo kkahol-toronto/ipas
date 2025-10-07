@@ -205,16 +205,16 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
       }
 
       // Patient Information (if available)
-      if (jsonContent.patient) {
+      if (jsonContent.patientInformation || jsonContent.patient) {
+        const patientData = jsonContent.patientInformation || jsonContent.patient;
         const patientFields = [];
-        if (jsonContent.patient.name) patientFields.push({ label: 'Name', value: jsonContent.patient.name });
-        if (jsonContent.patient.dateOfBirth) patientFields.push({ label: 'Date of Birth', value: jsonContent.patient.dateOfBirth });
-        if (jsonContent.patient.memberId) patientFields.push({ label: 'Member ID', value: jsonContent.patient.memberId });
-        if (jsonContent.patient.mrn) patientFields.push({ label: 'MRN', value: jsonContent.patient.mrn });
-        if (jsonContent.patient.insurancePlan) patientFields.push({ label: 'Insurance Plan', value: jsonContent.patient.insurancePlan });
-        if (jsonContent.patient.phone) patientFields.push({ label: 'Phone', value: jsonContent.patient.phone });
-        if (jsonContent.patient.email) patientFields.push({ label: 'Email', value: jsonContent.patient.email });
-        if (jsonContent.patient.address) patientFields.push({ label: 'Address', value: jsonContent.patient.address });
+        if (patientData.patientName || patientData.name) patientFields.push({ label: 'Name', value: patientData.patientName || patientData.name });
+        if (patientData.dateOfBirth) patientFields.push({ label: 'Date of Birth', value: patientData.dateOfBirth });
+        if (patientData.patientId || patientData.memberId) patientFields.push({ label: 'Patient ID', value: patientData.patientId || patientData.memberId });
+        if (patientData.gender) patientFields.push({ label: 'Gender', value: patientData.gender });
+        if (patientData.phoneNumber || patientData.phone) patientFields.push({ label: 'Phone', value: patientData.phoneNumber || patientData.phone });
+        if (patientData.email) patientFields.push({ label: 'Email', value: patientData.email });
+        if (patientData.address) patientFields.push({ label: 'Address', value: patientData.address });
         
         if (patientFields.length > 0) {
           tableData.push({ category: 'Patient Information', fields: patientFields });
@@ -222,18 +222,392 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
       }
 
       // Provider Information (if available)
-      if (jsonContent.provider) {
+      if (jsonContent.providerInformation || jsonContent.provider) {
+        const providerData = jsonContent.providerInformation || jsonContent.provider;
         const providerFields = [];
-        if (jsonContent.provider.name) providerFields.push({ label: 'Name', value: jsonContent.provider.name });
-        if (jsonContent.provider.npi) providerFields.push({ label: 'NPI', value: jsonContent.provider.npi });
-        if (jsonContent.provider.specialty) providerFields.push({ label: 'Specialty', value: jsonContent.provider.specialty });
-        if (jsonContent.provider.facility) providerFields.push({ label: 'Facility', value: jsonContent.provider.facility });
-        if (jsonContent.provider.phone) providerFields.push({ label: 'Phone', value: jsonContent.provider.phone });
-        if (jsonContent.provider.fax) providerFields.push({ label: 'Fax', value: jsonContent.provider.fax });
-        if (jsonContent.provider.signatureDate) providerFields.push({ label: 'Signature Date', value: jsonContent.provider.signatureDate });
+        if (providerData.providerName || providerData.name) providerFields.push({ label: 'Name', value: providerData.providerName || providerData.name });
+        if (providerData.npi) providerFields.push({ label: 'NPI', value: providerData.npi });
+        if (providerData.specialty) providerFields.push({ label: 'Specialty', value: providerData.specialty });
+        if (providerData.hospital || providerData.facility) providerFields.push({ label: 'Hospital/Facility', value: providerData.hospital || providerData.facility });
+        if (providerData.phoneNumber || providerData.phone) providerFields.push({ label: 'Phone', value: providerData.phoneNumber || providerData.phone });
+        if (providerData.fax) providerFields.push({ label: 'Fax', value: providerData.fax });
+        if (providerData.signatureDate) providerFields.push({ label: 'Signature Date', value: providerData.signatureDate });
         
         if (providerFields.length > 0) {
           tableData.push({ category: 'Provider Information', fields: providerFields });
+        }
+      }
+
+      // Insurance Information (if available)
+      if (jsonContent.insuranceInformation) {
+        const insuranceFields = [];
+        if (jsonContent.insuranceInformation.insuranceCompany) insuranceFields.push({ label: 'Insurance Company', value: jsonContent.insuranceInformation.insuranceCompany });
+        if (jsonContent.insuranceInformation.policyNumber) insuranceFields.push({ label: 'Policy Number', value: jsonContent.insuranceInformation.policyNumber });
+        if (jsonContent.insuranceInformation.groupNumber) insuranceFields.push({ label: 'Group Number', value: jsonContent.insuranceInformation.groupNumber });
+        if (jsonContent.insuranceInformation.memberId) insuranceFields.push({ label: 'Member ID', value: jsonContent.insuranceInformation.memberId });
+        if (jsonContent.insuranceInformation.effectiveDate) insuranceFields.push({ label: 'Effective Date', value: jsonContent.insuranceInformation.effectiveDate });
+        if (jsonContent.insuranceInformation.coverageType) insuranceFields.push({ label: 'Coverage Type', value: jsonContent.insuranceInformation.coverageType });
+        
+        if (insuranceFields.length > 0) {
+          tableData.push({ category: 'Insurance Information', fields: insuranceFields });
+        }
+      }
+
+      // Requested Service (if available)
+      if (jsonContent.requestedService) {
+        const serviceFields = [];
+        if (jsonContent.requestedService.procedureCode) serviceFields.push({ label: 'Procedure Code', value: jsonContent.requestedService.procedureCode });
+        if (jsonContent.requestedService.procedureName) serviceFields.push({ label: 'Procedure Name', value: jsonContent.requestedService.procedureName });
+        if (jsonContent.requestedService.diagnosisCode) serviceFields.push({ label: 'Diagnosis Code', value: jsonContent.requestedService.diagnosisCode });
+        if (jsonContent.requestedService.diagnosisDescription) serviceFields.push({ label: 'Diagnosis Description', value: jsonContent.requestedService.diagnosisDescription });
+        if (jsonContent.requestedService.requestedDate) serviceFields.push({ label: 'Requested Date', value: jsonContent.requestedService.requestedDate });
+        if (jsonContent.requestedService.urgency) serviceFields.push({ label: 'Urgency', value: jsonContent.requestedService.urgency });
+        if (jsonContent.requestedService.estimatedCost) serviceFields.push({ label: 'Estimated Cost', value: `$${jsonContent.requestedService.estimatedCost}` });
+        
+        if (serviceFields.length > 0) {
+          tableData.push({ category: 'Requested Service', fields: serviceFields });
+        }
+      }
+
+      // Medical History (if available)
+      if (jsonContent.medicalHistory) {
+        const medicalFields = [];
+        if (jsonContent.medicalHistory.chiefComplaint) medicalFields.push({ label: 'Chief Complaint', value: jsonContent.medicalHistory.chiefComplaint });
+        if (jsonContent.medicalHistory.historyOfPresentIllness) medicalFields.push({ label: 'History of Present Illness', value: jsonContent.medicalHistory.historyOfPresentIllness });
+        
+        if (jsonContent.medicalHistory.pastMedicalHistory && Array.isArray(jsonContent.medicalHistory.pastMedicalHistory)) {
+          medicalFields.push({ label: 'Past Medical History', value: jsonContent.medicalHistory.pastMedicalHistory.join('; ') });
+        }
+        
+        if (jsonContent.medicalHistory.pastSurgicalHistory && Array.isArray(jsonContent.medicalHistory.pastSurgicalHistory)) {
+          medicalFields.push({ label: 'Past Surgical History', value: jsonContent.medicalHistory.pastSurgicalHistory.join('; ') });
+        }
+        
+        if (jsonContent.medicalHistory.familyHistory && Array.isArray(jsonContent.medicalHistory.familyHistory)) {
+          medicalFields.push({ label: 'Family History', value: jsonContent.medicalHistory.familyHistory.join('; ') });
+        }
+        
+        if (jsonContent.medicalHistory.socialHistory) {
+          const social = jsonContent.medicalHistory.socialHistory;
+          if (social.smoking) medicalFields.push({ label: 'Smoking History', value: social.smoking });
+          if (social.alcohol) medicalFields.push({ label: 'Alcohol Use', value: social.alcohol });
+          if (social.exercise) medicalFields.push({ label: 'Exercise', value: social.exercise });
+          if (social.occupation) medicalFields.push({ label: 'Occupation', value: social.occupation });
+        }
+        
+        if (medicalFields.length > 0) {
+          tableData.push({ category: 'Medical History', fields: medicalFields });
+        }
+      }
+
+      // Current Medications (if available)
+      if (jsonContent.currentMedications && Array.isArray(jsonContent.currentMedications)) {
+        const medicationFields: Array<{ label: string; value: string }> = [];
+        jsonContent.currentMedications.forEach((med: any, index: number) => {
+          const medText = `${med.medication} ${med.dosage} ${med.frequency} - ${med.indication}`;
+          medicationFields.push({ label: `Medication ${index + 1}`, value: medText });
+        });
+        
+        if (medicationFields.length > 0) {
+          tableData.push({ category: 'Current Medications', fields: medicationFields });
+        }
+      }
+
+      // Allergies (if available)
+      if (jsonContent.allergies && Array.isArray(jsonContent.allergies)) {
+        const allergyFields: Array<{ label: string; value: string }> = [];
+        jsonContent.allergies.forEach((allergy: any, index: number) => {
+          const allergyText = `${allergy.allergen} (${allergy.reaction}) - ${allergy.severity} severity`;
+          allergyFields.push({ label: `Allergy ${index + 1}`, value: allergyText });
+        });
+        
+        if (allergyFields.length > 0) {
+          tableData.push({ category: 'Allergies', fields: allergyFields });
+        }
+      }
+
+      // Vital Signs (if available)
+      if (jsonContent.vitalSigns) {
+        const vitalFields = [];
+        if (jsonContent.vitalSigns.bloodPressure) vitalFields.push({ label: 'Blood Pressure', value: jsonContent.vitalSigns.bloodPressure });
+        if (jsonContent.vitalSigns.heartRate) vitalFields.push({ label: 'Heart Rate', value: jsonContent.vitalSigns.heartRate });
+        if (jsonContent.vitalSigns.temperature) vitalFields.push({ label: 'Temperature', value: jsonContent.vitalSigns.temperature });
+        if (jsonContent.vitalSigns.respiratoryRate) vitalFields.push({ label: 'Respiratory Rate', value: jsonContent.vitalSigns.respiratoryRate });
+        if (jsonContent.vitalSigns.oxygenSaturation) vitalFields.push({ label: 'Oxygen Saturation', value: jsonContent.vitalSigns.oxygenSaturation });
+        if (jsonContent.vitalSigns.weight) vitalFields.push({ label: 'Weight', value: jsonContent.vitalSigns.weight });
+        if (jsonContent.vitalSigns.height) vitalFields.push({ label: 'Height', value: jsonContent.vitalSigns.height });
+        if (jsonContent.vitalSigns.bmi) vitalFields.push({ label: 'BMI', value: jsonContent.vitalSigns.bmi });
+        
+        if (vitalFields.length > 0) {
+          tableData.push({ category: 'Vital Signs', fields: vitalFields });
+        }
+      }
+
+      // Physical Examination (if available)
+      if (jsonContent.physicalExamination) {
+        const examFields = [];
+        if (jsonContent.physicalExamination.general) examFields.push({ label: 'General', value: jsonContent.physicalExamination.general });
+        if (jsonContent.physicalExamination.cardiovascular) examFields.push({ label: 'Cardiovascular', value: jsonContent.physicalExamination.cardiovascular });
+        if (jsonContent.physicalExamination.respiratory) examFields.push({ label: 'Respiratory', value: jsonContent.physicalExamination.respiratory });
+        if (jsonContent.physicalExamination.abdomen) examFields.push({ label: 'Abdomen', value: jsonContent.physicalExamination.abdomen });
+        if (jsonContent.physicalExamination.extremities) examFields.push({ label: 'Extremities', value: jsonContent.physicalExamination.extremities });
+        
+        if (examFields.length > 0) {
+          tableData.push({ category: 'Physical Examination', fields: examFields });
+        }
+      }
+
+      // Assessment and Plan (if available)
+      if (jsonContent.assessmentAndPlan) {
+        const planFields = [];
+        if (jsonContent.assessmentAndPlan.assessment) planFields.push({ label: 'Assessment', value: jsonContent.assessmentAndPlan.assessment });
+        if (jsonContent.assessmentAndPlan.plan && Array.isArray(jsonContent.assessmentAndPlan.plan)) {
+          planFields.push({ label: 'Plan', value: jsonContent.assessmentAndPlan.plan.join('; ') });
+        }
+        
+        if (planFields.length > 0) {
+          tableData.push({ category: 'Assessment and Plan', fields: planFields });
+        }
+      }
+
+      // Clinical Data (if available) - for backward compatibility
+      if (jsonContent.clinicalData) {
+        const clinicalFields = [];
+        if (jsonContent.clinicalData.clinicalSummary) clinicalFields.push({ label: 'Clinical Summary', value: jsonContent.clinicalData.clinicalSummary });
+        
+        if (jsonContent.clinicalData.vitalSigns) {
+          const vitalSigns = jsonContent.clinicalData.vitalSigns;
+          if (vitalSigns.bloodPressure) clinicalFields.push({ label: 'Blood Pressure', value: vitalSigns.bloodPressure });
+          if (vitalSigns.heartRate) clinicalFields.push({ label: 'Heart Rate', value: vitalSigns.heartRate });
+          if (vitalSigns.temperature) clinicalFields.push({ label: 'Temperature', value: vitalSigns.temperature });
+          if (vitalSigns.oxygenSaturation) clinicalFields.push({ label: 'Oxygen Saturation', value: vitalSigns.oxygenSaturation });
+        }
+        
+        if (jsonContent.clinicalData.medications && Array.isArray(jsonContent.clinicalData.medications)) {
+          clinicalFields.push({ label: 'Medications', value: jsonContent.clinicalData.medications.join(', ') });
+        }
+        
+        if (jsonContent.clinicalData.allergies && Array.isArray(jsonContent.clinicalData.allergies)) {
+          clinicalFields.push({ label: 'Allergies', value: jsonContent.clinicalData.allergies.join(', ') });
+        }
+        
+        if (jsonContent.clinicalData.comorbidities && Array.isArray(jsonContent.clinicalData.comorbidities)) {
+          clinicalFields.push({ label: 'Comorbidities', value: jsonContent.clinicalData.comorbidities.join(', ') });
+        }
+        
+        if (clinicalFields.length > 0) {
+          tableData.push({ category: 'Clinical Data', fields: clinicalFields });
+        }
+      }
+
+      // Cardiology Notes / Clinical Notes specific fields
+      if (jsonContent.documentType === 'Cardiology Notes' || jsonContent.documentType === 'Physician Notes') {
+        // Visit Information
+        if (jsonContent.visitInformation) {
+          const visitFields = [];
+          if (jsonContent.visitInformation.visitDate) visitFields.push({ label: 'Visit Date', value: jsonContent.visitInformation.visitDate });
+          if (jsonContent.visitInformation.physician) visitFields.push({ label: 'Physician', value: jsonContent.visitInformation.physician });
+          if (jsonContent.visitInformation.specialty) visitFields.push({ label: 'Specialty', value: jsonContent.visitInformation.specialty });
+          if (jsonContent.visitInformation.visitType) visitFields.push({ label: 'Visit Type', value: jsonContent.visitInformation.visitType });
+          if (jsonContent.visitInformation.chiefComplaint) visitFields.push({ label: 'Chief Complaint', value: jsonContent.visitInformation.chiefComplaint });
+          
+          if (visitFields.length > 0) {
+            tableData.push({ category: 'Visit Information', fields: visitFields });
+          }
+        }
+
+        // Clinical Assessment
+        if (jsonContent.clinicalAssessment) {
+          const assessmentFields = [];
+          if (jsonContent.clinicalAssessment.historyOfPresentIllness) assessmentFields.push({ label: 'History of Present Illness', value: jsonContent.clinicalAssessment.historyOfPresentIllness });
+          
+          if (jsonContent.clinicalAssessment.reviewOfSystems) {
+            const ros = jsonContent.clinicalAssessment.reviewOfSystems;
+            if (ros.cardiovascular) assessmentFields.push({ label: 'ROS - Cardiovascular', value: ros.cardiovascular });
+            if (ros.respiratory) assessmentFields.push({ label: 'ROS - Respiratory', value: ros.respiratory });
+            if (ros.gastrointestinal) assessmentFields.push({ label: 'ROS - Gastrointestinal', value: ros.gastrointestinal });
+            if (ros.neurological) assessmentFields.push({ label: 'ROS - Neurological', value: ros.neurological });
+          }
+          
+          if (jsonContent.clinicalAssessment.physicalExamination) {
+            const pe = jsonContent.clinicalAssessment.physicalExamination;
+            if (pe.vitalSigns) assessmentFields.push({ label: 'Vital Signs', value: pe.vitalSigns });
+            if (pe.cardiovascular) assessmentFields.push({ label: 'PE - Cardiovascular', value: pe.cardiovascular });
+            if (pe.respiratory) assessmentFields.push({ label: 'PE - Respiratory', value: pe.respiratory });
+            if (pe.extremities) assessmentFields.push({ label: 'PE - Extremities', value: pe.extremities });
+          }
+          
+          if (assessmentFields.length > 0) {
+            tableData.push({ category: 'Clinical Assessment', fields: assessmentFields });
+          }
+        }
+
+        // Diagnostic Workup
+        if (jsonContent.diagnosticWorkup) {
+          const diagnosticFields = [];
+          if (jsonContent.diagnosticWorkup.eKG) diagnosticFields.push({ label: 'EKG', value: jsonContent.diagnosticWorkup.eKG });
+          if (jsonContent.diagnosticWorkup.stressTest) diagnosticFields.push({ label: 'Stress Test', value: jsonContent.diagnosticWorkup.stressTest });
+          if (jsonContent.diagnosticWorkup.echocardiogram) diagnosticFields.push({ label: 'Echocardiogram', value: jsonContent.diagnosticWorkup.echocardiogram });
+          if (jsonContent.diagnosticWorkup.laboratory) diagnosticFields.push({ label: 'Laboratory', value: jsonContent.diagnosticWorkup.laboratory });
+          if (jsonContent.diagnosticWorkup.imaging) diagnosticFields.push({ label: 'Imaging', value: jsonContent.diagnosticWorkup.imaging });
+          
+          if (diagnosticFields.length > 0) {
+            tableData.push({ category: 'Diagnostic Workup', fields: diagnosticFields });
+          }
+        }
+
+        // Assessment and Plan (clinical notes version)
+        if (jsonContent.assessmentAndPlan && jsonContent.assessmentAndPlan.primaryDiagnosis) {
+          const planFields = [];
+          if (jsonContent.assessmentAndPlan.primaryDiagnosis) planFields.push({ label: 'Primary Diagnosis', value: jsonContent.assessmentAndPlan.primaryDiagnosis });
+          
+          if (jsonContent.assessmentAndPlan.differentialDiagnosis && Array.isArray(jsonContent.assessmentAndPlan.differentialDiagnosis)) {
+            jsonContent.assessmentAndPlan.differentialDiagnosis.forEach((diagnosis: any, index: number) => {
+              planFields.push({ label: `Differential Diagnosis ${index + 1}`, value: diagnosis });
+            });
+          }
+          
+          if (jsonContent.assessmentAndPlan.treatmentPlan && Array.isArray(jsonContent.assessmentAndPlan.treatmentPlan)) {
+            jsonContent.assessmentAndPlan.treatmentPlan.forEach((treatment: any, index: number) => {
+              planFields.push({ label: `Treatment ${index + 1}`, value: treatment });
+            });
+          }
+          
+          if (jsonContent.assessmentAndPlan.prognosis) planFields.push({ label: 'Prognosis', value: jsonContent.assessmentAndPlan.prognosis });
+          if (jsonContent.assessmentAndPlan.followUp) planFields.push({ label: 'Follow Up', value: jsonContent.assessmentAndPlan.followUp });
+          
+          if (planFields.length > 0) {
+            tableData.push({ category: 'Assessment and Plan', fields: planFields });
+          }
+        }
+
+        // Risk Stratification
+        if (jsonContent.riskStratification) {
+          const riskFields = [];
+          if (jsonContent.riskStratification.timiRiskScore) riskFields.push({ label: 'TIMI Risk Score', value: jsonContent.riskStratification.timiRiskScore });
+          if (jsonContent.riskStratification.graceScore) riskFields.push({ label: 'GRACE Score', value: jsonContent.riskStratification.graceScore });
+          
+          if (jsonContent.riskStratification.riskFactors && Array.isArray(jsonContent.riskStratification.riskFactors)) {
+            jsonContent.riskStratification.riskFactors.forEach((factor: any, index: number) => {
+              riskFields.push({ label: `Risk Factor ${index + 1}`, value: factor });
+            });
+          }
+          
+          if (riskFields.length > 0) {
+            tableData.push({ category: 'Risk Stratification', fields: riskFields });
+          }
+        }
+
+        // Patient Education
+        if (jsonContent.patientEducation) {
+          const educationFields = [];
+          
+          if (jsonContent.patientEducation.discussed && Array.isArray(jsonContent.patientEducation.discussed)) {
+            jsonContent.patientEducation.discussed.forEach((topic: any, index: number) => {
+              educationFields.push({ label: `Topic ${index + 1}`, value: topic });
+            });
+          }
+          
+          if (jsonContent.patientEducation.questionsAnswered) educationFields.push({ label: 'Questions Answered', value: jsonContent.patientEducation.questionsAnswered });
+          if (jsonContent.patientEducation.patientUnderstanding) educationFields.push({ label: 'Patient Understanding', value: jsonContent.patientEducation.patientUnderstanding });
+          
+          if (educationFields.length > 0) {
+            tableData.push({ category: 'Patient Education', fields: educationFields });
+          }
+        }
+      }
+
+      // Stress Test Results specific fields
+      if (jsonContent.documentType === 'Stress Test Results') {
+        // Test Information
+        if (jsonContent.testInformation) {
+          const testInfoFields = [];
+          if (jsonContent.testInformation.testType) testInfoFields.push({ label: 'Test Type', value: jsonContent.testInformation.testType });
+          if (jsonContent.testInformation.testDate) testInfoFields.push({ label: 'Test Date', value: jsonContent.testInformation.testDate });
+          if (jsonContent.testInformation.orderingPhysician) testInfoFields.push({ label: 'Ordering Physician', value: jsonContent.testInformation.orderingPhysician });
+          if (jsonContent.testInformation.facility) testInfoFields.push({ label: 'Facility', value: jsonContent.testInformation.facility });
+          if (jsonContent.testInformation.technician) testInfoFields.push({ label: 'Technician', value: jsonContent.testInformation.technician });
+          
+          if (testInfoFields.length > 0) {
+            tableData.push({ category: 'Test Information', fields: testInfoFields });
+          }
+        }
+
+        // Test Protocol
+        if (jsonContent.testProtocol) {
+          const protocolFields = [];
+          if (jsonContent.testProtocol.protocol) protocolFields.push({ label: 'Protocol', value: jsonContent.testProtocol.protocol });
+          if (jsonContent.testProtocol.startingStage) protocolFields.push({ label: 'Starting Stage', value: jsonContent.testProtocol.startingStage });
+          if (jsonContent.testProtocol.targetHeartRate) protocolFields.push({ label: 'Target Heart Rate', value: jsonContent.testProtocol.targetHeartRate });
+          if (jsonContent.testProtocol.duration) protocolFields.push({ label: 'Duration', value: jsonContent.testProtocol.duration });
+          
+          if (protocolFields.length > 0) {
+            tableData.push({ category: 'Test Protocol', fields: protocolFields });
+          }
+        }
+
+        // Test Results
+        if (jsonContent.results) {
+          const resultsFields = [];
+          if (jsonContent.results.baselineEKG) resultsFields.push({ label: 'Baseline EKG', value: jsonContent.results.baselineEKG });
+          if (jsonContent.results.exerciseEKG) resultsFields.push({ label: 'Exercise EKG', value: jsonContent.results.exerciseEKG });
+          if (jsonContent.results.maxHeartRate) resultsFields.push({ label: 'Max Heart Rate', value: jsonContent.results.maxHeartRate });
+          if (jsonContent.results.maxBloodPressure) resultsFields.push({ label: 'Max Blood Pressure', value: jsonContent.results.maxBloodPressure });
+          if (jsonContent.results.exerciseDuration) resultsFields.push({ label: 'Exercise Duration', value: jsonContent.results.exerciseDuration });
+          if (jsonContent.results.reasonForTermination) resultsFields.push({ label: 'Reason for Termination', value: jsonContent.results.reasonForTermination });
+          if (jsonContent.results.symptoms) resultsFields.push({ label: 'Symptoms', value: jsonContent.results.symptoms });
+          
+          if (resultsFields.length > 0) {
+            tableData.push({ category: 'Test Results', fields: resultsFields });
+          }
+        }
+
+        // Interpretation
+        if (jsonContent.interpretation) {
+          const interpretationFields = [];
+          if (jsonContent.interpretation.overallResult) interpretationFields.push({ label: 'Overall Result', value: jsonContent.interpretation.overallResult });
+          if (jsonContent.interpretation.clinicalSignificance) interpretationFields.push({ label: 'Clinical Significance', value: jsonContent.interpretation.clinicalSignificance });
+          
+          if (jsonContent.interpretation.findings && Array.isArray(jsonContent.interpretation.findings)) {
+            jsonContent.interpretation.findings.forEach((finding: any, index: number) => {
+              interpretationFields.push({ label: `Finding ${index + 1}`, value: finding });
+            });
+          }
+          
+          if (jsonContent.interpretation.recommendations && Array.isArray(jsonContent.interpretation.recommendations)) {
+            jsonContent.interpretation.recommendations.forEach((recommendation: any, index: number) => {
+              interpretationFields.push({ label: `Recommendation ${index + 1}`, value: recommendation });
+            });
+          }
+          
+          if (interpretationFields.length > 0) {
+            tableData.push({ category: 'Interpretation', fields: interpretationFields });
+          }
+        }
+
+        // Quality Indicators
+        if (jsonContent.qualityIndicators) {
+          const qualityFields = [];
+          if (jsonContent.qualityIndicators.testQuality) qualityFields.push({ label: 'Test Quality', value: jsonContent.qualityIndicators.testQuality });
+          if (jsonContent.qualityIndicators.patientEffort) qualityFields.push({ label: 'Patient Effort', value: jsonContent.qualityIndicators.patientEffort });
+          if (jsonContent.qualityIndicators.eKGQuality) qualityFields.push({ label: 'EKG Quality', value: jsonContent.qualityIndicators.eKGQuality });
+          if (jsonContent.qualityIndicators.artifacts) qualityFields.push({ label: 'Artifacts', value: jsonContent.qualityIndicators.artifacts });
+          
+          if (qualityFields.length > 0) {
+            tableData.push({ category: 'Quality Indicators', fields: qualityFields });
+          }
+        }
+
+        // Follow Up
+        if (jsonContent.followUp) {
+          const followUpFields = [];
+          if (jsonContent.followUp.nextSteps) followUpFields.push({ label: 'Next Steps', value: jsonContent.followUp.nextSteps });
+          if (jsonContent.followUp.urgent !== undefined) followUpFields.push({ label: 'Urgent', value: jsonContent.followUp.urgent ? 'Yes' : 'No' });
+          if (jsonContent.followUp.contactInformation) followUpFields.push({ label: 'Contact Information', value: jsonContent.followUp.contactInformation });
+          
+          if (followUpFields.length > 0) {
+            tableData.push({ category: 'Follow Up', fields: followUpFields });
+          }
         }
       }
 
@@ -588,7 +962,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
           </Box>
         )}
         <Document
-          file={doc?.originalUrl || doc?.url}
+          file={`${window.location.origin}${doc?.originalUrl || doc?.url}`}
           onLoadSuccess={onDocumentLoadSuccess}
           onLoadError={onDocumentLoadError}
           onLoadStart={onDocumentLoadStart}

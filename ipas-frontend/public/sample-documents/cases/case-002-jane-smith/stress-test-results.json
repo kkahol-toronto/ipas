@@ -1,0 +1,58 @@
+{
+  "documentType": "Stress Test Results",
+  "extractionTimestamp": "2024-01-16T12:00:00Z",
+  "patientInformation": {
+    "patientName": "Mary Johnson",
+    "patientId": "P-2024-002",
+    "dateOfBirth": "1972-08-22",
+    "gender": "Female"
+  },
+  "testInformation": {
+    "testType": "Exercise Stress Test",
+    "testDate": "2024-01-15",
+    "orderingPhysician": "Dr. Michael Chen",
+    "facility": "Cedars-Sinai Medical Center",
+    "technician": "Sarah Wilson, RCP"
+  },
+  "testProtocol": {
+    "protocol": "Bruce Protocol",
+    "startingStage": "Stage 1",
+    "targetHeartRate": "85% of age-predicted maximum (161 bpm)",
+    "duration": "8 minutes 30 seconds"
+  },
+  "results": {
+    "baselineEKG": "Normal sinus rhythm, no acute changes",
+    "exerciseEKG": "ST depression in leads II, III, aVF, V4-V6 during exercise",
+    "maxHeartRate": "158 bpm (98% of predicted)",
+    "maxBloodPressure": "180/95 mmHg",
+    "exerciseDuration": "8 minutes 30 seconds",
+    "reasonForTermination": "Patient fatigue and ST changes",
+    "symptoms": "Chest discomfort at peak exercise"
+  },
+  "interpretation": {
+    "overallResult": "Positive for ischemia",
+    "findings": [
+      "ST depression ≥1mm in multiple leads during exercise",
+      "Symptoms of chest discomfort reproduced",
+      "Blood pressure response appropriate",
+      "Heart rate response normal"
+    ],
+    "clinicalSignificance": "Findings consistent with coronary artery disease",
+    "recommendations": [
+      "Cardiac catheterization recommended",
+      "Continue current medical therapy",
+      "Cardiac rehabilitation referral"
+    ]
+  },
+  "qualityIndicators": {
+    "testQuality": "Good",
+    "patientEffort": "Maximal",
+    "eKGQuality": "Excellent",
+    "artifacts": "Minimal"
+  },
+  "followUp": {
+    "nextSteps": "Cardiac catheterization scheduled for 2024-01-20",
+    "urgent": false,
+    "contactInformation": "Dr. Michael Chen - (555) 345-6789"
+  }
+}

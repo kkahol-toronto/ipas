@@ -1,0 +1,99 @@
+{
+  "documentType": "Patient Medical History",
+  "extractionTimestamp": "2024-01-16T11:00:00Z",
+  "patientInformation": {
+    "patientName": "Mary Johnson",
+    "patientId": "P-2024-002",
+    "dateOfBirth": "1972-08-22",
+    "gender": "Female"
+  },
+  "medicalHistory": {
+    "chiefComplaint": "Chest pain and shortness of breath",
+    "historyOfPresentIllness": "Patient reports chest pain that started 3 days ago, described as pressure-like, radiating to left arm. Associated with shortness of breath and diaphoresis.",
+    "pastMedicalHistory": [
+      "Hypertension - diagnosed 2018",
+      "Hyperlipidemia - diagnosed 2019", 
+      "Type 2 Diabetes - diagnosed 2020",
+      "Obesity - BMI 32"
+    ],
+    "pastSurgicalHistory": [
+      "Appendectomy - 1995",
+      "Cholecystectomy - 2010"
+    ],
+    "familyHistory": [
+      "Father - Myocardial Infarction at age 65",
+      "Mother - Hypertension",
+      "Sister - Diabetes"
+    ],
+    "socialHistory": {
+      "smoking": "Former smoker, quit 2015",
+      "alcohol": "Occasional social drinking",
+      "exercise": "Sedentary lifestyle",
+      "occupation": "Office manager"
+    }
+  },
+  "currentMedications": [
+    {
+      "medication": "Aspirin",
+      "dosage": "81mg",
+      "frequency": "Daily",
+      "indication": "Cardiovascular protection"
+    },
+    {
+      "medication": "Metoprolol",
+      "dosage": "50mg",
+      "frequency": "Twice daily",
+      "indication": "Hypertension"
+    },
+    {
+      "medication": "Atorvastatin",
+      "dosage": "40mg",
+      "frequency": "Daily",
+      "indication": "Hyperlipidemia"
+    },
+    {
+      "medication": "Metformin",
+      "dosage": "1000mg",
+      "frequency": "Twice daily",
+      "indication": "Diabetes"
+    }
+  ],
+  "allergies": [
+    {
+      "allergen": "Penicillin",
+      "reaction": "Rash",
+      "severity": "Moderate"
+    },
+    {
+      "allergen": "Sulfa drugs",
+      "reaction": "Nausea",
+      "severity": "Mild"
+    }
+  ],
+  "vitalSigns": {
+    "bloodPressure": "140/90 mmHg",
+    "heartRate": "95 bpm",
+    "temperature": "98.6°F",
+    "respiratoryRate": "18/min",
+    "oxygenSaturation": "95%",
+    "weight": "180 lbs",
+    "height": "5'6\"",
+    "bmi": "29.1"
+  },
+  "physicalExamination": {
+    "general": "Well-appearing, in mild distress",
+    "cardiovascular": "Regular rate and rhythm, no murmurs, rubs, or gallops",
+    "respiratory": "Bilateral rales at bases",
+    "abdomen": "Soft, non-tender, no organomegaly",
+    "extremities": "No edema, pulses intact"
+  },
+  "assessmentAndPlan": {
+    "assessment": "Chest pain, likely cardiac in origin. Rule out acute coronary syndrome.",
+    "plan": [
+      "Cardiac catheterization to assess coronary anatomy",
+      "Continue current medications",
+      "Cardiac rehabilitation referral",
+      "Dietary counseling"
+    ]
+  }
+}

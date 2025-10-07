@@ -1,0 +1,78 @@
+{
+  "documentType": "Prior Authorization Request Form",
+  "extractionTimestamp": "2024-01-16T10:30:00Z",
+  "patientInformation": {
+    "patientName": "Mary Johnson",
+    "patientId": "P-2024-002",
+    "dateOfBirth": "1972-08-22",
+    "gender": "Female",
+    "phoneNumber": "(555) 234-5678",
+    "address": "456 Oak Street, Los Angeles, CA 90210"
+  },
+  "providerInformation": {
+    "providerName": "Dr. Michael Chen",
+    "providerId": "PR-002",
+    "npi": "1234567891",
+    "specialty": "Cardiology",
+    "hospital": "Cedars-Sinai Medical Center",
+    "phoneNumber": "(555) 345-6789"
+  },
+  "insuranceInformation": {
+    "insuranceCompany": "Aetna",
+    "policyNumber": "AET987654321",
+    "groupNumber": "GRP-456",
+    "memberId": "MEM-789",
+    "effectiveDate": "2024-01-01",
+    "coverageType": "PPO"
+  },
+  "requestedService": {
+    "procedureCode": "CPT-93458",
+    "procedureName": "Cardiac Catheterization",
+    "diagnosisCode": "I25.10",
+    "diagnosisDescription": "Coronary Artery Disease",
+    "requestedDate": "2024-01-20",
+    "urgency": "High",
+    "estimatedCost": 15000
+  },
+  "clinicalData": {
+    "clinicalSummary": "Patient presents with chest pain and shortness of breath. EKG shows ST elevation. Cardiac catheterization recommended to assess coronary artery disease.",
+    "vitalSigns": {
+      "bloodPressure": "140/90 mmHg",
+      "heartRate": "95 bpm",
+      "temperature": "98.6°F",
+      "oxygenSaturation": "95%"
+    },
+    "physicalExam": {
+      "chest": "Bilateral rales present",
+      "heart": "Regular rhythm, no murmurs",
+      "extremities": "No edema"
+    },
+    "medications": [
+      "Aspirin 81mg daily",
+      "Metoprolol 50mg twice daily",
+      "Atorvastatin 40mg daily"
+    ],
+    "allergies": [
+      "Penicillin - Rash",
+      "Sulfa drugs - Nausea"
+    ],
+    "comorbidities": [
+      "Hypertension",
+      "Hyperlipidemia",
+      "Type 2 Diabetes"
+    ]
+  },
+  "supportingDocuments": [
+    "EKG Results",
+    "Stress Test Results",
+    "Cardiology Notes",
+    "Patient Medical History"
+  ],
+  "authorizationDetails": {
+    "requestedBy": "Dr. Michael Chen",
+    "requestDate": "2024-01-16",
+    "expectedProcedureDate": "2024-01-20",
+    "facility": "Cedars-Sinai Medical Center",
+    "roomType": "Cardiac Catheterization Lab"
+  }
+}

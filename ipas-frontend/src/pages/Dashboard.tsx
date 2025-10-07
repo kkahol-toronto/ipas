@@ -29,8 +29,10 @@ const Dashboard: React.FC = () => {
         // Show notification if letter was generated and notification hasn't been dismissed
         if (letterGenerated && !notificationDismissed) {
           setShowLetterNotification(true);
-          // Store the current case ID for download
-          setSelectedCaseId(caseId);
+          // Only store the case ID for download if no case details dialog is open
+          if (!caseDetailsOpen) {
+            setSelectedCaseId(caseId);
+          }
           break; // Only show one notification at a time
         }
       }
@@ -42,7 +44,7 @@ const Dashboard: React.FC = () => {
     const interval = setInterval(checkLetterGeneration, 2000);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [caseDetailsOpen]);
 
   // Consistent data for today
   const todayData = {

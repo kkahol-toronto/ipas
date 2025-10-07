@@ -1,0 +1,67 @@
+{
+  "documentType": "Insurance Card",
+  "extractionTimestamp": "2024-01-16T14:00:00Z",
+  "patientInformation": {
+    "patientName": "Mary Johnson",
+    "patientId": "P-2024-002",
+    "dateOfBirth": "1972-08-22",
+    "gender": "Female"
+  },
+  "insuranceInformation": {
+    "insuranceCompany": "Aetna",
+    "policyNumber": "AET987654321",
+    "groupNumber": "GRP-456",
+    "memberId": "MEM-789",
+    "effectiveDate": "2024-01-01",
+    "expirationDate": "2024-12-31",
+    "coverageType": "PPO",
+    "planName": "Aetna PPO Premier"
+  },
+  "coverageDetails": {
+    "deductible": {
+      "individual": 1000,
+      "family": 2000,
+      "met": 500
+    },
+    "copay": {
+      "primaryCare": 25,
+      "specialist": 40,
+      "emergency": 150,
+      "urgentCare": 50
+    },
+    "coinsurance": {
+      "inNetwork": "20%",
+      "outOfNetwork": "40%"
+    },
+    "outOfPocketMaximum": {
+      "individual": 5000,
+      "family": 10000
+    }
+  },
+  "benefits": {
+    "preventiveCare": "100% covered",
+    "prescriptionDrugs": "Tiered copay structure",
+    "mentalHealth": "Covered with copay",
+    "maternity": "Covered with copay",
+    "vision": "Basic coverage",
+    "dental": "Not included"
+  },
+  "networkInformation": {
+    "primaryCarePhysician": "Dr. Sarah Wilson",
+    "networkStatus": "In-network",
+    "referralRequired": "No for specialists",
+    "priorAuthorization": "Required for certain procedures"
+  },
+  "contactInformation": {
+    "customerService": "1-800-555-AETNA",
+    "website": "www.aetna.com",
+    "memberPortal": "www.aetna.com/member",
+    "claimsAddress": "Aetna Claims, PO Box 12345, Hartford, CT 06103"
+  },
+  "verificationStatus": {
+    "active": true,
+    "verificationDate": "2024-01-16",
+    "verificationMethod": "Online portal",
+    "nextVerification": "2024-07-16"
+  }
+}

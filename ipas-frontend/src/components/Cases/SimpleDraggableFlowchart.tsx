@@ -34,6 +34,7 @@ import {
   Remove as RemoveIcon
 } from '@mui/icons-material';
 import EMRNotificationStatus from '../Notifications/EMRNotificationStatus';
+import { statusTracker } from '../../services/statusTracker';
 
 interface ProcessStep {
   id: string;
@@ -1850,6 +1851,18 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       // Mark letter as generated in localStorage for dashboard notification
       localStorage.setItem(`ipas_letter_generated_${caseId}`, new Date().toISOString());
       
+      // Update case status to approved/denied based on the decision
+      const finalStatus = (caseId === 'PA-2024-004' || caseId === 'PA-2024-006') ? 'denied' : 'approved';
+      console.log(`✓ Updating case ${caseId} status to: ${finalStatus}`);
+      statusTracker.updateCaseStatus(
+        caseId, 
+        finalStatus, 
+        'system', 
+        'Workflow completed successfully',
+        `Authorization ${finalStatus} and letter generated`
+      );
+      console.log(`✓ Case ${caseId} status updated successfully`);
+      
       setIsAnimating(false);
     }, 9000);
   };
@@ -3081,7 +3094,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         <Dialog
           open={decisionDialogOpen}
           onClose={() => setDecisionDialogOpen(false)}
-          maxWidth="sm"
+          maxWidth="md"
           fullWidth
         >
           <DialogTitle>
@@ -3098,8 +3111,86 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                 ⚠️ Insurance coverage limit: $4,000 maximum for knee arthroscopy procedures
               </Typography>
             )}
-            <Typography variant="body2" sx={{ mb: 2 }}>
-              Select your decision:
+            
+            {/* Panel Members' Votes */}
+            <Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+                Panel Review Summary (4 Doctors)
+              </Typography>
+              
+              {/* Doctor 1 */}
+              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                  <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                    Dr. Sarah Mitchell, MD - Cardiologist
+                  </Typography>
+                  <Chip label="APPROVE" color="success" size="small" />
+                </Box>
+                <Typography variant="caption" color="text.secondary">
+                  {caseId === 'PA-2024-003' 
+                    ? "Patient meets clinical criteria for knee arthroscopy. Conservative treatments have been exhausted. Procedure is medically necessary for improved mobility and quality of life."
+                    : "Patient presents with clear signs of coronary artery disease. Positive stress test, elevated troponin, and ST depression on EKG strongly support need for cardiac catheterization. Delay could result in adverse cardiac event."
+                  }
+                </Typography>
+              </Box>
+              
+              {/* Doctor 2 */}
+              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                  <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                    {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Dr. Michael Chen, MD - Interventional Cardiologist'}
+                  </Typography>
+                  <Chip label="APPROVE" color="success" size="small" />
+                </Box>
+                <Typography variant="caption" color="text.secondary">
+                  {caseId === 'PA-2024-003'
+                    ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
+                    : "Clinical presentation is consistent with NSTEMI. TIMI risk score of 4 indicates intermediate risk requiring urgent intervention. Cardiac catheterization is gold standard for diagnosis and potential intervention."
+                  }
+                </Typography>
+              </Box>
+              
+              {/* Doctor 3 */}
+              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                  <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                    {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : 'Dr. Lisa Anderson, MD - Cardiology'}
+                  </Typography>
+                  <Chip label="APPROVE" color="success" size="small" />
+                </Box>
+                <Typography variant="caption" color="text.secondary">
+                  {caseId === 'PA-2024-003'
+                    ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
+                    : "Multiple risk factors present: hypertension, diabetes, hyperlipidemia, family history. Positive stress test result with ST changes. Patient symptomatic with chest pain. Procedure is indicated per ACC/AHA guidelines."
+                  }
+                </Typography>
+              </Box>
+              
+              {/* Doctor 4 */}
+              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                  <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                    {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : 'Dr. Robert Thompson, MD - Internal Medicine'}
+                  </Typography>
+                  <Chip label="APPROVE" color="success" size="small" />
+                </Box>
+                <Typography variant="caption" color="text.secondary">
+                  {caseId === 'PA-2024-003'
+                    ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
+                    : "Patient's clinical presentation warrants immediate diagnostic workup. Cardiac biomarkers elevated, EKG changes present, risk stratification tools indicate need for invasive assessment. Approve for expedited cardiac catheterization."
+                  }
+                </Typography>
+              </Box>
+
+              <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
+                <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+                  ✓ Consensus: 4/4 doctors recommend APPROVAL
+                </Typography>
+              </Box>
+            </Box>
+
+            <Typography variant="body2" sx={{ mb: 2, fontWeight: 'bold' }}>
+              Your Final Decision:
             </Typography>
             <ButtonGroup fullWidth sx={{ mb: 3 }}>
               <Button
