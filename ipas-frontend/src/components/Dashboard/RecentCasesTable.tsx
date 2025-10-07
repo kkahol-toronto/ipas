@@ -22,7 +22,8 @@ import {
   MenuItem,
   Select,
   FormControl,
-  InputLabel
+  InputLabel,
+  Tooltip
 } from '@mui/material';
 import {
   Visibility as VisibilityIcon,
@@ -32,15 +33,18 @@ import {
   Schedule as ScheduleIcon,
   Download as DownloadIcon,
   Description as DescriptionIcon,
-  Share as ShareIcon
+  Share as ShareIcon,
+  PlayArrow as PlayArrowIcon,
+  Refresh as RefreshIcon
 } from '@mui/icons-material';
+import { statusTracker, CaseStatus } from '../../services/statusTracker';
 
 interface Case {
   id: string;
   patientName: string;
   provider: string;
   procedure: string;
-  status: 'pending' | 'approved' | 'partially-approved' | 'denied';
+  status: 'pending' | 'approved' | 'partially-approved' | 'denied' | 'under_review';
   submittedDate: string;
   priority: 'low' | 'medium' | 'high';
   amount: number;
@@ -51,48 +55,43 @@ interface RecentCasesTableProps {
 }
 
 const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
-  const [caseStatuses, setCaseStatuses] = React.useState<{[key: string]: Case['status']}>({});
+  const [caseStatuses, setCaseStatuses] = React.useState<{[key: string]: CaseStatus}>({});
   const [editDialogOpen, setEditDialogOpen] = React.useState(false);
   const [selectedCase, setSelectedCase] = React.useState<Case | null>(null);
   const [clinicalNotes, setClinicalNotes] = React.useState('');
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false);
   const [selectedReviewers, setSelectedReviewers] = React.useState<string[]>([]);
+  const [shareNote, setShareNote] = React.useState('');
+  const [statusUpdateDialog, setStatusUpdateDialog] = React.useState(false);
+  const [newStatus, setNewStatus] = React.useState<Case['status']>('pending');
+  const [statusReason, setStatusReason] = React.useState('');
 
-  // Check localStorage for case completion status
+  // Load and monitor case statuses using the status tracker
   React.useEffect(() => {
-    const checkCaseStatus = () => {
-      const statuses: {[key: string]: Case['status']} = {};
-      
-      // Check if letters were generated (indicates completion)
-      if (localStorage.getItem('ipas_letter_generated_PA-2024-001')) {
-        statuses['PA-2024-001'] = 'approved';
-      }
-      if (localStorage.getItem('ipas_letter_generated_PA-2024-002')) {
-        statuses['PA-2024-002'] = 'approved';
-      }
-      if (localStorage.getItem('ipas_letter_generated_PA-2024-003')) {
-        statuses['PA-2024-003'] = 'partially-approved';
-      }
-      if (localStorage.getItem('ipas_letter_generated_PA-2024-004')) {
-        statuses['PA-2024-004'] = 'denied';
-      }
-      if (localStorage.getItem('ipas_letter_generated_PA-2024-005')) {
-        statuses['PA-2024-005'] = 'approved';
-      }
-      if (localStorage.getItem('ipas_letter_generated_PA-2024-006')) {
-        statuses['PA-2024-006'] = 'denied';
-      }
-      
-      setCaseStatuses(statuses);
+    const loadCaseStatuses = () => {
+      const allStatuses = statusTracker.getAllStatuses();
+      setCaseStatuses(allStatuses);
     };
 
-    checkCaseStatus();
+    loadCaseStatuses();
     
     // Poll for changes every 2 seconds
-    const interval = setInterval(checkCaseStatus, 2000);
+    const interval = setInterval(loadCaseStatuses, 2000);
     
     return () => clearInterval(interval);
   }, []);
+
+  // Handle status update
+  const handleStatusUpdate = (caseId: string, newStatus: Case['status'], reason?: string) => {
+    statusTracker.updateCaseStatus(caseId, newStatus, 'user', reason);
+    setCaseStatuses(statusTracker.getAllStatuses());
+  };
+
+  // Simulate workflow progression
+  const simulateWorkflow = (caseId: string) => {
+    statusTracker.simulateWorkflowProgression(caseId);
+    setCaseStatuses(statusTracker.getAllStatuses());
+  };
 
   // Dummy data for recent cases
   const cases: Case[] = [
@@ -163,7 +162,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       pending: { label: 'Pending', color: 'warning', icon: <ScheduleIcon /> },
       approved: { label: 'Approved', color: 'success', icon: <CheckCircleIcon /> },
       'partially-approved': { label: 'Partially Approved', color: 'info', icon: <CheckCircleIcon /> },
-      denied: { label: 'Denied', color: 'error', icon: <CancelIcon /> }
+      denied: { label: 'Denied', color: 'error', icon: <CancelIcon /> },
+      under_review: { label: 'Under Review', color: 'primary', icon: <ScheduleIcon /> }
     };
 
     const config = statusConfig[status];
@@ -242,9 +242,34 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6" component="h2" gutterBottom>
-          Recent Cases
-        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+          <Typography variant="h6" component="h2">
+            Recent Cases
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <Button
+              size="small"
+              startIcon={<RefreshIcon />}
+              onClick={() => {
+                setCaseStatuses(statusTracker.getAllStatuses());
+              }}
+              variant="outlined"
+            >
+              Refresh
+            </Button>
+            <Button
+              size="small"
+              onClick={() => {
+                statusTracker.resetAllStatuses();
+                setCaseStatuses(statusTracker.getAllStatuses());
+              }}
+              variant="outlined"
+              color="warning"
+            >
+              Reset All Statuses
+            </Button>
+          </Box>
+        </Box>
         <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
           <Table stickyHeader>
             <TableHead>
@@ -263,8 +288,9 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             </TableHead>
             <TableBody>
               {cases.map((caseItem) => {
-                // Use dynamic status if available, otherwise use default
-                const currentStatus = caseStatuses[caseItem.id] || caseItem.status;
+                // Use dynamic status from tracker
+                const caseStatus = caseStatuses[caseItem.id];
+                const currentStatus = caseStatus?.currentStatus || caseItem.status;
                 const caseWithStatus = { ...caseItem, status: currentStatus };
                 
                 return (
@@ -281,7 +307,23 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                       {caseItem.procedure}
                     </Typography>
                   </TableCell>
-                  <TableCell>{getStatusChip(currentStatus)}</TableCell>
+                  <TableCell>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      {getStatusChip(currentStatus)}
+                      <Tooltip title="Update Status">
+                        <IconButton 
+                          size="small" 
+                          onClick={() => {
+                            setSelectedCase(caseItem);
+                            setNewStatus(currentStatus);
+                            setStatusUpdateDialog(true);
+                          }}
+                        >
+                          <EditIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    </Box>
+                  </TableCell>
                   <TableCell>
                     <Box
                       sx={{
@@ -358,6 +400,14 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                         title="Download EMR Insert JSON"
                       >
                         <DownloadIcon />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        color="warning"
+                        onClick={() => simulateWorkflow(caseItem.id)}
+                        title="Simulate Workflow Progression"
+                      >
+                        <PlayArrowIcon />
                       </IconButton>
                       <IconButton
                         size="small"
@@ -454,6 +504,16 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
               </Box>
             </Box>
           )}
+          <TextField
+            fullWidth
+            multiline
+            rows={3}
+            label="Add a note (optional)"
+            placeholder="Add a message to accompany the case sharing..."
+            value={shareNote}
+            onChange={(e) => setShareNote(e.target.value)}
+            sx={{ mt: 3 }}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShareDialogOpen(false)}>Cancel</Button>
@@ -462,16 +522,65 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             disabled={selectedReviewers.length === 0}
             onClick={() => {
               setShareDialogOpen(false);
-              alert(`Case ${selectedCase?.id} shared with ${selectedReviewers.length} reviewer(s):\n${selectedReviewers.join('\n')}`);
+              const noteText = shareNote ? `\n\nNote: ${shareNote}` : '';
+              alert(`Case ${selectedCase?.id} shared with ${selectedReviewers.length} reviewer(s):\n${selectedReviewers.join('\n')}${noteText}`);
               setSelectedReviewers([]);
+              setShareNote('');
             }}
           >
             Share Case
           </Button>
         </DialogActions>
-      </Dialog>
-    </Card>
-  );
-};
+        </Dialog>
 
-export default RecentCasesTable;
+        {/* Status Update Dialog */}
+        <Dialog open={statusUpdateDialog} onClose={() => setStatusUpdateDialog(false)} maxWidth="sm" fullWidth>
+          <DialogTitle>Update Case Status</DialogTitle>
+          <DialogContent>
+            <Box sx={{ pt: 2 }}>
+              <FormControl fullWidth sx={{ mb: 2 }}>
+                <InputLabel>New Status</InputLabel>
+                <Select
+                  value={newStatus}
+                  onChange={(e) => setNewStatus(e.target.value as Case['status'])}
+                  label="New Status"
+                >
+                  <MenuItem value="pending">Pending</MenuItem>
+                  <MenuItem value="under_review">Under Review</MenuItem>
+                  <MenuItem value="approved">Approved</MenuItem>
+                  <MenuItem value="partially-approved">Partially Approved</MenuItem>
+                  <MenuItem value="denied">Denied</MenuItem>
+                </Select>
+              </FormControl>
+              <TextField
+                fullWidth
+                label="Reason for Status Change"
+                multiline
+                rows={3}
+                value={statusReason}
+                onChange={(e) => setStatusReason(e.target.value)}
+                placeholder="Enter the reason for this status change..."
+              />
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setStatusUpdateDialog(false)}>Cancel</Button>
+            <Button 
+              onClick={() => {
+                if (selectedCase) {
+                  handleStatusUpdate(selectedCase.id, newStatus, statusReason);
+                  setStatusUpdateDialog(false);
+                  setStatusReason('');
+                }
+              }}
+              variant="contained"
+            >
+              Update Status
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Card>
+    );
+  };
+
+  export default RecentCasesTable;

@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+/* React-PDF Styles */
+@import 'react-pdf/dist/Page/AnnotationLayer.css';
+@import 'react-pdf/dist/Page/TextLayer.css';

@@ -1,42 +1,44 @@
 {
-  "patientInfo": {
+  "documentType": "Prior Authorization Request Form",
+  "formData": {
+    "issuerName": "Blue Cross Blue Shield",
+    "issuerPhone": "(555) 800-AUTH",
+    "issuerFax": "(555) 800-FAX",
+    "requestDate": "2024-12-08",
+    "reviewType": "Non-Urgent",
+    "requestType": "Initial Request"
+  },
+  "patient": {
     "name": "John Michael Doe",
-    "dob": "01/15/1980",
-    "age": 44,
-    "sex": "Male",
+    "dateOfBirth": "1980-01-15",
     "memberId": "BCBS123456789",
-    "phone": "(555) 123-4567",
-    "email": "john.doe@email.com",
-    "address": "123 Main Street, Anytown, ST 12345"
-  },
-  "insuranceInfo": {
-    "company": "Blue Cross Blue Shield",
-    "planType": "PPO",
-    "policyNumber": "POL987654321",
     "groupNumber": "GRP001",
-    "effectiveDate": "01/01/2024",
-    "terminationDate": "12/31/2024"
+    "phone": "(555) 123-4567",
+    "sex": "Male"
   },
-  "providerInfo": {
+  "provider": {
     "name": "Dr. Sarah Smith, MD",
-    "npi": "1122334455",
+    "npi": "1234567890",
     "specialty": "Neurology",
-    "phone": "(555) 246-8135",
-    "fax": "(555) 246-8136",
-    "address": "456 Neurology Center Dr, Anytown, ST 12345",
-    "facility": "Anytown Neurology Institute",
-    "taxId": "11-2233445"
+    "phone": "(555) 987-6543",
+    "fax": "(555) 987-6544",
+    "facility": "Anytown Medical Center",
+    "signatureDate": "2024-12-08"
   },
-  "serviceRequested": {
-    "serviceType": "MRI Brain with Contrast",
-    "cptCode": "70553",
-    "icd10Code": "R51 - Headache",
-    "numberOfTreatments": 1,
-    "requestedDate": "12/20/2024",
-    "placeOfService": "Outpatient"
+  "requestedService": {
+    "procedure": "MRI brain with contrast",
+    "code": "70553",
+    "startDate": "2024-12-20",
+    "endDate": "2024-12-20",
+    "diagnosis": {
+      "description": "Headache",
+      "code": "R51"
+    },
+    "setting": "Outpatient",
+    "numberOfSessions": 1
   },
   "clinicalJustification": {
-    "medicalNecessity": "Patient presents with persistent headaches and dizziness for 3 weeks. Physical examination reveals no focal neurological deficits. MRI brain with contrast is medically necessary to rule out intracranial pathology including mass lesions, vascular abnormalities, or acute stroke. Clinical guidelines support MRI imaging for persistent headaches with associated symptoms.",
+    "medicalNecessity": "Patient presents with persistent headaches and dizziness for 3 weeks. Physical examination reveals no focal neurological deficits. History of controlled hypertension. MRI brain with contrast is medically necessary to rule out intracranial pathology (mass, vascular abnormalities, or stroke). Guidelines support MRI for persistent headaches with associated symptoms.",
     "clinicalFindings": [
       "Persistent headaches (3 weeks)",
       "Associated dizziness",
@@ -54,27 +56,5 @@
     "Patient Medical History",
     "Insurance Card Copy",
     "Neurology Consultation"
-  ],
-  "authorizationDetails": {
-    "dateOfRequest": "2024-12-15",
-    "urgency": "Routine",
-    "requestedStartDate": "2024-12-20",
-    "requestedEndDate": "2024-12-20",
-    "alternativeTreatmentConsidered": false
-  },
-  "signatures": {
-    "providerSignature": "Dr. Sarah Smith, MD",
-    "providerDate": "2024-12-15",
-    "patientConsent": "John M. Doe",
-    "patientDate": "2024-12-15",
-    "electronicSignature": "Applied",
-    "timestamp": "2024-12-15 14:30:25"
-  },
-  "formMetadata": {
-    "formId": "PA-2024-001234",
-    "submissionDeadline": "5 business days prior to service",
-    "authorizationPhone": "(555) 800-AUTH",
-    "onlinePortal": "www.bcbs.com/pa",
-    "providerPortal": "https://provider.bcbs.com"
-  }
+  ]
 }

@@ -1,9 +1,8 @@
 {
-  "patientInfo": {
+  "documentType": "Patient Medical History",
+  "patient": {
     "name": "John Michael Doe",
-    "dob": "01/15/1980",
-    "age": 44,
-    "sex": "Male",
+    "dateOfBirth": "1980-01-15",
     "mrn": "MR123456789",
     "phone": "(555) 123-4567",
     "email": "john.doe@email.com",
@@ -76,35 +75,23 @@
     "mother": "Breast Cancer (age 65)",
     "siblings": "No significant history"
   },
-  "physicalExamination": {
-    "vitalSigns": {
-      "bp": "128/82",
-      "hr": "72",
-      "rr": "16",
-      "temp": "98.6F",
-      "weight": "180 lbs",
-      "height": "5'10\""
-    },
-    "neurological": "CN II-XII intact, no focal deficits, normal reflexes",
-    "cardiovascular": "RRR, no murmurs, no gallops, no rubs",
-    "respiratory": "Clear to auscultation bilaterally"
+  "socialHistory": {
+    "smoking": "Never",
+    "alcohol": "Occasional",
+    "exercise": "Light exercise 2-3 times per week",
+    "occupation": "Office worker"
   },
-  "assessment": [
-    "Headaches - Likely tension type headaches",
-    "Hypertension - Well controlled",
-    "Diabetes - Well controlled",
-    "Hyperlipidemia - Continue statin therapy"
-  ],
-  "plan": [
-    "Order MRI brain with contrast to rule out intracranial pathology",
-    "Consider neurology referral if MRI abnormal",
-    "Continue current medications",
-    "Follow-up in 2 weeks with MRI results"
-  ],
-  "provider": {
-    "name": "Dr. Sarah Smith, MD",
-    "specialty": "Neurology",
-    "date": "12/15/2024",
-    "signature": "Applied"
+  "allergies": {
+    "medications": "None known",
+    "food": "None known",
+    "environmental": "None known"
+  },
+  "reviewOfSystems": {
+    "constitutional": "No fever, chills, weight loss",
+    "neurological": "Headaches, dizziness, no focal symptoms",
+    "cardiovascular": "No chest pain, palpitations",
+    "respiratory": "No shortness of breath, cough",
+    "gastrointestinal": "Nausea with headaches, no vomiting",
+    "genitourinary": "No dysuria, frequency changes"
   }
 }

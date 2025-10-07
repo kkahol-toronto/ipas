@@ -28,8 +28,10 @@ import {
   AutoFixHigh as ExtractIcon,
   DataObject as JsonIcon,
   CheckCircle as CheckCircleIcon,
-  AccessTime as TimeIcon
+  AccessTime as TimeIcon,
+  Compare as CompareIcon
 } from '@mui/icons-material';
+import DocumentComparisonViewer from './DocumentComparisonViewer';
 
 interface CaseDocument {
   id: string;
@@ -59,6 +61,8 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
   const [showCompletionMessage, setShowCompletionMessage] = useState(false);
   const [isStateLoaded, setIsStateLoaded] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(0);
+  const [comparisonViewerOpen, setComparisonViewerOpen] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<CaseDocument | null>(null);
 
   // Get case-specific documents based on caseId
   const getCaseDocuments = (caseId: string): CaseDocument[] => {
@@ -685,6 +689,11 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
     window.open(caseDocument.url, '_blank');
   };
 
+  const handleCompareDocument = (doc: CaseDocument) => {
+    setSelectedDocument(doc);
+    setComparisonViewerOpen(true);
+  };
+
   // Group documents by category
   const groupedDocuments = documents.reduce((acc, doc) => {
     if (!acc[doc.category]) {
@@ -925,6 +934,14 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
                           title="View Original Document"
                         >
                           <ViewIcon />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          color="info"
+                          onClick={() => handleCompareDocument(doc)}
+                          title="Compare Original with Extracted Text"
+                        >
+                          <CompareIcon />
                         </IconButton>
                         <IconButton
                           size="small"
@@ -1188,6 +1205,17 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           </Button>
         </CardContent>
       </Card>
+      {/* Document Comparison Viewer */}
+      {selectedDocument && (
+        <DocumentComparisonViewer
+          open={comparisonViewerOpen}
+          onClose={() => {
+            setComparisonViewerOpen(false);
+            setSelectedDocument(null);
+          }}
+          document={selectedDocument as any}
+        />
+      )}
     </Box>
   );
 };

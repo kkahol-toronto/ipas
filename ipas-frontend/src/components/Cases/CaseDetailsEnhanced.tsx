@@ -32,10 +32,12 @@ import {
   Timeline as TimelineIcon,
   Download as DownloadIcon,
   Edit as EditIcon,
-  Share as ShareIcon
+  Share as ShareIcon,
+  Computer as ComputerIcon
 } from '@mui/icons-material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
 import CaseDocuments from './CaseDocuments';
+import EMRNotificationPanel from '../Notifications/EMRNotificationPanel';
 
 interface CaseDetailsEnhancedProps {
   caseId: string;
@@ -71,6 +73,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [tabValue, setTabValue] = useState(0);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [selectedReviewers, setSelectedReviewers] = useState<string[]>([]);
+  const [shareNote, setShareNote] = useState('');
   const [editNotesOpen, setEditNotesOpen] = useState(false);
   const [clinicalNotes, setClinicalNotes] = useState('');
 
@@ -295,6 +298,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             <Tab label="Documents" icon={<DocumentIcon />} />
             <Tab label="Clinical Notes" icon={<TimelineIcon />} />
             <Tab label="AI Analysis" icon={<PsychologyIcon />} />
+            <Tab label="EMR Integration" icon={<ComputerIcon />} />
           </Tabs>
         </Box>
 
@@ -435,6 +439,10 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             </Grid>
           </Grid>
         </TabPanel>
+
+        <TabPanel value={tabValue} index={4}>
+          <EMRNotificationPanel caseId={caseId} showDetails={true} />
+        </TabPanel>
       </Card>
 
       {/* Edit Clinical Notes Dialog */}
@@ -510,6 +518,16 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               </Box>
             </Box>
           )}
+          <TextField
+            fullWidth
+            multiline
+            rows={3}
+            label="Add a note (optional)"
+            placeholder="Add a message to accompany the case sharing..."
+            value={shareNote}
+            onChange={(e) => setShareNote(e.target.value)}
+            sx={{ mt: 3 }}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShareDialogOpen(false)}>Cancel</Button>
@@ -518,8 +536,10 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             disabled={selectedReviewers.length === 0}
             onClick={() => {
               setShareDialogOpen(false);
-              alert(`Case ${caseData.id} shared with ${selectedReviewers.length} reviewer(s):\n${selectedReviewers.join('\n')}`);
+              const noteText = shareNote ? `\n\nNote: ${shareNote}` : '';
+              alert(`Case ${caseData.id} shared with ${selectedReviewers.length} reviewer(s):\n${selectedReviewers.join('\n')}${noteText}`);
               setSelectedReviewers([]);
+              setShareNote('');
             }}
           >
             Share Case

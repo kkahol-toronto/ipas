@@ -33,6 +33,7 @@ import {
   ThumbDown as ThumbDownIcon,
   Remove as RemoveIcon
 } from '@mui/icons-material';
+import EMRNotificationStatus from '../Notifications/EMRNotificationStatus';
 
 interface ProcessStep {
   id: string;
@@ -1795,6 +1796,35 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       setShowMessage('✓ Data transmitted to Epic successfully');
       setAnimationStep(37);
+      
+      // Trigger EMR notification service immediately
+      import('../../services/emrNotificationService').then(({ emrNotificationService }) => {
+        // Send to EPIC immediately
+        emrNotificationService.sendToEPIC(
+          caseId,
+          'Dr. Sarah Johnson',
+          `AUTH-${caseId}`,
+          'CPT-12345'
+        );
+        
+        // Simulate hospital notification after 2 seconds
+        setTimeout(() => {
+          emrNotificationService.simulateHospitalNotification(
+            caseId,
+            'UCLA Medical Center',
+            0
+          );
+        }, 2000);
+        
+        // Simulate order placement after additional 3 seconds
+        setTimeout(() => {
+          emrNotificationService.simulateOrderPlacement(
+            caseId,
+            'UCLA Medical Center',
+            0
+          );
+        }, 5000);
+      });
     }, 8000);
 
     // Step 5: Complete
@@ -2713,7 +2743,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                 />
               </Box>
               {step.id === 'provider-notification' && step.status === 'completed' && (
-                <Box sx={{ mt: 1 }}>
+                <Box sx={{ mt: 1, display: 'flex', gap: 1, flexDirection: 'column' }}>
                   <Button
                     variant="contained"
                     size="small"
@@ -2730,6 +2760,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                   >
                     Download Letter
                   </Button>
+                  <EMRNotificationStatus caseId={caseId} />
                 </Box>
               )}
             </Paper>

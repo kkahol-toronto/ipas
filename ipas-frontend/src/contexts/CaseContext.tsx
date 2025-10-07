@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { PriorAuthRequest, DashboardStats, Notification } from '../types';
+import { emrNotificationService } from '../services/emrNotificationService';
 
 interface CaseContextType {
   cases: PriorAuthRequest[];
@@ -11,6 +12,7 @@ interface CaseContextType {
   addNotification: (notification: Notification) => void;
   markNotificationRead: (notificationId: string) => void;
   markAllNotificationsRead: () => void;
+  getEMRNotificationCount: () => number;
   isLoading: boolean;
 }
 
@@ -301,6 +303,10 @@ export const CaseProvider: React.FC<CaseProviderProps> = ({ children }) => {
     );
   };
 
+  const getEMRNotificationCount = () => {
+    return emrNotificationService.getNotificationCount();
+  };
+
   return (
     <CaseContext.Provider value={{
       cases,
@@ -312,6 +318,7 @@ export const CaseProvider: React.FC<CaseProviderProps> = ({ children }) => {
       addNotification,
       markNotificationRead,
       markAllNotificationsRead,
+      getEMRNotificationCount,
       isLoading
     }}>
       {children}

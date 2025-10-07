@@ -15,14 +15,15 @@ import {
   Notifications as NotificationsIcon,
   AccountCircle,
   Settings,
-  Logout
+  Logout,
+  Computer as ComputerIcon
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { useCases } from '../../contexts/CaseContext';
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth();
-  const { notifications, markAllNotificationsRead } = useCases();
+  const { notifications, markAllNotificationsRead, getEMRNotificationCount } = useCases();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [notificationAnchor, setNotificationAnchor] = React.useState<null | HTMLElement>(null);
 
@@ -76,6 +77,17 @@ const Header: React.FC = () => {
           >
             <Badge badgeContent={unreadNotifications} color="error">
               <NotificationsIcon />
+            </Badge>
+          </IconButton>
+
+          <IconButton
+            size="large"
+            aria-label="EMR notifications"
+            color="inherit"
+            title="EMR Integration Status"
+          >
+            <Badge badgeContent={getEMRNotificationCount()} color="primary">
+              <ComputerIcon />
             </Badge>
           </IconButton>
 
