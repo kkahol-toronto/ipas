@@ -15,15 +15,14 @@ import {
   Notifications as NotificationsIcon,
   AccountCircle,
   Settings,
-  Logout,
-  Computer as ComputerIcon
+  Logout
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { useCases } from '../../contexts/CaseContext';
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth();
-  const { notifications, markAllNotificationsRead, getEMRNotificationCount } = useCases();
+  const { notifications } = useCases();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [notificationAnchor, setNotificationAnchor] = React.useState<null | HTMLElement>(null);
 
@@ -37,8 +36,6 @@ const Header: React.FC = () => {
 
   const handleNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
     setNotificationAnchor(event.currentTarget);
-    // Mark all notifications as read when the menu is opened
-    markAllNotificationsRead();
   };
 
   const handleNotificationClose = () => {
@@ -55,8 +52,8 @@ const Header: React.FC = () => {
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#1976d2', zIndex: 1200 }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-          Smart Auth - Intelligent Prior Authorization System
+        <Typography variant="h6" component="div" sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, fontWeight: 'bold' }}>
+          <img src="/assets/images/nttdata-white-logo.svg" alt="nttdata-white-logo" style={{marginRight: '1rem', height:"38px"}} />Smart Auth - Intelligent Prior Authorization System
         </Typography>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -77,17 +74,6 @@ const Header: React.FC = () => {
           >
             <Badge badgeContent={unreadNotifications} color="error">
               <NotificationsIcon />
-            </Badge>
-          </IconButton>
-
-          <IconButton
-            size="large"
-            aria-label="EMR notifications"
-            color="inherit"
-            title="EMR Integration Status"
-          >
-            <Badge badgeContent={getEMRNotificationCount()} color="primary">
-              <ComputerIcon />
             </Badge>
           </IconButton>
 

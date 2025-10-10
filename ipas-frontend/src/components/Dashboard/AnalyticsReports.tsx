@@ -25,7 +25,7 @@ const AnalyticsReports: React.FC = () => {
   const performanceMetrics = [
     {
       title: 'Average Processing Time',
-      value: '2.3 hours',
+      value: '2.3m',
       change: '+15%',
       trend: 'up',
       color: '#4caf50'
@@ -54,10 +54,10 @@ const AnalyticsReports: React.FC = () => {
   ];
 
   const topProviders = [
-    { name: 'Dr. Sarah Johnson', cases: 45, approvalRate: '94%', avgTime: '1.8h' },
-    { name: 'Dr. Michael Chen', cases: 38, approvalRate: '89%', avgTime: '2.1h' },
-    { name: 'Dr. Emily Rodriguez', cases: 32, approvalRate: '91%', avgTime: '2.4h' },
-    { name: 'Dr. James Thompson', cases: 28, approvalRate: '86%', avgTime: '2.7h' }
+    { name: 'Sarah Johnson', cases: 45, approvalRate: '94%', avgTime: '1.8m' },
+    { name: 'Dr. Michael Chen', cases: 38, approvalRate: '89%', avgTime: '2.1m' },
+    { name: 'Dr. Emily Rodriguez', cases: 32, approvalRate: '91%', avgTime: '2.4m' },
+    { name: 'Dr. James Thompson', cases: 28, approvalRate: '86%', avgTime: '2.7m' }
   ];
 
   const procedureStats = [
@@ -228,7 +228,7 @@ const AnalyticsReports: React.FC = () => {
                   value={75}
                   sx={{ height: 8, borderRadius: 4, mb: 1 }}
                 />
-                <Typography variant="body2">2.1 hours avg</Typography>
+                <Typography variant="body2">2.1m avg</Typography>
               </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 4 }}>
@@ -241,7 +241,7 @@ const AnalyticsReports: React.FC = () => {
                   value={68}
                   sx={{ height: 8, borderRadius: 4, mb: 1 }}
                 />
-                <Typography variant="body2">2.4 hours avg</Typography>
+                <Typography variant="body2">2.4m avg</Typography>
               </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 4 }}>
@@ -254,7 +254,7 @@ const AnalyticsReports: React.FC = () => {
                   value={82}
                   sx={{ height: 8, borderRadius: 4, mb: 1 }}
                 />
-                <Typography variant="body2">2.3 hours avg</Typography>
+                <Typography variant="body2">2.3m avg</Typography>
               </Box>
             </Grid>
           </Grid>

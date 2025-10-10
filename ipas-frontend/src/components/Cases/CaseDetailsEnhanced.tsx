@@ -44,6 +44,9 @@ import {
 } from '@mui/icons-material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
 import CaseDocuments from './CaseDocuments';
+import ClinicalSummary from './ClinicalSummary';
+import ClinicalCriteriaEval from './ClinicalCriteriaEval';
+import MedicalRecordRetrival from './MedicalRecordRetrival'
 import EMRNotificationPanel from '../Notifications/EMRNotificationPanel';
 
 interface CaseDetailsEnhancedProps {
@@ -84,8 +87,11 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [editNotesOpen, setEditNotesOpen] = useState(false);
   const [clinicalNotes, setClinicalNotes] = useState('');
   const [observabilityDialogOpen, setObservabilityDialogOpen] = useState(false);
-  const [observabilityData, setObservabilityData] = useState<any>(null);
+  const [observabilityData, setObservabilityData] = useState<any>(null);  
+  const [selectedOption, setSelectedOption] = useState('Approved');
+  
 
+ 
   // Dynamic case data based on caseId
   const getCaseData = (caseId: string) => {
     const caseDataMap: { [key: string]: any } = {
@@ -94,7 +100,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         patientName: 'John Smith',
         patientId: 'P-2024-001',
         dateOfBirth: '1985-03-15',
-        provider: 'Dr. Sarah Johnson',
+        provider: 'Sarah Johnson',
         providerId: 'PR-001',
         hospital: 'UCLA Medical Center',
         procedure: 'MRI Brain with Contrast',
@@ -113,8 +119,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
         ],
         clinicalNotes: [
-          { timestamp: '2024-01-15T10:30:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Dr. Sarah Johnson' },
-          { timestamp: '2024-01-15T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Dr. Sarah Johnson' },
+          { timestamp: '2024-01-15T10:30:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Sarah Johnson' },
+          { timestamp: '2024-01-15T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Sarah Johnson' },
           { timestamp: '2024-01-15T12:00:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
         ],
         aiAnalysis: {
@@ -181,7 +187,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         documents: [
           { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.0 MB', status: 'Processed' },
           { id: 'doc2', name: 'MRI Knee Results.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
-          { id: 'doc3', name: 'Physical Therapy Notes.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
+          { id: 'doc3', name: 'Robert Davis Medical Records.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
           { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
         ],
         clinicalNotes: [
@@ -195,6 +201,42 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'Medium',
           recommendedAction: 'Approve with coverage limit',
           confidence: 0.87
+        }
+      },
+      'PA-2024-004': {
+        id: 'PA-2024-004',
+        patientName: 'Lisa Wilson',
+        patientId: 'P-2024-004',
+        dateOfBirth: '1982-06-15',
+        provider: 'Andrew Thomson',
+        providerId: 'PR-004',
+        hospital: 'UCLA Medical Center',
+        procedure: 'Kneee Surgery',
+        diagnosis: 'Muscle Weakness and Knee Joint Stiffness',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2024-01-15T10:30:00Z',
+        lastUpdated: '2024-01-15T14:45:00Z',
+        insurance: 'Blue Cross Blue Shield',
+        policyNumber: 'BC123456789',
+        estimatedCost: 2500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
+          { id: 'doc2', name: 'MRI Scan - Brain.jpg', type: 'Image', size: '4.1 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Patient Medical Records.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2024-01-15T10:30:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Sarah Johnson' },
+          { timestamp: '2024-01-15T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Sarah Johnson' },
+          { timestamp: '2024-01-15T12:00:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.94,
+          coverageEligibility: 0.87,
+          riskAssessment: 'Medium',
+          recommendedAction: 'Approve with monitoring',
+          confidence: 0.91
         }
       },
       'PA-2024-006': {
@@ -223,7 +265,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         ],
         clinicalNotes: [
           { timestamp: '2024-04-24T15:05:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
-          { timestamp: '2024-04-24T15:48:00Z', note: 'CPAP device replacement needed - current device 5+ years old', author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2024-04-24T15:48:00Z', note: "CPAP Device Replacement needed as member is requesting for a personal device. She is currently using father in law's device ", author: 'Amy Diane Kelly, NP' },
+
           { timestamp: '2024-04-25T12:16:34Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
         ],
         aiAnalysis: {
@@ -483,6 +526,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             <Tab label="Clinical Notes" icon={<TimelineIcon />} />
             <Tab label="AI Analysis" icon={<PsychologyIcon />} />
             <Tab label="EMR Integration" icon={<ComputerIcon />} />
+            <Tab label="Clinical Summary" icon={<DocumentIcon />} />
+
           </Tabs>
         </Box>
 
@@ -494,7 +539,12 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           <CaseDocuments caseId={caseId} />
         </TabPanel>
 
+        <TabPanel value={tabValue} index={5}>
+          <ClinicalSummary caseId={caseId} />
+        </TabPanel>
+
         <TabPanel value={tabValue} index={2}>
+
           <Typography variant="h6" gutterBottom>
             Clinical Timeline
           </Typography>
@@ -522,9 +572,9 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           <Typography variant="h6" gutterBottom>
             AI Analysis Results
           </Typography>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} alignItems="stretch">
             <Grid size={{ xs: 12, md: 6 }}>
-              <Paper sx={{ p: 2 }}>
+              <Paper sx={{ p: 2, height: "100%" }}>
                 <Typography variant="h6" gutterBottom>
                   Clinical Assessment
                 </Typography>
@@ -589,7 +639,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               </Paper>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <Paper sx={{ p: 2 }}>
+              <Paper sx={{ p: 2, height: "100%" }}>
                 <Typography variant="h6" gutterBottom>
                   Risk Assessment
                 </Typography>
@@ -599,8 +649,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   </Typography>
                   <Chip
                     label={caseData.aiAnalysis.riskAssessment}
-                    color={caseData.aiAnalysis.riskAssessment === 'Low' ? 'success' : 
-                           caseData.aiAnalysis.riskAssessment === 'Medium' ? 'warning' : 'error'}
+                    color={caseData.aiAnalysis.riskAssessment === 'Low' ? 'success' :
+                      caseData.aiAnalysis.riskAssessment === 'Medium' ? 'warning' : 'error'}
                   />
                 </Box>
                 <Box sx={{ mb: 2 }}>
@@ -622,9 +672,13 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               </Paper>
             </Grid>
           </Grid>
+
+          <ClinicalCriteriaEval caseId={caseId} />
+
         </TabPanel>
 
         <TabPanel value={tabValue} index={4}>
+          <MedicalRecordRetrival caseId={caseId} /> {/*change*/}
           <EMRNotificationPanel caseId={caseId} showDetails={true} />
         </TabPanel>
       </Card>
@@ -647,8 +701,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEditNotesOpen(false)}>Cancel</Button>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             onClick={() => {
               setEditNotesOpen(false);
               alert('Clinical notes saved successfully!');
@@ -715,7 +769,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShareDialogOpen(false)}>Cancel</Button>
-          <Button 
+          <Button
             variant="contained"
             disabled={selectedReviewers.length === 0}
             onClick={() => {
@@ -761,12 +815,31 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                     <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.procedure}</Typography>
                   </Grid>
                   <Grid size={{ xs: 6, md: 3 }}>
-                    <Typography variant="caption" color="text.secondary">Final Decision</Typography>
-                    <Chip 
-                      label={observabilityData.finalDecision} 
+                      {/*<Typography variant="caption" color="text.secondary">Final Decision</Typography>
+                   <Chip
+                      label={observabilityData.finalDecision}
                       color={observabilityData.finalDecision === 'APPROVED' ? 'success' : 'error'}
                       size="small"
-                    />
+                    /> */}
+
+                    <FormControl fullWidth >
+                      <InputLabel id="demo-simple-select-label">Smart Auth recommendation </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        value={selectedOption}
+                        onChange={(e) => setSelectedOption(e.target.value)}
+
+                        label="Smart Auth recommendation"
+                      >
+
+                        <MenuItem value="Approved">Approved</MenuItem>
+                        <MenuItem value="Denied">Denied</MenuItem>
+                        <MenuItem value="Pend">Pend</MenuItem>
+                      </Select>
+                      
+                    </FormControl>
+
+
                   </Grid>
                   <Grid size={{ xs: 6, md: 3 }}>
                     <Typography variant="caption" color="text.secondary">Processing Time</Typography>
@@ -795,8 +868,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                         <TableCell>{step.step}</TableCell>
                         <TableCell sx={{ fontWeight: 'bold' }}>{step.action}</TableCell>
                         <TableCell>
-                          <Chip 
-                            label={step.status} 
+                          <Chip
+                            label={step.status}
                             color={step.status === 'Completed' ? 'success' : 'default'}
                             size="small"
                           />
@@ -884,7 +957,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           )}
         </DialogContent>
         <DialogActions>
-          <Button 
+          <Button
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
@@ -893,7 +966,10 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               link.click();
             }}
           >
-            Download JSON
+            Download 
+          </Button>
+           <Button  variant="contained">
+            Save
           </Button>
           <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">
             Close

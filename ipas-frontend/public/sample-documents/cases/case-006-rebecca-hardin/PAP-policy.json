@@ -1,0 +1,62 @@
+{
+  "documentType": "PAP Device Coverage Policy",
+  "papCoveragePolicy": {
+    "metadata": {
+      "policyTitle": "Coverage Guidelines for Positive Airway Pressure (PAP) Devices",
+      "policyEffectiveDate": "2024-12-01",
+      "policyVersion": "1.0",
+      "applicableCondition": "Obstructive Sleep Apnea (OSA)",
+      "devicesIncluded": [
+        {
+          "name": "Continuous Positive Airway Pressure (CPAP)",
+          "code": "E0601"
+        },
+        {
+          "name": "Bi-level Respiratory Assist Device without Backup Rate",
+          "code": "E0470"
+        }
+      ]
+    },
+    "coverageCriteria": [
+      {
+        "section": "I",
+        "deviceCode": "E0601",
+        "description": "Continuous Positive Airway Pressure (CPAP) Device Coverage",
+        "criteria": {
+          "A": "Beneficiary has an in-person clinical evaluation by the treating practitioner prior to the sleep test to assess for obstructive sleep apnea.",
+          "B": {
+            "description": "Beneficiary has a sleep test that meets one of the following:",
+            "options": {
+              "1": "Apnea-Hypopnea Index (AHI) or Respiratory Disturbance Index (RDI) ≥ 15 events per hour with a minimum of 30 events.",
+              "2": {
+                "condition": "AHI or RDI between 5 and 14 events per hour (minimum 10 events) with documentation of one or more of the following:",
+                "subconditions": {
+                  "a": "Excessive daytime sleepiness, impaired cognition, mood disorders, or insomnia.",
+                  "b": "Hypertension, ischemic heart disease, or history of stroke."
+                }
+              }
+            }
+          },
+          "C": "Beneficiary and/or caregiver has received instruction from the device supplier in proper use and care of the equipment."
+        },
+        "nonComplianceNote": "If a claim for an E0601 device is submitted and all criteria above have not been met, it will be denied as not reasonable and necessary."
+      },
+      {
+        "section": "II",
+        "deviceCode": "E0470",
+        "description": "Bi-level Respiratory Assist Device (without backup rate) Coverage",
+        "criteria": {
+          "prerequisites": "Beneficiary must meet all criteria A–C for E0601.",
+          "D": "E0601 has been tried and proven ineffective based on a therapeutic trial conducted in a facility or home setting."
+        },
+        "ineffectiveDefinition": "Documented failure to meet therapeutic goals using E0601 during titration in a facility-based study or during home use despite optimal therapy (proper mask selection, fitting, and appropriate pressure settings)."
+      }
+    ],
+    "documentMetadata": {
+      "source": "Medicare LCD L33718",
+      "extractionTimestamp": "2025-10-08T00:00:00Z",
+      "preparedBy": "Policy Automation Extractor",
+      "documentType": "Coverage Policy Summary"
+    }
+  }
+}

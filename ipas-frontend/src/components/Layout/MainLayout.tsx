@@ -26,8 +26,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${isMobile ? 0 : 240}px)` },
-          ml: { sm: `${isMobile ? 0 : 240}px` },
+          // width: { sm: `calc(100% - ${isMobile ? 0 : 240}px)` },
+          // ml: { sm: `${isMobile ? 0 : 240}px` },
+          width: "100%",
           mt: 8, // Account for AppBar height
           backgroundColor: 'white', // Force white background
           minHeight: '100vh',

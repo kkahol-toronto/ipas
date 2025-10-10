@@ -98,7 +98,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
     {
       id: 'PA-2024-001',
       patientName: 'John Smith',
-      provider: 'Dr. Sarah Johnson',
+      provider: 'Sarah Johnson',
       procedure: 'MRI Brain with Contrast',
       status: 'approved',
       submittedDate: '2024-01-15',
@@ -138,7 +138,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
     {
       id: 'PA-2024-005',
       patientName: 'David Brown',
-      provider: 'Dr. Sarah Johnson',
+      provider: 'Sarah Johnson',
       procedure: 'CT Chest with Contrast',
       status: 'approved',
       submittedDate: '2024-01-11',
@@ -187,12 +187,12 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
     return colors[priority];
   };
 
-  const handleDownloadEMR = (caseItem: Case) => {
+  const handleDownloadEMR= (caseItem: Case) => {
     // Get current status for this case
     const currentCaseStatus = caseStatuses[caseItem.id] || caseItem.status;
     
-    // Generate EMR_insert.json for the case
-    const emrData = {
+    // Generate EPIC_insert.json for the case
+    const EPICData = {
       case_id: caseItem.id,
       patient: {
         name: caseItem.patientName,
@@ -221,11 +221,11 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       }
     };
 
-    const blob = new Blob([JSON.stringify(emrData, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(EPICData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `EMR_insert_${caseItem.id}.json`;
+    link.download = `EPIC_insert_${caseItem.id}.json`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -396,8 +396,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                       <IconButton
                         size="small"
                         color="info"
-                        onClick={() => handleDownloadEMR(caseItem)}
-                        title="Download EMR Insert JSON"
+                        //onClick={() => handleDownloadEPIC(caseItem)}
+                        title="Download EMRInsert JSON"
                       >
                         <DownloadIcon />
                       </IconButton>

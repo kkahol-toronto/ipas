@@ -127,7 +127,7 @@ const DashboardCharts: React.FC<DashboardChartsProps> = ({ stats }) => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip formatter={(value) => [`${value} hours`, 'Processing Time']} />
+                <Tooltip formatter={(value) => [`${value} minutes`, 'Processing Time']} />
                 <Line 
                   type="monotone" 
                   dataKey="time" 

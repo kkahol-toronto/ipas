@@ -1,142 +1,170 @@
 {
-    "documentType": "Prior Authorization Request Form",
-    "priorAuthorizationRequest": {
-      "metadata": {
-        "formType": "Outpatient Authorization Form",
-        "source": "Ambetter / Absolute Total Care",
-        "submissionDate": "2025-04-25T12:16:34-05:00",
-        "faxNumber": "1-844-560-0799",
-        "standardRequest": true,
-        "urgentRequest": false
-      },
-      "memberInformation": {
-        "memberId": "U7131533302",
-        "lastName": "Hardin",
-        "firstName": "Rebecca",
-        "dateOfBirth": "1976-08-25",
-        "address": "2045 Lloyd Dr, Sumter, SC 29154-9233",
-        "phone": "803-607-6918",
-        "sex": "F",
-        "mrn": "976457669",
-        "ssn": "XXX-XX-9971",
-        "insurance": {
-          "payor": "Ambetter / Absolute Total Care",
-          "plan": "AMBETTER EXCHANGE-ALL",
-          "groupNumber": "412101",
-          "subscriberId": "U7131533302"
-        }
-      },
-      "requestingProvider": {
-        "name": "Amy Diane Kelly, NP",
-        "npi": "1578173555",
-        "tin": "474914917",
-        "phone": "803-774-9787",
-        "fax": "803-774-8890",
-        "specialty": "Pulmonology",
-        "facility": {
-          "name": "Prisma Health Pulmonology - Sumter",
-          "address": "115 N Sumter St Suite 315, Sumter, SC 29150",
-          "phone": "803-774-9787",
-          "fax": "803-774-9781"
-        }
-      },
-      "servicingProvider": {
-        "name": "Maria Griffin",
-        "facilityName": "AeroCare / AdaptHealth",
-        "npi": "1124566716",
-        "tin": "593758015",
-        "phone": "803-572-4391",
-        "fax": "803-701-9115",
-        "notificationEmail": "maria.griffin@adapthealth.com",
-        "location": "Camden, SC 61504"
-      },
-      "authorizationRequest": {
-        "primaryProcedure": {
-          "code": "E0601",
-          "description": "Continuous Positive Airway Pressure (CPAP) Device",
-          "hcpcsCategory": "DME Rental (417)"
-        },
-        "additionalProcedures": [
-          {
-            "code": "E0562",
-            "description": "Heated Humidifier",
-            "hcpcsCategory": "DME Purchase (120)"
-          },
-          {
-            "code": "A7037",
-            "description": "CPAP Tubing, Generic"
-          },
-          {
-            "code": "A4604",
-            "description": "CPAP Tubing, Heated"
-          },
-          {
-            "code": "A7038",
-            "description": "CPAP Filter, Disposable"
-          }
-        ],
-        "diagnosis": {
-          "icd10": "G47.33",
-          "description": "Obstructive Sleep Apnea"
-        },
-        "startDate": "2025-04-25",
-        "endDate": null,
-        "totalUnits": 1,
-        "serviceTypeCode": "417",
-        "serviceTypeDescription": "DME Rental / Purchase",
-        "setting": "Outpatient"
-      },
-      "deviceOrder": [
-        {
-          "orderId": "708800217",
-          "orderType": "CPAP Compliance Download",
-          "quantity": 1,
-          "diagnosisCode": "G47.33",
-          "orderDate": "2025-04-24",
-          "signedBy": {
-            "name": "Amy Diane Kelly, NP",
-            "npi": "1578173555",
-            "dea": "MK6112560",
-            "timestamp": "2025-04-24T15:48:00-05:00"
-          }
-        },
-        {
-          "orderId": "708800218",
-          "orderType": "PAP Supplies",
-          "diagnosisCode": "G47.33",
-          "quantity": 1,
-          "orderDate": "2025-04-24",
-          "supplies": {
-            "mask": "Yes",
-            "tubing": {
-              "included": true,
-              "type": "DME choice",
-              "codes": ["A7037", "A4604"]
-            },
-            "filters": { "included": true, "code": "A7038", "type": "Disposable" },
-            "chinStrap": "No",
-            "lengthOfNeed": 99
-          },
-          "signedBy": {
-            "name": "Amy Diane Kelly, NP",
-            "npi": "1578173555",
-            "dea": "MK6112560",
-            "timestamp": "2025-04-24T15:48:00-05:00"
-          }
-        }
-      ],
-      "patientVitals": {
-        "date": "2025-04-24T15:05:00-05:00",
-        "weightKg": 136,
-        "weightLbs": 300
-      },
-      "documentMetadata": {
-        "sourceFacility": "Prisma Health Pulmonology - Sumter",
-        "receivedBy": "Centene / AeroCare",
-        "location": "AR Camden - 53006",
-        "faxReceived": "2025-04-25T12:16:34-05:00",
-        "extractionTimestamp": "2025-10-07T00:00:00Z"
-      }
-    }
+  "documentType": "Prior Authorization Request Form",
+  "priorAuthorizationRequest": {
+    "metadata": "metadata",
+    "memberInformation": "memberInformation",
+    "requestingProvider": "requestingProvider",
+    "servicingProvider": "servicingProvider",
+    "authorizationRequest": "authorizationRequest",
+    "deviceOrder": [
+      "deviceOrder",
+      "deviceOrder_1"
+    ],
+    "patientVitals": "patientVitals",
+    "documentMetadata": "documentMetadata"
+  },
+  "metadata": {
+    "formType": "Outpatient Authorization Form",
+    "source": "Ambetter / Absolute Total Care",
+    "submissionDate": "2025-04-25T12:16:34-05:00",
+    "faxNumber": "1-844-560-0799",
+    "standardRequest": true,
+    "urgentRequest": false
+  },
+  "memberInformation": {
+    "memberId": "U7131533302",
+    "lastName": "Hardin",
+    "firstName": "Rebecca",
+    "dateOfBirth": "1976-08-25",
+    "address": "2045 Lloyd Dr, Sumter, SC 29154-9233",
+    "phone": "803-607-6918",
+    "sex": "F",
+    "mrn": "976457669",
+    "ssn": "XXX-XX-9971",
+    "insurance": "insurance"
+  },
+  "insurance": {
+    "payor": "Ambetter / Absolute Total Care",
+    "plan": "AMBETTER EXCHANGE-ALL",
+    "groupNumber": "412101",
+    "subscriberId": "U7131533302"
+  },
+  "requestingProvider": {
+    "name": "Amy Diane Kelly, NP",
+    "npi": "1578173555",
+    "tin": "474914917",
+    "phone": "803-774-9787",
+    "fax": "803-774-8890",
+    "specialty": "Pulmonology",
+    "facility": "facility"
+  },
+  "facility": {
+    "name": "Prisma Health Pulmonology - Sumter",
+    "address": "115 N Sumter St Suite 315, Sumter, SC 29150",
+    "phone": "803-774-9787",
+    "fax": "803-774-9781"
+  },
+  "servicingProvider": {
+    "name": "Maria Griffin",
+    "facilityName": "AeroCare / AdaptHealth",
+    "npi": "1124566716",
+    "tin": "593758015",
+    "phone": "803-572-4391",
+    "fax": "803-701-9115",
+    "notificationEmail": "maria.griffin@adapthealth.com",
+    "location": "Camden, SC 61504"
+  },
+  "authorizationRequest": {
+    "primaryProcedure": "primaryProcedure",
+    "additionalProcedures": [
+      "additionalProcedures",
+      "additionalProcedures_1",
+      "additionalProcedures_2",
+      "additionalProcedures_3"
+    ],
+    "diagnosis": "diagnosis",
+    "startDate": "2025-04-25",
+    "endDate": null,
+    "totalUnits": 1,
+    "serviceTypeCode": "417",
+    "serviceTypeDescription": "DME Rental / Purchase",
+    "setting": "Outpatient"
+  },
+  "primaryProcedure": {
+    "code": "E0601",
+    "description": "Continuous Positive Airway Pressure (CPAP) Device",
+    "hcpcsCategory": "DME Rental (417)"
+  },
+  "additionalProcedures": {
+    "code": "E0562",
+    "description": "Heated Humidifier",
+    "hcpcsCategory": "DME Purchase (120)"
+  },
+  "additionalProcedures_1": {
+    "code": "A7037",
+    "description": "CPAP Tubing, Generic"
+  },
+  "additionalProcedures_2": {
+    "code": "A4604",
+    "description": "CPAP Tubing, Heated"
+  },
+  "additionalProcedures_3": {
+    "code": "A7038",
+    "description": "CPAP Filter, Disposable"
+  },
+  "diagnosis": {
+    "icd10": "G47.33",
+    "description": "Obstructive Sleep Apnea"
+  },
+  "deviceOrder": {
+    "orderId": "708800217",
+    "orderType": "CPAP Compliance Download",
+    "quantity": 1,
+    "diagnosisCode": "G47.33",
+    "orderDate": "2025-04-24",
+    "signedBy": "signedBy"
+  },
+  "signedBy": {
+    "name": "Amy Diane Kelly, NP",
+    "npi": "1578173555",
+    "dea": "MK6112560",
+    "timestamp": "2025-04-24T15:48:00-05:00"
+  },
+  "deviceOrder_1": {
+    "orderId": "708800218",
+    "orderType": "PAP Supplies",
+    "diagnosisCode": "G47.33",
+    "quantity": 1,
+    "orderDate": "2025-04-24",
+    "supplies": "supplies",
+    "signedBy": "signedBy_1"
+  },
+  "supplies": {
+    "mask": "Yes",
+    "tubing": "tubing",
+    "filters": "filters",
+    "chinStrap": "No",
+    "lengthOfNeed": 99
+  },
+  "tubing": {
+    "included": true,
+    "type": "DME choice",
+    "codes": [
+      "A7037",
+      "A4604"
+    ]
+  },
+  "filters": {
+    "included": true,
+    "code": "A7038",
+    "type": "Disposable"
+  },
+  "signedBy_1": {
+    "name": "Amy Diane Kelly, NP",
+    "npi": "1578173555",
+    "dea": "MK6112560",
+    "timestamp": "2025-04-24T15:48:00-05:00"
+  },
+  "patientVitals": {
+    "date": "2025-04-24T15:05:00-05:00",
+    "weightKg": 136,
+    "weightLbs": 300
+  },
+  "documentMetadata": {
+    "sourceFacility": "Prisma Health Pulmonology - Sumter",
+    "receivedBy": "Centene / AeroCare",
+    "location": "AR Camden - 53006",
+    "faxReceived": "2025-04-25T12:16:34-05:00",
+    "extractionTimestamp": "2025-10-07T00:00:00Z"
   }
-  
+}

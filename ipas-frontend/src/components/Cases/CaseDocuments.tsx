@@ -37,7 +37,7 @@ interface CaseDocument {
   id: string;
   name: string;
   type: 'pdf' | 'image' | 'doc' | 'other';
-  category: 'prior-auth' | 'medical-records' | 'imaging' | 'insurance' | 'clinical-notes' | 'diagnostics';
+  category: 'prior-auth' |'operativenotes' |'radionotes'| 'medical-records' | 'imaging' | 'insurance' | 'clinical-notes' | 'diagnostics' | 'drnotes' | 'dmeform';
   size: string;
   uploadDate: string;
   status: 'uploaded' | 'processing' | 'ready' | 'error';
@@ -271,7 +271,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
         },
         {
           id: '5',
-          name: 'Physical Therapy Notes',
+          name: 'Robert Davis Medical Records',
           type: 'pdf',
           category: 'clinical-notes',
           size: '892 KB',
@@ -515,23 +515,10 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           jsonUrl: '/sample-documents/cases/case-003-mike-johnson/prior-auth-request-form.json',
           isExtracted: false
         },
-        {
-          id: '2',
-          name: 'MRI Knee Results',
-          type: 'pdf',
-          category: 'imaging',
-          size: '3.2 MB',
-          uploadDate: '2024-01-17',
-          status: 'ready',
-          url: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.pdf',
-          originalUrl: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.pdf',
-          extractedUrl: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.pdf',
-          jsonUrl: '/sample-documents/cases/case-003-mike-johnson/mri-knee-report.json',
-          isExtracted: false
-        },
+
         {
           id: '3',
-          name: 'Physical Therapy Notes',
+          name: 'Robert Davis Medical Records',
           type: 'pdf',
           category: 'medical-records',
           size: '1.5 MB',
@@ -544,17 +531,89 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           isExtracted: false
         },
         {
-          id: '4',
-          name: 'Insurance Card',
-          type: 'image',
-          category: 'insurance',
+          id: '8',
+          name: 'DME Request form',
+          type: 'pdf',
+          category: 'dmeform',
           size: '0.9 MB',
           uploadDate: '2024-01-17',
           status: 'ready',
-          url: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf',
-          originalUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf',
-          extractedUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.pdf',
-          jsonUrl: '/sample-documents/cases/case-003-mike-johnson/insurance-card.json',
+          url: '/sample-documents/cases/case-003-mike-johnson/dme.pdf',
+          originalUrl: '/sample-documents/cases/case-003-mike-johnson/dme.pdf',
+          extractedUrl: '/sample-documents/cases/case-003-mike-johnson/dme.pdf',
+          jsonUrl: '/sample-documents/cases/case-003-mike-johnson/dme.json',
+          isExtracted: false
+        },
+        {
+          id: '7',
+          name: 'Doctors Note',
+          type: 'pdf',
+          category: 'drnotes',
+          size: '0.9 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/case-003-mike-johnson/drnotes.pdf',
+          originalUrl: '/sample-documents/cases/case-003-mike-johnson/drnotes.pdf',
+          extractedUrl: '/sample-documents/cases/case-003-mike-johnson/drnotes.pdf',
+          jsonUrl: '/sample-documents/cases/case-003-mike-johnson/drnotes.json',
+          isExtracted: false
+        }
+      ],
+      'PA-2024-004': [
+        {
+          id: '1',
+          name: 'Prior Authorization Request Form',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '1.7 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/case-004-sarah-wilson/prior-auth-form-original.pdf',
+          originalUrl: '/sample-documents/cases/case-004-sarah-wilson/prior-auth-form-original.pdf',
+          extractedUrl: '/sample-documents/cases/case-004-sarah-wilson/prior-auth-request-form.pdf',
+          jsonUrl: '/sample-documents/cases/case-004-sarah-wilson/prior-auth-request-form.json',
+          isExtracted: false
+        },
+        {
+          id: '2',
+          name: 'Operative Notes',
+          type: 'pdf',
+          category: 'operativenotes',
+          size: '3.2 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/Clincase-004-sarah-wilsonical/opnote.pdf',
+          originalUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/opnote.pdf',
+          extractedUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/opnote.pdf',
+          jsonUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/opnote.json',
+          isExtracted: false
+        },
+        {
+          id: '3',
+          name: 'Radiology Notes',
+          type: 'pdf',
+          category: 'radionotes',
+          size: '1.5 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/Clincase-004-sarah-wilsonical/radionote.pdf',
+          originalUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/radionote.pdf',
+          extractedUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/radionote.pdf',
+          jsonUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/radionote.json',
+          isExtracted: false
+        },
+        {
+          id: '4',
+          name: 'Doctor Notes',
+          type: 'pdf',
+          category: 'drnotes',
+          size: '0.9 MB',
+          uploadDate: '2024-01-17',
+          status: 'ready',
+          url: '/sample-documents/cases/Clincase-004-sarah-wilsonical/drnote.pdf',
+          originalUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/drnote.pdf',
+          extractedUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/drnote.pdf',
+          jsonUrl: '/sample-documents/cases/Clincase-004-sarah-wilsonical/drnote.json',
           isExtracted: false
         }
       ],
@@ -827,6 +886,16 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
         return <CloudDownloadIcon color="warning" />;
       case 'clinical-notes':
         return <DocumentIcon color="secondary" />;
+      case 'drnotes':
+        return <DocumentIcon color="secondary" />;
+
+      case 'dmeform':
+        return <DocumentIcon color="secondary" />;
+
+      case 'operativenotes':
+      case 'radionotes':
+        return <DocumentIcon color="secondary" />;
+
       default:
         return <AttachFileIcon color="action" />;
     }
@@ -857,6 +926,14 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
         return 'Insurance';
       case 'clinical-notes':
         return 'Clinical Notes';
+      case 'drnotes':
+        return 'Doctor Notes';
+      case 'dmeform':
+        return 'DME Form';
+      case 'operativenotes':
+        return 'Operative Notes'
+      case 'radionotes':
+        return 'Radiology Notes'
       default:
         return 'Other';
     }
@@ -1335,7 +1412,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
                             <Box>
                               <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                                 <Typography variant="body2" color="text.secondary">
-                                  Size: ~15 KB • Format: JSON • 
+                                  Size: ~15 KB  
                                 </Typography>
                                 <TimeIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
                                 <Typography variant="body2" color="text.secondary">

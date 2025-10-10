@@ -53,7 +53,7 @@ const LoginForm: React.FC = () => {
     <Container component="main" maxWidth="sm">
       <Box
         sx={{
-          marginTop: 8,
+          // marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -70,10 +70,11 @@ const LoginForm: React.FC = () => {
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-            <MedicalIcon sx={{ fontSize: 40, color: '#1976d2', mr: 1 }} />
+            {/* <MedicalIcon sx={{ fontSize: 40, color: '#1976d2', mr: 1 }} />
             <Typography component="h1" variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
               IPAS
-            </Typography>
+            </Typography> */}
+            <img src="/assets/images/smart_auth.svg" alt="smart_auth-logo" />
           </Box>
           
           <Typography component="h2" variant="h5" sx={{ mb: 1, textAlign: 'center' }}>

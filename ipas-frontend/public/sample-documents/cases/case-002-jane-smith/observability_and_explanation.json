@@ -6,7 +6,7 @@
   "processingTimeline": {
     "startTime": "2024-01-16T09:00:00Z",
     "endTime": "2024-01-16T09:25:00Z",
-    "totalDuration": "25 minutes"
+    "totalDuration": "1m"
   },
   "workflowSteps": [
     {
@@ -158,8 +158,8 @@
       "action": "EMR Integration",
       "timestamp": "2024-01-16T09:24:00Z",
       "status": "Completed",
-      "details": "Authorization data transmitted to Epic EMR system",
-      "outcome": "Epic Patient ID: EPIC_8B6E2K19, Order placed successfully",
+      "details": "Authorization data transmitted to EMR system",
+      "outcome": "EMR Patient ID: EMR_8B6E2K19, Order placed successfully",
       "comments": "EMR integration successful. Hospital notified for urgent scheduling. Order ID: ORD_3X7N5R2P9T"
     }
   ],
