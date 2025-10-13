@@ -16,6 +16,7 @@ import Chat from './pages/Chat';
 import Upload from './pages/Upload';
 import Analytics from './pages/Analytics';
 import HospitalPortal from './pages/HospitalPortal';
+import RecentCases from './pages/RecentCases';
 
 // Create theme
 const theme = createTheme({
@@ -72,6 +73,16 @@ const AppRoutes: React.FC = () => {
           <ProtectedRoute>
             <MainLayout>
               <Dashboard />
+            </MainLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/RecentCases"
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <RecentCases />
             </MainLayout>
           </ProtectedRoute>
         }

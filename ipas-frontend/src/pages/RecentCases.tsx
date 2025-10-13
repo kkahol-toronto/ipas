@@ -9,7 +9,7 @@ import HospitalPerformance from '../components/Dashboard/HospitalPerformance';
 import CaseDetailsEnhanced from '../components/Cases/CaseDetailsEnhanced';
 import ErrorBoundary from '../components/ErrorBoundary';
 
-const Dashboard: React.FC = () => {
+const RecentCases: React.FC = () => {
   const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
   const [caseDetailsOpen, setCaseDetailsOpen] = useState(false);
   const [showLetterNotification, setShowLetterNotification] = useState(false);
@@ -94,7 +94,7 @@ const Dashboard: React.FC = () => {
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#1976d2', fontWeight: 'bold' }}>
-        Smart Auth Dashboard
+        Smart Auth Recent Cases
       </Typography>
       
       <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
@@ -102,7 +102,7 @@ const Dashboard: React.FC = () => {
       </Typography>
 
       {/* Letter Generation Notification */}
-      {showLetterNotification && (
+      {/* {showLetterNotification && (
         <Alert 
           severity="success" 
           icon={<DescriptionIcon />}
@@ -151,10 +151,10 @@ const Dashboard: React.FC = () => {
             Approval letter for Case <strong>{selectedCaseId}</strong> has been generated and is ready for download
           </Typography>
         </Alert>
-      )}
+      )} */}
 
       {/* Statistics Cards */}
-      <Grid container spacing={2} sx={{ mb: 4 }}>
+      {/* <Grid container spacing={2} sx={{ mb: 4 }}>
         <Grid size={{ xs: 12, sm: 6, md: 2.4 }}>
           <Card sx={{ textAlign: 'center', backgroundColor: '#f8f9fa', height: '100%' }}>
             <CardContent sx={{ p: 2 }}>
@@ -319,30 +319,30 @@ const Dashboard: React.FC = () => {
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
+      </Grid> */}
 
         {/* Approval Status Chart */}
-        <Box sx={{ mb: 4 }}>
+        {/* <Box sx={{ mb: 4 }}>
           <ApprovalStatusChart todayData={todayData} />
-        </Box>
+        </Box> */}
 
       {/* Recent Cases Table */}
-      {/* <Box sx={{ mb: 4 }}>
+      <Box sx={{ mb: 4 }}>
         <RecentCasesTable onCaseClick={handleCaseClick} />
-      </Box> */}
+      </Box>
 
       {/* Geographic Heat Map */}
-      <Box sx={{ mb: 4 }}>
+      {/* <Box sx={{ mb: 4 }}>
         <GeographicHeatMap />
-      </Box>
+      </Box> */}
 
       {/* Hospital Performance */}
-      <Box sx={{ mb: 4 }}>
+      {/* <Box sx={{ mb: 4 }}>
         <HospitalPerformance />
-      </Box>
+      </Box> */}
 
       {/* Analytics & Reports */}
-      <AnalyticsReports />
+      {/* <AnalyticsReports /> */}
 
       {/* Case Details Dialog */}
       <Dialog
@@ -369,4 +369,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default RecentCases;

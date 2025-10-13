@@ -270,7 +270,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             </Button>
           </Box>
         </Box>
-        <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
+        <TableContainer component={Paper} sx={{ maxHeight: 570 }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>

@@ -82,6 +82,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
   const [editingField, setEditingField] = useState<EditableField | null>(null);
   const [editedValue, setEditedValue] = useState<string>('');
 
+  const [isEditingCell, setIsEditingCell] = useState(false);
+
   useEffect(() => {
     if (open && doc) {
       loadDocumentContent();
@@ -91,7 +93,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
         // For development server, ensure we're using the correct port and public path
         setPdfUrl(url);
         console.log('Loading PDF from URL:', url);
-        
+
         // Verify if the file is accessible
         fetch(url)
           .then(response => {
@@ -120,7 +122,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
         // Check for saved changes in localStorage first
         const key = doc.jsonUrl.split('/').pop() || 'temp';
         const savedContent = localStorage.getItem(`edited_json_${key}`);
-        
+
         if (savedContent) {
           // If we have saved changes, use those
           setJsonContent(JSON.parse(savedContent));
@@ -163,7 +165,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
     console.error('PDF URL:', pdfUrl);
     console.error('Error details:', error.message);
     console.error('Error stack:', error.stack);
-    
+
     // Try to fetch the PDF directly to check if it's accessible
     fetch(pdfUrl)
       .then(response => {
@@ -177,7 +179,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
         console.error('Failed to fetch PDF:', fetchError);
         setError('Cannot access the PDF file. Please make sure the file exists and try again.');
       });
-    
+
     setPdfLoading(false);
   };
 
@@ -253,16 +255,16 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
   // Helper function to update nested object immutably
   const updateNestedValue = (obj: any, path: string[], value: any): any => {
     if (path.length === 0) return value;
-    
+
     const currentPath = path[0];
     const newObj = Array.isArray(obj) ? [...obj] : { ...obj };
-    
+
     newObj[currentPath] = updateNestedValue(
       obj[currentPath],
       path.slice(1),
       value
     );
-    
+
     return newObj;
   };
 
@@ -272,7 +274,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
       // Get the original value to determine the type
       const originalValue = path.reduce((obj, key) => obj?.[key], jsonContent);
       const parsedValue = parseValue(newValue, originalValue);
-      
+
       // Create updated content with immutable updates
       const updatedContent = updateNestedValue(jsonContent, path, parsedValue);
 
@@ -305,7 +307,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
-          
+
           console.log('Please save the downloaded file to:', filePath);
         } catch (fileError) {
           console.error('Error creating file:', fileError);
@@ -334,6 +336,10 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
     setEditingField(null);
     setEditedValue('');
   };
+
+  const cancelSetIsEditingCell = () => {
+    setIsEditingCell(false);
+  }
 
   // Helper function to format field names from camelCase
   const formatFieldName = (field: string): string => {
@@ -385,8 +391,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
           'Status': resource.status || 'N/A',
           'Result': resource.valueString || 'See Details Below',
           'Details': resource.component?.reduce((acc: any, comp: any) => {
-            acc[comp.code.text] = comp.valueQuantity ? 
-              `${comp.valueQuantity.value} ${comp.valueQuantity.unit}` : 
+            acc[comp.code.text] = comp.valueQuantity ?
+              `${comp.valueQuantity.value} ${comp.valueQuantity.unit}` :
               comp.valueString || 'N/A';
             return acc;
           }, {})
@@ -404,7 +410,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
           'Priority': resource.priority || 'N/A',
           'Order Date': resource.authoredOn || 'N/A',
           'Parameters': resource.parameter?.reduce((acc: any, param: any) => {
-            acc[param.code.text] = param.valueString || param.valueInteger || 
+            acc[param.code.text] = param.valueString || param.valueInteger ||
               param.valueCodeableConcept?.coding?.[0]?.display || 'N/A';
             return acc;
           }, {})
@@ -434,10 +440,10 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
     }
 
     return (
-      <TableContainer 
-        component={Paper} 
-        variant="outlined" 
-        sx={{ 
+      <TableContainer
+        component={Paper}
+        variant="outlined"
+        sx={{
           mb: 1,
           backgroundColor: level === 0 ? 'background.paper' : 'background.default'
         }}
@@ -447,14 +453,15 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
             {Object.entries(data).map(([field, value]) => {
               const currentPath = [...path, field];
               const isEditing = editingField?.path.join('.') === currentPath.join('.');
+              const isEditingCell = editingField?.path.join('.') === currentPath.join('.');
               const isEditable = typeof value !== 'object' || value === null;
 
               return (
                 <TableRow key={field}>
-                  <TableCell 
-                    component="th" 
-                    scope="row" 
-                    sx={{ 
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{
                       width: '30%',
                       fontWeight: 'medium',
                       color: 'text.primary',
@@ -463,8 +470,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                   >
                     {formatFieldName(field)}
                   </TableCell>
-                  <TableCell 
-                    sx={{ 
+                  <TableCell
+                    sx={{
                       borderBottom: '1px solid rgba(224, 224, 224, 0.4)',
                       display: 'flex',
                       alignItems: 'center',
@@ -503,8 +510,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                         {isEditing ? (
                           <>
                             <Tooltip title="Save">
-                              <IconButton 
-                                size="small" 
+                              <IconButton
+                                size="small"
                                 color="primary"
                                 onClick={async () => {
                                   setSaving(true);
@@ -520,8 +527,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                               </IconButton>
                             </Tooltip>
                             <Tooltip title="Cancel">
-                              <IconButton 
-                                size="small" 
+                              <IconButton
+                                size="small"
                                 color="error"
                                 onClick={cancelEditing}
                               >
@@ -531,7 +538,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                           </>
                         ) : (
                           <Tooltip title="Edit">
-                            <IconButton 
+                            <IconButton
                               size="small"
                               onClick={() => startEditing(currentPath, value)}
                             >
@@ -578,9 +585,9 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
       return Object.entries(groupedEntries).map(([resourceType, resources]) => {
         return (
           <Box key={resourceType} sx={{ mb: 4 }}>
-            <Typography 
-              variant="h6" 
-              sx={{ 
+            <Typography
+              variant="h6"
+              sx={{
                 mb: 2,
                 color: 'primary.main',
                 fontWeight: 'bold',
@@ -594,20 +601,20 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
               // Extract the most relevant information based on resource type
               const displayData = extractDisplayData(resource);
               return (
-                <TableContainer 
+                <TableContainer
                   key={resource.id || index}
-                  component={Paper} 
-                  variant="outlined" 
+                  component={Paper}
+                  variant="outlined"
                   sx={{ mb: 2, backgroundColor: 'background.paper' }}
                 >
                   <Table size="small">
                     <TableBody>
                       {Object.entries(displayData).map(([key, value]) => (
                         <TableRow key={key}>
-                          <TableCell 
-                            component="th" 
+                          <TableCell
+                            component="th"
                             scope="row"
-                            sx={{ 
+                            sx={{
                               width: '30%',
                               fontWeight: 'medium',
                               color: 'text.primary'
@@ -615,8 +622,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                           >
                             {formatFieldName(key)}
                           </TableCell>
-                          <TableCell 
-                            sx={{ 
+                          <TableCell
+                            sx={{
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'space-between',
@@ -641,8 +648,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                               {editingField?.path.join('.') === `${resourceType}.${resource.id}.${key}` ? (
                                 <>
                                   <Tooltip title="Save">
-                                    <IconButton 
-                                      size="small" 
+                                    <IconButton
+                                      size="small"
                                       color="primary"
                                       onClick={async () => {
                                         setSaving(true);
@@ -658,8 +665,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                                     </IconButton>
                                   </Tooltip>
                                   <Tooltip title="Cancel">
-                                    <IconButton 
-                                      size="small" 
+                                    <IconButton
+                                      size="small"
                                       color="error"
                                       onClick={cancelEditing}
                                     >
@@ -669,7 +676,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                                 </>
                               ) : (
                                 <Tooltip title="Edit">
-                                  <IconButton 
+                                  <IconButton
                                     size="small"
                                     onClick={() => startEditing([resourceType, resource.id, key], value)}
                                   >
@@ -695,9 +702,9 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
     const tableData = Object.entries(jsonContent).map(([category, data]) => {
       return (
         <Box key={category} sx={{ mb: 4 }}>
-          <Typography 
-            variant="h6" 
-            sx={{ 
+          <Typography
+            variant="h6"
+            sx={{
               mb: 2,
               color: 'primary.main',
               fontWeight: 'bold'
@@ -734,8 +741,8 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
         }
         if (resource.component) {
           resource.component.forEach((comp: any) => {
-            result[comp.code.text] = comp.valueQuantity ? 
-              `${comp.valueQuantity.value} ${comp.valueQuantity.unit}` : 
+            result[comp.code.text] = comp.valueQuantity ?
+              `${comp.valueQuantity.value} ${comp.valueQuantity.unit}` :
               comp.valueString || 'N/A';
           });
         }
@@ -755,7 +762,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
           'Order Date': formatDate(resource.authoredOn) || 'N/A',
         };
         resource.parameter?.forEach((param: any) => {
-          params[param.code.text] = param.valueString || param.valueInteger || 
+          params[param.code.text] = param.valueString || param.valueInteger ||
             param.valueCodeableConcept?.coding?.[0]?.display || 'N/A';
         });
         return params;
@@ -769,7 +776,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
         };
       case 'Practitioner':
         return {
-          'Name': resource.name?.[0] ? 
+          'Name': resource.name?.[0] ?
             `${resource.name[0].given?.join(' ')} ${resource.name[0].family} ${resource.name[0].suffix?.join(' ') || ''}` : 'N/A',
           'NPI': resource.identifier?.find((id: any) => id.system.includes('npi'))?.value || 'N/A',
           'DEA': resource.identifier?.find((id: any) => id.system.includes('dea'))?.value || 'N/A'
@@ -809,12 +816,12 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
       <TableContainer component={Paper} variant="outlined" sx={{ mb: 1 }}>
         <Table size="small">
           <TableBody>
-            {Object.entries(data).map(([key, value]) => (
+            {Object.entries(data).map(([key, value], index) => (
               <TableRow key={key}>
-                <TableCell 
-                  component="th" 
+                <TableCell
+                  component="th"
                   scope="row"
-                  sx={{ 
+                  sx={{
                     width: '30%',
                     fontWeight: 'medium',
                     color: 'text.primary'
@@ -823,7 +830,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                   {formatFieldName(key)}
                 </TableCell>
                 <TableCell
-                  sx={{ 
+                  sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
@@ -831,11 +838,11 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                   }}
                 >
                   <Box sx={{ flexGrow: 1 }}>
-                    {editingField?.path.join('.') === `simple.${key}` ? (
+                    {isEditingCell ? (
                       <TextField
                         fullWidth
                         size="small"
-                        value={editedValue}
+                        value={value}
                         onChange={(e) => setEditedValue(e.target.value)}
                         variant="outlined"
                         autoFocus
@@ -844,7 +851,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                       formatValue(value)
                     )}
                   </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center', ml: 1 }}>
+                  {/* <Box sx={{ display: 'flex', alignItems: 'center', ml: 1 }}>
                     {editingField?.path.join('.') === `simple.${key}` ? (
                       <>
                         <Tooltip title="Save">
@@ -884,7 +891,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                         </IconButton>
                       </Tooltip>
                     )}
-                  </Box>
+                  </Box> */}
                 </TableCell>
               </TableRow>
             ))}
@@ -962,9 +969,63 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
 
           {/* Right Panel - Extracted Content */}
           <Box sx={{ width: '50%', p: 2, height: '100%', overflow: 'auto' }}>
-            <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              Extracted Content
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', }}>
+              <Box sx={{ mr: 'auto' }}>
+                <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                  Extracted Content
+                </Typography>
+              </Box>
+
+
+
+
+
+              <Box sx={{ display: 'flex', alignItems: 'center', ml: 1 }}>
+                {isEditingCell ? (
+                  <>
+                    <Tooltip title="Save">
+                      <IconButton
+                        size="small"
+                        color="primary"
+                        onClick={async () => {
+                          // setSaving(true);
+                          // try {
+                          //   await handleSaveChanges(['simple', key], editedValue);
+                          // } finally {
+                          //   setSaving(false);
+                          // }
+                        }}
+                        disabled={saving}
+                      >
+                        <SaveIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Cancel">
+                      <IconButton
+                        size="small"
+                        color="error"
+                        onClick={cancelSetIsEditingCell}
+                      >
+                        <CancelIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  </>
+                ) : (
+                  <Tooltip title="Edit">
+                    <IconButton size="small" onClick={() => setIsEditingCell(true)}>
+                      <EditIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                )}
+              </Box>
+
+
+
+
+
+
+
+            </Box>
             {loading ? (
               <LinearProgress />
             ) : (
@@ -1004,5 +1065,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
   );
 };
 
+
+
 export default DocumentComparisonViewer;
- // http://localhost:3001/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-extracted.json
+// http://localhost:3001/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-extracted.json
