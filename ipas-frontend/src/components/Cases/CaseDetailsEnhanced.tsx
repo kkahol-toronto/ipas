@@ -521,7 +521,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       <Card>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={tabValue} onChange={handleTabChange} aria-label="case details tabs">
-            <Tab label="Orchestration" icon={<AIIcon />} />
+            {/* <Tab label="Orchestration" icon={<AIIcon />} /> */}
             <Tab label="Documents" icon={<DocumentIcon />} />
             <Tab label="Clinical Notes" icon={<TimelineIcon />} />
             <Tab label="AI Analysis" icon={<PsychologyIcon />} />
@@ -531,19 +531,19 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           </Tabs>
         </Box>
 
-        <TabPanel value={tabValue} index={0}>
+        {/* <TabPanel value={tabValue} index={0}>
           <SimpleDraggableFlowchart caseId={caseId} />
-        </TabPanel>
+        </TabPanel> */}
 
-        <TabPanel value={tabValue} index={1}>
+        <TabPanel value={tabValue} index={0}>
           <CaseDocuments caseId={caseId} />
         </TabPanel>
 
-        <TabPanel value={tabValue} index={5}>
+        <TabPanel value={tabValue} index={4}>
           <ClinicalSummary caseId={caseId} />
         </TabPanel>
 
-        <TabPanel value={tabValue} index={2}>
+        <TabPanel value={tabValue} index={1}>
 
           <Typography variant="h6" gutterBottom>
             Clinical Timeline
@@ -568,7 +568,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           ))}
         </TabPanel>
 
-        <TabPanel value={tabValue} index={3}>
+        <TabPanel value={tabValue} index={2}>
           <Typography variant="h6" gutterBottom>
             AI Analysis Results
           </Typography>
@@ -677,7 +677,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
 
         </TabPanel>
 
-        <TabPanel value={tabValue} index={4}>
+        <TabPanel value={tabValue} index={3}>
           <MedicalRecordRetrival caseId={caseId} /> {/*change*/}
           <EMRNotificationPanel caseId={caseId} showDetails={true} />
         </TabPanel>
