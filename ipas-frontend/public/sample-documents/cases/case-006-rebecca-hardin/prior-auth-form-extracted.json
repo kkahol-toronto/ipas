@@ -1,18 +1,5 @@
 {
   "documentType": "Prior Authorization Request Form",
-  "priorAuthorizationRequest": {
-    "metadata": "metadata",
-    "memberInformation": "memberInformation",
-    "requestingProvider": "requestingProvider",
-    "servicingProvider": "servicingProvider",
-    "authorizationRequest": "authorizationRequest",
-    "deviceOrder": [
-      "deviceOrder",
-      "deviceOrder_1"
-    ],
-    "patientVitals": "patientVitals",
-    "documentMetadata": "documentMetadata"
-  },
   "metadata": {
     "formType": "Outpatient Authorization Form",
     "source": "Ambetter / Absolute Total Care",
