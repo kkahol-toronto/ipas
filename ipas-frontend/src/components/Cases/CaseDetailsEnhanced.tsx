@@ -87,194 +87,194 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [editNotesOpen, setEditNotesOpen] = useState(false);
   const [clinicalNotes, setClinicalNotes] = useState('');
   const [observabilityDialogOpen, setObservabilityDialogOpen] = useState(false);
-  const [observabilityData, setObservabilityData] = useState<any>(null);  
+  const [observabilityData, setObservabilityData] = useState<any>(null);
   const [selectedOption, setSelectedOption] = useState('Approved');
   const [emrIntegrationOpen, setEmrIntegrationOpen] = useState(false);
 
- 
+
   // Dynamic case data based on caseId
   const getCaseData = (caseId: string) => {
-const caseDataMap: { [key: string]: any } = {
-  'PA-2024-001': {
-    id: 'PA-2024-001',
-    patientName: 'John Smith',
-    patientId: 'P-2024-001',
-    dateOfBirth: '1985-03-15',
-    provider: 'Sarah Johnson',
-    providerId: 'PR-001',
-    hospital: 'UCLA Medical Center',
-    procedure: 'MRI Brain with Contrast',
-    diagnosis: 'Suspected Brain Tumor',
-    status: 'In Review',
-    priority: 'High',
-    submittedDate: '2025-10-08T10:32:00Z',
-    lastUpdated: '2025-10-08T14:45:00Z',
-    insurance: 'Blue Cross Blue Shield',
-    policyNumber: 'BC123456789',
-    estimatedCost: 2500,
-    documents: [
-      { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
-      { id: 'doc2', name: 'MRI Scan - Brain.jpg', type: 'Image', size: '4.1 MB', status: 'Analyzed' },
-      { id: 'doc3', name: 'Patient Medical Records.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
-      { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
-    ],
-    clinicalNotes: [
-      { timestamp: '2025-10-08T10:32:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Sarah Johnson' },
-      { timestamp: '2025-10-08T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Sarah Johnson' },
-      { timestamp: '2025-10-08T12:00:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
-    ],
-    aiAnalysis: {
-      clinicalNecessity: 0.94,
-      coverageEligibility: 0.87,
-      riskAssessment: 'Standard',
-      recommendedAction: 'Approve with monitoring',
-      confidence: 0.91
-    }
-  },
-  'PA-2024-002': {
-    id: 'PA-2024-002',
-    patientName: 'Mary Johnson',
-    patientId: 'P-2024-002',
-    dateOfBirth: '1972-08-22',
-    provider: 'Dr. Michael Chen',
-    providerId: 'PR-002',
-    hospital: 'Cedars-Sinai Medical Center',
-    procedure: 'Cardiac Catheterization',
-    diagnosis: 'Coronary Artery Disease',
-    status: 'In Review',
-    priority: 'High',
-    submittedDate: '2025-10-09T09:18:00Z',
-    lastUpdated: '2025-10-09T13:24:00Z',
-    insurance: 'Aetna',
-    policyNumber: 'AET987654321',
-    estimatedCost: 15000,
-    documents: [
-      { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
-      { id: 'doc2', name: 'EKG Results.pdf', type: 'PDF', size: '0.8 MB', status: 'Analyzed' },
-      { id: 'doc3', name: 'Stress Test Results.pdf', type: 'PDF', size: '1.2 MB', status: 'Processed' },
-      { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
-    ],
-    clinicalNotes: [
-      { timestamp: '2025-10-09T09:18:00Z', note: 'Patient presents with chest pain and shortness of breath', author: 'Dr. Michael Chen' },
-      { timestamp: '2025-10-09T10:30:00Z', note: 'EKG shows ST elevation, cardiac catheterization recommended', author: 'Dr. Michael Chen' },
-      { timestamp: '2025-10-09T11:45:00Z', note: 'Prior authorization submitted for cardiac catheterization', author: 'Nurse Jennifer Lee' }
-    ],
-    aiAnalysis: {
-      clinicalNecessity: 0.98,
-      coverageEligibility: 0.92,
-      riskAssessment: 'High',
-      recommendedAction: 'Approve immediately',
-      confidence: 0.95
-    }
-  },
-  'PA-2024-003': {
-    id: 'PA-2024-003',
-    patientName: 'Robert Davis',
-    patientId: 'P-2024-003',
-    dateOfBirth: '1965-12-03',
-    provider: 'Dr. Emily Rodriguez',
-    providerId: 'PR-003',
-    hospital: 'Kaiser Permanente',
-    procedure: 'Knee Arthroscopy',
-    diagnosis: 'Meniscal Tear',
-    status: 'In Review',
-    priority: 'Standard',
-    submittedDate: '2025-10-10T14:22:00Z',
-    lastUpdated: '2025-10-10T16:48:00Z',
-    insurance: 'Kaiser Permanente',
-    policyNumber: 'KP456789123',
-    estimatedCost: 8000,
-    documents: [
-      { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.0 MB', status: 'Processed' },
-      { id: 'doc2', name: 'MRI Knee Results.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
-      { id: 'doc3', name: 'Robert Davis Medical Records.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
-      { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
-    ],
-    clinicalNotes: [
-      { timestamp: '2025-10-10T14:22:00Z', note: 'Patient reports persistent knee pain and limited mobility', author: 'Dr. Emily Rodriguez' },
-      { timestamp: '2025-10-10T15:30:00Z', note: 'MRI confirms meniscal tear, arthroscopy recommended', author: 'Dr. Emily Rodriguez' },
-      { timestamp: '2025-10-10T16:00:00Z', note: 'Prior authorization submitted for knee arthroscopy', author: 'Nurse David Kim' }
-    ],
-    aiAnalysis: {
-      clinicalNecessity: 0.89,
-      coverageEligibility: 0.85,
-      riskAssessment: 'Standard',
-      recommendedAction: 'Approve with coverage limit',
-      confidence: 0.87
-    }
-  },
-  'PA-2024-004': {
-    id: 'PA-2024-004',
-    patientName: 'Lisa Wilson',
-    patientId: 'P-2024-004',
-    dateOfBirth: '1985-03-15',
-    provider: 'Andrew Thomson',
-    providerId: 'PR-004',
-    hospital: 'UCLA Medical Center',
-    procedure: 'MRI Brain with Contrast',
-    diagnosis: 'Suspected Brain Tumor',
-    status: 'In Review',
-    priority: 'High',
-    submittedDate: '2025-10-08T11:02:00Z',
-    lastUpdated: '2025-10-08T14:47:00Z',
-    insurance: 'Blue Cross Blue Shield',
-    policyNumber: 'BC123456789',
-    estimatedCost: 2500,
-    documents: [
-      { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
-      { id: 'doc2', name: 'MRI Scan - Brain.jpg', type: 'Image', size: '4.1 MB', status: 'Analyzed' },
-      { id: 'doc3', name: 'Patient Medical Records.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
-      { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
-    ],
-    clinicalNotes: [
-      { timestamp: '2025-10-08T11:02:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Sarah Johnson' },
-      { timestamp: '2025-10-08T11:45:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Sarah Johnson' },
-      { timestamp: '2025-10-08T12:10:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
-    ],
-    aiAnalysis: {
-      clinicalNecessity: 0.94,
-      coverageEligibility: 0.87,
-      riskAssessment: 'Standard',
-      recommendedAction: 'Approve with monitoring',
-      confidence: 0.91
-    }
-  },
-  'PA-2024-006': {
-    id: 'PA-2024-006',
-    patientName: 'Rebecca Hardin',
-    patientId: 'P-2024-006',
-    dateOfBirth: '1976-08-25',
-    provider: 'Amy Diane Kelly, NP',
-    providerId: 'PR-006',
-    hospital: 'Prisma Health Pulmonology - Sumter',
-    procedure: 'CPAP Device Replacement',
-    diagnosis: 'Obstructive Sleep Apnea (G47.33)',
-    status: 'In Review',
-    priority: 'Standard',
-    submittedDate: '2025-10-09T12:14:00Z',
-    lastUpdated: '2025-10-09T15:46:00Z',
-    insurance: 'Ambetter / Absolute Total Care',
-    policyNumber: 'U7131533302',
-    estimatedCost: 2500,
-    documents: [
-      { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
-      { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
-      { id: 'doc3', name: 'Polysomnography Report.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
-      { id: 'doc4', name: 'Doctor Notes.pdf', type: 'PDF', size: '1.2 MB', status: 'Processed' },
-      { id: 'doc5', name: 'Insurance Card.pdf', type: 'PDF', size: '0.9 MB', status: 'Processed' }
-    ],
-    clinicalNotes: [
-      { timestamp: '2025-10-09T12:14:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
-      { timestamp: '2025-10-09T15:46:00Z', note: "CPAP Device Replacement needed as member is requesting for a personal device. She is currently using father-in-law's device", author: 'Amy Diane Kelly, NP' },
-      { timestamp: '2025-10-09T13:10:00Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
-    ],
-    aiAnalysis: {
-      clinicalNecessity: 0.96,
-      coverageEligibility: 0.94,
-      riskAssessment: 'Low',
-      recommendedAction: 'Approve - clear medical necessity',
-      confidence: 0.95
-    }
+    const caseDataMap: { [key: string]: any } = {
+      'PA-2024-001': {
+        id: 'PA-2024-001',
+        patientName: 'John Smith',
+        patientId: 'P-2024-001',
+        dateOfBirth: '1985-03-15',
+        provider: 'Sarah Johnson',
+        providerId: 'PR-001',
+        hospital: 'UCLA Medical Center',
+        procedure: 'MRI Brain with Contrast',
+        diagnosis: 'Suspected Brain Tumor',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2025-10-08T10:32:00Z',
+        lastUpdated: '2025-10-08T14:45:00Z',
+        insurance: 'Blue Cross Blue Shield',
+        policyNumber: 'BC123456789',
+        estimatedCost: 2500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
+          { id: 'doc2', name: 'MRI Scan - Brain.jpg', type: 'Image', size: '4.1 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Patient Medical Records.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2025-10-08T10:32:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Sarah Johnson' },
+          { timestamp: '2025-10-08T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Sarah Johnson' },
+          { timestamp: '2025-10-08T12:00:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.94,
+          coverageEligibility: 0.87,
+          riskAssessment: 'Standard',
+          recommendedAction: 'Approve with monitoring',
+          confidence: 0.91
+        }
+      },
+      'PA-2024-002': {
+        id: 'PA-2024-002',
+        patientName: 'Mary Johnson',
+        patientId: 'P-2024-002',
+        dateOfBirth: '1972-08-22',
+        provider: 'Dr. Michael Chen',
+        providerId: 'PR-002',
+        hospital: 'Cedars-Sinai Medical Center',
+        procedure: 'Cardiac Catheterization',
+        diagnosis: 'Coronary Artery Disease',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2025-10-09T09:18:00Z',
+        lastUpdated: '2025-10-09T13:24:00Z',
+        insurance: 'Aetna',
+        policyNumber: 'AET987654321',
+        estimatedCost: 15000,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc2', name: 'EKG Results.pdf', type: 'PDF', size: '0.8 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Stress Test Results.pdf', type: 'PDF', size: '1.2 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2025-10-09T09:18:00Z', note: 'Patient presents with chest pain and shortness of breath', author: 'Dr. Michael Chen' },
+          { timestamp: '2025-10-09T10:30:00Z', note: 'EKG shows ST elevation, cardiac catheterization recommended', author: 'Dr. Michael Chen' },
+          { timestamp: '2025-10-09T11:45:00Z', note: 'Prior authorization submitted for cardiac catheterization', author: 'Nurse Jennifer Lee' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.98,
+          coverageEligibility: 0.92,
+          riskAssessment: 'High',
+          recommendedAction: 'Approve immediately',
+          confidence: 0.95
+        }
+      },
+      'PA-2024-003': {
+        id: 'PA-2024-003',
+        patientName: 'Robert Davis',
+        patientId: 'P-2024-003',
+        dateOfBirth: '1965-12-03',
+        provider: 'Dr. Emily Rodriguez',
+        providerId: 'PR-003',
+        hospital: 'Kaiser Permanente',
+        procedure: 'Knee Arthroscopy',
+        diagnosis: 'Meniscal Tear',
+        status: 'In Review',
+        priority: 'Standard',
+        submittedDate: '2025-10-10T14:22:00Z',
+        lastUpdated: '2025-10-10T16:48:00Z',
+        insurance: 'Kaiser Permanente',
+        policyNumber: 'KP456789123',
+        estimatedCost: 8000,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.0 MB', status: 'Processed' },
+          { id: 'doc2', name: 'MRI Knee Results.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Robert Davis Medical Records.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2025-10-10T14:22:00Z', note: 'Patient reports persistent knee pain and limited mobility', author: 'Dr. Emily Rodriguez' },
+          { timestamp: '2025-10-10T15:30:00Z', note: 'MRI confirms meniscal tear, arthroscopy recommended', author: 'Dr. Emily Rodriguez' },
+          { timestamp: '2025-10-10T16:00:00Z', note: 'Prior authorization submitted for knee arthroscopy', author: 'Nurse David Kim' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.89,
+          coverageEligibility: 0.85,
+          riskAssessment: 'Standard',
+          recommendedAction: 'Approve with coverage limit',
+          confidence: 0.87
+        }
+      },
+      'PA-2024-004': {
+        id: 'PA-2024-004',
+        patientName: 'Lisa Wilson',
+        patientId: 'P-2024-004',
+        dateOfBirth: '1985-03-15',
+        provider: 'Andrew Thomson',
+        providerId: 'PR-004',
+        hospital: 'UCLA Medical Center',
+        procedure: 'MRI Brain with Contrast',
+        diagnosis: 'Suspected Brain Tumor',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2025-10-08T11:02:00Z',
+        lastUpdated: '2025-10-08T14:47:00Z',
+        insurance: 'Blue Cross Blue Shield',
+        policyNumber: 'BC123456789',
+        estimatedCost: 2500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
+          { id: 'doc2', name: 'MRI Scan - Brain.jpg', type: 'Image', size: '4.1 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Patient Medical Records.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2025-10-08T11:02:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Sarah Johnson' },
+          { timestamp: '2025-10-08T11:45:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Sarah Johnson' },
+          { timestamp: '2025-10-08T12:10:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.94,
+          coverageEligibility: 0.87,
+          riskAssessment: 'Standard',
+          recommendedAction: 'Approve with monitoring',
+          confidence: 0.91
+        }
+      },
+      'PA-2024-006': {
+        id: 'PA-2024-006',
+        patientName: 'Rebecca Hardin',
+        patientId: 'P-2024-006',
+        dateOfBirth: '1976-08-25',
+        provider: 'Amy Diane Kelly, NP',
+        providerId: 'PR-006',
+        hospital: 'Prisma Health Pulmonology - Sumter',
+        procedure: 'CPAP Device Replacement',
+        diagnosis: 'Obstructive Sleep Apnea (G47.33)',
+        status: 'In Review',
+        priority: 'Standard',
+        submittedDate: '2025-10-09T12:14:00Z',
+        lastUpdated: '2025-10-09T15:46:00Z',
+        insurance: 'Ambetter / Absolute Total Care',
+        policyNumber: 'U7131533302',
+        estimatedCost: 2500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Polysomnography Report.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Doctor Notes.pdf', type: 'PDF', size: '1.2 MB', status: 'Processed' },
+          { id: 'doc5', name: 'Insurance Card.pdf', type: 'PDF', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2025-10-09T12:14:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2025-10-09T15:46:00Z', note: "CPAP Device Replacement needed as member is requesting for a personal device. She is currently using father-in-law's device", author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2025-10-09T13:10:00Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.96,
+          coverageEligibility: 0.94,
+          riskAssessment: 'Low',
+          recommendedAction: 'Approve - clear medical necessity',
+          confidence: 0.95
+        }
 
 
       },
@@ -346,9 +346,41 @@ const caseDataMap: { [key: string]: any } = {
 
   const caseData = getCaseData(caseId);
 
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
-  };
+  setTabValue(newValue);
+
+  // Check if "Auth Decision Summary" tab is clicked
+  if (newValue === 2) { // Assuming "Auth Decision Summary" is the third tab (index 2)
+    
+    // Immediately invoke the async function
+    (async () => {
+      try {
+        const folderName =
+          caseId === 'PA-2024-001' ? 'case-001-john-doe' :
+          caseId === 'PA-2024-002' ? 'case-002-jane-smith' :
+          caseId === 'PA-2024-003' ? 'case-003-mike-johnson' :
+          caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' :
+          caseId === 'PA-2024-005' ? 'case-005-david-brown' :
+          caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' :
+          'case-001-john-doe';
+
+        const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
+        
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        setObservabilityData(data);
+      } catch (error) {
+        console.error('Failed to fetch observability data:', error);
+        // Handle the error appropriately
+      }
+    })();
+  }
+};
+
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -408,7 +440,7 @@ const caseDataMap: { [key: string]: any } = {
                   <ComputerIcon />
                 </IconButton>
               </Tooltip> */}
-              
+
               <Tooltip title="View Observability & Explanation">
                 <IconButton
                   color="info"
@@ -521,23 +553,24 @@ const caseDataMap: { [key: string]: any } = {
 
       {/* Tabs */}
       <Card>
-        <Box sx={{  borderBottom: 1, borderColor: 'divider', display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', alignItems: 'center' }}>
           <Tabs value={tabValue} onChange={handleTabChange} aria-label="case details tabs">
             {/* <Tab label="Orchestration" icon={<AIIcon />} /> */}
             <Tab label="Documents" icon={<DocumentIcon />} />
             <Tab label="Clinical Summary" icon={<DocumentIcon />} />
             <Tab label="Auth Decision Summary" icon={<DocumentIcon />} />
+
             <Tab label="Reviewer Notes" icon={<TimelineIcon />} />
           </Tabs>
           <Box sx={{ marginLeft: 'auto' }}>
-          <Tooltip title="EMR Integration">
-                <IconButton
-                  onClick={() => setEmrIntegrationOpen(true)}
-                >
-                  <ComputerIcon />
-                </IconButton>
-              </Tooltip>
-              </Box>
+            <Tooltip title="EMR Integration">
+              <IconButton
+                onClick={() => setEmrIntegrationOpen(true)}
+              >
+                <ComputerIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
         </Box>
 
         {/* <TabPanel value={tabValue} index={0}>
@@ -553,7 +586,172 @@ const caseDataMap: { [key: string]: any } = {
         </TabPanel>
 
         <TabPanel value={tabValue} index={2}>
-              <ClinicalCriteriaEval caseId={caseId} />
+
+          {/* Observability & Explanation Dialog */}
+          <Box>
+
+            {observabilityData && (
+              <Box>
+                {/* Summary Section */}
+                <Paper sx={{ p: 2, mb: 3, bgcolor: '#f5f5f5' }}>
+                  <Grid container spacing={2}>
+                    <Grid size={{ xs: 6, md: 3 }}>
+                      <Typography variant="caption" color="text.secondary">Patient</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.patientName}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 3 }}>
+                      <Typography variant="caption" color="text.secondary">Procedure</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.procedure}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 3 }}>
+                      <FormControl fullWidth >
+                        <InputLabel id="demo-simple-select-label">Smart Auth recommendation </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          value={selectedOption}
+                          onChange={(e) => setSelectedOption(e.target.value)}
+                          label="Smart Auth recommendation"
+                        >
+                          <MenuItem value="Approved">Approved</MenuItem>
+                          <MenuItem value="Denied">Denied</MenuItem>
+                          <MenuItem value="Pend">Pend</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 3 }}>
+                      <Typography variant="caption" color="text.secondary">Processing Time</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.processingTimeline.totalDuration}</Typography>
+                    </Grid>
+                  </Grid>
+                </Paper>
+
+                {/* Workflow Steps Table */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Workflow Steps</Typography>
+                <TableContainer component={Paper} variant="outlined" sx={{ mb: 3 }}>
+                  <Table size="small">
+                    <TableHead>
+                      <TableRow sx={{ bgcolor: '#f5f5f5' }}>
+                        <TableCell sx={{ fontWeight: 'bold', width: '5%' }}>Step</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '15%' }}>Action</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '10%' }}>Status</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '25%' }}>Details</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '25%' }}>Outcome</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '20%' }}>Comments</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {observabilityData.workflowSteps.map((step: any) => (
+                        <TableRow key={step.step}>
+                          <TableCell>{step.step}</TableCell>
+                          <TableCell sx={{ fontWeight: 'bold' }}>{step.action}</TableCell>
+                          <TableCell>
+                            <Chip
+                              label={step.status}
+                              color={step.status === 'Completed' ? 'success' : 'default'}
+                              size="small"
+                            />
+                          </TableCell>
+                          <TableCell sx={{ fontSize: '0.875rem' }}>{step.details}</TableCell>
+                          <TableCell sx={{ fontSize: '0.875rem' }}>{step.outcome}</TableCell>
+                          <TableCell sx={{ fontSize: '0.875rem', color: 'text.secondary' }}>{step.comments}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+
+                {/* Key Findings */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Key Findings</Typography>
+                <Grid container spacing={2} sx={{ mb: 3 }}>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Clinical Justification</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.clinicalJustification}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Medical Necessity</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.medicalNecessity}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Policy Compliance</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.policyCompliance}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Cost Efficiency</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.costEfficiency}</Typography>
+                    </Paper>
+                  </Grid>
+                </Grid>
+
+                {/* Approval Details */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
+                <Paper sx={{ p: 2, mb: 3 }}>
+                  <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary">Valid Until</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      <Typography variant="caption" color="text.secondary">Approved By</Typography>
+                      <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      <Typography variant="caption" color="text.secondary">Review Type</Typography>
+                      <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
+                    </Grid>
+                  </Grid>
+                </Paper>
+
+                {/* Quality Metrics */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
+                <Paper sx={{ p: 2 }}>
+                  <Grid container spacing={2}>
+                    {Object.entries(observabilityData.qualityMetrics).map(([key, value]) => (
+                      <Grid size={{ xs: 6, md: 4 }} key={key}>
+                        <Typography variant="caption" color="text.secondary">
+                          {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{String(value)}</Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Paper>
+              </Box>
+            )}
+
+            {/* <Button
+            startIcon={<DownloadIcon />}
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.download = `observability_and_explanation_${caseId}.json`;
+              link.click();
+            }}
+          >
+            Download 
+          </Button>
+           <Button  variant="contained">
+            Save
+          </Button>
+          <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">
+            Close
+          </Button> */}
+          </Box>
+          <ClinicalCriteriaEval caseId={caseId} />
         </TabPanel>
 
         <TabPanel value={tabValue} index={3}>
@@ -875,9 +1073,9 @@ const caseDataMap: { [key: string]: any } = {
               link.click();
             }}
           >
-            Download 
+            Download
           </Button>
-           <Button  variant="contained">
+          <Button variant="contained">
             Save
           </Button>
           <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">

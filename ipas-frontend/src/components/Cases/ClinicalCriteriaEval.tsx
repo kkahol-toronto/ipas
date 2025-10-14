@@ -81,20 +81,21 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "isExtracted": false
     },
-      {
-      "id": "2",
-      "name": "Observability and explainability report",
-      "type": "other",
-      "category": "Observability-and-explainability-report",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
-      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
-      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
-      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
-      "isExtracted": false
-    },
+    // Commented by saras
+    //   {
+    //   "id": "2",
+    //   "name": "Observability and explainability report",
+    //   "type": "other",
+    //   "category": "Observability-and-explainability-report",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+    //   "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+    //   "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+    //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+    //   "isExtracted": false
+    // },
       {
       "id": "3",
       "name": "AI Specialist panel recommendation",
