@@ -523,7 +523,7 @@ const caseDataMap: { [key: string]: any } = {
       <Card>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={tabValue} onChange={handleTabChange} aria-label="case details tabs">
-            <Tab label="Orchestration" icon={<AIIcon />} />
+            {/* <Tab label="Orchestration" icon={<AIIcon />} /> */}
             <Tab label="Documents" icon={<DocumentIcon />} />
             <Tab label="Clinical Summary" icon={<DocumentIcon />} />
             <Tab label="Auth Decision Summary" icon={<DocumentIcon />} />
@@ -531,11 +531,11 @@ const caseDataMap: { [key: string]: any } = {
           </Tabs>
         </Box>
 
-        <TabPanel value={tabValue} index={0}>
+        {/* <TabPanel value={tabValue} index={0}>
           <SimpleDraggableFlowchart caseId={caseId} />
-        </TabPanel>
+        </TabPanel> */}
 
-        <TabPanel value={tabValue} index={1}>
+        <TabPanel value={tabValue} index={0}>
           <CaseDocuments caseId={caseId} />
         </TabPanel>
 
