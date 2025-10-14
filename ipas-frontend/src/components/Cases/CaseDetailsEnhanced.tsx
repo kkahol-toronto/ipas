@@ -401,13 +401,13 @@ const caseDataMap: { [key: string]: any } = {
               </Box>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
-              <Tooltip title="EMR Integration">
+              {/* <Tooltip title="EMR Integration">
                 <IconButton
                   onClick={() => setEmrIntegrationOpen(true)}
                 >
                   <ComputerIcon />
                 </IconButton>
-              </Tooltip>
+              </Tooltip> */}
               
               <Tooltip title="View Observability & Explanation">
                 <IconButton
@@ -521,7 +521,7 @@ const caseDataMap: { [key: string]: any } = {
 
       {/* Tabs */}
       <Card>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{  borderBottom: 1, borderColor: 'divider', display: 'flex', alignItems: 'center' }}>
           <Tabs value={tabValue} onChange={handleTabChange} aria-label="case details tabs">
             {/* <Tab label="Orchestration" icon={<AIIcon />} /> */}
             <Tab label="Documents" icon={<DocumentIcon />} />
@@ -529,6 +529,15 @@ const caseDataMap: { [key: string]: any } = {
             <Tab label="Auth Decision Summary" icon={<DocumentIcon />} />
             <Tab label="Reviewer Notes" icon={<TimelineIcon />} />
           </Tabs>
+          <Box sx={{ marginLeft: 'auto' }}>
+          <Tooltip title="EMR Integration">
+                <IconButton
+                  onClick={() => setEmrIntegrationOpen(true)}
+                >
+                  <ComputerIcon />
+                </IconButton>
+              </Tooltip>
+              </Box>
         </Box>
 
         {/* <TabPanel value={tabValue} index={0}>
@@ -539,15 +548,15 @@ const caseDataMap: { [key: string]: any } = {
           <CaseDocuments caseId={caseId} />
         </TabPanel>
 
-        <TabPanel value={tabValue} index={2}>
+        <TabPanel value={tabValue} index={1}>
           <ClinicalSummary caseId={caseId} />
         </TabPanel>
 
-        <TabPanel value={tabValue} index={3}>
+        <TabPanel value={tabValue} index={2}>
               <ClinicalCriteriaEval caseId={caseId} />
         </TabPanel>
 
-        <TabPanel value={tabValue} index={4}>
+        <TabPanel value={tabValue} index={3}>
           <Typography variant="h6" gutterBottom>
             Clinical Timeline
           </Typography>
