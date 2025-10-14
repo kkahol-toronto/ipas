@@ -122,6 +122,23 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "recordretrivedUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
         "isExtracted": false
       }
+    ],
+    "PA-2024-007": [
+      {
+        "id": "1",
+        "name": "Medical Record Retrieval",
+        "type": "pdf",
+        "category": "Medical-Record-Retrival",
+        "size": "1.6 MB",
+        "uploadDate": "2024-12-15",
+        "status": "ready",
+        "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+        "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
+        "recordretrivedUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
+        "isExtracted": false
+      }
     ]
   };
 

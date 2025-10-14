@@ -46,7 +46,7 @@ interface Case {
   procedure: string;
   status: 'pending' | 'approved' | 'partially-approved' | 'denied' | 'under_review';
   submittedDate: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'low' | 'standard' | 'Urgent';
   amount: number;
 }
 
@@ -94,68 +94,78 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   };
 
   // Dummy data for recent cases
-  const cases: Case[] = [
-    {
-      id: 'PA-2024-001',
-      patientName: 'John Smith',
-      provider: 'Sarah Johnson',
-      procedure: 'MRI Brain with Contrast',
-      status: 'approved',
-      submittedDate: '2024-01-15',
-      priority: 'high',
-      amount: 2500
-    },
-    {
-      id: 'PA-2024-002',
-      patientName: 'Mary Johnson',
-      provider: 'Dr. Michael Chen',
-      procedure: 'Cardiac Catheterization',
-      status: 'pending',
-      submittedDate: '2024-01-14',
-      priority: 'high',
-      amount: 15000
-    },
-    {
-      id: 'PA-2024-003',
-      patientName: 'Robert Davis',
-      provider: 'Dr. Emily Rodriguez',
-      procedure: 'Knee Arthroscopy',
-      status: 'partially-approved',
-      submittedDate: '2024-01-13',
-      priority: 'medium',
-      amount: 8000
-    },
-    {
-      id: 'PA-2024-004',
-      patientName: 'Lisa Wilson',
-      provider: 'Dr. James Thompson',
-      procedure: 'Colonoscopy',
-      status: 'denied',
-      submittedDate: '2024-01-12',
-      priority: 'low',
-      amount: 1200
-    },
-    {
-      id: 'PA-2024-005',
-      patientName: 'David Brown',
-      provider: 'Sarah Johnson',
-      procedure: 'CT Chest with Contrast',
-      status: 'approved',
-      submittedDate: '2024-01-11',
-      priority: 'medium',
-      amount: 1800
-    },
-    {
-      id: 'PA-2024-006',
-      patientName: 'Rebecca Hardin',
-      provider: 'Amy Diane Kelly, NP',
-      procedure: 'CPAP Device Replacement',
-      status: 'pending',
-      submittedDate: '2024-04-25',
-      priority: 'medium',
-      amount: 2500
-    }
-  ];
+const cases: Case[] = [
+  {
+    id: 'PA-2024-001',
+    patientName: 'John Smith',
+    provider: 'Sarah Johnson',
+    procedure: 'MRI Brain with Contrast',
+    status: 'approved',
+    submittedDate: '2025-10-11',
+    priority: 'Urgent',
+    amount: 2500
+  },
+  {
+    id: 'PA-2024-002',
+    patientName: 'Mary Johnson',
+    provider: 'Dr. Michael Chen',
+    procedure: 'Cardiac Catheterization',
+    status: 'pending',
+    submittedDate: '2025-10-11',
+    priority: 'Urgent',
+    amount: 15000
+  },
+  {
+    id: 'PA-2024-003',
+    patientName: 'Robert Davis',
+    provider: 'Dr. Emily Rodriguez',
+    procedure: 'Knee Arthroscopy',
+    status: 'partially-approved',
+    submittedDate: '2025-10-08',
+    priority: 'standard',
+    amount: 8000
+  },
+  {
+    id: 'PA-2024-004',
+    patientName: 'Lisa Wilson',
+    provider: 'Dr. James Thompson',
+    procedure: 'Colonoscopy',
+    status: 'denied',
+    submittedDate: '2025-10-08',
+    priority: 'low',
+    amount: 1200
+  },
+  {
+    id: 'PA-2024-005',
+    patientName: 'David Brown',
+    provider: 'Sarah Johnson',
+    procedure: 'CT Chest with Contrast',
+    status: 'approved',
+    submittedDate: '2025-10-11',
+    priority: 'standard',
+    amount: 1800
+  },
+  {
+    id: 'PA-2024-006',
+    patientName: 'Rebecca Hardin',
+    provider: 'Amy Diane Kelly, NP',
+    procedure: 'CPAP Device Replacement',
+    status: 'pending',
+    submittedDate: '2025-10-08',
+    priority: 'standard',
+    amount: 2500
+  },
+  {
+    id: 'PA-2024-007',
+    patientName: 'Amanda Villiams',
+    provider: 'Amy Diane Kelly, NP',
+    procedure: 'CPAP Device Replacement',
+    status: 'denied',
+    submittedDate: '2025-10-11',
+    priority: 'standard',
+    amount: 2500
+  }
+];
 
   const getStatusChip = (status: Case['status']) => {
     const statusConfig = {
@@ -181,8 +191,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   const getPriorityColor = (priority: Case['priority']) => {
     const colors = {
       low: '#4caf50',
-      medium: '#ff9800',
-      high: '#f44336'
+      standard: '#ff9800',
+      Urgent: '#f44336'
     };
     return colors[priority];
   };

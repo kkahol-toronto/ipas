@@ -210,8 +210,24 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
       "jsonUrl": "/sample-documents/cases/case-006-rebecca-hardin/Summary.pdf",
       "isExtracted": false
     }
+  ],
+  
+  "PA-2024-007": [
+    {
+      "id": "1",
+      "name": "Clinical Summary",
+      "type": "pdf",
+      "category": "prior-auth",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/cases/case-007/Summary.pdf",
+      "originalUrl": "/sample-documents/cases/case-007/Summary.pdf",
+      "extractedUrl": "/sample-documents/cases/case-007/Summary.pdf",
+      "jsonUrl": "/sample-documents/cases/case-007/Summary.pdf",
+      "isExtracted": false
+    }
   ]
-
 
     };
 

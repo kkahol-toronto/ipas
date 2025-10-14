@@ -1503,7 +1503,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     // Step 5: Complete
     setTimeout(() => {
-      if (caseId === 'PA-2024-004') {
+      if (caseId === 'PA-2024-007') {
         setShowMessage('❌ Authorization Denied - Letter available for download');
       } else if (caseId === 'PA-2024-006') {
         setShowMessage('✅ Authorization Approved - CPAP Replacement Authorized');

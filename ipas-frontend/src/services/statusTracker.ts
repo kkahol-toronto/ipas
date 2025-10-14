@@ -100,6 +100,19 @@ class StatusTracker {
         }],
         lastUpdated: new Date().toISOString(),
         isCompleted: false
+      },
+      'PA-2024-007': {
+        caseId: 'PA-2024-007',
+        currentStatus: 'pending',
+        statusHistory: [{
+          caseId: 'PA-2024-007',
+          status: 'pending',
+          timestamp: new Date().toISOString(),
+          updatedBy: 'system',
+          reason: 'Initial status'
+        }],
+        lastUpdated: new Date().toISOString(),
+        isCompleted: false
       }
     };
 

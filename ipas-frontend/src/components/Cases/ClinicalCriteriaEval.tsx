@@ -31,7 +31,7 @@ interface ClinicalCriteriaEvaluation {
   id: string;
   name: string;
   type: 'pdf' | 'image' | 'doc' | 'other';
-  category: 'Clinical-Criteria-Evaluation' ;
+  category:  'Observability-and-explainability-report' | 'Clinical-Criteria-Evaluation' | 'AI-Specialist-panel-recommendation';
   size: string;
   uploadDate: string;
   status: 'uploaded' | 'processing' | 'ready' | 'error';
@@ -40,6 +40,8 @@ interface ClinicalCriteriaEvaluation {
   extractedUrl?: string;
   jsonUrl?: string;
   isExtracted?: boolean;
+  jsonText?: string;  // <-- add this
+
 }
 
 interface ClinicalCriteriaEvaluationsProps {
@@ -78,6 +80,34 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "isExtracted": false
+    },
+      {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+      {
+      "id": "3",
+      "name": "AI Specialist panel recommendation",
+      "type": "pdf",
+      "category": "AI-Specialist-panel-recommendation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "isExtracted": false
     }
   ],
   "002": [
@@ -93,6 +123,34 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+        {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+      {
+      "id": "3",
+      "name": "AI Specialist panel recommendation",
+      "type": "pdf",
+      "category": "AI-Specialist-panel-recommendation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
       "isExtracted": false
     }
   ],
@@ -110,6 +168,34 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "isExtracted": false
+    },
+        {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+      {
+      "id": "3",
+      "name": "AI Specialist panel recommendation",
+      "type": "pdf",
+      "category": "AI-Specialist-panel-recommendation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "isExtracted": false
     }
   ],
   "004": [
@@ -126,7 +212,21 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "isExtracted": false
-    }
+    },
+        {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+        },
   ],
   "005": [
     {
@@ -141,6 +241,34 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+        {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+      {
+      "id": "3",
+      "name": "AI Specialist panel recommendation",
+      "type": "pdf",
+      "category": "AI-Specialist-panel-recommendation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
       "isExtracted": false
     }
   ],
@@ -158,6 +286,34 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "isExtracted": false
+    },
+          {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+      {
+      "id": "3",
+      "name": "AI Specialist panel recommendation",
+      "type": "pdf",
+      "category": "AI-Specialist-panel-recommendation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "isExtracted": false
     }
   ],
   "PA-2024-003": [
@@ -173,6 +329,34 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
       "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+        {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+      {
+      "id": "3",
+      "name": "AI Specialist panel recommendation",
+      "type": "pdf",
+      "category": "AI-Specialist-panel-recommendation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
       "isExtracted": false
     }
   ],
@@ -190,6 +374,76 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
       jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
       isExtracted: false
+    },
+        {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+      {
+      "id": "3",
+      "name": "AI Specialist panel recommendation",
+      "type": "pdf",
+      "category": "AI-Specialist-panel-recommendation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "isExtracted": false
+    }
+  ],
+  "PA-2024-007": [
+    {
+      "id": "1",
+      "name": "Clinical Criteria Evaluation",
+      "type": "pdf",
+      "category": "Clinical-Criteria-Evaluation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      url: "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      originalUrl: "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      isExtracted: false
+    },
+    {
+      "id": "2",
+      "name": "Observability and explainability report",
+      "type": "other",
+      "category": "Observability-and-explainability-report",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+      "isExtracted": false
+    },
+      {
+      "id": "3",
+      "name": "AI Specialist panel recommendation",
+      "type": "pdf",
+      "category": "AI-Specialist-panel-recommendation",
+      "size": "1.6 MB",
+      "uploadDate": "2024-12-15",
+      "status": "ready",
+      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+      "isExtracted": false
     }
   ]
 
@@ -329,43 +583,6 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     }, 3000);
   };
 
-  const handleExtractAll = async () => {
-    setIsExtractingAll(true);
-    
-    // Get all documents that haven't been extracted yet
-    const documentsToExtract = documents.filter(doc => !extractedDocuments.has(doc.id));
-    
-    // Start extraction for all documents in parallel with staggered completion
-    const extractionPromises = documentsToExtract.map((doc, index) => {
-      return new Promise<void>((resolve) => {
-        // Stagger the extractions slightly for better visual effect
-        const baseDelay = index * 200; // 200ms between each start
-        const randomDelay = Math.random() * 1500 + 500; // 500-2000ms processing time
-        const totalDelay = baseDelay + randomDelay;
-        
-        setTimeout(() => {
-          setExtractedDocuments(prev => new Set(prev).add(doc.id));
-          setExtractionTimestamps(prev => ({ 
-            ...prev, 
-            [doc.id]: new Date().toISOString() 
-          }));
-          resolve();
-        }, totalDelay);
-      });
-    });
-
-    // Wait for all extractions to complete
-    await Promise.all(extractionPromises);
-    
-    setIsExtractingAll(false);
-    
-    // Show completion message
-    setShowCompletionMessage(true);
-    setTimeout(() => {
-      setShowCompletionMessage(false);
-    }, 3000);
-  };
-
   const getDocumentIcon = (type: string) => {
     switch (type) {
       case 'pdf':
@@ -390,6 +607,8 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       case 'insurance':
         return <CloudDownloadIcon color="warning" />;
       case 'clinical-notes':
+      case 'AI-Specialist-panel-recommendation':
+      case 'Observability-and-explainability-report':
         return <DocumentIcon color="secondary" />;
       default:
         return <AttachFileIcon color="action" />;
@@ -413,31 +632,16 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     switch (category) {
       case 'Clinical-Criteria-Evaluation':
         return 'Clinical Criteria Evaluation';
-      case 'medical-records':
-        return 'Medical Records';
-      case 'imaging':
-        return 'Imaging';
+      case 'Observability-and-explainability-report':
+        return 'Observability and explainability report';
+      case 'AI-Specialist-panel-recommendation':
+        return 'AI Specialist panel recommendation';
       case 'insurance':
         return 'Insurance';
       case 'clinical-notes':
         return 'Clinical Notes';
       default:
         return 'Other';
-    }
-  };
-
-  const formatTimestamp = (timestamp: string) => {
-    const date = new Date(timestamp);
-    const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    
-    if (diffInHours < 1) {
-      const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
-      return `${diffInMinutes} minute${diffInMinutes !== 1 ? 's' : ''} ago`;
-    } else if (diffInHours < 24) {
-      return `${diffInHours} hour${diffInHours !== 1 ? 's' : ''} ago`;
-    } else {
-      return date.toLocaleDateString() + ' at ' + date.toLocaleTimeString();
     }
   };
 
@@ -455,10 +659,6 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     window.open(ClinicalCriteriaEvaluation.url, '_blank');
   };
 
-  const handleCompareDocument = (doc: ClinicalCriteriaEvaluation) => {
-    setSelectedDocument(doc);
-    setComparisonViewerOpen(true);
-  };
 
   // Group documents by category
   const groupedDocuments = documents.reduce((acc, doc) => {
@@ -591,14 +791,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
                         >
                           <ViewIcon />
                         </IconButton>
-                        <IconButton
-                          size="small"
-                          color="info"
-                          onClick={() => handleCompareDocument(doc)}
-                          title="Compare Original with Extracted Text"
-                        >
-                          <CompareIcon />
-                        </IconButton>
+                        
                         <IconButton
                           size="small"
                           color="secondary"

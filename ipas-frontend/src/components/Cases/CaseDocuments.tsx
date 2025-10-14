@@ -688,7 +688,39 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.json',
           isExtracted: false
         }
+      ],
+      'PA-2024-007': [
+        {
+          id: '1',
+          name: 'Prior Authorization Request Form',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '2.1 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-007/prior-auth-form-original.pdf',
+          originalUrl: '/sample-documents/cases/case-007/prior-auth-form-original.pdf',
+          extractedUrl: '/sample-documents/cases/case-007/prior-auth-form-original.pdf',
+          jsonUrl: '/sample-documents/cases/case-007/AuthReq.json',
+          isExtracted: false
+        },
+        {
+          id: '2',
+          name: 'Medical Records',
+          type: 'pdf',
+          category: 'medical-records',
+          size: '3.2 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-007/MedicalRecords.json',
+          originalUrl: '/sample-documents/cases/case-007/MedicalRecords.json',
+          extractedUrl: '/sample-documents/cases/case-007/MedicalRecords.json',
+          jsonUrl: '/sample-documents/cases/case-007/MedicalRecords.json',
+          isExtracted: false
+        }
+  
       ]
+
     };
 
     return caseDocumentMap[caseId] || caseDocumentMap['PA-2024-001']; // Default to PA-2024-001 if not found

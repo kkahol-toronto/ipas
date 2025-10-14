@@ -1,0 +1,36 @@
+{
+  "Authorization Request Form": {
+    "FormType": "INPATIENT AUTHORIZATION FORM",
+    "Member ID": "U7183854101",
+    "Last Name": "WILLIAMS",
+    "First Name": ", AMANDA",
+    "Date Of Birth": "03-05-1987",
+    "Requesting Provider NPI": "1083063507",
+    "Requesting Provider Name": "BENJAMIN VELKY",
+    "Requesting Provider Phone Number": "8647254865",
+    "Servicing Provider NPI": "1023046612",
+    "Servicing Provider Contact Name": "UR DEPT",
+    "Servicing Provider Name": "SELF REGIONAL HE",
+    "Servicing Provider Phone Number": "8647255039",
+    "Servicing Provider Fax": "8647255044",
+    "Admission Date": "04-24-2025",
+    "INPATIENT SERVICE TYPE": "970",
+    "Diagnosis Code": "K5792",
+    "Servicing Provider TIN": "570331865",
+    "Authpriority": [
+      {
+        "Standard requests": false,
+        "Urgent requests": true
+      }
+    ],
+    "Requesting Provider TIN": null,
+    "Requesting Provider Contact Name": null,
+    "Requesting Provider Fax": null,
+    "Discharge Date": null,
+    "Additional Procedure Code1": null,
+    "Additional Procedure Code2": null,
+    "Additional Procedure Code3": null,
+    "Primary Procedure Code": null,
+    "Additional Diagnosis Code": null
+  }
+}
