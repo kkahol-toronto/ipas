@@ -707,7 +707,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     <Box>
 
       {Object.entries(groupedDocuments).map(([category, docs]) => (
-        <Card key={category} sx={{ mb: 3 }}>
+        <Card key={category} sx={{ mb: 3 }} variant="outlined">
           <CardContent>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               {getCategoryIcon(category)}
