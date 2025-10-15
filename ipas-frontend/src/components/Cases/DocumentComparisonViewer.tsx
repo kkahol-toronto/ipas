@@ -630,12 +630,12 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                               gap: 1
                             }}
                           >
-                            <Box sx={{ flexGrow: 1 }}>
-                              {editingField?.path.join('.') === `${resourceType}.${resource.id}.${key}` ? (
+                             <Box sx={{ flexGrow: 1 }}>
+                              {isEditingCell ? (
                                 <TextField
                                   fullWidth
                                   size="small"
-                                  value={editedValue}
+                                  value={value}
                                   onChange={(e) => setEditedValue(e.target.value)}
                                   variant="outlined"
                                   autoFocus
@@ -644,7 +644,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                                 formatValue(value)
                               )}
                             </Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', ml: 1 }}>
+                            {/*<Box sx={{ display: 'flex', alignItems: 'center', ml: 1 }}>
                               {editingField?.path.join('.') === `${resourceType}.${resource.id}.${key}` ? (
                                 <>
                                   <Tooltip title="Save">
@@ -684,7 +684,7 @@ const DocumentComparisonViewer: React.FC<DocumentComparisonViewerProps> = ({
                                   </IconButton>
                                 </Tooltip>
                               )}
-                            </Box>
+                            </Box> */}
                           </TableCell>
                         </TableRow>
                       ))}
