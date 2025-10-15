@@ -98,78 +98,78 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   };
 
   // Dummy data for recent cases
-const cases: Case[] = [
-  {
-    id: 'PA-2024-001',
-    patientName: 'John Smith',
-    provider: 'Sarah Johnson',
-    procedure: 'MRI Brain with Contrast',
-    status: 'approved',
-    submittedDate: '2025-10-11',
-    priority: 'Urgent',
-    amount: 2500
-  },
-  {
-    id: 'PA-2024-002',
-    patientName: 'Mary Johnson',
-    provider: 'Dr. Michael Chen',
-    procedure: 'Cardiac Catheterization',
-    status: 'pending',
-    submittedDate: '2025-10-11',
-    priority: 'Urgent',
-    amount: 15000
-  },
-  {
-    id: 'PA-2024-003',
-    patientName: 'Robert Davis',
-    provider: 'Dr. Emily Rodriguez',
-    procedure: 'Knee Arthroscopy',
-    status: 'partially-approved',
-    submittedDate: '2025-10-08',
-    priority: 'standard',
-    amount: 8000
-  },
-  {
-    id: 'PA-2024-004',
-    patientName: 'Lisa Wilson',
-    provider: 'Dr. James Thompson',
-    procedure: 'Colonoscopy',
-    status: 'denied',
-    submittedDate: '2025-10-08',
-    priority: 'standard',
-    amount: 1200
-  },
-  {
-    id: 'PA-2024-005',
-    patientName: 'David Brown',
-    provider: 'Sarah Johnson',
-    procedure: 'CT Chest with Contrast',
-    status: 'approved',
-    submittedDate: '2025-10-11',
-    priority: 'standard',
-    amount: 1800
-  },
-  {
-    id: 'PA-2024-006',
-    patientName: 'Rebecca Hardin',
-    provider: 'Amy Diane Kelly, NP',
-    procedure: 'CPAP Device Replacement',
-    status: 'pending',
-    submittedDate: '2025-10-08',
-    priority: 'standard',
-    amount: 2500
-  },
-  {
-    id: 'PA-2024-007',
-    patientName: 'Amanda Villiams',
-    provider: 'Amy Diane Kelly, NP',
-    procedure: 'CPAP Device Replacement',
-    status: 'denied',
-    submittedDate: '2025-10-11',
-    priority: 'Urgent',
-    amount: 2500
-  }
-];
+  const cases: Case[] = [
+    {
+      id: 'PA-2024-001',
+      patientName: 'John Smith',
+      provider: 'Sarah Johnson',
+      procedure: 'MRI Brain with Contrast',
+      status: 'approved',
+      submittedDate: '2025-10-11',
+      priority: 'Urgent',
+      amount: 2500
+    },
+    {
+      id: 'PA-2024-002',
+      patientName: 'Mary Johnson',
+      provider: 'Dr. Michael Chen',
+      procedure: 'Cardiac Catheterization',
+      status: 'pending',
+      submittedDate: '2025-10-11',
+      priority: 'Urgent',
+      amount: 15000
+    },
+    {
+      id: 'PA-2024-003',
+      patientName: 'Robert Davis',
+      provider: 'Dr. Emily Rodriguez',
+      procedure: 'Knee Arthroscopy',
+      status: 'partially-approved',
+      submittedDate: '2025-10-08',
+      priority: 'standard',
+      amount: 8000
+    },
+    {
+      id: 'PA-2024-004',
+      patientName: 'Lisa Wilson',
+      provider: 'Dr. James Thompson',
+      procedure: 'Colonoscopy',
+      status: 'denied',
+      submittedDate: '2025-10-08',
+      priority: 'standard',
+      amount: 1200
+    },
+    {
+      id: 'PA-2024-005',
+      patientName: 'David Brown',
+      provider: 'Sarah Johnson',
+      procedure: 'CT Chest with Contrast',
+      status: 'approved',
+      submittedDate: '2025-10-11',
+      priority: 'standard',
+      amount: 1800
+    },
+    {
+      id: 'PA-2024-006',
+      patientName: 'Rebecca Hardin',
+      provider: 'Amy Diane Kelly, NP',
+      procedure: 'CPAP Device Replacement',
+      status: 'pending',
+      submittedDate: '2025-10-08',
+      priority: 'standard',
+      amount: 2500
+    },
+    {
+      id: 'PA-2024-007',
+      patientName: 'Amanda Villiams',
+      provider: 'Amy Diane Kelly, NP',
+      procedure: 'CPAP Device Replacement',
+      status: 'denied',
+      submittedDate: '2025-10-11',
+      priority: 'Urgent',
+      amount: 2500
+    }
+  ];
 
   const getStatusChip = (status: Case['status']) => {
     const statusConfig = {
@@ -339,19 +339,22 @@ const cases: Case[] = [
                       </Box>
                     </TableCell>
                     <TableCell>
-                      <Box
-                        sx={{
-                          display: 'inline-block',
-                          width: 8,
-                          height: 8,
-                          borderRadius: '50%',
-                          backgroundColor: getPriorityColor(caseItem.priority),
-                          mr: 1
-                        }}
-                      />
-                      <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>
-                        {caseItem.priority}
-                      </Typography>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Box
+                          sx={{
+                            display: 'inline-block',
+                            width: 8,
+                            height: 8,
+                            borderRadius: '50%',
+                            backgroundColor: getPriorityColor(caseItem.priority),
+                            mr: 1
+                          }}
+                        />
+                        <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>
+                          {caseItem.priority}
+                        </Typography>
+                      </Box>
+
                     </TableCell>
                     <TableCell>
                       <Typography variant="body2" fontWeight="bold">
