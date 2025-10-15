@@ -177,18 +177,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Identify and assess data gaps',
           subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
-          nextSteps: ['data-prediction'],
-          position: { x: 1300, y: 50 }
-        },
-        {
-          id: 'data-prediction',
-          name: 'Decision Prediction',
-          type: 'process',
-          status: 'pending',
-          description: 'ML-based prediction and risk assessment',
-          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-summarization'],
-          position: { x: 50, y: 250 }
+          position: { x: 1300, y: 50 }
         },
         {
           id: 'clinical-summarization',
@@ -197,6 +187,16 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['data-prediction'],
+          position: { x: 50, y: 250 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Decision Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
           position: { x: 300, y: 250 }
         },
@@ -293,18 +293,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Identify and assess data gaps',
           subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
-          nextSteps: ['data-prediction'],
-          position: { x: 1300, y: 50 }
-        },
-        {
-          id: 'data-prediction',
-          name: 'Decision Prediction',
-          type: 'process',
-          status: 'pending',
-          description: 'ML-based prediction and risk assessment',
-          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-summarization'],
-          position: { x: 50, y: 250 }
+          position: { x: 1300, y: 50 }
         },
         {
           id: 'clinical-summarization',
@@ -313,6 +303,16 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['data-prediction'],
+          position: { x: 50, y: 250 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Decision Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
           position: { x: 300, y: 250 }
         },
@@ -485,18 +485,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Identify and assess data gaps',
           subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
-          nextSteps: ['data-prediction'],
-          position: { x: 1300, y: 50 }
-        },
-        {
-          id: 'data-prediction',
-          name: 'Decision Prediction',
-          type: 'process',
-          status: 'pending',
-          description: 'ML-based prediction and risk assessment',
-          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-summarization'],
-          position: { x: 50, y: 250 }
+          position: { x: 1300, y: 50 }
         },
         {
           id: 'clinical-summarization',
@@ -505,6 +495,16 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['data-prediction'],
+          position: { x: 50, y: 250 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Decision Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
           position: { x: 300, y: 250 }
         },
@@ -601,18 +601,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Identify and assess data gaps',
           subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
-          nextSteps: ['data-prediction'],
-          position: { x: 1300, y: 50 }
-        },
-        {
-          id: 'data-prediction',
-          name: 'Decision Prediction',
-          type: 'process',
-          status: 'pending',
-          description: 'ML-based prediction and risk assessment',
-          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-summarization'],
-          position: { x: 50, y: 250 }
+          position: { x: 1300, y: 50 }
         },
         {
           id: 'clinical-summarization',
@@ -621,6 +611,16 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['data-prediction'],
+          position: { x: 50, y: 250 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Decision Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
           position: { x: 300, y: 250 }
         },
@@ -1872,19 +1872,69 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           }, 2000);
         } else {
           // Other cases: Proceed to Decision Prediction
-          setShowMessage('Proceeding to Decision Prediction...');
+          setShowMessage('Proceeding to Clinical Summarization...');
           setAnimationStep(59);
           setProcessSteps(prev => 
             prev.map(step => 
-              step.id === 'data-prediction' 
+              step.id === 'clinical-summarization' 
                 ? { ...step, status: 'running' }
                 : step
             )
           );
           setTimeout(() => {
-            startDataPredictionProcess();
+            startClinicalSummarizationProcess();
           }, 2000);
         }
+      }, 2000);
+    }, 4000);
+  };
+
+   const startClinicalSummarizationProcess = () => {
+    setIsAnimating(true);
+    setAnimationStep(67);
+    setShowMessage('');
+
+    setTimeout(() => {
+      setShowMessage('Synthesizing clinical data...');
+      setAnimationStep(68);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowMessage('Generating comprehensive summary...');
+      setAnimationStep(69);
+    }, 2000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Clinical summary generated');
+      setAnimationStep(70);
+    }, 3000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Clinical Summarization complete');
+      setAnimationStep(71);
+      
+      setProcessSteps(prev => 
+        prev.map(step => 
+          step.id === 'clinical-summarization' 
+            ? { ...step, status: 'completed' }
+            : step
+        )
+      );
+      
+      // Proceed to Clinical Review Planning
+      setTimeout(() => {
+        setShowMessage('Proceeding to Decision Assessment...');
+        setAnimationStep(72);
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'data-prediction' 
+              ? { ...step, status: 'running' }
+              : step
+          )
+        );
+        setTimeout(() => {
+          startDataPredictionProcess();
+        }, 2000);
       }, 2000);
     }, 4000);
   };
@@ -1964,55 +2014,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Removed automatic progression - now controlled by chat dialog "Continue" button
   };
 
-  const startClinicalSummarizationProcess = () => {
-    setIsAnimating(true);
-    setAnimationStep(67);
-    setShowMessage('');
-
-    setTimeout(() => {
-      setShowMessage('Synthesizing clinical data...');
-      setAnimationStep(68);
-    }, 1000);
-
-    setTimeout(() => {
-      setShowMessage('Generating comprehensive summary...');
-      setAnimationStep(69);
-    }, 2000);
-
-    setTimeout(() => {
-      setShowMessage('✓ Clinical summary generated');
-      setAnimationStep(70);
-    }, 3000);
-
-    setTimeout(() => {
-      setShowMessage('✓ Clinical Summarization complete');
-      setAnimationStep(71);
-      
-      setProcessSteps(prev => 
-        prev.map(step => 
-          step.id === 'clinical-summarization' 
-            ? { ...step, status: 'completed' }
-            : step
-        )
-      );
-      
-      // Proceed to Clinical Review Planning
-      setTimeout(() => {
-        setShowMessage('Proceeding to Clinical Review Planning...');
-        setAnimationStep(72);
-        setProcessSteps(prev => 
-          prev.map(step => 
-            step.id === 'clinical-review-planning' 
-              ? { ...step, status: 'running' }
-              : step
-          )
-        );
-        setTimeout(() => {
-          startClinicalReviewPlanningProcess();
-        }, 2000);
-      }, 2000);
-    }, 4000);
-  };
+ 
 
   const startClinicalReviewPlanningProcess = () => {
     setIsAnimating(true);
@@ -2230,7 +2232,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     const dy = toCenterY - fromCenterY;
     
     // Special case: Gap Assessment to Decision Prediction (right to top)
-    if (fromStep.id === 'gap-assessment' && toStep.id === 'data-prediction') {
+    if (fromStep.id === 'gap-assessment' && toStep.id === 'clinical-summarization') {
       // Connect from right edge to top center
       fromX = 1500; // Gap Assessment right edge (1300 + 200)
       fromY = 135;  // Gap Assessment middle (50 + 85)
@@ -2267,7 +2269,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     let pathData: string;
     
     // Special handling for Gap Assessment to Decision Prediction (right, down, left)
-    if (fromStep.id === 'gap-assessment' && toStep.id === 'data-prediction') {
+    if (fromStep.id === 'gap-assessment' && toStep.id === 'clinical-summarization') {
       // Go right 50px, down to target row, then left to target
       const rightExtend = fromX + 50;
       pathData = `M ${fromX} ${fromY} L ${rightExtend} ${fromY} L ${rightExtend} ${toY} L ${toX} ${toY}`;
@@ -2298,7 +2300,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
              const shouldAnimate = shouldAnimateStartToIntake || shouldAnimateIntakeToTriage || shouldAnimateTriageToNotification;
              
              // Use downward arrowhead for Gap Assessment to Decision Prediction
-             const markerType = (fromStep.id === 'gap-assessment' && toStep.id === 'data-prediction') 
+             const markerType = (fromStep.id === 'gap-assessment' && toStep.id === 'clinical-summarization') 
                ? 'url(#arrowhead-down)' 
                : 'url(#arrowhead)';
              
@@ -2910,7 +2912,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                 setChatOpen(false);
                 // Continue to next stage
                 setTimeout(() => {
-                  setShowMessage('✓ Decision Prediction complete');
+                  setShowMessage('✓ Decision Assessment complete');
                   setProcessSteps(prev => 
                     prev.map(step => 
                       step.id === 'data-prediction' 
@@ -2965,16 +2967,16 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                     setAnimationStep(70);
                     
                     setTimeout(() => {
-                      setShowMessage('Proceeding to Clinical Summarization...');
+                      setShowMessage('Proceeding to Clinical Review Planning...');
                       setProcessSteps(prev => 
                         prev.map(step => 
-                          step.id === 'clinical-summarization' 
+                          step.id === 'clinical-review-planning' 
                             ? { ...step, status: 'running' }
                             : step
                         )
                       );
                       setTimeout(() => {
-                        startClinicalSummarizationProcess();
+                        startClinicalReviewPlanningProcess();
                       }, 2000);
                     }, 2000);
                   }, 6000);

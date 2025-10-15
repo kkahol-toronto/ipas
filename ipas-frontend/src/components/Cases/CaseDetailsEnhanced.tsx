@@ -129,7 +129,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'Standard',
           recommendedAction: 'Approve with monitoring',
           confidence: 0.91
-        }
+        },
+        ipopFlag: ''
       },
       'PA-2024-002': {
         id: 'PA-2024-002',
@@ -165,7 +166,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'High',
           recommendedAction: 'Approve immediately',
           confidence: 0.95
-        }
+        },
+        ipopFlag: ''
       },
       'PA-2024-003': {
         id: 'PA-2024-003',
@@ -201,7 +203,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'Standard',
           recommendedAction: 'Approve with coverage limit',
           confidence: 0.87
-        }
+        },
+        ipopFlag: ''
       },
       'PA-2024-004': {
         id: 'PA-2024-004',
@@ -237,7 +240,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'Standard',
           recommendedAction: 'Approve with monitoring',
           confidence: 0.91
-        }
+        },
+        ipopFlag: 'Outpatient'
       },
       'PA-2024-006': {
         id: 'PA-2024-006',
@@ -274,7 +278,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'Low',
           recommendedAction: 'Approve - clear medical necessity',
           confidence: 0.95
-        }
+        },
+        ipopFlag: 'Outpatient'
 
 
       },
@@ -310,7 +315,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'Low',
           recommendedAction: 'Deny - clear medical necessity',
           confidence: 0.95
-        }
+        },
+        ipopFlag: ''
       }
 
     };
@@ -348,7 +354,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
 
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-  setTabValue(newValue);
+    setTabValue(newValue);
 
   // Check if "Auth Decision Summary" tab is clicked
   if (newValue === 2) { // Assuming "Auth Decision Summary" is the third tab (index 2)
@@ -366,21 +372,21 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           caseId === 'PA-2024-007' ? 'case-007':
           'case-001-john-doe';
 
-        const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+          const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
 
-        const data = await response.json();
-        setObservabilityData(data);
-      } catch (error) {
-        console.error('Failed to fetch observability data:', error);
-        // Handle the error appropriately
-      }
-    })();
-  }
-};
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const data = await response.json();
+          setObservabilityData(data);
+        } catch (error) {
+          console.error('Failed to fetch observability data:', error);
+          // Handle the error appropriately
+        }
+      })();
+    }
+  };
 
 
   const getStatusColor = (status: string) => {
@@ -431,6 +437,15 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="info"
                   size="small"
                 />
+
+                {caseData.ipopFlag &&
+                  <Chip
+                    label={caseData.ipopFlag}
+                    color="success"
+                    size="small"
+                  />
+                }
+
               </Box>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
@@ -561,7 +576,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             <Tab label="Clinical Summary" icon={<DocumentIcon />} />
             <Tab label="Auth Decision Summary" icon={<DocumentIcon />} />
 
-            <Tab label="Reviewer Notes" icon={<TimelineIcon />} />
+            <Tab label="Review Notes" icon={<TimelineIcon />} />
           </Tabs>
           <Box sx={{ marginLeft: 'auto' }}>
             <Tooltip title="EMR Integration">
@@ -588,20 +603,29 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
 
         <TabPanel value={tabValue} index={2}>
 
+
+
+
           {/* Observability & Explanation Dialog */}
           <Box>
-
             {observabilityData && (
+
               <Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <DocumentIcon color="secondary" />
+                  <Typography variant="h6" sx={{ ml: 1, fontWeight: 'bold' }}>
+                    Observability & Explanation Report
+                  </Typography>
+                </Box>
                 {/* Summary Section */}
-                <Paper sx={{ p: 2, mb: 3, bgcolor: '#f5f5f5' }}>
+                <Paper sx={{ p: 2, mb: 3, bgcolor: '#f5f5f5' }} variant="outlined">
                   <Grid container spacing={2}>
                     <Grid size={{ xs: 6, md: 3 }}>
-                      <Typography variant="caption" color="text.secondary">Patient</Typography>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Patient</Typography>
                       <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.patientName}</Typography>
                     </Grid>
                     <Grid size={{ xs: 6, md: 3 }}>
-                      <Typography variant="caption" color="text.secondary">Procedure</Typography>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Procedure</Typography>
                       <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.procedure}</Typography>
                     </Grid>
                     <Grid size={{ xs: 6, md: 3 }}>
@@ -620,15 +644,186 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                       </FormControl>
                     </Grid>
                     <Grid size={{ xs: 6, md: 3 }}>
-                      <Typography variant="caption" color="text.secondary">Processing Time</Typography>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Processing Time</Typography>
                       <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.processingTimeline.totalDuration}</Typography>
                     </Grid>
                   </Grid>
                 </Paper>
 
+                {/* Key Findings */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Key Findings</Typography>
+                <Grid container spacing={2} sx={{ mb: 3 }}>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }} variant="outlined">
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Clinical Justification</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.clinicalJustification}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }} variant="outlined">
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Medical Necessity</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.medicalNecessity}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }} variant="outlined">
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Policy Compliance</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.policyCompliance}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }} variant="outlined">
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Cost Efficiency</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.costEfficiency}</Typography>
+                    </Paper>
+                  </Grid>
+                </Grid>
+
+                {/* Approval Details */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
+                <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
+                  <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved Amount</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Valid Until</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved By</Typography>
+                      <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Review Type</Typography>
+                      <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
+                    </Grid>
+                  </Grid>
+                </Paper>
+
+                {/* Quality Metrics */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
+                <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
+                  <Grid container spacing={2}>
+                    {Object.entries(observabilityData.qualityMetrics).map(([key, value]) => (
+                      <Grid size={{ xs: 6, md: 4 }} key={key}>
+                        <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>
+                          {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{String(value)}</Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Paper>
+
+                <ClinicalCriteriaEval caseId={caseId} />
+
+                <Card sx={{ mb: 3 }} variant="outlined">
+                  <CardContent>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                      <DocumentIcon color="secondary" />
+                      <Typography variant="h6" sx={{ ml: 1, fontWeight: 'bold' }}>
+                        AI Specialist panel recommendation
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" sx={{ mb: 3 }}>
+                        Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : 'APPROVE'}</strong>
+                      </Typography>
+                      {caseId === 'PA-2024-003' && (
+                        <Typography variant="body2" color="warning.main" sx={{ mb: 2, p: 1, bgcolor: '#fff3cd', borderRadius: 1 }}>
+                          ⚠️ Insurance coverage limit: $4,000 maximum for knee arthroscopy procedures
+                        </Typography>
+                      )}
+
+                      {/* Panel Members' Votes */}
+                      <Box sx={{ p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+                        <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+                          Panel Review Summary (4 Doctors)
+                        </Typography>
+
+                        {/* Doctor 1 */}
+                        <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                              Sleep medicine specialist
+                            </Typography>
+                            <Chip label="APPROVE" color="success" size="small" />
+                          </Box>
+                          <Typography variant="caption" color="text.secondary">
+                            {caseId === 'PA-2024-003'
+                              ? "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
+                              : "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
+                            }
+                          </Typography>
+                        </Box>
+
+                        {/* Doctor 2 */}
+                        <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                              {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
+                            </Typography>
+                            <Chip label="APPROVE" color="success" size="small" />
+                          </Box>
+                          <Typography variant="caption" color="text.secondary">
+                            {caseId === 'PA-2024-003'
+                              ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
+                              : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
+                            }
+                          </Typography>
+                        </Box>
+
+                        {/* Doctor 3 */}
+                        <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                              {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
+                            </Typography>
+                            <Chip label="APPROVE" color="success" size="small" />
+                          </Box>
+                          <Typography variant="caption" color="text.secondary">
+                            {caseId === 'PA-2024-003'
+                              ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
+                              : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
+                            }
+                          </Typography>
+                        </Box>
+
+                        {/* Doctor 4 */}
+                        <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                              {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
+                            </Typography>
+                            <Chip label="APPROVE" color="success" size="small" />
+                          </Box>
+                          <Typography variant="caption" color="text.secondary">
+                            {caseId === 'PA-2024-003'
+                              ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
+                              : "As a Cardiologist, I strongly affirm the medical necessity of continued CPAP therapy for this patient. Given the interplay between OSA, hypertension, arrhythmias, and severe obesity, ongoing CPAP use is essential for cardiovascular risk reduction and long-term health maintenance."
+                            }
+                          </Typography>
+                        </Box>
+
+                        <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
+                          <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+                            ✓ Consensus: 4/4 doctors recommend APPROVAL
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Card>
+
                 {/* Workflow Steps Table */}
                 <Typography variant="h6" sx={{ mb: 2 }}>Workflow Steps</Typography>
-                <TableContainer component={Paper} variant="outlined" sx={{ mb: 3 }}>
+                <TableContainer component={Paper} variant="outlined">
                   <Table size="small">
                     <TableHead>
                       <TableRow sx={{ bgcolor: '#f5f5f5' }}>
@@ -661,78 +856,27 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   </Table>
                 </TableContainer>
 
-                {/* Key Findings */}
-                <Typography variant="h6" sx={{ mb: 2 }}>Key Findings</Typography>
-                <Grid container spacing={2} sx={{ mb: 3 }}>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <Paper sx={{ p: 2, height: '100%' }}>
-                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Clinical Justification</Typography>
-                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.clinicalJustification}</Typography>
-                    </Paper>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <Paper sx={{ p: 2, height: '100%' }}>
-                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Medical Necessity</Typography>
-                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.medicalNecessity}</Typography>
-                    </Paper>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <Paper sx={{ p: 2, height: '100%' }}>
-                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Policy Compliance</Typography>
-                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.policyCompliance}</Typography>
-                    </Paper>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <Paper sx={{ p: 2, height: '100%' }}>
-                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Cost Efficiency</Typography>
-                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.costEfficiency}</Typography>
-                    </Paper>
-                  </Grid>
-                </Grid>
-
-                {/* Approval Details */}
-                <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
-                <Paper sx={{ p: 2, mb: 3 }}>
-                  <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary">Valid Until</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      <Typography variant="caption" color="text.secondary">Approved By</Typography>
-                      <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      <Typography variant="caption" color="text.secondary">Review Type</Typography>
-                      <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
-                    </Grid>
-                  </Grid>
-                </Paper>
-
-                {/* Quality Metrics */}
-                <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
-                <Paper sx={{ p: 2 }}>
-                  <Grid container spacing={2}>
-                    {Object.entries(observabilityData.qualityMetrics).map(([key, value]) => (
-                      <Grid size={{ xs: 6, md: 4 }} key={key}>
-                        <Typography variant="caption" color="text.secondary">
-                          {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{String(value)}</Typography>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Paper>
+                
               </Box>
             )}
+
+            {/* <Button
+            startIcon={<DownloadIcon />}
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.download = `observability_and_explanation_${caseId}.json`;
+              link.click();
+            }}
+          >
+            Download 
+          </Button>
+           <Button  variant="contained">
+            Save
+          </Button>
+          <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">
+            Close
+          </Button> */}
           </Box>
           <ClinicalCriteriaEval caseId={caseId} />
         </TabPanel>

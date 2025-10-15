@@ -136,7 +136,7 @@ const cases: Case[] = [
     procedure: 'Colonoscopy',
     status: 'denied',
     submittedDate: '2025-10-08',
-    priority: 'low',
+    priority: 'standard',
     amount: 1200
   },
   {
@@ -166,7 +166,7 @@ const cases: Case[] = [
     procedure: 'In patient',
     status: 'denied',
     submittedDate: '2025-10-11',
-    priority: 'standard',
+    priority: 'Urgent',
     amount: 2500
   }
 ];
@@ -290,7 +290,7 @@ const cases: Case[] = [
               <TableRow>
                 <TableCell>Case ID</TableCell>
                 <TableCell>Patient</TableCell>
-                <TableCell>Provider</TableCell>
+                <TableCell>Requesting Provider</TableCell>
                 <TableCell>Procedure</TableCell>
                 <TableCell>Status</TableCell>
                 <TableCell>Priority</TableCell>
@@ -339,19 +339,22 @@ const cases: Case[] = [
                       </Box>
                     </TableCell>
                     <TableCell>
-                      <Box
-                        sx={{
-                          display: 'inline-block',
-                          width: 8,
-                          height: 8,
-                          borderRadius: '50%',
-                          backgroundColor: getPriorityColor(caseItem.priority),
-                          mr: 1
-                        }}
-                      />
-                      <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>
-                        {caseItem.priority}
-                      </Typography>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Box
+                          sx={{
+                            display: 'inline-block',
+                            width: 8,
+                            height: 8,
+                            borderRadius: '50%',
+                            backgroundColor: getPriorityColor(caseItem.priority),
+                            mr: 1
+                          }}
+                        />
+                        <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>
+                          {caseItem.priority}
+                        </Typography>
+                      </Box>
+
                     </TableCell>
                     <TableCell>
                       <Typography variant="body2" fontWeight="bold">

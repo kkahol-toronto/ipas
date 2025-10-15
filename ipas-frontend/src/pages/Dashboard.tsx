@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Box, Typography, Card, CardContent, Dialog, DialogTitle, DialogContent, Alert, IconButton, Button, LinearProgress, Chip } from '@mui/material';
 import { Close as CloseIcon, Download as DownloadIcon, Description as DescriptionIcon, TrendingUp, TrendingDown, TrendingFlat } from '@mui/icons-material';
 import ApprovalStatusChart from '../components/Dashboard/ApprovalStatusChart';
-import RecentCasesTable from '../components/Dashboard/RecentCasesTable';
+//import RecentCasesTable from '../components/Dashboard/RecentCasesTable';
 import AnalyticsReports from '../components/Dashboard/AnalyticsReports';
 import GeographicHeatMap from '../components/Dashboard/GeographicHeatMap';
 import HospitalPerformance from '../components/Dashboard/HospitalPerformance';
