@@ -96,20 +96,20 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
     //   "isExtracted": false
     // },
-      {
-      "id": "3",
-      "name": "AI Specialist panel recommendation",
-      "type": "pdf",
-      "category": "AI-Specialist-panel-recommendation",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "isExtracted": false
-    }
+    //   {
+    //   "id": "3",
+    //   "name": "AI Specialist panel recommendation",
+    //   "type": "pdf",
+    //   "category": "AI-Specialist-panel-recommendation",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "isExtracted": false
+    // }
   ],
   "002": [
     {
@@ -140,20 +140,20 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
     //   "isExtracted": false
     // },
-      {
-      "id": "3",
-      "name": "AI Specialist panel recommendation",
-      "type": "pdf",
-      "category": "AI-Specialist-panel-recommendation",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "isExtracted": false
-    }
+    //   {
+    //   "id": "3",
+    //   "name": "AI Specialist panel recommendation",
+    //   "type": "pdf",
+    //   "category": "AI-Specialist-panel-recommendation",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "isExtracted": false
+    // }
   ],
   "003": [
     {
@@ -184,20 +184,20 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
     //   "isExtracted": false
     // },
-      {
-      "id": "3",
-      "name": "AI Specialist panel recommendation",
-      "type": "pdf",
-      "category": "AI-Specialist-panel-recommendation",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "isExtracted": false
-    }
+    //   {
+    //   "id": "3",
+    //   "name": "AI Specialist panel recommendation",
+    //   "type": "pdf",
+    //   "category": "AI-Specialist-panel-recommendation",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "isExtracted": false
+    // }
   ],
   "004": [
     {
@@ -258,20 +258,20 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
     //   "isExtracted": false
     // },
-      {
-      "id": "3",
-      "name": "AI Specialist panel recommendation",
-      "type": "pdf",
-      "category": "AI-Specialist-panel-recommendation",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "isExtracted": false
-    }
+    //   {
+    //   "id": "3",
+    //   "name": "AI Specialist panel recommendation",
+    //   "type": "pdf",
+    //   "category": "AI-Specialist-panel-recommendation",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "isExtracted": false
+    // }
   ],
   "PA-2024-002": [
     {
@@ -302,20 +302,20 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
     //   "isExtracted": false
     // },
-      {
-      "id": "3",
-      "name": "AI Specialist panel recommendation",
-      "type": "pdf",
-      "category": "AI-Specialist-panel-recommendation",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "isExtracted": false
-    }
+    //   {
+    //   "id": "3",
+    //   "name": "AI Specialist panel recommendation",
+    //   "type": "pdf",
+    //   "category": "AI-Specialist-panel-recommendation",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "isExtracted": false
+    // }
   ],
   "PA-2024-003": [
     {
@@ -346,20 +346,20 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
     //   "isExtracted": false
     // },
-      {
-      "id": "3",
-      "name": "AI Specialist panel recommendation",
-      "type": "pdf",
-      "category": "AI-Specialist-panel-recommendation",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "isExtracted": false
-    }
+    //   {
+    //   "id": "3",
+    //   "name": "AI Specialist panel recommendation",
+    //   "type": "pdf",
+    //   "category": "AI-Specialist-panel-recommendation",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "isExtracted": false
+    // }
   ],
   "PA-2024-006": [
     {
@@ -390,20 +390,20 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
     //   "isExtracted": false
     // },
-      {
-      "id": "3",
-      "name": "AI Specialist panel recommendation",
-      "type": "pdf",
-      "category": "AI-Specialist-panel-recommendation",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "isExtracted": false
-    }
+    //   {
+    //   "id": "3",
+    //   "name": "AI Specialist panel recommendation",
+    //   "type": "pdf",
+    //   "category": "AI-Specialist-panel-recommendation",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "isExtracted": false
+    // }
   ],
   "PA-2024-007": [
     {
@@ -432,20 +432,20 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     //   "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
     //   "isExtracted": false
     // },
-      {
-      "id": "3",
-      "name": "AI Specialist panel recommendation",
-      "type": "pdf",
-      "category": "AI-Specialist-panel-recommendation",
-      "size": "1.6 MB",
-      "uploadDate": "2024-12-15",
-      "status": "ready",
-      "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
-      "isExtracted": false
-    }
+    //   {
+    //   "id": "3",
+    //   "name": "AI Specialist panel recommendation",
+    //   "type": "pdf",
+    //   "category": "AI-Specialist-panel-recommendation",
+    //   "size": "1.6 MB",
+    //   "uploadDate": "2024-12-15",
+    //   "status": "ready",
+    //   "url": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "originalUrl":"/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "extractedUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "jsonUrl": "/sample-documents/ai-panel-recommendation/ai-recommends.pdf",
+    //   "isExtracted": false
+    // }
   ]
 
 

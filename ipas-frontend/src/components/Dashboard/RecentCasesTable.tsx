@@ -136,7 +136,7 @@ const cases: Case[] = [
     procedure: 'Colonoscopy',
     status: 'denied',
     submittedDate: '2025-10-08',
-    priority: 'low',
+    priority: 'standard',
     amount: 1200
   },
   {
@@ -166,7 +166,7 @@ const cases: Case[] = [
     procedure: 'CPAP Device Replacement',
     status: 'denied',
     submittedDate: '2025-10-11',
-    priority: 'standard',
+    priority: 'Urgent',
     amount: 2500
   }
 ];
@@ -290,7 +290,7 @@ const cases: Case[] = [
               <TableRow>
                 <TableCell>Case ID</TableCell>
                 <TableCell>Patient</TableCell>
-                <TableCell>Provider</TableCell>
+                <TableCell>Requesting Provider</TableCell>
                 <TableCell>Procedure</TableCell>
                 <TableCell>Status</TableCell>
                 <TableCell>Priority</TableCell>
