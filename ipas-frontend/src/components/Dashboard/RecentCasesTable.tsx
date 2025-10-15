@@ -161,9 +161,9 @@ const cases: Case[] = [
   },
   {
     id: 'PA-2024-007',
-    patientName: 'Amanda Villiams',
-    provider: 'Amy Diane Kelly, NP',
-    procedure: 'CPAP Device Replacement',
+    patientName: 'Amanda Williams',
+    provider: 'Benjamin Velky',
+    procedure: 'In patient',
     status: 'denied',
     submittedDate: '2025-10-11',
     priority: 'standard',

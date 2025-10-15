@@ -151,10 +151,10 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-007':
               return {
                 patientName: 'Rebecca===Hardin',
-                patientId: 'P-2024-006',
-                procedure: 'CPAP Device Replacement',
-                provider: 'Amy Diane Kelly, NP',
-                hospital: 'Prisma Health Pulmonology - Sumter'
+                patientId: 'P-2024-007',
+                procedure: 'Inpatient',
+                provider: 'Benjamin Velky',
+                hospital: 'Self Regional HE'
               };
                             
             default:

@@ -13,7 +13,6 @@ import {
   Alert,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
@@ -21,7 +20,6 @@ import {
 } from '@mui/material';
 import {
   Description as DocumentIcon,
-  PictureAsPdf as PdfIcon,
   Visibility as ViewIcon,
   Download as DownloadIcon
 } from '@mui/icons-material';
@@ -51,7 +49,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
   const [inputId, setInputId] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [selectedDocument, setSelectedDocument] = useState<ClinicalCriteriaEvaluation | null>(null);
+  const [selectedDocuments, setSelectedDocuments] = useState<ClinicalCriteriaEvaluation[]>([]);
   const [error, setError] = useState('');
 
   const ClinicalCriteriaEvaluationMap: Record<string, ClinicalCriteriaEvaluation[]> = {
@@ -70,6 +68,21 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "extractedUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
         "jsonUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
         "isExtracted": false
+      },
+      {
+        "id": "2",
+        "name": "Medical Record Retrieval.pdf",
+        "type": "pdf",
+        "category": "Medical-Record-Retrival",
+        "size": "1.6 MB",
+        "uploadDate": "2024-12-15",
+        "status": "ready",
+        "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+        "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
+        "recordretrivedUrl": "/sample-documents/cases/case-001-john-doe/patient-medical-history-original.pdf",
+        "isExtracted": false
       }
     ],
     "PA-2024-002": [
@@ -86,6 +99,21 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
         "extractedUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
         "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "isExtracted": false
+      },
+      {
+        "id": "2",
+        "name": "Medical Record Retrieval.pdf",
+        "type": "pdf",
+        "category": "Medical-Record-Retrival",
+        "size": "1.6 MB",
+        "uploadDate": "2024-12-15",
+        "status": "ready",
+        "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+        "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
+        "recordretrivedUrl": "/sample-documents/cases/case-002-jane-smith/patient-medical-history.pdf",
         "isExtracted": false
       }
     ],
@@ -104,6 +132,21 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "recordretrivedUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
         "jsonUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
         "isExtracted": false
+      },
+      {
+        "id": "2",
+        "name": "Medical Record Retrieval.pdf",
+        "type": "pdf",
+        "category": "Medical-Record-Retrival",
+        "size": "1.6 MB",
+        "uploadDate": "2024-12-15",
+        "status": "ready",
+        "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+        "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
+        "recordretrivedUrl": "/sample-documents/cases/case-003-mike-johnson/patient-medical-history.pdf",
+        "isExtracted": false
       }
     ],
     "PA-2024-006": [
@@ -121,6 +164,21 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
         "recordretrivedUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
         "isExtracted": false
+      },
+      {
+        "id": "2",
+        "name": "Medical Record Retrieval.pdf",
+        "type": "pdf",
+        "category": "Medical-Record-Retrival",
+        "size": "1.6 MB",
+        "uploadDate": "2024-12-15",
+        "status": "ready",
+        "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+        "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
+        "recordretrivedUrl": "/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf",
+        "isExtracted": false
       }
     ],
     "PA-2024-007": [
@@ -137,6 +195,21 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
         "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
         "recordretrivedUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
+        "isExtracted": false
+      },
+      {
+        "id": "2",
+        "name": "Medical Record Retrieval.pdf",
+        "type": "pdf",
+        "category": "Medical-Record-Retrival",
+        "size": "1.6 MB",
+        "uploadDate": "2024-12-15",
+        "status": "ready",
+        "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
+        "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+        "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
+        "recordretrivedUrl": "/sample-documents/cases/case-007/medrec.pdf",
         "isExtracted": false
       }
     ]
@@ -160,33 +233,29 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
 
   const handleSearch = () => {
     const trimmedId = inputId.trim();
-    
+
     if (!trimmedId) {
       setError('Please enter a Member ID');
       return;
     }
 
     const documents = ClinicalCriteriaEvaluationMap[trimmedId];
-    
+
     if (!documents || documents.length === 0) {
       setError(`Member ID "${trimmedId}" not found`);
       return;
     }
 
-    setSelectedDocument(documents[0]);
+    setSelectedDocuments(documents);
     setError('');
     handleCloseDialog();
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
+    if (e.key === 'Enter') handleSearch();
   };
 
-  const handleView = (url: string) => {
-    window.open(url, '_blank');
-  };
+  const handleView = (url: string) => window.open(url, '_blank');
 
   const handleDownload = (url: string, name: string) => {
     const link = document.createElement('a');
@@ -250,7 +319,6 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
           )}
         </DialogContent>
 
-        {/* Date Range Fields - Side by Side */}
         <DialogContent>
           <Box sx={{ display: 'flex', gap: 2 }}>
             <TextField
@@ -275,7 +343,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
             />
           </Box>
         </DialogContent>
-  
+
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>
           <Button onClick={handleSearch} variant="contained" color="primary">
@@ -285,7 +353,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       </Dialog>
 
       {/* Document Display */}
-      {selectedDocument ? (
+      {selectedDocuments.length > 0 ? (
         <Card>
           <CardContent>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -293,69 +361,62 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
               <Typography variant="h6" sx={{ ml: 1, fontWeight: 'bold' }}>
                 Medical Record Retrieval
               </Typography>
-              <Chip 
-                label="1 document" 
-                size="small" 
-                color="primary" 
+              <Chip
+                label={`${selectedDocuments.length} document${selectedDocuments.length > 1 ? 's' : ''}`}
+                size="small"
+                color="primary"
                 sx={{ ml: 2 }}
               />
             </Box>
 
             <List>
-              <ListItem
-                sx={{
-                  '&:hover': {
-                    backgroundColor: '#f5f5f5',
-                    borderRadius: 1
-                  }
-                }}
-              >
-
-                
-                <ListItemText
-                  primary={
-                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                      {selectedDocument.name}
-                    </Typography>
-                  }
-                  secondary={
-                    <Box>
-                      <Typography variant="body2" color="text.secondary">
-                        Size: {selectedDocument.size} • Uploaded: {selectedDocument.uploadDate}
-                      </Typography>
-                      <Box sx={{ display: 'flex', gap: 1, mt: 0.5 }}>
-                        <Chip
-                          label={selectedDocument.status.toUpperCase()}
-                          size="small"
-                          color={getStatusColor(selectedDocument.status)}
-                        />
+              {selectedDocuments.map((doc) => (
+                <ListItem
+                  key={doc.id}
+                  sx={{
+                    '&:hover': { backgroundColor: '#f5f5f5', borderRadius: 1 },
+                    mb: 1
+                  }}
+                >
+                  <ListItemText
+                    primary={<Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{doc.name}</Typography>}
+                    secondary={
+                      <Box>
+                        <Typography variant="body2" color="text.secondary">
+                          Size: {doc.size} • Uploaded: {doc.uploadDate}
+                        </Typography>
+                        <Box sx={{ display: 'flex', gap: 1, mt: 0.5 }}>
+                          <Chip
+                            label={doc.status.toUpperCase()}
+                            size="small"
+                            color={getStatusColor(doc.status)}
+                          />
+                        </Box>
                       </Box>
+                    }
+                  />
+                  <ListItemSecondaryAction>
+                    <Box sx={{ display: 'flex', gap: 1 }}>
+                      <IconButton
+                        size="small"
+                        color="primary"
+                        onClick={() => handleView(doc.recordretrivedUrl || doc.url)}
+                        title="View Document"
+                      >
+                        <ViewIcon />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        color="secondary"
+                        onClick={() => handleDownload(doc.recordretrivedUrl || doc.url, doc.name)}
+                        title="Download Document"
+                      >
+                        <DownloadIcon />
+                      </IconButton>
                     </Box>
-                  }
-                />
-                
-                <ListItemSecondaryAction>
-                  <Box sx={{ display: 'flex', gap: 1 }}>
-                    <IconButton
-                      size="small"
-                      color="primary"
-                      onClick={() => handleView(selectedDocument.recordretrivedUrl || selectedDocument.url)}
-                      title="View Document"
-                    >
-                      <ViewIcon />
-                    </IconButton>
-                    
-                    <IconButton
-                      size="small"
-                      color="secondary"
-                      onClick={() => handleDownload(selectedDocument.recordretrivedUrl || selectedDocument.url, selectedDocument.name)}
-                      title="Download Document"
-                    >
-                      <DownloadIcon />
-                    </IconButton>
-                  </Box>
-                </ListItemSecondaryAction>
-              </ListItem>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
             </List>
           </CardContent>
         </Card>
@@ -373,7 +434,6 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
               }}
             >
               <DocumentIcon sx={{ fontSize: 60, mb: 2, opacity: 0.5 }} />
-              <Typography variant="h6"></Typography>
               <Typography variant="body2">
                 Click the search button above to retrieve medical data
               </Typography>

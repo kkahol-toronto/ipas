@@ -88,11 +88,11 @@ class StatusTracker {
         lastUpdated: new Date().toISOString(),
         isCompleted: false
       },
-      'PA-2024-006': {
-        caseId: 'PA-2024-006',
+      '': {
+        caseId: '',
         currentStatus: 'pending',
         statusHistory: [{
-          caseId: 'PA-2024-006',
+          caseId: '',
           status: 'pending',
           timestamp: new Date().toISOString(),
           updatedBy: 'system',
@@ -220,7 +220,7 @@ class StatusTracker {
 
   // Simulate workflow progression (for demo purposes)
   simulateWorkflowProgression(caseId: string): void {
-    const statuses: StatusUpdate['status'][] = ['pending', 'under_review', 'approved'];
+    const statuses: StatusUpdate['status'][] = ['pending','denied', 'under_review', 'approved'];
     const currentStatus = this.getCaseStatus(caseId);
     
     if (!currentStatus) return;

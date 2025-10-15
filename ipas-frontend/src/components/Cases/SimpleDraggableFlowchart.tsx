@@ -656,7 +656,125 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         }
       ];
     }
-    
+
+   // Case PA-2024-007: Full review workflow ending in approval (CPAP replacement - compliant patient)
+    if (caseId === 'PA-2024-007' || caseId === '007') {
+      return [
+        {
+          id: 'start',
+          name: 'Start',
+          type: 'start',
+          status: 'pending',
+          description: 'Initiates the prior authorization case processing workflow',
+          subSteps: ['Case ID Generation', 'Initial Data Collection'],
+          nextSteps: ['auth-intake'],
+          position: { x: 50, y: 50 }
+        },
+        {
+          id: 'auth-intake',
+          name: 'Auth Intake',
+          type: 'process',
+          status: 'pending',
+          description: 'Multi-modal document ingestion and data extraction',
+          subSteps: ['Email', 'Mail', 'Fax', 'Call', 'Portal', 'EDI/FHIR', 'Auth ID'],
+          nextSteps: ['auth-triage'],
+          position: { x: 300, y: 50 }
+        },
+        {
+          id: 'auth-triage',
+          name: 'Auth Triage',
+          type: 'process',
+          status: 'pending',
+          description: 'Data validation, guideline matching, and approval determination',
+          subSteps: ['Data Completeness', 'Guidelines', 'Insurance', 'Priority', 'Decision'],
+          nextSteps: ['member-verification'],
+          position: { x: 550, y: 50 }
+        },
+        {
+          id: 'member-verification',
+          name: 'Member Verification',
+          type: 'process',
+          status: 'pending',
+          description: 'Verify member eligibility and coverage details',
+          subSteps: ['Eligibility Check', 'Coverage Verification', 'Benefits Analysis'],
+          nextSteps: ['data-enrichment'],
+          position: { x: 800, y: 50 }
+        },
+        {
+          id: 'data-enrichment',
+          name: 'Data Enrichment',
+          type: 'process',
+          status: 'pending',
+          description: 'Enrich case data with additional clinical information',
+          subSteps: ['Medical History', 'Lab Results', 'External Records'],
+          nextSteps: ['gap-assessment'],
+          position: { x: 1050, y: 50 }
+        },
+        {
+          id: 'gap-assessment',
+          name: 'Gap Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'Identify and assess data gaps',
+          subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
+          nextSteps: ['data-prediction'],
+          position: { x: 1300, y: 50 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Decision Prediction',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
+          nextSteps: ['clinical-summarization'],
+          position: { x: 50, y: 250 }
+        },
+        {
+          id: 'clinical-summarization',
+          name: 'Clinical Summarization',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate comprehensive clinical summary',
+          subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['clinical-review-planning'],
+          position: { x: 300, y: 250 }
+        },
+        {
+          id: 'clinical-review-planning',
+          name: 'Clinical Review Planning',
+          type: 'process',
+          status: 'pending',
+          description: 'Plan clinical review strategy',
+          subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
+          nextSteps: ['clinical-decisioning'],
+          position: { x: 550, y: 250 }
+        },
+        {
+          id: 'clinical-decisioning',
+          name: 'Clinical Decisioning',
+          type: 'decision',
+          status: 'pending',
+          description: 'Final clinical decision on authorization',
+          subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
+          nextSteps: ['provider-notification'],
+          position: { x: 800, y: 250 }
+        },
+        {
+          id: 'provider-notification',
+          name: 'Provider Notification',
+          type: 'process',
+          status: 'pending',
+          description: 'Generate approval letter and notify provider',
+          subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
+          nextSteps: [],
+          position: { x: 800, y: 450 }
+        }
+      ];
+    }
+ 
+
+
     // Default fallback for unknown cases
     return [
       {
@@ -1253,7 +1371,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       }
       
       // For Case 001, Case 002, and Case 006, ensure all fields are found for demo purposes
-      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002' || caseId === 'PA-2024-006' || caseId === '006') {
+      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002' || caseId === 'PA-2024-006' || caseId === '006' || caseId === 'PA-2024-007' || caseId === '007' ) {
         return true;
       }
       
@@ -1394,7 +1512,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           setTimeout(() => {
             startProviderNotificationProcess();
           }, 2000);
-        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006') {
+        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006' || caseId === 'PA-2024-007' || caseId === '007' ) {
           // Case-002, Case-003, Case-004, Case-005 & Case-006: Proceed to Member Verification
           setShowMessage('Proceeding to Member Verification...');
           setAnimationStep(37);
@@ -1504,40 +1622,66 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     // Step 5: Complete
     setTimeout(() => {
       if (caseId === 'PA-2024-007') {
-        setShowMessage('❌ Authorization Denied - Letter available for download');
+        setShowMessage('✓ Denial letter generated - Missing documentation noted');
       } else if (caseId === 'PA-2024-006') {
-        setShowMessage('✅ Authorization Approved - CPAP Replacement Authorized');
+        setShowMessage('✓ Approval letter generated - CPAP replacement approved');
       } else {
-        setShowMessage('🎉 Authorization Complete - Letter available for download!');
+        setShowMessage('✓ Approval letter generated');
       }
-      setAnimationStep(47);
+      setAnimationStep(42);
+    }, 4000);
+
+    // Step 3: Provider Notification
+    setTimeout(() => {
+      setShowMessage('Sending notification to provider...');
+      setAnimationStep(43);
+    }, 5000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Notification sent successfully');
+      setAnimationStep(44);
+    }, 6000);
+
+    // Step 4: Epic Integration
+    setTimeout(() => {
+      setShowMessage('Sending authorization data to Epic medical records...');
+      setAnimationStep(45);
+    }, 7000);
+
+    setTimeout(() => {
+      setShowMessage('✓ Data transmitted to Epic successfully');
+      setAnimationStep(46);
       
-      // Update Provider Notification status to completed
-      setProcessSteps(prev => 
-        prev.map(step => 
-          step.id === 'provider-notification' 
-            ? { ...step, status: 'completed' }
-            : step
-        )
-      );
-      
-      // Mark letter as generated in localStorage for dashboard notification
-      localStorage.setItem(`ipas_letter_generated_${caseId}`, new Date().toISOString());
-      
-      // Update case status to approved/denied based on the decision
-      const finalStatus = (caseId === 'PA-2024-004') ? 'denied' : 'approved';
-      console.log(`✓ Updating case ${caseId} status to: ${finalStatus}`);
-      statusTracker.updateCaseStatus(
-        caseId, 
-        finalStatus, 
-        'system', 
-        'Workflow completed successfully',
-        `Authorization ${finalStatus} and letter generated`
-      );
-      console.log(`✓ Case ${caseId} status updated successfully`);
-      
-      setIsAnimating(false);
-    }, 9000);
+      // Trigger EMR notification service immediately
+      import('../../services/emrNotificationService').then(({ emrNotificationService }) => {
+        // Send to EPIC immediately
+        emrNotificationService.sendToEMR(
+          caseId,
+          'Sarah Johnson',
+          `AUTH-${caseId}`,
+          'CPT-12345'
+        );
+        
+        // Simulate hospital notification after 2 seconds
+        setTimeout(() => {
+          emrNotificationService.simulateHospitalNotification(
+            caseId,
+            'UCLA Medical Center',
+            0
+          );
+        }, 2000);
+        
+        // Simulate order placement after additional 3 seconds
+        setTimeout(() => {
+          emrNotificationService.simulateOrderPlacement(
+            caseId,
+            'UCLA Medical Center',
+            0
+          );
+        }, 5000);
+      });
+    }, 8000);
+
   };
 
   const startMemberVerificationProcess = () => {
@@ -1798,7 +1942,16 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             content: `I've analyzed Case PA-2024-006 (Rebecca Hardin - CPAP Device Replacement). Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision. The patient has documented OSA with AHI 8.9/hr, compliant with current CPAP therapy, and device replacement is medically necessary. My recommendation is APPROVE. Do you have questions?`
           }
         ]);
-      } else {
+     } else if (caseId === 'PA-2024-007') {
+        setChatMessages([
+          {
+            role: 'assistant',
+            content: `I've analyzed Case PA-2024-007 (Amanda Williams - In Patient). Based on the clinical data and similar patient outcomes, the case does not show enough strong medical necessity. The 77% approval rate for similar cases supports an approval decision. Presentation is hemodynamically stable, afebrile, with normal leukocyte count and CT evidence of uncomplicated diverticulitis without perforation or abscess. Outpatient management is appropriate and guideline-concordant. Do you have questions?`
+          }
+        ]);
+      }
+      
+        else {
         setChatMessages([
           {
             role: 'assistant',
@@ -2849,90 +3002,140 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           </DialogTitle>
           <DialogContent>
             <Typography variant="body2" sx={{ mb: 3 }}>
-              Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : 'APPROVE'}</strong>
+              Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : caseId === 'PA-2024-007' ? 'DENY' : 'APPROVE'}</strong>
             </Typography>
             {caseId === 'PA-2024-003' && (
               <Typography variant="body2" color="warning.main" sx={{ mb: 2, p: 1, bgcolor: '#fff3cd', borderRadius: 1 }}>
                 ⚠️ Insurance coverage limit: $4,000 maximum for knee arthroscopy procedures
               </Typography>
             )}
+          {/* Panel Members' Votes */}
+          <Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+              Panel Review Summary ({caseId === 'PA-2024-007' ? '3 Doctors' : '4 Doctors'})
+            </Typography>
+                    
+            {caseId === 'PA-2024-007' ? (
+              <>
+                {/* Gastroenterologist */}
+                <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                      Gastroenterologist
+                    </Typography>
+                    <Chip label="DENY" color="error" size="small" />
+                  </Box>
+                  <Typography variant="caption" color="text.secondary">
+                    Given the acute onset of symptoms, prior history of diverticulitis, and confirmation by imaging, it is medically necessary to initiate appropriate treatment and observation in Outpatient setting as the patient is stable, afebrile, and has no evidence of complications. Supportive therapy, dietary modifications, and symptom monitoring are essential. Antibiotics may be considered given her history, but shared decision-making and close follow-up are recommended.
+                  </Typography>
+                </Box>
             
-            {/* Panel Members' Votes */}
-            <Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
-                Panel Review Summary (4 Doctors)
-              </Typography>
-              
-              {/* Doctor 1 */}
-              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                  <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                     Sleep medicine specialist
+                {/* Infectious disease specialist */}
+                <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                      Infectious disease specialist
+                    </Typography>
+                    <Chip label="DENY" color="error" size="small" />
+                  </Box>
+                  <Typography variant="caption" color="text.secondary">
+                    For this patient with uncomplicated acute diverticulitis, the medically necessary management includes supportive care, possible oral antibiotic therapy, pain control, and close outpatient monitoring. Inpatient admission or intravenous antibiotic therapy is not indicated unless her condition worsens or she develops signs of systemic infection or complications.
                   </Typography>
-                  <Chip label="APPROVE" color="success" size="small" />
                 </Box>
-                <Typography variant="caption" color="text.secondary">
-                  {caseId === 'PA-2024-003' 
-                    ? "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
-                    : "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
-                  }
-                </Typography>
-              </Box>
-              
-              {/* Doctor 2 */}
-              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                  <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                    {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
+            
+                {/* General Surgeon */}
+                <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                      General Surgeon
+                    </Typography>
+                    <Chip label="DENY" color="error" size="small" />
+                  </Box>
+                  <Typography variant="caption" color="text.secondary">
+                    For this patient with uncomplicated acute diverticulitis, there is no medical necessity for surgical intervention or inpatient admission at this time. Outpatient management with supportive care and close follow-up is medically necessary, aligning with current surgical and clinical guidelines
                   </Typography>
-                  <Chip label="APPROVE" color="success" size="small" />
                 </Box>
-                <Typography variant="caption" color="text.secondary">
-                  {caseId === 'PA-2024-003'
-                    ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
-                    : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
-                  }
-                </Typography>
-              </Box>
-              
-              {/* Doctor 3 */}
-              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                  <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                    {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
+            
+                <Box sx={{ mt: 2, p: 1, bgcolor: '#fdecea', borderRadius: 1 }}>
+                  <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
+                    ✓ Consensus: 0/3 doctors recommend APPROVAL (case PA-2024-007)
                   </Typography>
-                  <Chip label="APPROVE" color="success" size="small" />
                 </Box>
-                <Typography variant="caption" color="text.secondary">
-                  {caseId === 'PA-2024-003'
-                    ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
-                    : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
-                  }
-                </Typography>
-              </Box>
-              
-              {/* Doctor 4 */}
-              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                  <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                    {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
+              </>
+            ) : (
+              <>
+                {/* Doctor 1 */}
+                <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                       Sleep medicine specialist
+                    </Typography>
+                    <Chip label="APPROVE" color="success" size="small" />
+                  </Box>
+                  <Typography variant="caption" color="text.secondary">
+                    {caseId === 'PA-2024-003' 
+                      ? "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
+                      : "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
+                    }
                   </Typography>
-                  <Chip label="APPROVE" color="success" size="small" />
                 </Box>
-                <Typography variant="caption" color="text.secondary">
-                  {caseId === 'PA-2024-003'
-                    ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
-                    : "As a Cardiologist, I strongly affirm the medical necessity of continued CPAP therapy for this patient. Given the interplay between OSA, hypertension, arrhythmias, and severe obesity, ongoing CPAP use is essential for cardiovascular risk reduction and long-term health maintenance."
-                  }
-                </Typography>
-              </Box>
-
-              <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
-                <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-                  ✓ Consensus: 4/4 doctors recommend APPROVAL
-                </Typography>
-              </Box>
-            </Box>
+                  
+                {/* Doctor 2 */}
+                <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                      {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
+                    </Typography>
+                    <Chip label="APPROVE" color="success" size="small" />
+                  </Box>
+                  <Typography variant="caption" color="text.secondary">
+                    {caseId === 'PA-2024-003'
+                      ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
+                      : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
+                    }
+                  </Typography>
+                </Box>
+                  
+                {/* Doctor 3 */}
+                <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                      {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
+                    </Typography>
+                    <Chip label="APPROVE" color="success" size="small" />
+                  </Box>
+                  <Typography variant="caption" color="text.secondary">
+                    {caseId === 'PA-2024-003'
+                      ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
+                      : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
+                    }
+                  </Typography>
+                </Box>
+                  
+                {/* Doctor 4 */}
+                <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                      {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
+                    </Typography>
+                    <Chip label="APPROVE" color="success" size="small" />
+                  </Box>
+                  <Typography variant="caption" color="text.secondary">
+                    {caseId === 'PA-2024-003'
+                      ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
+                      : "As a Cardiologist, I strongly affirm the medical necessity of continued CPAP therapy for this patient. Given the interplay between OSA, hypertension, arrhythmias, and severe obesity, ongoing CPAP use is essential for cardiovascular risk reduction and long-term health maintenance."
+                    }
+                  </Typography>
+                </Box>
+                  
+                <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
+                  <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+                    ✓ Consensus: 4/4 doctors recommend APPROVAL
+                  </Typography>
+                </Box>
+              </>
+            )}
+          </Box>           
 
             <Typography variant="body2" sx={{ mb: 2, fontWeight: 'bold' }}>
               Your Final Decision:

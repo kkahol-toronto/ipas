@@ -37,7 +37,7 @@ interface CaseDocument {
   id: string;
   name: string;
   type: 'pdf' | 'image' | 'doc' | 'other';
-  category: 'prior-auth' |'operativenotes' |'radionotes'| 'medical-records' | 'imaging' | 'insurance' | 'clinical-notes' | 'diagnostics' | 'drnotes' | 'dmeform';
+  category: 'polysomnography-report'| 'imaging'| 'lab-results'|'prior-auth' |'operativenotes' |'radionotes'| 'medical-records' |  'insurance' | 'clinical-notes' | 'diagnostics' | 'drnotes' | 'dmeform';
   size: string;
   uploadDate: string;
   status: 'uploaded' | 'processing' | 'ready' | 'error';
@@ -628,7 +628,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
           originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
-          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/structured-text.pdf',
           jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-extracted.json',
           isExtracted: false
         },
@@ -642,7 +642,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf',
           originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf',
-          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/extr/medical-records.pdf',
           jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/medical_records.json',
           isExtracted: false
         },
@@ -650,13 +650,13 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           id: '3',
           name: 'Polysomnography Report',
           type: 'pdf',
-          category: 'diagnostics',
+          category: 'polysomnography-report',
           size: '1.8 MB',
           uploadDate: '2024-04-25',
           status: 'ready',
           url: '/sample-documents/cases/case-006-rebecca-hardin/polysomnography.pdf',
           originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/polysomnography.pdf',
-          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/polysomnography.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/extr/polysomnography.pdf',
           jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/polysomnography.json',
           isExtracted: false
         },
@@ -670,7 +670,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/case-006-rebecca-hardin/doctor-notes.pdf',
           originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/doctor-notes.pdf',
-          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/doctor-notes.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/extr/doctor-notes.pdf',
           jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/doctor-notes.json',
           isExtracted: false
         },
@@ -684,7 +684,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.pdf',
           originalUrl: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.pdf',
-          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.pdf',
+          extractedUrl: '/sample-documents/cases/case-006-rebecca-hardin/extr/insurance-card.pdf',
           jsonUrl: '/sample-documents/cases/case-006-rebecca-hardin/insurance-card.json',
           isExtracted: false
         }
@@ -700,7 +700,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/case-007/prior-auth-form-original.pdf',
           originalUrl: '/sample-documents/cases/case-007/prior-auth-form-original.pdf',
-          extractedUrl: '/sample-documents/cases/case-007/prior-auth-form-original.pdf',
+          extractedUrl: '/sample-documents/cases/case-007/prior auth extracted.pdf',
           jsonUrl: '/sample-documents/cases/case-007/AuthReq.json',
           isExtracted: false
         },
@@ -712,10 +712,38 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           size: '3.2 MB',
           uploadDate: '2024-04-25',
           status: 'ready',
-          url: '/sample-documents/cases/case-007/MedicalRecords.json',
-          originalUrl: '/sample-documents/cases/case-007/MedicalRecords.json',
-          extractedUrl: '/sample-documents/cases/case-007/MedicalRecords.json',
+          url: '/sample-documents/cases/case-007/medrec.pdf ',
+          originalUrl: '/sample-documents/cases/case-007/medrec.pdf',
+          extractedUrl: '/sample-documents/cases/case-007/med records.pdf',
           jsonUrl: '/sample-documents/cases/case-007/MedicalRecords.json',
+          isExtracted: false
+        },
+        {
+          id: '3',
+          name: 'Lab Results',
+          type: 'pdf',
+          category: 'lab-results',
+          size: '3.2 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-007/labres.pdf',
+          originalUrl: '/sample-documents/cases/case-007/labres.pdf',
+          extractedUrl: '/sample-documents/cases/case-007/labres1.pdf',
+          jsonUrl: '/sample-documents/cases/case-007/labres.pdf',
+          isExtracted: false
+        },
+        {
+          id: '4',
+          name: 'Imaging',
+          type: 'pdf',
+          category: 'imaging',
+          size: '3.2 MB',
+          uploadDate: '2024-04-25',
+          status: 'ready',
+          url: '/sample-documents/cases/case-007/image.pdf',
+          originalUrl: '/sample-documents/cases/case-007/image.pdf',
+          extractedUrl: '/sample-documents/cases/case-007/Image structured.pdf',
+          jsonUrl: '/sample-documents/cases/case-007/image.json',
           isExtracted: false
         }
   
@@ -911,6 +939,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
       case 'prior-auth':
         return <DocumentIcon color="primary" />;
       case 'medical-records':
+      case 'lab-results':
         return <FolderIcon color="success" />;
       case 'imaging':
         return <ImageIcon color="info" />;
@@ -924,6 +953,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
       case 'dmeform':
         return <DocumentIcon color="secondary" />;
 
+      case 'polysomnography-report':
       case 'operativenotes':
       case 'radionotes':
         return <DocumentIcon color="secondary" />;
@@ -966,6 +996,11 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
         return 'Operative Notes'
       case 'radionotes':
         return 'Radiology Notes'
+      case 'lab-results':
+        return 'Lab Results'
+      case 'polysomnography-report':
+        return 'Polysomnography Report'
+
       default:
         return 'Other';
     }
