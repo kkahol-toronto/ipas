@@ -1512,7 +1512,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           setTimeout(() => {
             startProviderNotificationProcess();
           }, 2000);
-        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006') {
+        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006' || caseId === 'PA-2024-007') {
           // Case-002, Case-003, Case-004, Case-005 & Case-006: Proceed to Member Verification
           setShowMessage('Proceeding to Member Verification...');
           setAnimationStep(37);
@@ -2412,7 +2412,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             backgroundColor: '#fafafa'
           }}
         >
-          <svg width="100%" height="680" style={{ position: 'absolute', top: 0, left: 0, minWidth: 'calc(100% + 150px)' }}>
+          <svg width="100%" height="680" style={{ position: 'absolute', top: 0, left: 0, minWidth: '1588' }}>
             <defs>
               <marker
                 id="arrowhead"
