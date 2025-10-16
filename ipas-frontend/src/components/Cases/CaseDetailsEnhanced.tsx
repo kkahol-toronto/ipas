@@ -88,7 +88,9 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [clinicalNotes, setClinicalNotes] = useState('');
   const [observabilityDialogOpen, setObservabilityDialogOpen] = useState(false);
   const [observabilityData, setObservabilityData] = useState<any>(null);
-  const [selectedOption, setSelectedOption] = useState('Approved');
+  const [selectedOption, setSelectedOption] = useState(
+    caseId === 'PA-2024-007' ? 'Denied' : 'Approved'
+  );
   const [emrIntegrationOpen, setEmrIntegrationOpen] = useState(false);
 
 
@@ -742,129 +744,128 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                       )}
 
                       {/* Panel Members' Votes */}
-{/* Panel Members' Votes */}
-<Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
-<Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
-    Panel Review Summary ({caseId === 'PA-2024-007' ? '3 Doctors' : '4 Doctors'})
-</Typography>
- 
-  {caseId === 'PA-2024-007' ? (
-<>
-      {/* Gastroenterologist */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            Gastroenterologist
-</Typography>
-<Chip label="DENY" color="error" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          Given the acute onset of symptoms, prior history of diverticulitis, and confirmation by imaging, it is medically necessary to initiate appropriate treatment and observation in Outpatient setting as the patient is stable, afebrile, and has no evidence of complications. Supportive therapy, dietary modifications, and symptom monitoring are essential. Antibiotics may be considered given her history, but shared decision-making and close follow-up are recommended.
-</Typography>
-</Box>
- 
-      {/* Infectious disease specialist */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            Infectious disease specialist
-</Typography>
-<Chip label="DENY" color="error" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          For this patient with uncomplicated acute diverticulitis, the medically necessary management includes supportive care, possible oral antibiotic therapy, pain control, and close outpatient monitoring. Inpatient admission or intravenous antibiotic therapy is not indicated unless her condition worsens or she develops signs of systemic infection or complications.
-</Typography>
-</Box>
- 
-      {/* General Surgeon */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            General Surgeon
-</Typography>
-<Chip label="DENY" color="error" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          For this patient with uncomplicated acute diverticulitis, there is no medical necessity for surgical intervention or inpatient admission at this time. Outpatient management with supportive care and close follow-up is medically necessary, aligning with current surgical and clinical guidelines
-</Typography>
-</Box>
- 
-      <Box sx={{ mt: 2, p: 1, bgcolor: '#fdecea', borderRadius: 1 }}>
-<Typography variant="caption" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
-          ✓ Consensus: 0/3 doctors recommend APPROVAL (case PA-2024-007)
-</Typography>
-</Box>
-</>
-  ) : (
-<>
-      {/* Doctor 1 */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-             Sleep medicine specialist
-</Typography>
-<Chip label="APPROVE" color="success" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          {caseId === 'PA-2024-003' 
-            ? "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
-            : "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
-          }
-</Typography>
-</Box>
-      {/* Doctor 2 */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
-</Typography>
-<Chip label="APPROVE" color="success" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          {caseId === 'PA-2024-003'
-            ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
-            : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
-          }
-</Typography>
-</Box>
-      {/* Doctor 3 */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
-</Typography>
-<Chip label="APPROVE" color="success" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          {caseId === 'PA-2024-003'
-            ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
-            : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
-          }
-</Typography>
-</Box>
-      {/* Doctor 4 */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
-</Typography>
-<Chip label="APPROVE" color="success" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          {caseId === 'PA-2024-003'
-            ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
-            : "As a Cardiologist, I strongly affirm the medical necessity of continued CPAP therapy for this patient. Given the interplay between OSA, hypertension, arrhythmias, and severe obesity, ongoing CPAP use is essential for cardiovascular risk reduction and long-term health maintenance."
-          }
-</Typography>
-</Box>
- 
-      <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
-<Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-          ✓ Consensus: 4/4 doctors recommend APPROVAL
-</Typography>
-</Box>
-</>
-  )}
+                      <Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+                        <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+                          Panel Review Summary ({caseId === 'PA-2024-007' ? '3 Doctors' : '4 Doctors'})
+                        </Typography>
+
+                        {caseId === 'PA-2024-007' ? (
+                          <>
+                            {/* Gastroenterologist */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  Gastroenterologist
+                                </Typography>
+                                <Chip label="DENY" color="error" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                Given the acute onset of symptoms, prior history of diverticulitis, and confirmation by imaging, it is medically necessary to initiate appropriate treatment and observation in Outpatient setting as the patient is stable, afebrile, and has no evidence of complications. Supportive therapy, dietary modifications, and symptom monitoring are essential. Antibiotics may be considered given her history, but shared decision-making and close follow-up are recommended.
+                              </Typography>
+                            </Box>
+
+                            {/* Infectious disease specialist */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  Infectious disease specialist
+                                </Typography>
+                                <Chip label="DENY" color="error" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                For this patient with uncomplicated acute diverticulitis, the medically necessary management includes supportive care, possible oral antibiotic therapy, pain control, and close outpatient monitoring. Inpatient admission or intravenous antibiotic therapy is not indicated unless her condition worsens or she develops signs of systemic infection or complications.
+                              </Typography>
+                            </Box>
+
+                            {/* General Surgeon */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  General Surgeon
+                                </Typography>
+                                <Chip label="DENY" color="error" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                For this patient with uncomplicated acute diverticulitis, there is no medical necessity for surgical intervention or inpatient admission at this time. Outpatient management with supportive care and close follow-up is medically necessary, aligning with current surgical and clinical guidelines
+                              </Typography>
+                            </Box>
+
+                            <Box sx={{ mt: 2, p: 1, bgcolor: '#fdecea', borderRadius: 1 }}>
+                              <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
+                                ✓ Consensus: 0/3 doctors recommend APPROVAL (case PA-2024-007)
+                              </Typography>
+                            </Box>
+                          </>
+                        ) : (
+                          <>
+                            {/* Doctor 1 */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  Sleep medicine specialist
+                                </Typography>
+                                <Chip label="APPROVE" color="success" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                {caseId === 'PA-2024-003' 
+                                  ? "Given the patient's established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
+                                  : "Given the patient's established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
+                                }
+                              </Typography>
+                            </Box>
+                            {/* Doctor 2 */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
+                                </Typography>
+                                <Chip label="APPROVE" color="success" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                {caseId === 'PA-2024-003'
+                                  ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
+                                  : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
+                                }
+                              </Typography>
+                            </Box>
+                            {/* Doctor 3 */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
+                                </Typography>
+                                <Chip label="APPROVE" color="success" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                {caseId === 'PA-2024-003'
+                                  ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
+                                  : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
+                                }
+                              </Typography>
+                            </Box>
+                            {/* Doctor 4 */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
+                                </Typography>
+                                <Chip label="APPROVE" color="success" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                {caseId === 'PA-2024-003'
+                                  ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
+                                  : "As a Cardiologist, I strongly affirm the medical necessity of continued CPAP therapy for this patient. Given the interplay between OSA, hypertension, arrhythmias, and severe obesity, ongoing CPAP use is essential for cardiovascular risk reduction and long-term health maintenance."
+                                }
+                              </Typography>
+                            </Box>
+
+                            <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
+                              <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+                                ✓ Consensus: 4/4 doctors recommend APPROVAL
+                              </Typography>
+                            </Box>
+                          </>
+                        )}
                       </Box>
                     </Box>
                   </CardContent>
