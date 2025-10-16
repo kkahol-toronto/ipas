@@ -539,7 +539,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
 
             <Grid size={{ xs: 12, md: 6 }}>
               <Typography variant="h6" gutterBottom>
-                Provider Information
+                Requesting Provider Information
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                 <HospitalIcon sx={{ mr: 1, color: 'text.secondary' }} />
