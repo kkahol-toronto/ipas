@@ -878,7 +878,6 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             Close
           </Button> */}
           </Box>
-          <ClinicalCriteriaEval caseId={caseId} />
         </TabPanel>
 
         <TabPanel value={tabValue} index={3}>

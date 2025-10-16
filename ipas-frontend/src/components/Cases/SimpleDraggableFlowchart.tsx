@@ -188,7 +188,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
           nextSteps: ['data-prediction'],
-          position: { x: 50, y: 250 }
+          position: { x: 50, y: 265 }
         },
         {
           id: 'data-prediction',
@@ -198,7 +198,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'ML-based prediction and risk assessment',
           subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
-          position: { x: 300, y: 250 }
+          position: { x: 300, y: 300 }
         },
         {
           id: 'clinical-review-planning',
@@ -208,7 +208,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Plan clinical review strategy',
           subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
           nextSteps: ['clinical-decisioning'],
-          position: { x: 550, y: 250 }
+          position: { x: 550, y: 300 }
         },
         {
           id: 'clinical-decisioning',
@@ -218,7 +218,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Final clinical decision on authorization',
           subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
           nextSteps: ['provider-notification'],
-          position: { x: 800, y: 250 }
+          position: { x: 800, y: 300 }
         },
         {
           id: 'provider-notification',
@@ -228,7 +228,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate letter and notify provider',
           subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
           nextSteps: [],
-          position: { x: 800, y: 450 }
+          position: { x: 800, y: 500 }
         }
       ];
     }
@@ -304,7 +304,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
           nextSteps: ['data-prediction'],
-          position: { x: 50, y: 250 }
+          position: { x: 50, y: 265 }
         },
         {
           id: 'data-prediction',
@@ -314,7 +314,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'ML-based prediction and risk assessment',
           subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
-          position: { x: 300, y: 250 }
+          position: { x: 300, y: 300 }
         },
         {
           id: 'clinical-review-planning',
@@ -324,7 +324,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Plan clinical review strategy',
           subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
           nextSteps: ['clinical-decisioning'],
-          position: { x: 550, y: 250 }
+          position: { x: 550, y: 300 }
         },
         {
           id: 'clinical-decisioning',
@@ -334,7 +334,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Final clinical decision on authorization',
           subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
           nextSteps: ['provider-notification'],
-          position: { x: 800, y: 250 }
+          position: { x: 800, y: 300 }
         },
         {
           id: 'provider-notification',
@@ -344,7 +344,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate letter and notify provider',
           subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
           nextSteps: [],
-          position: { x: 800, y: 450 }
+          position: { x: 800, y: 500 }
         }
       ];
     }
@@ -496,7 +496,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
           nextSteps: ['data-prediction'],
-          position: { x: 50, y: 250 }
+          position: { x: 50, y: 265 }
         },
         {
           id: 'data-prediction',
@@ -506,7 +506,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'ML-based prediction and risk assessment',
           subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
-          position: { x: 300, y: 250 }
+          position: { x: 300, y: 300 }
         },
         {
           id: 'clinical-review-planning',
@@ -516,7 +516,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Plan clinical review strategy',
           subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
           nextSteps: ['clinical-decisioning'],
-          position: { x: 550, y: 250 }
+          position: { x: 550, y: 300 }
         },
         {
           id: 'clinical-decisioning',
@@ -526,7 +526,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Final clinical decision on authorization',
           subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
           nextSteps: ['provider-notification'],
-          position: { x: 800, y: 250 }
+          position: { x: 800, y: 300 }
         },
         {
           id: 'provider-notification',
@@ -536,7 +536,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate letter and notify provider',
           subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
           nextSteps: [],
-          position: { x: 800, y: 450 }
+          position: { x: 800, y: 500 }
         }
       ];
     }
@@ -612,7 +612,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
           nextSteps: ['data-prediction'],
-          position: { x: 50, y: 250 }
+          position: { x: 50, y: 265 }
         },
         {
           id: 'data-prediction',
@@ -622,7 +622,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'ML-based prediction and risk assessment',
           subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
-          position: { x: 300, y: 250 }
+          position: { x: 300, y: 300 }
         },
         {
           id: 'clinical-review-planning',
@@ -632,7 +632,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Plan clinical review strategy',
           subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
           nextSteps: ['clinical-decisioning'],
-          position: { x: 550, y: 250 }
+          position: { x: 550, y: 300 }
         },
         {
           id: 'clinical-decisioning',
@@ -642,7 +642,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Final clinical decision on authorization',
           subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
           nextSteps: ['provider-notification'],
-          position: { x: 800, y: 250 }
+          position: { x: 800, y: 300 }
         },
         {
           id: 'provider-notification',
@@ -652,7 +652,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate approval letter and notify provider',
           subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
           nextSteps: [],
-          position: { x: 800, y: 450 }
+          position: { x: 800, y: 500 }
         }
       ];
     }
@@ -717,18 +717,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Identify and assess data gaps',
           subSteps: ['Gap Identification', 'Gap Analysis', 'Gap Resolution'],
-          nextSteps: ['data-prediction'],
-          position: { x: 1300, y: 50 }
-        },
-        {
-          id: 'data-prediction',
-          name: 'Decision Prediction',
-          type: 'process',
-          status: 'pending',
-          description: 'ML-based prediction and risk assessment',
-          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-summarization'],
-          position: { x: 50, y: 250 }
+          position: { x: 1300, y: 50 }
         },
         {
           id: 'clinical-summarization',
@@ -737,8 +727,18 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           status: 'pending',
           description: 'Generate comprehensive clinical summary',
           subSteps: ['Data Synthesis', 'Summary Generation', 'Key Findings'],
+          nextSteps: ['data-prediction'],
+          position: { x: 50, y: 265 }
+        },
+        {
+          id: 'data-prediction',
+          name: 'Decision Assessment',
+          type: 'process',
+          status: 'pending',
+          description: 'ML-based prediction and risk assessment',
+          subSteps: ['Risk Scoring', 'Outcome Prediction', 'Confidence Analysis'],
           nextSteps: ['clinical-review-planning'],
-          position: { x: 300, y: 250 }
+          position: { x: 300, y: 300 }
         },
         {
           id: 'clinical-review-planning',
@@ -748,7 +748,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Plan clinical review strategy',
           subSteps: ['Reviewer Assignment', 'Review Criteria', 'Timeline Planning'],
           nextSteps: ['clinical-decisioning'],
-          position: { x: 550, y: 250 }
+          position: { x: 550, y: 300 }
         },
         {
           id: 'clinical-decisioning',
@@ -758,7 +758,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Final clinical decision on authorization',
           subSteps: ['Medical Necessity Review', 'Clinical Guidelines', 'Final Decision'],
           nextSteps: ['provider-notification'],
-          position: { x: 800, y: 250 }
+          position: { x: 800, y: 300 }
         },
         {
           id: 'provider-notification',
@@ -768,7 +768,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           description: 'Generate approval letter and notify provider',
           subSteps: ['Letter Creation', 'Letter Generation', 'Notification'],
           nextSteps: [],
-          position: { x: 800, y: 450 }
+          position: { x: 800, y: 500 }
         }
       ];
     }
@@ -2447,7 +2447,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             backgroundColor: '#fafafa'
           }}
         >
-          <svg width="2000" height="700" style={{ position: 'absolute', top: 0, left: 0, minWidth: '2000px' }}>
+          <svg width="100%" height="680" style={{ position: 'absolute', top: 0, left: 0, minWidth: 'calc(100% + 150px)' }}>
             <defs>
               <marker
                 id="arrowhead"
