@@ -41,12 +41,12 @@ import {
 } from '@mui/icons-material';
 import { emrNotificationService, EMRNotification, EMRIntegrationStatus } from '../../services/emrNotificationService';
 
-interface EMRNotificationPanelProps {
+interface EPICNotificationPanelProps {
   caseId: string;
   showDetails?: boolean;
 }
 
-const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, showDetails = false }) => {
+const EPICNotificationPanel: React.FC<EPICNotificationPanelProps> = ({ caseId, showDetails = false }) => {
   const [notifications, setNotifications] = useState<EMRNotification[]>([]);
   const [integrationStatus, setIntegrationStatus] = useState<EMRIntegrationStatus | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -93,13 +93,13 @@ const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, sho
     }
   };
 
-  const simulateEMRFlow = async () => {
+  const simulateEPICFlow = async () => {
     setLoading(true);
     try {
       // Step 1: Send to EPIC
-      await emrNotificationService.sendToEPIC(
+      await emrNotificationService.sendToEMR(
         caseId,
-        'Dr. Sarah Johnson',
+        'Sarah Johnson',
         `AUTH-${caseId}`,
         'CPT-12345'
       );
@@ -122,7 +122,7 @@ const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, sho
       loadNotifications();
       loadIntegrationStatus();
     } catch (error) {
-      console.error('Error simulating EMR flow:', error);
+      console.error('Error simulating EPIC flow:', error);
     } finally {
       setLoading(false);
     }
@@ -149,8 +149,8 @@ const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, sho
           
           {sent ? (
             <Alert severity="success" sx={{ mb: 2 }}>
-              <AlertTitle>Sent to EPIC EMR</AlertTitle>
-              Authorization data transmitted to EPIC medical records system.
+              <AlertTitle>Sent to EMR</AlertTitle>
+              Authorization data transmitted to EMR medical records system.
               {timestamp && (
                 <Typography variant="caption" display="block" sx={{ mt: 1 }}>
                   Sent: {new Date(timestamp).toLocaleString()}
@@ -160,7 +160,7 @@ const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, sho
           ) : (
             <Alert severity="info">
               <AlertTitle>Ready to Send</AlertTitle>
-              Authorization will be sent to EPIC EMR upon case completion.
+              Authorization will be sent to EMR upon case completion.
             </Alert>
           )}
         </CardContent>
@@ -228,7 +228,7 @@ const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, sho
       <DialogTitle>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <ComputerIcon sx={{ mr: 1 }} />
-          EMR Integration Details
+          EPIC Integration Details
         </Box>
       </DialogTitle>
       <DialogContent>
@@ -269,9 +269,9 @@ const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, sho
                         Order: {notification.details.orderId}
                       </Typography>
                     )}
-                    {notification.details.epicPatientId && (
+                    {notification.details.EMRPatientId && (
                       <Typography variant="caption" display="block">
-                        EPIC ID: {notification.details.epicPatientId}
+                        EPIC ID: {notification.details.EMRPatientId}
                       </Typography>
                     )}
                   </TableCell>
@@ -333,18 +333,18 @@ const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, sho
 
             {notifications.length === 0 && (
               <Alert severity="info">
-                No EMR notifications yet. Complete the case to trigger EMR integration.
+                No EPIC notifications yet. Complete the case to trigger EPIC integration.
               </Alert>
             )}
 
             <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
               <Button
                 variant="contained"
-                onClick={simulateEMRFlow}
+                onClick={simulateEPICFlow}
                 disabled={loading}
                 startIcon={<SendIcon />}
               >
-                {loading ? 'Processing...' : 'Simulate EMR Flow'}
+                {loading ? 'Processing...' : 'Simulate EPIC Flow'}
               </Button>
             </Box>
           </CardContent>
@@ -356,4 +356,4 @@ const EMRNotificationPanel: React.FC<EMRNotificationPanelProps> = ({ caseId, sho
   );
 };
 
-export default EMRNotificationPanel;
+export default EPICNotificationPanel;

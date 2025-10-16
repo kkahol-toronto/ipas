@@ -6,7 +6,7 @@
   "processingTimeline": {
     "startTime": "2024-01-10T08:30:00Z",
     "endTime": "2024-01-10T08:35:00Z",
-    "totalDuration": "5 minutes"
+    "totalDuration": "20s"
   },
   "workflowSteps": [
     {
@@ -14,7 +14,7 @@
       "action": "Case Initiation",
       "timestamp": "2024-01-10T08:30:00Z",
       "status": "Completed",
-      "details": "Prior authorization request submitted by Dr. Sarah Johnson",
+      "details": "Prior authorization request submitted by Sarah Johnson",
       "outcome": "Case PA-2024-001 created and queued for processing",
       "comments": "High priority case - suspected brain tumor"
     },
@@ -95,18 +95,18 @@
       "action": "Provider Notification",
       "timestamp": "2024-01-10T08:34:00Z",
       "status": "Completed",
-      "details": "Notification sent to Dr. Sarah Johnson at UCLA Medical Center",
+      "details": "Notification sent to Sarah Johnson at UCLA Medical Center",
       "outcome": "Email notification delivered successfully",
       "comments": "Provider portal updated with approval status and downloadable letter"
     },
     {
       "step": 11,
-      "action": "EMR Integration",
+      "action": "EMRIntegration",
       "timestamp": "2024-01-10T08:34:30Z",
       "status": "Completed",
-      "details": "Authorization data transmitted to Epic EMR system",
-      "outcome": "Epic Patient ID: EPIC_5A3D7F92, Order placed successfully",
-      "comments": "EMR integration successful. Hospital notified. Order ID: ORD_7K2M9P4N8Q"
+      "details": "Authorization data transmitted to EMRsystem",
+      "outcome": "EMRPatient ID: EPIC_5A3D7F92, Order placed successfully",
+      "comments": "EMRintegration successful. Hospital notified. Order ID: ORD_7K2M9P4N8Q"
     }
   ],
   "keyFindings": {

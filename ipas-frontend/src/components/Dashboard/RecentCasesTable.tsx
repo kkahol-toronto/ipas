@@ -38,6 +38,8 @@ import {
   Refresh as RefreshIcon
 } from '@mui/icons-material';
 import { statusTracker, CaseStatus } from '../../services/statusTracker';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import SimpleDraggableFlowchart from '../Cases/SimpleDraggableFlowchart';
 
 interface Case {
   id: string;
@@ -46,7 +48,7 @@ interface Case {
   procedure: string;
   status: 'pending' | 'approved' | 'partially-approved' | 'denied' | 'under_review';
   submittedDate: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'low' | 'standard' | 'Urgent';
   amount: number;
 }
 
@@ -55,7 +57,7 @@ interface RecentCasesTableProps {
 }
 
 const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
-  const [caseStatuses, setCaseStatuses] = React.useState<{[key: string]: CaseStatus}>({});
+  const [caseStatuses, setCaseStatuses] = React.useState<{ [key: string]: CaseStatus }>({});
   const [editDialogOpen, setEditDialogOpen] = React.useState(false);
   const [selectedCase, setSelectedCase] = React.useState<Case | null>(null);
   const [clinicalNotes, setClinicalNotes] = React.useState('');
@@ -65,6 +67,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   const [statusUpdateDialog, setStatusUpdateDialog] = React.useState(false);
   const [newStatus, setNewStatus] = React.useState<Case['status']>('pending');
   const [statusReason, setStatusReason] = React.useState('');
+  const [agenticDialogOpen, setAgenticDialogOpen] = React.useState(false);
+  const [selectedCaseID, setSelectedCaseID] = React.useState('');
 
   // Load and monitor case statuses using the status tracker
   React.useEffect(() => {
@@ -74,10 +78,10 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
     };
 
     loadCaseStatuses();
-    
+
     // Poll for changes every 2 seconds
     const interval = setInterval(loadCaseStatuses, 2000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -98,11 +102,11 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
     {
       id: 'PA-2024-001',
       patientName: 'John Smith',
-      provider: 'Dr. Sarah Johnson',
+      provider: 'Sarah Johnson',
       procedure: 'MRI Brain with Contrast',
       status: 'approved',
-      submittedDate: '2024-01-15',
-      priority: 'high',
+      submittedDate: '2025-10-11',
+      priority: 'Urgent',
       amount: 2500
     },
     {
@@ -111,8 +115,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       provider: 'Dr. Michael Chen',
       procedure: 'Cardiac Catheterization',
       status: 'pending',
-      submittedDate: '2024-01-14',
-      priority: 'high',
+      submittedDate: '2025-10-11',
+      priority: 'Urgent',
       amount: 15000
     },
     {
@@ -121,8 +125,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       provider: 'Dr. Emily Rodriguez',
       procedure: 'Knee Arthroscopy',
       status: 'partially-approved',
-      submittedDate: '2024-01-13',
-      priority: 'medium',
+      submittedDate: '2025-10-08',
+      priority: 'standard',
       amount: 8000
     },
     {
@@ -131,18 +135,18 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       provider: 'Dr. James Thompson',
       procedure: 'Colonoscopy',
       status: 'denied',
-      submittedDate: '2024-01-12',
-      priority: 'low',
+      submittedDate: '2025-10-08',
+      priority: 'standard',
       amount: 1200
     },
     {
       id: 'PA-2024-005',
       patientName: 'David Brown',
-      provider: 'Dr. Sarah Johnson',
+      provider: 'Sarah Johnson',
       procedure: 'CT Chest with Contrast',
       status: 'approved',
-      submittedDate: '2024-01-11',
-      priority: 'medium',
+      submittedDate: '2025-10-11',
+      priority: 'standard',
       amount: 1800
     },
     {
@@ -151,8 +155,18 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       provider: 'Amy Diane Kelly, NP',
       procedure: 'CPAP Device Replacement',
       status: 'pending',
-      submittedDate: '2024-04-25',
-      priority: 'medium',
+      submittedDate: '2025-10-08',
+      priority: 'standard',
+      amount: 2500
+    },
+    {
+      id: 'PA-2024-007',
+      patientName: 'Amanda Williams',
+      provider: 'Benjamin Velky',
+      procedure: 'In patient',
+      status: 'denied',
+      submittedDate: '2025-10-11',
+      priority: 'Urgent',
       amount: 2500
     }
   ];
@@ -181,8 +195,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   const getPriorityColor = (priority: Case['priority']) => {
     const colors = {
       low: '#4caf50',
-      medium: '#ff9800',
-      high: '#f44336'
+      standard: '#ff9800',
+      Urgent: '#f44336'
     };
     return colors[priority];
   };
@@ -190,9 +204,9 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   const handleDownloadEMR = (caseItem: Case) => {
     // Get current status for this case
     const currentCaseStatus = caseStatuses[caseItem.id] || caseItem.status;
-    
-    // Generate EMR_insert.json for the case
-    const emrData = {
+
+    // Generate EPIC_insert.json for the case
+    const EPICData = {
       case_id: caseItem.id,
       patient: {
         name: caseItem.patientName,
@@ -221,18 +235,18 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       }
     };
 
-    const blob = new Blob([JSON.stringify(emrData, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(EPICData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `EMR_insert_${caseItem.id}.json`;
+    link.download = `EPIC_insert_${caseItem.id}.json`;
     link.click();
     URL.revokeObjectURL(url);
   };
 
   const availableReviewers = [
     'Dr. Sarah Wilson - Cardiologist',
-    'Dr. Michael Chen - Medical Director', 
+    'Dr. Michael Chen - Medical Director',
     'Dr. Emily Rodriguez - Clinical Specialist',
     'Dr. James Thompson - Quality Assurance',
     'Dr. Lisa Anderson - Internal Medicine',
@@ -270,13 +284,13 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             </Button>
           </Box>
         </Box>
-        <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
+        <TableContainer component={Paper} sx={{ maxHeight: 570 }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Case ID</TableCell>
                 <TableCell>Patient</TableCell>
-                <TableCell>Provider</TableCell>
+                <TableCell>Requesting Provider</TableCell>
                 <TableCell>Procedure</TableCell>
                 <TableCell>Status</TableCell>
                 <TableCell>Priority</TableCell>
@@ -292,139 +306,155 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                 const caseStatus = caseStatuses[caseItem.id];
                 const currentStatus = caseStatus?.currentStatus || caseItem.status;
                 const caseWithStatus = { ...caseItem, status: currentStatus };
-                
+
                 return (
-                <TableRow key={caseItem.id} hover>
-                  <TableCell>
-                    <Typography variant="body2" fontWeight="bold">
-                      {caseItem.id}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>{caseItem.patientName}</TableCell>
-                  <TableCell>{caseItem.provider}</TableCell>
-                  <TableCell>
-                    <Typography variant="body2" sx={{ maxWidth: 200 }}>
-                      {caseItem.procedure}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      {getStatusChip(currentStatus)}
-                      <Tooltip title="Update Status">
-                        <IconButton 
-                          size="small" 
+                  <TableRow key={caseItem.id} hover>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="bold">
+                        {caseItem.id}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>{caseItem.patientName}</TableCell>
+                    <TableCell>{caseItem.provider}</TableCell>
+                    <TableCell>
+                      <Typography variant="body2" sx={{ maxWidth: 200 }}>
+                        {caseItem.procedure}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        {getStatusChip(currentStatus)}
+                        <Tooltip title="Update Status">
+                          <IconButton
+                            size="small"
+                            onClick={() => {
+                              setSelectedCase(caseItem);
+                              setNewStatus(currentStatus);
+                              setStatusUpdateDialog(true);
+                            }}
+                          >
+                            <EditIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Box
+                          sx={{
+                            display: 'inline-block',
+                            width: 8,
+                            height: 8,
+                            borderRadius: '50%',
+                            backgroundColor: getPriorityColor(caseItem.priority),
+                            mr: 1
+                          }}
+                        />
+                        <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>
+                          {caseItem.priority}
+                        </Typography>
+                      </Box>
+
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="bold">
+                        ${caseItem.amount.toLocaleString()}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" color="text.secondary">
+                        {new Date(caseItem.submittedDate).toLocaleDateString()}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {currentStatus === 'approved' ? (
+                        <IconButton
+                          size="small"
+                          color="success"
+                          onClick={() => {
+                            // Download the approval letter PDF
+                            const link = document.createElement('a');
+                            link.href = `/sample-documents/approval-letters/${caseItem.id}-approval-letter.pdf`;
+                            link.download = `${caseItem.id}-approval-letter.pdf`;
+                            link.click();
+                          }}
+                          title="Download Approval Letter"
+                        >
+                          <DownloadIcon />
+                        </IconButton>
+                      ) : (
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <DescriptionIcon sx={{ color: '#ccc', fontSize: 20 }} />
+                        </Box>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <Box sx={{ display: 'flex', gap: 1 }}>
+                        <IconButton
+                          size="small"
+                          color="primary"
+                          onClick={() => onCaseClick?.(caseItem.id)}
+                          title="View Case Details"
+                        >
+                          <VisibilityIcon />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          color="secondary"
                           onClick={() => {
                             setSelectedCase(caseItem);
-                            setNewStatus(currentStatus);
-                            setStatusUpdateDialog(true);
+                            setClinicalNotes(`Clinical notes for ${caseItem.patientName}:\n\nProcedure: ${caseItem.procedure}\nStatus: ${currentStatus}\nPriority: ${caseItem.priority}\n\nAdd your clinical observations here...`);
+                            setEditDialogOpen(true);
+                          }}
+                          title="Edit Clinical Notes"
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          color="info"
+                          //onClick={() => handleDownloadEPIC(caseItem)}
+                          title="Download EMRInsert JSON"
+                        >
+                          <DownloadIcon />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          color="warning"
+                          onClick={() => simulateWorkflow(caseItem.id)}
+                          title="Simulate Workflow Progression"
+                        >
+                          <PlayArrowIcon />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          color="success"
+                          onClick={() => {
+                            setSelectedCase(caseItem);
+                            setSelectedReviewers([]);
+                            setShareDialogOpen(true);
+                          }}
+                          title="Share with Reviewers"
+                        >
+                          <ShareIcon />
+                        </IconButton>
+                        <IconButton
+                          id={caseItem.id}
+                          size="small"
+                          color="info"
+                          title="Orchestration Flow"
+                          onClick={() => {
+                            setSelectedCaseID(caseItem.id);
+                            setAgenticDialogOpen(true)
                           }}
                         >
-                          <EditIcon fontSize="small" />
+                          <PsychologyIcon />
                         </IconButton>
-                      </Tooltip>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        display: 'inline-block',
-                        width: 8,
-                        height: 8,
-                        borderRadius: '50%',
-                        backgroundColor: getPriorityColor(caseItem.priority),
-                        mr: 1
-                      }}
-                    />
-                    <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>
-                      {caseItem.priority}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="body2" fontWeight="bold">
-                      ${caseItem.amount.toLocaleString()}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="body2" color="text.secondary">
-                      {new Date(caseItem.submittedDate).toLocaleDateString()}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    {currentStatus === 'approved' ? (
-                      <IconButton 
-                        size="small" 
-                        color="success"
-                        onClick={() => {
-                          // Download the approval letter PDF
-                          const link = document.createElement('a');
-                          link.href = `/sample-documents/approval-letters/${caseItem.id}-approval-letter.pdf`;
-                          link.download = `${caseItem.id}-approval-letter.pdf`;
-                          link.click();
-                        }}
-                        title="Download Approval Letter"
-                      >
-                        <DownloadIcon />
-                      </IconButton>
-                    ) : (
-                      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <DescriptionIcon sx={{ color: '#ccc', fontSize: 20 }} />
+
                       </Box>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', gap: 1 }}>
-                      <IconButton 
-                        size="small" 
-                        color="primary"
-                        onClick={() => onCaseClick?.(caseItem.id)}
-                        title="View Case Details"
-                      >
-                        <VisibilityIcon />
-                      </IconButton>
-                      <IconButton 
-                        size="small" 
-                        color="secondary"
-                        onClick={() => {
-                          setSelectedCase(caseItem);
-                          setClinicalNotes(`Clinical notes for ${caseItem.patientName}:\n\nProcedure: ${caseItem.procedure}\nStatus: ${currentStatus}\nPriority: ${caseItem.priority}\n\nAdd your clinical observations here...`);
-                          setEditDialogOpen(true);
-                        }}
-                        title="Edit Clinical Notes"
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        size="small"
-                        color="info"
-                        onClick={() => handleDownloadEMR(caseItem)}
-                        title="Download EMR Insert JSON"
-                      >
-                        <DownloadIcon />
-                      </IconButton>
-                      <IconButton
-                        size="small"
-                        color="warning"
-                        onClick={() => simulateWorkflow(caseItem.id)}
-                        title="Simulate Workflow Progression"
-                      >
-                        <PlayArrowIcon />
-                      </IconButton>
-                      <IconButton
-                        size="small"
-                        color="success"
-                        onClick={() => {
-                          setSelectedCase(caseItem);
-                          setSelectedReviewers([]);
-                          setShareDialogOpen(true);
-                        }}
-                        title="Share with Reviewers"
-                      >
-                        <ShareIcon />
-                      </IconButton>
-                    </Box>
-                  </TableCell>
-                </TableRow>
-              );
+                    </TableCell>
+                  </TableRow>
+                );
               })}
             </TableBody>
           </Table>
@@ -449,8 +479,8 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             onClick={() => {
               setEditDialogOpen(false);
               // In a real app, save notes to backend
@@ -517,7 +547,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShareDialogOpen(false)}>Cancel</Button>
-          <Button 
+          <Button
             variant="contained"
             disabled={selectedReviewers.length === 0}
             onClick={() => {
@@ -531,56 +561,70 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             Share Case
           </Button>
         </DialogActions>
-        </Dialog>
+      </Dialog>
 
-        {/* Status Update Dialog */}
-        <Dialog open={statusUpdateDialog} onClose={() => setStatusUpdateDialog(false)} maxWidth="sm" fullWidth>
-          <DialogTitle>Update Case Status</DialogTitle>
-          <DialogContent>
-            <Box sx={{ pt: 2 }}>
-              <FormControl fullWidth sx={{ mb: 2 }}>
-                <InputLabel>New Status</InputLabel>
-                <Select
-                  value={newStatus}
-                  onChange={(e) => setNewStatus(e.target.value as Case['status'])}
-                  label="New Status"
-                >
-                  <MenuItem value="pending">Pending</MenuItem>
-                  <MenuItem value="under_review">Under Review</MenuItem>
-                  <MenuItem value="approved">Approved</MenuItem>
-                  <MenuItem value="partially-approved">Partially Approved</MenuItem>
-                  <MenuItem value="denied">Denied</MenuItem>
-                </Select>
-              </FormControl>
-              <TextField
-                fullWidth
-                label="Reason for Status Change"
-                multiline
-                rows={3}
-                value={statusReason}
-                onChange={(e) => setStatusReason(e.target.value)}
-                placeholder="Enter the reason for this status change..."
-              />
-            </Box>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setStatusUpdateDialog(false)}>Cancel</Button>
-            <Button 
-              onClick={() => {
-                if (selectedCase) {
-                  handleStatusUpdate(selectedCase.id, newStatus, statusReason);
-                  setStatusUpdateDialog(false);
-                  setStatusReason('');
-                }
-              }}
-              variant="contained"
-            >
-              Update Status
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Card>
-    );
-  };
+      {/* Status Update Dialog */}
+      <Dialog open={statusUpdateDialog} onClose={() => setStatusUpdateDialog(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>Update Case Status</DialogTitle>
+        <DialogContent>
+          <Box sx={{ pt: 2 }}>
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel>New Status</InputLabel>
+              <Select
+                value={newStatus}
+                onChange={(e) => setNewStatus(e.target.value as Case['status'])}
+                label="New Status"
+              >
+                <MenuItem value="pending">Pending</MenuItem>
+                <MenuItem value="under_review">Under Review</MenuItem>
+                <MenuItem value="approved">Approved</MenuItem>
+                <MenuItem value="partially-approved">Partially Approved</MenuItem>
+                <MenuItem value="denied">Denied</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              fullWidth
+              label="Reason for Status Change"
+              multiline
+              rows={3}
+              value={statusReason}
+              onChange={(e) => setStatusReason(e.target.value)}
+              placeholder="Enter the reason for this status change..."
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setStatusUpdateDialog(false)}>Cancel</Button>
+          <Button
+            onClick={() => {
+              if (selectedCase) {
+                handleStatusUpdate(selectedCase.id, newStatus, statusReason);
+                setStatusUpdateDialog(false);
+                setStatusReason('');
+              }
+            }}
+            variant="contained"
+          >
+            Update Status
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={agenticDialogOpen} onClose={() => setAgenticDialogOpen(false)} fullWidth PaperProps={{
+        sx: { maxWidth: 1700 }, // max width in px or use e.g. '80vw'
+      }}>
+        <DialogTitle>
+          Orchestration FLow
+        </DialogTitle>
+        <DialogContent>
+          <SimpleDraggableFlowchart caseId={selectedCaseID} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setAgenticDialogOpen(false)}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
 
-  export default RecentCasesTable;
+    </Card>
+  );
+};
+
+export default RecentCasesTable;

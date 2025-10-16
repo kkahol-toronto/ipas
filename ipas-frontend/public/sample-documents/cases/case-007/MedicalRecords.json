@@ -1,0 +1,199 @@
+{
+    "patient_information": {
+      "name": "Amanda Latoya Williams",
+      "date_of_birth": "3/5/1987",
+      "age": "38",
+      "gender": "Female",
+      "address": "226 Saint Augustine Dr, Greenwood, SC 29649-3212",
+      "phone": "(864) 971-1171",
+      "marital_status": "Single",
+      "emergency_contact": {
+        "name": "Virginia Booker",
+        "relationship": "Other",
+        "phone": "(864) 323-3418"
+      }
+    },
+    "clinical_history": {
+      "presenting_complaints": [
+        "Abdominal pain",
+        "Back pain",
+        "Blood in stool",
+        "Vomiting"
+      ],
+      "duration_of_symptoms": "2 days",
+      "past_medical_history": [
+        "Anemia",
+        "Diabetes mellitus",
+        "Hypertension"
+      ],
+      "past_surgical_history": [
+        "Ovarian cyst removal",
+        "Uterine polyp removal"
+      ],
+      "family_history": {
+        "father": "No known problems",
+        "mother": "Hypertension, Hyperlipidemia",
+        "maternal_uncle": "Diabetes",
+        "maternal_aunt": "Diabetes",
+        "maternal_grandmother": "Hypertension, Hyperlipidemia"
+      },
+      "social_history": {
+        "smoking_status": "Former",
+        "current_packs_per_day": "1.00",
+        "alcohol_use": "Occasionally",
+        "drug_use": "Marijuana, last used week and half ago"
+      }
+    },
+    "review_of_systems": {
+      "constitutional": "Negative for fever",
+      "respiratory": "Negative for shortness of breath",
+      "cardiovascular": "Negative for chest pain",
+      "gastrointestinal": "Negative for vomiting",
+      "skin": "Negative for rash",
+      "neurological": "Negative for headaches",
+      "hematological": "Does not bruise/bleed easily",
+      "psychiatric": "Negative for confusion"
+    },
+    "physical_exam": {
+      "vitals": {
+        "blood_pressure": "138/84",
+        "pulse": "78",
+        "temperature": "98.1 F (36.7 C)",
+        "respiratory_rate": "17",
+        "height": "1.854 m (6' 1\")",
+        "weight": "140.6 kg (310 lb)",
+        "bmi": "40.90 kg/m",
+        "spo2": "100%"
+      },
+      "general": {
+        "head": "Normocephalic and atraumatic",
+        "cardiovascular": "Normal rate and regular rhythm, normal pulses",
+        "pulmonary": "Normal effort and breath sounds",
+        "abdominal": "No distension, bowel sounds present, soft, left side abdominal and flank tenderness, no guarding or rebound, no palpable mass",
+        "musculoskeletal": "Normal range of motion, neck supple",
+        "neurological": "No focal deficit present, alert",
+        "psychiatric": "Mood normal"
+      }
+    },
+    "diagnostic_tests": {
+      "radiology": {
+        "ct_abdomen_pelvis": {
+          "date": "4/24/2025",
+          "findings": "Uncomplicated sigmoid diverticulitis, no evidence of perforation or pericolonic abscess"
+        }
+      },
+      "laboratory_tests": {
+        "cbc_with_differential": {
+          "date": "4/24/2025",
+          "results": {
+            "basophils": "0.0",
+            "eosinophils": "0.1",
+            "lymphocytes": "1.5",
+            "monocytes": "0.4",
+            "neutrophils": "5.8",
+            "nucleated_rbc": "0.0"
+          }
+        },
+        "basic_metabolic_panel": {
+          "date": "4/25/2025",
+          "results": {
+            "anion_gap": "9.0",
+            "bun": "<5",
+            "calcium": "9.5",
+            "chloride": "105",
+            "co2": "24",
+            "creatinine": "0.75",
+            "glucose": "149",
+            "potassium": "3.4",
+            "sodium": "138"
+          }
+        },
+        "comprehensive_metabolic_panel": {
+          "date": "4/24/2025",
+          "results": {
+            "albumin": "4.5",
+            "alp": "70",
+            "alt": "15",
+            "ast": "13",
+            "bilirubin": "0.8",
+            "bun": "6",
+            "calcium": "9.7",
+            "chloride": "109",
+            "co2": "25",
+            "creatinine": "0.82",
+            "globulin": "3.4",
+            "glucose": "133",
+            "potassium": "3.7",
+            "protein": "7.9",
+            "sodium": "140"
+          }
+        },
+        "urinalysis": {
+          "date": "4/24/2025",
+          "results": {
+            "appearance": "Hazy",
+            "color": "Yellow",
+            "glucose": "Negative",
+            "hgb": "Negative",
+            "ketones": "Trace",
+            "leukocyte_esterase": "Negative",
+            "nitrite": "Negative",
+            "ph": "5",
+            "protein": "Negative",
+            "specific_gravity": "1.026",
+            "urobilinogen": "Negative"
+          }
+        }
+      }
+    },
+    "medications": {
+      "current_medications": [
+        "Atorvastatin 10 mg",
+        "Ciprofloxacin 500 mg",
+        "Famotidine 20 mg",
+        "Heparin 5000 units",
+        "Insulin lispro 0-20 units",
+        "Lisinopril 5 mg",
+        "Metronidazole 500 mg",
+        "Potassium chloride 40 mEq"
+      ],
+      "prn_medications": [
+        "Acetaminophen 650 mg",
+        "Dextrose 40% gel",
+        "Dextrose 50% in water",
+        "Glucagon 1 mg",
+        "Hydrocodone-acetaminophen 7.5-325 mg",
+        "Hydromorphone 0.5 mg",
+        "Melatonin 3 mg",
+        "Metoclopramide 10 mg",
+        "Naloxone 0.2 mg",
+        "Polyethylene glycol 17 g",
+        "Sodium chloride 0.9% flush"
+      ]
+    },
+    "allergies": [
+      "Omeprazole",
+      "Pseudoephedrine HCL"
+    ],
+    "admission_information": {
+      "account_number": "10001431398",
+      "patient_type": "Inpatient",
+      "admission_date": "4/24/2025 4:54 PM",
+      "location": "5T /514-514-1",
+      "attending_physician": "Benjamin Joseph Velky",
+      "service_type": "Family Med",
+      "admitting_diagnosis": "Multiple Complaints"
+    },
+    "financial_information": {
+      "financial_class": "Commercial",
+      "plan_description": "AMBETTER-ATC CONTRACTED",
+      "plan_number": "U7183854101",
+      "group_number": "001",
+      "insured_name": "Amanda Latoya Williams",
+      "guarantor": {
+        "name": "Amanda Latoya Williams",
+        "address": "226 Saint Augustine Dr, Greenwood, SC 29649-3212",
+        "employer": "ZF Transmission"
+      }
+    }
+}

@@ -394,7 +394,7 @@ const HospitalPerformance: React.FC = () => {
                   </TableCell>
                   <TableCell align="right">
                     <Typography variant="body2">
-                      {hospital.avgProcessingTime}h
+                      {hospital.avgProcessingTime}m
                     </Typography>
                     <LinearProgress
                       variant="determinate"

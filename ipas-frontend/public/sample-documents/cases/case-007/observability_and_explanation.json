@@ -1,0 +1,120 @@
+{
+  "caseId": "PA-2025-0425-DIV-002",
+  "patientName": "Amanda Latoya Williams",
+  "procedure": "Inpatient Admission Evaluation – Acute Uncomplicated Sigmoid Diverticulitis (K57.92)",
+  "finalDecision": "DENIED",
+  "processingTimeline": {
+    "startTime": "2025-04-25T13:10:00Z",
+    "endTime": "2025-04-25T14:05:30Z",
+    "totalDuration": "1m 30s",
+    "stages": {
+      "documentProcessing": "3m 10s",
+      "clinicalAnalysis": "26m 45s",
+      "policyVerification": "23m 05s",
+      "finalDecision": "2m 30s"
+    }
+  },
+  "workflowSteps": [
+    {
+      "step": 1,
+      "action": "Document Ingestion",
+      "status": "Completed",
+      "details": "Ingested inpatient authorization form, clinical summary, UR packet, and structured MR JSON.",
+      "outcome": "All required documents successfully processed",
+      "comments": "Document quality complete and well-structured"
+    },
+    {
+      "step": 2,
+      "action": "Patient Information Extraction",
+      "status": "Completed",
+      "details": "Extracted member demographics, provider, facility, diagnosis, service type, and requested admission date.",
+      "outcome": "Patient: Amanda Latoya Williams (38F), Member ID: U7183854101",
+      "comments": "All patient data verified and accurate"
+    },
+    {
+      "step": 3,
+      "action": "Clinical Data Analysis",
+      "status": "Completed",
+      "details": "Reviewed vitals, labs, and CT imaging for clinical assessment.",
+      "outcome": "Stable vitals, normal WBC, CT shows uncomplicated sigmoid diverticulitis without abscess or perforation",
+      "comments": "No indications for acute inpatient admission"
+    },
+    {
+      "step": 4,
+      "action": "Medical Necessity Assessment",
+      "status": "Completed",
+      "details": "Assessed inpatient admission criteria against guidelines.",
+      "outcome": "High likelihood outpatient management is sufficient; inpatient admission not medically necessary",
+      "comments": "Case meets outpatient management criteria per AAFP guidance"
+    },
+    {
+      "step": 5,
+      "action": "Policy Compliance Check",
+      "status": "Completed",
+      "details": "Verified case against coverage and inpatient authorization rules.",
+      "outcome": "Criteria for inpatient admission not met",
+      "comments": "All policy checks confirm denial is compliant"
+    },
+    {
+      "step": 6,
+      "action": "Clinical Decision Support",
+      "status": "Completed",
+      "details": "Panel and AI-based review of clinical data and policy alignment.",
+      "outcome": "Recommendation: DENY inpatient admission; outpatient management recommended",
+      "comments": "Consensus supported by clinical evidence and policy compliance"
+    },
+    {
+      "step": 7,
+      "action": "Final Authorization",
+      "status": "Completed",
+      "details": "Generated final denial notice and safety-net instructions.",
+      "outcome": "Decision communicated to portal with audit trail",
+      "comments": "Patient advised on outpatient management and follow-up precautions"
+    }
+  ],
+  "keyFindings": {
+    "clinicalJustification": "Patient afebrile, hemodynamically stable, normal WBC, CT shows uncomplicated sigmoid diverticulitis without abscess/perforation. Outpatient management appropriate.",
+    "medicalNecessity": "Inpatient admission not clinically indicated; outpatient care recommended per guidelines.",
+    "policyCompliance": "Meets all policy criteria for denial; inpatient admission requires systemic toxicity, hemodynamic instability, or imaging complications.",
+    "costEfficiency": "Avoids unnecessary hospitalization costs; outpatient management is cost-effective and guideline concordant."
+  },
+  "approvalDetails": {
+    "authorizationNumber": "PA-2025-0425-DIV-002-DENIED",
+    "approvedAmount": "$0.00",
+    "validUntil": "2025-06-01",
+    "approvedBy": "IPAS Automated System",
+    "reviewType": "Automated Denial with Physician Panel Review",
+    "coverageDetails": {
+      "inpatientCare": "Not approved",
+      "outpatientCare": "Recommended with diet modification, analgesia, and selective oral antibiotics as needed"
+    }
+  },
+  "qualityMetrics": {
+    "processingAccuracy": "99.1%",
+    "clinicalConfidence": "94%",
+    "policyCompliance": "100%",
+    "costOptimization": "95%",
+    "timelineEfficiency": "95%",
+    "documentQuality": "95%",
+    "automationLevel": "100%",
+    "patientSatisfaction": "93%"
+  },
+  "riskAssessment": {
+    "clinicalRisk": "Low",
+    "financialRisk": "Low",
+    "complianceRisk": "Low",
+    "overallRisk": "Low"
+  },
+  "recommendations": {
+    "immediate": "Outpatient management with clear liquid to low residue diet, analgesics, and selective antibiotics if indicated",
+    "followUp": "Re-evaluate within 48–72 hours or sooner if red flags occur",
+    "monitoring": "Track for fever, worsening pain, persistent vomiting, or signs of complications",
+    "education": "Provide patient education on diet, medication adherence, and red-flag symptoms"
+  },
+  "systemNotes": {
+    "automationTrigger": "Vitals and imaging matched uncomplicated diverticulitis profile; no sepsis signals",
+    "humanReview": "Physician panel convened due to inpatient request conflicting with guideline profile",
+    "exceptionHandling": "No exceptions identified; standard outpatient pathway recommended",
+    "auditTrail": "Complete audit trail maintained with all workflow steps and document sources"
+  }
+}

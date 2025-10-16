@@ -567,7 +567,7 @@ const GeographicHeatMap: React.FC = () => {
                         Cases: {location.totalCases}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Avg Time: {location.avgProcessingTime}h
+                        Avg Time: {location.avgProcessingTime}m
                       </Typography>
                     </Box>
                     <Box sx={{ textAlign: 'right' }}>

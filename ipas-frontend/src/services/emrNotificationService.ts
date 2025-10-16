@@ -1,6 +1,6 @@
 /**
  * EMR Notification Service
- * Handles notifications for EPIC EMR integration and hospital order entry
+ * Handles notifications for EMR integration and hospital order entry
  */
 
 export interface EMRNotification {
@@ -14,7 +14,7 @@ export interface EMRNotification {
     providerName?: string;
     hospitalName?: string;
     orderId?: string;
-    epicPatientId?: string;
+    EMRPatientId?: string;
     authorizationNumber?: string;
     procedureCode?: string;
     errorMessage?: string;
@@ -72,8 +72,8 @@ class EMRNotificationService {
     return newNotification;
   }
 
-  // Simulate sending authorization to EPIC EMR
-  sendToEPIC(caseId: string, providerName: string, authorizationNumber: string, procedureCode: string): Promise<EMRNotification> {
+  // Simulate sending authorization to EMR
+  sendToEMR(caseId: string, providerName: string, authorizationNumber: string, procedureCode: string): Promise<EMRNotification> {
     return new Promise((resolve, reject) => {
       // Simulate API call delay
       setTimeout(() => {
@@ -82,12 +82,12 @@ class EMRNotificationService {
             caseId,
             type: 'provider_sent',
             status: 'sent',
-            message: `Authorization sent to EPIC EMR for ${providerName}`,
+            message: `Authorization sent to EMR for ${providerName}`,
             details: {
               providerName,
               authorizationNumber,
               procedureCode,
-              epicPatientId: `EPIC_${Math.random().toString(36).substr(2, 8).toUpperCase()}`
+              EMRPatientId: `EMR_${Math.random().toString(36).substr(2, 8).toUpperCase()}`
             }
           });
 
@@ -102,7 +102,7 @@ class EMRNotificationService {
     });
   }
 
-  // Simulate hospital receiving notification from EPIC
+  // Simulate hospital receiving notification from EMR
   simulateHospitalNotification(caseId: string, hospitalName: string, delay: number = 2000): Promise<EMRNotification> {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -110,7 +110,7 @@ class EMRNotificationService {
           caseId,
           type: 'hospital_received',
           status: 'received',
-          message: `Hospital ${hospitalName} received authorization notification from EPIC`,
+          message: `Hospital ${hospitalName} received authorization notification from EMR`,
           details: {
             hospitalName,
             authorizationNumber: `AUTH_${Math.random().toString(36).substr(2, 8).toUpperCase()}`

@@ -16,11 +16,11 @@ import {
 } from '@mui/icons-material';
 import { emrNotificationService, EMRIntegrationStatus } from '../../services/emrNotificationService';
 
-interface EMRNotificationStatusProps {
+interface EPICNotificationStatusProps {
   caseId: string;
 }
 
-const EMRNotificationStatus: React.FC<EMRNotificationStatusProps> = ({ caseId }) => {
+const EPICNotificationStatus: React.FC<EPICNotificationStatusProps> = ({ caseId }) => {
   const [integrationStatus, setIntegrationStatus] = useState<EMRIntegrationStatus | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +46,7 @@ const EMRNotificationStatus: React.FC<EMRNotificationStatusProps> = ({ caseId })
       return (
         <Chip
           icon={<CheckCircleIcon />}
-          label="Sent to EPIC"
+          label="Sent to EMR"
           color="success"
           size="small"
           sx={{ fontSize: '0.7rem', height: '24px' }}
@@ -105,12 +105,12 @@ const EMRNotificationStatus: React.FC<EMRNotificationStatusProps> = ({ caseId })
     );
   };
 
-  const simulateEMRFlow = async () => {
+  const simulateEPICFlow = async () => {
     setLoading(true);
     try {
-      await emrNotificationService.sendToEPIC(
+      await emrNotificationService.sendToEMR(
         caseId,
-        'Dr. Sarah Johnson',
+        'Sarah Johnson',
         `AUTH-${caseId}`,
         'CPT-12345'
       );
@@ -131,7 +131,7 @@ const EMRNotificationStatus: React.FC<EMRNotificationStatusProps> = ({ caseId })
         );
       }, 4000);
     } catch (error) {
-      console.error('Error simulating EMR flow:', error);
+      console.error('Error simulating EPIC flow:', error);
     } finally {
       setLoading(false);
     }
@@ -142,10 +142,10 @@ const EMRNotificationStatus: React.FC<EMRNotificationStatusProps> = ({ caseId })
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
         <ComputerIcon sx={{ fontSize: '1rem', color: '#666' }} />
         <Typography variant="caption" color="text.secondary">
-          EMR Integration Ready
+          EPIC Integration Ready
         </Typography>
-        <Tooltip title="Simulate EMR Flow">
-          <IconButton size="small" onClick={simulateEMRFlow} disabled={loading}>
+        <Tooltip title="Simulate EPIC Flow">
+          <IconButton size="small" onClick={simulateEPICFlow} disabled={loading}>
             <SendIcon sx={{ fontSize: '1rem' }} />
           </IconButton>
         </Tooltip>
@@ -172,4 +172,4 @@ const EMRNotificationStatus: React.FC<EMRNotificationStatusProps> = ({ caseId })
   );
 };
 
-export default EMRNotificationStatus;
+export default EPICNotificationStatus;

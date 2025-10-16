@@ -148,6 +148,15 @@ const HospitalPortal: React.FC = () => {
                 provider: 'Amy Diane Kelly, NP',
                 hospital: 'Prisma Health Pulmonology - Sumter'
               };
+            case 'PA-2024-007':
+              return {
+                patientName: 'Rebecca===Hardin',
+                patientId: 'P-2024-007',
+                procedure: 'Inpatient',
+                provider: 'Benjamin Velky',
+                hospital: 'Self Regional HE'
+              };
+                            
             default:
               return {
                 patientName: 'Unknown Patient',

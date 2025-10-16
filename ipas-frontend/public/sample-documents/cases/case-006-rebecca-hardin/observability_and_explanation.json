@@ -6,7 +6,7 @@
   "processingTimeline": {
     "startTime": "2024-04-25T12:16:34Z",
     "endTime": "2024-04-25T15:48:00Z",
-    "totalDuration": "3h 31m 26s",
+    "totalDuration": "1m 4s",
     "stages": {
       "documentProcessing": "2m 15s",
       "clinicalAnalysis": "1h 23m 45s",

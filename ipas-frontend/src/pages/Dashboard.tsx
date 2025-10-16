@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Box, Typography, Card, CardContent, Dialog, DialogTitle, DialogContent, Alert, IconButton, Button, LinearProgress, Chip } from '@mui/material';
 import { Close as CloseIcon, Download as DownloadIcon, Description as DescriptionIcon, TrendingUp, TrendingDown, TrendingFlat } from '@mui/icons-material';
 import ApprovalStatusChart from '../components/Dashboard/ApprovalStatusChart';
-import RecentCasesTable from '../components/Dashboard/RecentCasesTable';
+//import RecentCasesTable from '../components/Dashboard/RecentCasesTable';
 import AnalyticsReports from '../components/Dashboard/AnalyticsReports';
 import GeographicHeatMap from '../components/Dashboard/GeographicHeatMap';
 import HospitalPerformance from '../components/Dashboard/HospitalPerformance';
@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
   // Check if letter was generated for any case
   React.useEffect(() => {
     const checkLetterGeneration = () => {
-      const caseIds = ['PA-2024-001', 'PA-2024-002', 'PA-2024-003', 'PA-2024-004', 'PA-2024-005', 'PA-2024-006'];
+      const caseIds = ['PA-2024-001', 'PA-2024-002', 'PA-2024-003', 'PA-2024-004', 'PA-2024-005', 'PA-2024-006', 'PA-2024-007'];
       
       for (const caseId of caseIds) {
         const letterKey = `ipas_letter_generated_${caseId}`;
@@ -327,9 +327,9 @@ const Dashboard: React.FC = () => {
         </Box>
 
       {/* Recent Cases Table */}
-      <Box sx={{ mb: 4 }}>
+      {/* <Box sx={{ mb: 4 }}>
         <RecentCasesTable onCaseClick={handleCaseClick} />
-      </Box>
+      </Box> */}
 
       {/* Geographic Heat Map */}
       <Box sx={{ mb: 4 }}>

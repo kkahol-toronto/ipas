@@ -44,6 +44,9 @@ import {
 } from '@mui/icons-material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
 import CaseDocuments from './CaseDocuments';
+import ClinicalSummary from './ClinicalSummary';
+import ClinicalCriteriaEval from './ClinicalCriteriaEval';
+import MedicalRecordRetrival from './MedicalRecordRetrival'
 import EMRNotificationPanel from '../Notifications/EMRNotificationPanel';
 
 interface CaseDetailsEnhancedProps {
@@ -85,6 +88,9 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [clinicalNotes, setClinicalNotes] = useState('');
   const [observabilityDialogOpen, setObservabilityDialogOpen] = useState(false);
   const [observabilityData, setObservabilityData] = useState<any>(null);
+  const [selectedOption, setSelectedOption] = useState('Approved');
+  const [emrIntegrationOpen, setEmrIntegrationOpen] = useState(false);
+
 
   // Dynamic case data based on caseId
   const getCaseData = (caseId: string) => {
@@ -94,15 +100,15 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         patientName: 'John Smith',
         patientId: 'P-2024-001',
         dateOfBirth: '1985-03-15',
-        provider: 'Dr. Sarah Johnson',
+        provider: 'Sarah Johnson',
         providerId: 'PR-001',
         hospital: 'UCLA Medical Center',
         procedure: 'MRI Brain with Contrast',
         diagnosis: 'Suspected Brain Tumor',
         status: 'In Review',
         priority: 'High',
-        submittedDate: '2024-01-15T10:30:00Z',
-        lastUpdated: '2024-01-15T14:45:00Z',
+        submittedDate: '2025-10-08T10:32:00Z',
+        lastUpdated: '2025-10-08T14:45:00Z',
         insurance: 'Blue Cross Blue Shield',
         policyNumber: 'BC123456789',
         estimatedCost: 2500,
@@ -113,17 +119,18 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
         ],
         clinicalNotes: [
-          { timestamp: '2024-01-15T10:30:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Dr. Sarah Johnson' },
-          { timestamp: '2024-01-15T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Dr. Sarah Johnson' },
-          { timestamp: '2024-01-15T12:00:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
+          { timestamp: '2025-10-08T10:32:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Sarah Johnson' },
+          { timestamp: '2025-10-08T11:15:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Sarah Johnson' },
+          { timestamp: '2025-10-08T12:00:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
         ],
         aiAnalysis: {
           clinicalNecessity: 0.94,
           coverageEligibility: 0.87,
-          riskAssessment: 'Medium',
+          riskAssessment: 'Standard',
           recommendedAction: 'Approve with monitoring',
           confidence: 0.91
-        }
+        },
+        ipopFlag: ''
       },
       'PA-2024-002': {
         id: 'PA-2024-002',
@@ -137,8 +144,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         diagnosis: 'Coronary Artery Disease',
         status: 'In Review',
         priority: 'High',
-        submittedDate: '2024-01-16T09:15:00Z',
-        lastUpdated: '2024-01-16T13:20:00Z',
+        submittedDate: '2025-10-09T09:18:00Z',
+        lastUpdated: '2025-10-09T13:24:00Z',
         insurance: 'Aetna',
         policyNumber: 'AET987654321',
         estimatedCost: 15000,
@@ -149,9 +156,9 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
         ],
         clinicalNotes: [
-          { timestamp: '2024-01-16T09:15:00Z', note: 'Patient presents with chest pain and shortness of breath', author: 'Dr. Michael Chen' },
-          { timestamp: '2024-01-16T10:30:00Z', note: 'EKG shows ST elevation, cardiac catheterization recommended', author: 'Dr. Michael Chen' },
-          { timestamp: '2024-01-16T11:45:00Z', note: 'Prior authorization submitted for cardiac catheterization', author: 'Nurse Jennifer Lee' }
+          { timestamp: '2025-10-09T09:18:00Z', note: 'Patient presents with chest pain and shortness of breath', author: 'Dr. Michael Chen' },
+          { timestamp: '2025-10-09T10:30:00Z', note: 'EKG shows ST elevation, cardiac catheterization recommended', author: 'Dr. Michael Chen' },
+          { timestamp: '2025-10-09T11:45:00Z', note: 'Prior authorization submitted for cardiac catheterization', author: 'Nurse Jennifer Lee' }
         ],
         aiAnalysis: {
           clinicalNecessity: 0.98,
@@ -159,7 +166,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'High',
           recommendedAction: 'Approve immediately',
           confidence: 0.95
-        }
+        },
+        ipopFlag: ''
       },
       'PA-2024-003': {
         id: 'PA-2024-003',
@@ -172,30 +180,68 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         procedure: 'Knee Arthroscopy',
         diagnosis: 'Meniscal Tear',
         status: 'In Review',
-        priority: 'Medium',
-        submittedDate: '2024-01-17T14:20:00Z',
-        lastUpdated: '2024-01-17T16:45:00Z',
+        priority: 'Standard',
+        submittedDate: '2025-10-10T14:22:00Z',
+        lastUpdated: '2025-10-10T16:48:00Z',
         insurance: 'Kaiser Permanente',
         policyNumber: 'KP456789123',
         estimatedCost: 8000,
         documents: [
           { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.0 MB', status: 'Processed' },
           { id: 'doc2', name: 'MRI Knee Results.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
-          { id: 'doc3', name: 'Physical Therapy Notes.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
+          { id: 'doc3', name: 'Robert Davis Medical Records.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
           { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
         ],
         clinicalNotes: [
-          { timestamp: '2024-01-17T14:20:00Z', note: 'Patient reports persistent knee pain and limited mobility', author: 'Dr. Emily Rodriguez' },
-          { timestamp: '2024-01-17T15:30:00Z', note: 'MRI confirms meniscal tear, arthroscopy recommended', author: 'Dr. Emily Rodriguez' },
-          { timestamp: '2024-01-17T16:00:00Z', note: 'Prior authorization submitted for knee arthroscopy', author: 'Nurse David Kim' }
+          { timestamp: '2025-10-10T14:22:00Z', note: 'Patient reports persistent knee pain and limited mobility', author: 'Dr. Emily Rodriguez' },
+          { timestamp: '2025-10-10T15:30:00Z', note: 'MRI confirms meniscal tear, arthroscopy recommended', author: 'Dr. Emily Rodriguez' },
+          { timestamp: '2025-10-10T16:00:00Z', note: 'Prior authorization submitted for knee arthroscopy', author: 'Nurse David Kim' }
         ],
         aiAnalysis: {
           clinicalNecessity: 0.89,
           coverageEligibility: 0.85,
-          riskAssessment: 'Medium',
+          riskAssessment: 'Standard',
           recommendedAction: 'Approve with coverage limit',
           confidence: 0.87
-        }
+        },
+        ipopFlag: ''
+      },
+      'PA-2024-004': {
+        id: 'PA-2024-004',
+        patientName: 'Lisa Wilson',
+        patientId: 'P-2024-004',
+        dateOfBirth: '1985-03-15',
+        provider: 'Andrew Thomson',
+        providerId: 'PR-004',
+        hospital: 'UCLA Medical Center',
+        procedure: 'MRI Brain with Contrast',
+        diagnosis: 'Suspected Brain Tumor',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2025-10-08T11:02:00Z',
+        lastUpdated: '2025-10-08T14:47:00Z',
+        insurance: 'Blue Cross Blue Shield',
+        policyNumber: 'BC123456789',
+        estimatedCost: 2500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
+          { id: 'doc2', name: 'MRI Scan - Brain.jpg', type: 'Image', size: '4.1 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Patient Medical Records.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Insurance Card.png', type: 'Image', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2025-10-08T11:02:00Z', note: 'Patient presents with persistent headaches and visual disturbances', author: 'Sarah Johnson' },
+          { timestamp: '2025-10-08T11:45:00Z', note: 'MRI recommended to rule out brain tumor', author: 'Sarah Johnson' },
+          { timestamp: '2025-10-08T12:10:00Z', note: 'Prior authorization submitted to insurance', author: 'Nurse Mary Wilson' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.94,
+          coverageEligibility: 0.87,
+          riskAssessment: 'Standard',
+          recommendedAction: 'Approve with monitoring',
+          confidence: 0.91
+        },
+        ipopFlag: 'Outpatient'
       },
       'PA-2024-006': {
         id: 'PA-2024-006',
@@ -208,9 +254,9 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         procedure: 'CPAP Device Replacement',
         diagnosis: 'Obstructive Sleep Apnea (G47.33)',
         status: 'In Review',
-        priority: 'Medium',
-        submittedDate: '2024-04-25T12:16:34Z',
-        lastUpdated: '2024-04-25T15:48:00Z',
+        priority: 'Standard',
+        submittedDate: '2025-10-09T12:14:00Z',
+        lastUpdated: '2025-10-09T15:46:00Z',
         insurance: 'Ambetter / Absolute Total Care',
         policyNumber: 'U7131533302',
         estimatedCost: 2500,
@@ -222,9 +268,9 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           { id: 'doc5', name: 'Insurance Card.pdf', type: 'PDF', size: '0.9 MB', status: 'Processed' }
         ],
         clinicalNotes: [
-          { timestamp: '2024-04-24T15:05:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
-          { timestamp: '2024-04-24T15:48:00Z', note: 'CPAP device replacement needed - current device 5+ years old', author: 'Amy Diane Kelly, NP' },
-          { timestamp: '2024-04-25T12:16:34Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
+          { timestamp: '2025-10-09T12:14:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2025-10-09T15:46:00Z', note: "CPAP Device Replacement needed as member is requesting for a personal device. She is currently using father-in-law's device", author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2025-10-09T13:10:00Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
         ],
         aiAnalysis: {
           clinicalNecessity: 0.96,
@@ -232,8 +278,47 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           riskAssessment: 'Low',
           recommendedAction: 'Approve - clear medical necessity',
           confidence: 0.95
-        }
+        },
+        ipopFlag: 'Outpatient'
+
+
+      },
+      'PA-2024-007': {
+        id: 'PA-2024-007',
+        patientName: 'Amanda Williams',
+        patientId: 'P-2024-007',
+        dateOfBirth: '1987-03-05',
+        provider: 'Benjamin Velky',
+        providerId: 'PR-007',
+        hospital: 'Self regional HE',
+        procedure: 'In Patient',
+        diagnosis: 'Diverticulitis of Intestine, part unspecified, without perforation or abcess without bleeding (K57.92)',
+        status: 'Denied',
+        priority: 'Urgent',
+        submittedDate: '2024-04-25T12:16:34Z',
+        lastUpdated: '2024-04-25T15:48:00Z',
+        insurance: 'Ambetter - ATC contracted ',
+        policyNumber: 'U7183854101',
+        estimatedCost: 2500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2024-04-24T15:05:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2024-04-24T15:48:00Z', note: "CPAP Device Replacement needed as member is requesting for a personal device. She is currently using father in law's device ", author: 'Amy Diane Kelly, NP' },
+          { timestamp: '2024-04-25T12:16:34Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.95,
+          coverageEligibility: 0.94,
+          riskAssessment: 'Low',
+          recommendedAction: 'Deny - clear medical necessity',
+          confidence: 0.95
+        },
+        ipopFlag: ''
       }
+
     };
 
     return caseDataMap[caseId] || {
@@ -267,9 +352,42 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
 
   const caseData = getCaseData(caseId);
 
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
+
+  // Check if "Auth Decision Summary" tab is clicked
+  if (newValue === 2) { // Assuming "Auth Decision Summary" is the third tab (index 2)
+    
+    // Immediately invoke the async function
+    (async () => {
+      try {
+        const folderName =
+          caseId === 'PA-2024-001' ? 'case-001-john-doe' :
+          caseId === 'PA-2024-002' ? 'case-002-jane-smith' :
+          caseId === 'PA-2024-003' ? 'case-003-mike-johnson' :
+          caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' :
+          caseId === 'PA-2024-005' ? 'case-005-david-brown' :
+          caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' :
+          caseId === 'PA-2024-007' ? 'case-007':
+          'case-001-john-doe';
+
+          const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const data = await response.json();
+          setObservabilityData(data);
+        } catch (error) {
+          console.error('Failed to fetch observability data:', error);
+          // Handle the error appropriately
+        }
+      })();
+    }
   };
+
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -284,7 +402,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const getPriorityColor = (priority: string) => {
     switch (priority.toLowerCase()) {
       case 'high': return 'error';
-      case 'medium': return 'warning';
+      case 'Standard': return 'warning';
       case 'low': return 'success';
       default: return 'default';
     }
@@ -319,57 +437,32 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="info"
                   size="small"
                 />
+
+                {caseData.ipopFlag &&
+                  <Chip
+                    label={caseData.ipopFlag}
+                    color="success"
+                    size="small"
+                  />
+                }
+
               </Box>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
-              <Tooltip title="Download EMR Insert JSON">
+              {/* <Tooltip title="EMR Integration">
                 <IconButton
-                  onClick={() => {
-                    const emrData = {
-                      case_id: caseData.id,
-                      patient: {
-                        name: caseData.patientName,
-                        patient_id: caseData.patientId,
-                        date_of_birth: caseData.dateOfBirth,
-                        insurance: caseData.insurance,
-                        policy_number: caseData.policyNumber
-                      },
-                      provider: {
-                        name: caseData.provider,
-                        provider_id: caseData.providerId,
-                        hospital: caseData.hospital
-                      },
-                      procedure: {
-                        name: caseData.procedure,
-                        diagnosis: caseData.diagnosis,
-                        estimated_cost: caseData.estimatedCost
-                      },
-                      authorization: {
-                        status: caseData.status,
-                        priority: caseData.priority,
-                        submitted_date: caseData.submittedDate,
-                        last_updated: caseData.lastUpdated
-                      },
-                      clinical_notes: clinicalNotes || caseData.clinicalNotes.map((n: any) => n.note).join('\n')
-                    };
-                    const blob = new Blob([JSON.stringify(emrData, null, 2)], { type: 'application/json' });
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = `EMR_insert_${caseData.id}.json`;
-                    link.click();
-                    URL.revokeObjectURL(url);
-                  }}
+                  onClick={() => setEmrIntegrationOpen(true)}
                 >
-                  <DownloadIcon />
+                  <ComputerIcon />
                 </IconButton>
-              </Tooltip>
+              </Tooltip> */}
+
               <Tooltip title="View Observability & Explanation">
                 <IconButton
                   color="info"
                   onClick={async () => {
                     try {
-                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe';
+                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe';
                       const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
                       const data = await response.json();
                       setObservabilityData(data);
@@ -388,7 +481,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="success"
                   onClick={() => {
                     const link = document.createElement('a');
-                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
+                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe'}/observability_and_explanation.json`;
                     link.download = `observability_and_explanation_${caseId}.json`;
                     link.click();
                   }}
@@ -446,7 +539,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
 
             <Grid size={{ xs: 12, md: 6 }}>
               <Typography variant="h6" gutterBottom>
-                Provider Information
+                Requesting Provider Information
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                 <HospitalIcon sx={{ mr: 1, color: 'text.secondary' }} />
@@ -476,25 +569,367 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
 
       {/* Tabs */}
       <Card>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', alignItems: 'center' }}>
           <Tabs value={tabValue} onChange={handleTabChange} aria-label="case details tabs">
-            <Tab label="Orchestration" icon={<AIIcon />} />
+            {/* <Tab label="Orchestration" icon={<AIIcon />} /> */}
             <Tab label="Documents" icon={<DocumentIcon />} />
-            <Tab label="Clinical Notes" icon={<TimelineIcon />} />
-            <Tab label="AI Analysis" icon={<PsychologyIcon />} />
-            <Tab label="EMR Integration" icon={<ComputerIcon />} />
+            <Tab label="Clinical Summary" icon={<DocumentIcon />} />
+            <Tab label="Auth Decision Summary" icon={<DocumentIcon />} />
+
+            <Tab label="Review Notes" icon={<TimelineIcon />} />
           </Tabs>
+          <Box sx={{ marginLeft: 'auto' }}>
+            <Tooltip title="EMR Integration">
+              <IconButton
+                onClick={() => setEmrIntegrationOpen(true)}
+              >
+                <ComputerIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
         </Box>
 
-        <TabPanel value={tabValue} index={0}>
+        {/* <TabPanel value={tabValue} index={0}>
           <SimpleDraggableFlowchart caseId={caseId} />
-        </TabPanel>
+        </TabPanel> */}
 
-        <TabPanel value={tabValue} index={1}>
+        <TabPanel value={tabValue} index={0}>
           <CaseDocuments caseId={caseId} />
         </TabPanel>
 
+        <TabPanel value={tabValue} index={1}>
+          <ClinicalSummary caseId={caseId} />
+        </TabPanel>
+
         <TabPanel value={tabValue} index={2}>
+
+
+
+
+          {/* Observability & Explanation Dialog */}
+          <Box>
+            {observabilityData && (
+
+              <Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <DocumentIcon color="secondary" />
+                  <Typography variant="h6" sx={{ ml: 1, fontWeight: 'bold' }}>
+                    Observability & Explanation Report
+                  </Typography>
+                </Box>
+                {/* Summary Section */}
+                <Paper sx={{ p: 2, mb: 3, bgcolor: '#f5f5f5' }} variant="outlined">
+                  <Grid container spacing={2}>
+                    <Grid size={{ xs: 6, md: 3 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Patient</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.patientName}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 3 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Procedure</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.procedure}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 3 }}>
+                      <FormControl fullWidth >
+                        <InputLabel id="demo-simple-select-label">Smart Auth recommendation </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          value={selectedOption}
+                          onChange={(e) => setSelectedOption(e.target.value)}
+                          label="Smart Auth recommendation"
+                        >
+                          <MenuItem value="Approved">Approved</MenuItem>
+                          <MenuItem value="Denied">Denied</MenuItem>
+                          <MenuItem value="Pend">Pend</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 3 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Processing Time</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.processingTimeline.totalDuration}</Typography>
+                    </Grid>
+                  </Grid>
+                </Paper>
+
+                {/* Key Findings */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Key Findings</Typography>
+                <Grid container spacing={2} sx={{ mb: 3 }}>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }} variant="outlined">
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Clinical Justification</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.clinicalJustification}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }} variant="outlined">
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Medical Necessity</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.medicalNecessity}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }} variant="outlined">
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Policy Compliance</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.policyCompliance}</Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Paper sx={{ p: 2, height: '100%' }} variant="outlined">
+                      <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>Cost Efficiency</Typography>
+                      <Typography variant="body2" color="text.secondary">{observabilityData.keyFindings.costEfficiency}</Typography>
+                    </Paper>
+                  </Grid>
+                </Grid>
+
+                {/* Approval Details */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
+                <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
+                  <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved Amount</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Valid Until</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved By</Typography>
+                      <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Review Type</Typography>
+                      <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
+                    </Grid>
+                  </Grid>
+                </Paper>
+
+                {/* Quality Metrics */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
+                <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
+                  <Grid container spacing={2}>
+                    {Object.entries(observabilityData.qualityMetrics).map(([key, value]) => (
+                      <Grid size={{ xs: 6, md: 4 }} key={key}>
+                        <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>
+                          {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{String(value)}</Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Paper>
+
+                
+
+                <Card sx={{ mb: 3 }} variant="outlined">
+                  <CardContent>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                      <DocumentIcon color="secondary" />
+                      <Typography variant="h6" sx={{ ml: 1, fontWeight: 'bold' }}>
+                        AI Specialist panel recommendation
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" sx={{ mb: 3 }}>
+                        Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : 'APPROVE'}</strong>
+                      </Typography>
+                      {caseId === 'PA-2024-003' && (
+                        <Typography variant="body2" color="warning.main" sx={{ mb: 2, p: 1, bgcolor: '#fff3cd', borderRadius: 1 }}>
+                          ⚠️ Insurance coverage limit: $4,000 maximum for knee arthroscopy procedures
+                        </Typography>
+                      )}
+
+                      {/* Panel Members' Votes */}
+{/* Panel Members' Votes */}
+<Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+<Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+    Panel Review Summary ({caseId === 'PA-2024-007' ? '3 Doctors' : '4 Doctors'})
+</Typography>
+ 
+  {caseId === 'PA-2024-007' ? (
+<>
+      {/* Gastroenterologist */}
+<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            Gastroenterologist
+</Typography>
+<Chip label="DENY" color="error" size="small" />
+</Box>
+<Typography variant="caption" color="text.secondary">
+          Given the acute onset of symptoms, prior history of diverticulitis, and confirmation by imaging, it is medically necessary to initiate appropriate treatment and observation in Outpatient setting as the patient is stable, afebrile, and has no evidence of complications. Supportive therapy, dietary modifications, and symptom monitoring are essential. Antibiotics may be considered given her history, but shared decision-making and close follow-up are recommended.
+</Typography>
+</Box>
+ 
+      {/* Infectious disease specialist */}
+<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            Infectious disease specialist
+</Typography>
+<Chip label="DENY" color="error" size="small" />
+</Box>
+<Typography variant="caption" color="text.secondary">
+          For this patient with uncomplicated acute diverticulitis, the medically necessary management includes supportive care, possible oral antibiotic therapy, pain control, and close outpatient monitoring. Inpatient admission or intravenous antibiotic therapy is not indicated unless her condition worsens or she develops signs of systemic infection or complications.
+</Typography>
+</Box>
+ 
+      {/* General Surgeon */}
+<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            General Surgeon
+</Typography>
+<Chip label="DENY" color="error" size="small" />
+</Box>
+<Typography variant="caption" color="text.secondary">
+          For this patient with uncomplicated acute diverticulitis, there is no medical necessity for surgical intervention or inpatient admission at this time. Outpatient management with supportive care and close follow-up is medically necessary, aligning with current surgical and clinical guidelines
+</Typography>
+</Box>
+ 
+      <Box sx={{ mt: 2, p: 1, bgcolor: '#fdecea', borderRadius: 1 }}>
+<Typography variant="caption" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
+          ✓ Consensus: 0/3 doctors recommend APPROVAL (case PA-2024-007)
+</Typography>
+</Box>
+</>
+  ) : (
+<>
+      {/* Doctor 1 */}
+<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+             Sleep medicine specialist
+</Typography>
+<Chip label="APPROVE" color="success" size="small" />
+</Box>
+<Typography variant="caption" color="text.secondary">
+          {caseId === 'PA-2024-003' 
+            ? "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
+            : "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
+          }
+</Typography>
+</Box>
+      {/* Doctor 2 */}
+<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
+</Typography>
+<Chip label="APPROVE" color="success" size="small" />
+</Box>
+<Typography variant="caption" color="text.secondary">
+          {caseId === 'PA-2024-003'
+            ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
+            : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
+          }
+</Typography>
+</Box>
+      {/* Doctor 3 */}
+<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
+</Typography>
+<Chip label="APPROVE" color="success" size="small" />
+</Box>
+<Typography variant="caption" color="text.secondary">
+          {caseId === 'PA-2024-003'
+            ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
+            : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
+          }
+</Typography>
+</Box>
+      {/* Doctor 4 */}
+<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
+</Typography>
+<Chip label="APPROVE" color="success" size="small" />
+</Box>
+<Typography variant="caption" color="text.secondary">
+          {caseId === 'PA-2024-003'
+            ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
+            : "As a Cardiologist, I strongly affirm the medical necessity of continued CPAP therapy for this patient. Given the interplay between OSA, hypertension, arrhythmias, and severe obesity, ongoing CPAP use is essential for cardiovascular risk reduction and long-term health maintenance."
+          }
+</Typography>
+</Box>
+ 
+      <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
+<Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+          ✓ Consensus: 4/4 doctors recommend APPROVAL
+</Typography>
+</Box>
+</>
+  )}
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Card>
+
+                {/* Workflow Steps Table */}
+                <Typography variant="h6" sx={{ mb: 2 }}>Workflow Steps</Typography>
+                <TableContainer component={Paper} variant="outlined">
+                  <Table size="small">
+                    <TableHead>
+                      <TableRow sx={{ bgcolor: '#f5f5f5' }}>
+                        <TableCell sx={{ fontWeight: 'bold', width: '5%' }}>Step</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '15%' }}>Action</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '10%' }}>Status</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '25%' }}>Details</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '25%' }}>Outcome</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', width: '20%' }}>Comments</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {observabilityData.workflowSteps.map((step: any) => (
+                        <TableRow key={step.step}>
+                          <TableCell>{step.step}</TableCell>
+                          <TableCell sx={{ fontWeight: 'bold' }}>{step.action}</TableCell>
+                          <TableCell>
+                            <Chip
+                              label={step.status}
+                              color={step.status === 'Completed' ? 'success' : 'default'}
+                              size="small"
+                            />
+                          </TableCell>
+                          <TableCell sx={{ fontSize: '0.875rem' }}>{step.details}</TableCell>
+                          <TableCell sx={{ fontSize: '0.875rem' }}>{step.outcome}</TableCell>
+                          <TableCell sx={{ fontSize: '0.875rem', color: 'text.secondary' }}>{step.comments}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+
+                
+              </Box>
+            )}
+
+            {/* <Button
+            startIcon={<DownloadIcon />}
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.download = `observability_and_explanation_${caseId}.json`;
+              link.click();
+            }}
+          >
+            Download 
+          </Button>
+           <Button  variant="contained">
+            Save
+          </Button>
+          <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">
+            Close
+          </Button> */}
+          </Box>
+        </TabPanel>
+
+        <TabPanel value={tabValue} index={3}>
           <Typography variant="h6" gutterBottom>
             Clinical Timeline
           </Typography>
@@ -517,116 +952,6 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             </Box>
           ))}
         </TabPanel>
-
-        <TabPanel value={tabValue} index={3}>
-          <Typography variant="h6" gutterBottom>
-            AI Analysis Results
-          </Typography>
-          <Grid container spacing={3}>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Paper sx={{ p: 2 }}>
-                <Typography variant="h6" gutterBottom>
-                  Clinical Assessment
-                </Typography>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body2" gutterBottom>
-                    Clinical Necessity Score
-                  </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Box sx={{ width: '100%', mr: 1 }}>
-                      <Box
-                        sx={{
-                          width: '100%',
-                          height: 8,
-                          backgroundColor: '#e0e0e0',
-                          borderRadius: 4,
-                          overflow: 'hidden'
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            width: `${caseData.aiAnalysis.clinicalNecessity * 100}%`,
-                            height: '100%',
-                            backgroundColor: '#4caf50'
-                          }}
-                        />
-                      </Box>
-                    </Box>
-                    <Typography variant="body2" fontWeight="bold">
-                      {(caseData.aiAnalysis.clinicalNecessity * 100).toFixed(1)}%
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body2" gutterBottom>
-                    Coverage Eligibility
-                  </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Box sx={{ width: '100%', mr: 1 }}>
-                      <Box
-                        sx={{
-                          width: '100%',
-                          height: 8,
-                          backgroundColor: '#e0e0e0',
-                          borderRadius: 4,
-                          overflow: 'hidden'
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            width: `${caseData.aiAnalysis.coverageEligibility * 100}%`,
-                            height: '100%',
-                            backgroundColor: '#2196f3'
-                          }}
-                        />
-                      </Box>
-                    </Box>
-                    <Typography variant="body2" fontWeight="bold">
-                      {(caseData.aiAnalysis.coverageEligibility * 100).toFixed(1)}%
-                    </Typography>
-                  </Box>
-                </Box>
-              </Paper>
-            </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Paper sx={{ p: 2 }}>
-                <Typography variant="h6" gutterBottom>
-                  Risk Assessment
-                </Typography>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body2" gutterBottom>
-                    Risk Level
-                  </Typography>
-                  <Chip
-                    label={caseData.aiAnalysis.riskAssessment}
-                    color={caseData.aiAnalysis.riskAssessment === 'Low' ? 'success' : 
-                           caseData.aiAnalysis.riskAssessment === 'Medium' ? 'warning' : 'error'}
-                  />
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body2" gutterBottom>
-                    Recommended Action
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {caseData.aiAnalysis.recommendedAction}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body2" gutterBottom>
-                    Overall Confidence
-                  </Typography>
-                  <Typography variant="h6" color="primary">
-                    {(caseData.aiAnalysis.confidence * 100).toFixed(1)}%
-                  </Typography>
-                </Box>
-              </Paper>
-            </Grid>
-          </Grid>
-        </TabPanel>
-
-        <TabPanel value={tabValue} index={4}>
-          <EMRNotificationPanel caseId={caseId} showDetails={true} />
-        </TabPanel>
       </Card>
 
       {/* Edit Clinical Notes Dialog */}
@@ -647,8 +972,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEditNotesOpen(false)}>Cancel</Button>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             onClick={() => {
               setEditNotesOpen(false);
               alert('Clinical notes saved successfully!');
@@ -715,7 +1040,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShareDialogOpen(false)}>Cancel</Button>
-          <Button 
+          <Button
             variant="contained"
             disabled={selectedReviewers.length === 0}
             onClick={() => {
@@ -727,6 +1052,29 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             }}
           >
             Share Case
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* EMR Integration Dialog */}
+      <Dialog
+        open={emrIntegrationOpen}
+        onClose={() => setEmrIntegrationOpen(false)}
+        maxWidth="lg"
+        fullWidth
+      >
+        <DialogTitle>
+          <Typography variant="h6">
+            EMR Integration - {caseId}
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <MedicalRecordRetrival caseId={caseId} />
+          <EMRNotificationPanel caseId={caseId} showDetails={true} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEmrIntegrationOpen(false)} variant="contained">
+            Close
           </Button>
         </DialogActions>
       </Dialog>
@@ -761,12 +1109,19 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                     <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.procedure}</Typography>
                   </Grid>
                   <Grid size={{ xs: 6, md: 3 }}>
-                    <Typography variant="caption" color="text.secondary">Final Decision</Typography>
-                    <Chip 
-                      label={observabilityData.finalDecision} 
-                      color={observabilityData.finalDecision === 'APPROVED' ? 'success' : 'error'}
-                      size="small"
-                    />
+                    <FormControl fullWidth >
+                      <InputLabel id="demo-simple-select-label">Smart Auth recommendation </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        value={selectedOption}
+                        onChange={(e) => setSelectedOption(e.target.value)}
+                        label="Smart Auth recommendation"
+                      >
+                        <MenuItem value="Approved">Approved</MenuItem>
+                        <MenuItem value="Denied">Denied</MenuItem>
+                        <MenuItem value="Pend">Pend</MenuItem>
+                      </Select>
+                    </FormControl>
                   </Grid>
                   <Grid size={{ xs: 6, md: 3 }}>
                     <Typography variant="caption" color="text.secondary">Processing Time</Typography>
@@ -795,8 +1150,8 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                         <TableCell>{step.step}</TableCell>
                         <TableCell sx={{ fontWeight: 'bold' }}>{step.action}</TableCell>
                         <TableCell>
-                          <Chip 
-                            label={step.status} 
+                          <Chip
+                            label={step.status}
                             color={step.status === 'Completed' ? 'success' : 'default'}
                             size="small"
                           />
@@ -884,16 +1239,19 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           )}
         </DialogContent>
         <DialogActions>
-          <Button 
+          <Button
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe'}/observability_and_explanation.json`;
               link.download = `observability_and_explanation_${caseId}.json`;
               link.click();
             }}
           >
-            Download JSON
+            Download
+          </Button>
+          <Button variant="contained">
+            Save
           </Button>
           <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">
             Close
