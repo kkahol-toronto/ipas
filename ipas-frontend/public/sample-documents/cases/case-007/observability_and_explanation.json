@@ -1,16 +1,18 @@
 {
-  "caseId": "PA-2025-0425-DIV-002",
+  "caseId": "PA-2024-007",
   "patientName": "Amanda Latoya Williams",
   "procedure": "Inpatient Admission Evaluation – Acute Uncomplicated Sigmoid Diverticulitis (K57.92)",
   "finalDecision": "DENIED",
   "processingTimeline": {
-    "startTime": "2025-04-25T13:10:00Z",
+    "startTime": "2025-04-24T16:54:00Z",
     "endTime": "2025-04-25T14:05:30Z",
-    "totalDuration": "1m 30s",
+    "totalDuration": "21h 11m 30s",
     "stages": {
       "documentProcessing": "3m 10s",
-      "clinicalAnalysis": "26m 45s",
-      "policyVerification": "23m 05s",
+      "clinicalAnalysis": "8h 26m 45s",
+      "policyVerification": "6h 23m 05s",
+      "riskAssessment": "2h 15m 30s",
+      "physianPanelReview": "3h 45m 20s",
       "finalDecision": "2m 30s"
     }
   },
@@ -19,57 +21,89 @@
       "step": 1,
       "action": "Document Ingestion",
       "status": "Completed",
-      "details": "Ingested inpatient authorization form, clinical summary, UR packet, and structured MR JSON.",
-      "outcome": "All required documents successfully processed",
-      "comments": "Document quality complete and well-structured"
+      "details": "Ingested inpatient authorization form, clinical summary, UR packet, structured medical records JSON, CT imaging reports, and laboratory results",
+      "outcome": "All required documents successfully processed - 15 documents including medical records, imaging, and lab results",
+      "comments": "Document quality excellent - comprehensive clinical documentation with complete imaging and laboratory data"
     },
     {
       "step": 2,
       "action": "Patient Information Extraction",
       "status": "Completed",
-      "details": "Extracted member demographics, provider, facility, diagnosis, service type, and requested admission date.",
-      "outcome": "Patient: Amanda Latoya Williams (38F), Member ID: U7183854101",
-      "comments": "All patient data verified and accurate"
+      "details": "Extracted comprehensive patient demographics, insurance information, provider details, facility information, diagnosis codes, and service type from authorization request",
+      "outcome": "Patient: Amanda Latoya Williams (38F, DOB: 03/05/1987), Member ID: U7183854101, Ambetter-ATC insurance, Admitted: 04/24/2025",
+      "comments": "Insurance verification successful - active coverage confirmed with Ambetter-ATC contracted plan, requesting provider: Benjamin Velky, NPI: 1083063507, facility: Self Regional HE"
     },
     {
       "step": 3,
       "action": "Clinical Data Analysis",
       "status": "Completed",
-      "details": "Reviewed vitals, labs, and CT imaging for clinical assessment.",
-      "outcome": "Stable vitals, normal WBC, CT shows uncomplicated sigmoid diverticulitis without abscess or perforation",
-      "comments": "No indications for acute inpatient admission"
+      "details": "Analyzed vital signs, laboratory tests (CBC, CMP, BMP, UA), CT abdomen/pelvis imaging results, medical history, and current medications",
+      "outcome": "Vitals stable: BP 138/84, HR 78, Temp 98.1°F, SpO2 100%. Labs: Normal WBC, no leukocytosis. CT: Uncomplicated sigmoid diverticulitis without abscess, perforation, or pericolonic complications",
+      "comments": "Patient hemodynamically stable, afebrile, no signs of sepsis or systemic toxicity. Clinical presentation consistent with uncomplicated diverticulitis suitable for outpatient management"
     },
     {
       "step": 4,
       "action": "Medical Necessity Assessment",
       "status": "Completed",
-      "details": "Assessed inpatient admission criteria against guidelines.",
-      "outcome": "High likelihood outpatient management is sufficient; inpatient admission not medically necessary",
-      "comments": "Case meets outpatient management criteria per AAFP guidance"
+      "details": "Evaluated inpatient admission criteria against InterQual guidelines and AAFP evidence-based criteria for acute diverticulitis management",
+      "outcome": "Medical necessity score for inpatient: 32% (Low) - Patient does not meet criteria for inpatient admission. Outpatient management appropriate with oral antibiotics and dietary modification",
+      "comments": "Patient lacks high-risk features: no fever, no significant leukocytosis, no imaging complications, no immunosuppression, tolerating oral intake, stable vital signs. AAFP guidelines support outpatient management"
     },
     {
       "step": 5,
       "action": "Policy Compliance Check",
       "status": "Completed",
-      "details": "Verified case against coverage and inpatient authorization rules.",
-      "outcome": "Criteria for inpatient admission not met",
-      "comments": "All policy checks confirm denial is compliant"
+      "details": "Verified inpatient authorization requirements against Ambetter coverage criteria and CMS guidelines for acute care admissions",
+      "outcome": "Inpatient admission criteria NOT met - policy requires presence of complications (abscess, perforation), hemodynamic instability, sepsis, or inability to tolerate oral intake",
+      "comments": "Coverage criteria strictly define inpatient necessity. Current clinical presentation does not meet any threshold criteria for inpatient authorization"
     },
     {
       "step": 6,
-      "action": "Clinical Decision Support",
+      "action": "Cost Analysis",
       "status": "Completed",
-      "details": "Panel and AI-based review of clinical data and policy alignment.",
-      "outcome": "Recommendation: DENY inpatient admission; outpatient management recommended",
-      "comments": "Consensus supported by clinical evidence and policy compliance"
+      "details": "Calculated estimated costs for inpatient admission versus outpatient management with antibiotics and follow-up care",
+      "outcome": "Inpatient admission: $12,500-15,000 (3-day stay). Outpatient management: $800-1,200 (medications, follow-up visits, imaging if needed). Cost savings: $11,700",
+      "comments": "Outpatient management is cost-effective and clinically appropriate, avoiding unnecessary hospitalization costs while maintaining quality care"
     },
     {
       "step": 7,
-      "action": "Final Authorization",
+      "action": "Risk Assessment",
       "status": "Completed",
-      "details": "Generated final denial notice and safety-net instructions.",
-      "outcome": "Decision communicated to portal with audit trail",
-      "comments": "Patient advised on outpatient management and follow-up precautions"
+      "details": "Evaluated clinical risks associated with outpatient management including risk of progression, complications, and readmission potential",
+      "outcome": "Low risk for outpatient management - 5% risk of progression requiring hospitalization. Patient has no high-risk comorbidities, stable social support (emergency contact available)",
+      "comments": "Risk factors assessed: BMI 40.9 (obesity), diabetes mellitus, hypertension - all well-controlled. Patient appropriate for outpatient care with safety-net instructions"
+    },
+    {
+      "step": 8,
+      "action": "Clinical Guidelines Review",
+      "status": "Completed",
+      "details": "Comprehensive review of AAFP evidence-based guidelines, ACG clinical guidelines for diverticulitis, and institutional protocols for uncomplicated diverticulitis",
+      "outcome": "All major clinical guidelines support outpatient management for uncomplicated diverticulitis without systemic signs of infection or complications",
+      "comments": "Evidence strongly supports selective outpatient management with oral antibiotics (Ciprofloxacin + Metronidazole already prescribed) and dietary modifications"
+    },
+    {
+      "step": 9,
+      "action": "Physician Panel Review",
+      "status": "Completed",
+      "details": "Convened physician panel review due to inpatient admission request conflicting with clinical guideline recommendations. Panel consisted of gastroenterologist, hospitalist, and medical director",
+      "outcome": "Panel consensus: DENY inpatient admission. Unanimous agreement that clinical presentation does not warrant inpatient care. Outpatient management appropriate with close follow-up",
+      "comments": "Panel noted patient already receiving appropriate antibiotic therapy (Ciprofloxacin 500mg, Metronidazole 500mg). Clear liquid to low-residue diet recommended with 48-72 hour follow-up"
+    },
+    {
+      "step": 10,
+      "action": "Alternative Treatment Recommendations",
+      "status": "Completed",
+      "details": "Developed comprehensive outpatient care plan including medication regimen, dietary modifications, symptom monitoring, and follow-up schedule",
+      "outcome": "Recommended outpatient plan: Continue current antibiotics (7-10 day course), clear liquid diet progressing to low-residue, oral analgesics (current: Hydrocodone-acetaminophen PRN), follow-up in 48-72 hours",
+      "comments": "Safety-net instructions provided: Return to ED if fever >101°F, worsening abdominal pain, persistent vomiting, inability to tolerate oral intake, or signs of peritonitis. Patient education materials provided"
+    },
+    {
+      "step": 11,
+      "action": "Final Authorization Decision",
+      "status": "Completed",
+      "details": "Generated final denial determination with detailed clinical rationale, alternative care recommendations, and appeal rights information",
+      "outcome": "Authorization #PA-2024-007-DENIED issued for inpatient admission. Denial letter sent to provider and facility with comprehensive justification and outpatient care plan",
+      "comments": "Decision communicated to Self Regional HE UR Department via secure portal with complete audit trail. Provider advised of patient's appeal rights and peer-to-peer review availability"
     }
   ],
   "keyFindings": {
@@ -78,15 +112,33 @@
     "policyCompliance": "Meets all policy criteria for denial; inpatient admission requires systemic toxicity, hemodynamic instability, or imaging complications.",
     "costEfficiency": "Avoids unnecessary hospitalization costs; outpatient management is cost-effective and guideline concordant."
   },
-  "approvalDetails": {
-    "authorizationNumber": "PA-2025-0425-DIV-002-DENIED",
-    "approvedAmount": "$0.00",
-    "validUntil": "2025-06-01",
-    "approvedBy": "IPAS Automated System",
-    "reviewType": "Automated Denial with Physician Panel Review",
+  "denialDetails": {
+    "authorizationNumber": "PA-2024-007-DENIED",
+    "denialReason": "Inpatient admission does not meet medical necessity criteria - clinical presentation appropriate for outpatient management",
+    "deniedAmount": "$12,500.00 - $15,000.00",
+    "denialDate": "2025-04-25",
+    "deniedBy": "IPAS Automated System with Physician Panel Review",
+    "reviewType": "Automated Initial Denial with Physician Panel Consensus Review",
+    "reviewPanel": {
+      "gastroenterologist": "Dr. Sarah Mitchell, MD - Gastroenterology",
+      "hospitalist": "Dr. James O'Connor, MD - Hospital Medicine",
+      "medicalDirector": "Dr. Patricia Chen, MD, MBA - Medical Director"
+    },
     "coverageDetails": {
-      "inpatientCare": "Not approved",
-      "outpatientCare": "Recommended with diet modification, analgesia, and selective oral antibiotics as needed"
+      "inpatientCare": "DENIED - Does not meet inpatient admission criteria per policy guidelines",
+      "outpatientCare": "COVERED AND RECOMMENDED - Oral antibiotics (Ciprofloxacin 500mg BID + Metronidazole 500mg TID for 7-10 days), dietary modifications (clear liquid progressing to low-residue diet), oral analgesics for pain management, follow-up visit within 48-72 hours"
+    },
+    "alternativeCareApproved": {
+      "medications": "Ciprofloxacin 500mg, Metronidazole 500mg, Hydrocodone-acetaminophen 7.5-325mg PRN - APPROVED",
+      "followUpVisit": "Office visit within 48-72 hours - APPROVED",
+      "diagnosticTests": "Repeat CT abdomen/pelvis if symptoms worsen - PRE-APPROVED",
+      "estimatedOutpatientCost": "$800 - $1,200"
+    },
+    "appealRights": {
+      "appealDeadline": "2025-05-25 (30 days from denial date)",
+      "peerToPeerReview": "Available - Provider may request peer-to-peer discussion within 5 business days",
+      "expeditedAppeal": "Available if clinical situation changes or worsens",
+      "contactNumber": "1-800-IPAS-APPEAL"
     }
   },
   "qualityMetrics": {
@@ -106,15 +158,29 @@
     "overallRisk": "Low"
   },
   "recommendations": {
-    "immediate": "Outpatient management with clear liquid to low residue diet, analgesics, and selective antibiotics if indicated",
-    "followUp": "Re-evaluate within 48–72 hours or sooner if red flags occur",
-    "monitoring": "Track for fever, worsening pain, persistent vomiting, or signs of complications",
-    "education": "Provide patient education on diet, medication adherence, and red-flag symptoms"
+    "immediate": "Outpatient management with clear liquid to low residue diet, analgesics (Hydrocodone-acetaminophen 7.5-325mg PRN), and continue current antibiotic regimen (Ciprofloxacin 500mg BID + Metronidazole 500mg TID)",
+    "followUp": "Re-evaluate within 48-72 hours with primary care provider or gastroenterologist. Clinical assessment to include vital signs, abdominal exam, and symptom progression evaluation",
+    "monitoring": "Safety-net instructions: Monitor for fever >101°F, worsening abdominal pain, persistent vomiting, inability to tolerate oral intake, rectal bleeding, or signs of peritonitis. Immediate ED evaluation if any warning signs develop",
+    "education": "Comprehensive patient education provided on dietary modifications (clear liquids day 1-2, progress to low-residue diet as tolerated), medication compliance, importance of adequate hydration, activity restrictions, and recognition of warning symptoms requiring immediate medical attention",
+    "dietaryRecommendations": "Clear liquid diet initially (broth, gelatin, clear juices), advance to low-residue diet as symptoms improve (white bread, white rice, cooked vegetables without skins), avoid high-fiber foods, nuts, seeds, and raw vegetables during acute phase",
+    "medicationManagement": "Complete full 7-10 day antibiotic course even if symptoms improve. Take probiotics after antibiotic completion to restore gut flora. Continue current medications for diabetes and hypertension as prescribed"
   },
   "systemNotes": {
-    "automationTrigger": "Vitals and imaging matched uncomplicated diverticulitis profile; no sepsis signals",
-    "humanReview": "Physician panel convened due to inpatient request conflicting with guideline profile",
-    "exceptionHandling": "No exceptions identified; standard outpatient pathway recommended",
-    "auditTrail": "Complete audit trail maintained with all workflow steps and document sources"
+    "automationTrigger": "Clinical decision support algorithm identified uncomplicated diverticulitis profile based on stable vitals, absence of fever, normal inflammatory markers, and CT imaging showing no complications. Automated system flagged case for denial with physician panel review due to inpatient request",
+    "humanReview": "Physician panel (gastroenterologist, hospitalist, medical director) convened for consensus review due to inpatient admission request conflicting with clinical guideline recommendations. Panel unanimously agreed with system recommendation for denial",
+    "exceptionHandling": "No exceptions identified. Case followed standard denial pathway for uncomplicated diverticulitis. Alternative outpatient care plan approved and communicated. Peer-to-peer review option offered to requesting provider",
+    "auditTrail": "Complete audit trail maintained for all 11 workflow steps including document processing timestamps, AI analysis parameters, policy criteria evaluation, panel review notes, and final decision communication. All data sources documented including medical records, imaging reports, laboratory results, and clinical guidelines referenced",
+    "communicationLog": "Denial notification sent via secure portal to Self Regional HE UR Department on 04/25/2025 at 14:05:30Z. Provider notification includes detailed clinical rationale, alternative care recommendations, appeal rights, and peer-to-peer review contact information. Patient notification letter generated with layman explanation of decision and care instructions",
+    "qualityAssurance": "Case reviewed for quality assurance compliance - all documentation requirements met, clinical guidelines appropriately applied, patient safety considerations addressed through comprehensive outpatient care plan and safety-net instructions"
+  },
+  "clinicalReferences": {
+    "guidelines": [
+      "AAFP Evidence-Based Guidelines for Acute Diverticulitis Management (2021)",
+      "American College of Gastroenterology Clinical Guidelines for Diverticular Disease (2021)",
+      "InterQual Level of Care Criteria for Acute Care Admissions (2024)",
+      "CMS Inpatient Admission Guidance and Two-Midnight Rule",
+      "Ambetter Medical Policy: Inpatient Hospital Admissions - Medical Necessity Criteria"
+    ],
+    "evidence": "Multiple high-quality studies demonstrate safety and efficacy of outpatient management for uncomplicated diverticulitis with low rates of treatment failure (5-7%) and complications (<2%). Hinchey Grade 0-1 diverticulitis without systemic signs does not require hospitalization per current evidence."
   }
 }

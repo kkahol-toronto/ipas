@@ -227,6 +227,23 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
       "jsonUrl": "/sample-documents/cases/case-007/Summary.pdf",
       "isExtracted": false
     }
+  ],
+  
+  "PA-2024-008": [
+    {
+      "id": "1",
+      "name": "Clinical Summary",
+      "type": "pdf",
+      "category": "prior-auth",
+      "size": "1.6 MB",
+      "uploadDate": "2024-02-07",
+      "status": "ready",
+      "url": "/sample-documents/cases/008/ClinicalSummary _110402.pdf",
+      "originalUrl": "/sample-documents/cases/008/ClinicalSummary _110402.pdf",
+      "extractedUrl": "/sample-documents/cases/008/ClinicalSummary _110402.pdf",
+      "jsonUrl": "/sample-documents/cases/008/MedicalRecordJson.txt",
+      "isExtracted": false
+    }
   ]
 
     };

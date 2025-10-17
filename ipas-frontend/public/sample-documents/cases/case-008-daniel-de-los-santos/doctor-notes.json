@@ -1,0 +1,424 @@
+{
+  "documentType": "Doctor Notes",
+  "resourceType": "Bundle",
+  "type": "document",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:composition-visit-2025",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "visit-2025",
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "11488-4",
+              "display": "Consult note"
+            }
+          ],
+          "text": "Pulmonology progress note"
+        },
+        "date": "2025-04-24T15:48:00-05:00",
+        "title": "Pulmonology Follow-up Note - Rebecca Hardin",
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "author": [
+          {
+            "reference": "Practitioner/amy-kelly"
+          }
+        ],
+        "section": [
+          {
+            "title": "Subjective",
+            "text": {
+              "status": "generated",
+              "div": "<div>Compliant with CPAP; Epworth 3/24; no snoring or fatigue.</div>"
+            }
+          },
+          {
+            "title": "Objective",
+            "text": {
+              "status": "generated",
+              "div": "<div>Vitals: BP118/69, HR68, SpO2 94%, Weight 136 kg. Sleep study AHI 8.9/hr, SpO2 nadir 69%.</div>"
+            }
+          },
+          {
+            "title": "Assessment",
+            "text": {
+              "status": "generated",
+              "div": "<div>Mild OSA (G47.33), Nocturnal Hypoxemia (G47.36), Obesity (E66.01 Z68.42), Atrial Fib, Hypertension.</div>"
+            }
+          },
+          {
+            "title": "Plan",
+            "text": {
+              "status": "generated",
+              "div": "<div>Continue CPAP. Order replacement AutoSet CPAP (E0601,E0562,A7037,A4604,A7038). Length of Need 99 months. Follow-up 3 months.</div>"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:patient-rebecca-hardin",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "rebecca-hardin",
+        "name": [
+          {
+            "family": "Hardin",
+            "given": [
+              "Rebecca"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1976-08-25",
+        "address": [
+          {
+            "line": [
+              "2045 Lloyd Dr"
+            ],
+            "city": "Sumter",
+            "state": "SC",
+            "postalCode": "29154-9233"
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "803-607-6918"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:practitioner-amy-kelly",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "amy-kelly",
+        "name": [
+          {
+            "family": "Kelly",
+            "given": [
+              "Amy",
+              "Diane"
+            ],
+            "suffix": [
+              "NP"
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "1578173555"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/dea",
+            "value": "MK6112560"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-osa",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "osa-condition",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "G47.33",
+              "display": "Obstructive Sleep Apnea"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "onsetDateTime": "2022-08-16",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:devicerequest-cpap",
+      "resource": {
+        "resourceType": "DeviceRequest",
+        "id": "cpap-replacement",
+        "status": "active",
+        "intent": "order",
+        "codeCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
+              "code": "E0601",
+              "display": "CPAP device"
+            }
+          ],
+          "text": "ResMed S10 AutoSet CPAP with heated humidifier"
+        },
+        "parameter": [
+          {
+            "code": {
+              "text": "Heated Humidifier"
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "E0562"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "text": "Tubing"
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "A7037"
+                },
+                {
+                  "code": "A4604"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "text": "Filter"
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "A7038"
+                }
+              ]
+            }
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/osa-condition"
+          }
+        ],
+        "authoredOn": "2025-04-24T15:48:00-05:00",
+        "requester": {
+          "reference": "Practitioner/amy-kelly"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationstatement-acetaminophen",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "acetaminophen",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "161",
+              "display": "Acetaminophen 650 MG Oral Tablet"
+            }
+          ],
+          "text": "Acetaminophen (TYLENOL) 650 mg tablet"
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "dosage": [
+          {
+            "text": "650 mg, as needed"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationstatement-apixaban",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "apixaban",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "1117300",
+              "display": "Apixaban 5 MG Oral Tablet"
+            }
+          ],
+          "text": "Apixaban (ELIQUIS) 5 mg tablet"
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "dosage": [
+          {
+            "text": "5 mg, oral, 2 times daily"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationstatement-atenolol",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "atenolol",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "197361",
+              "display": "Atenolol 25 MG Oral Tablet"
+            }
+          ],
+          "text": "Atenolol (TENORMIN) 25 mg tablet"
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "dosage": [
+          {
+            "text": "25 mg, oral, at bedtime"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationstatement-cetirizine",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "cetirizine",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "573621",
+              "display": "Cetirizine 10 MG Oral Tablet"
+            }
+          ],
+          "text": "Cetirizine (ZyrTEC) 10 mg tablet"
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "dosage": [
+          {
+            "text": "10 mg, 1 tablet, as needed"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationstatement-cpap",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "cpap",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "CPAP Replacement Autoset CPAP-Aerocare"
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "dosage": [
+          {
+            "text": "Use nightly as directed"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationstatement-flecainide",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "flecainide",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "197795",
+              "display": "Flecainide 100 MG Oral Tablet"
+            }
+          ],
+          "text": "Flecainide (TAMBOCOR) 100 mg tablet"
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "dosage": [
+          {
+            "text": "100 mg, oral, 2 times daily"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationstatement-fluticasone",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "fluticasone",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "197361",
+              "display": "Fluticasone propionate 50 mcg/actuation nasal spray"
+            }
+          ],
+          "text": "Fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray"
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "dosage": [
+          {
+            "text": "1 spray, as needed"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationstatement-losartan-hctz",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "losartan-hctz",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "316764",
+              "display": "Losartan 100 MG / Hydrochlorothiazide 12.5 MG Oral Tablet"
+            }
+          ],
+          "text": "Losartan-hydrochlorothiazide (HYZAAR) 100-12.5 mg tablet"
+        },
+        "subject": {
+          "reference": "Patient/rebecca-hardin"
+        },
+        "dosage": [
+          {
+            "text": "100-12.5 mg per tablet, 1 tablet, oral, daily"
+          }
+        ]
+      }
+    }
+  ]
+}

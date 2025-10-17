@@ -168,6 +168,16 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       submittedDate: '2025-10-11',
       priority: 'Urgent',
       amount: 2500
+    },
+    {
+      id: 'PA-2024-008',
+      patientName: 'Daniel de Los Santos marin',
+      provider: 'Amanda R',
+      procedure: 'Electrocardiogram',
+      status: 'pending',
+      submittedDate: '2025-10-08',
+      priority: 'standard',
+      amount: 2500
     }
   ];
 
@@ -613,7 +623,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
         sx: { maxWidth: 1700 }, // max width in px or use e.g. '80vw'
       }}>
         <DialogTitle>
-          Orchestration FLow
+          Orchestration Flow
         </DialogTitle>
         <DialogContent>
           <SimpleDraggableFlowchart caseId={selectedCaseID} />

@@ -1,0 +1,61 @@
+{
+  "study_type": "2D Doppler Echocardiogram",
+  "patient_name": "Daniel De Los Santos Marin",
+  "medical_record_number": "D856360",
+  "study_date": "02/07/2025",
+  "indication": "Myocardial infarction without ST elevation (NSTEMI)",
+  "ordering_physician": "Dr. Christopher P McCarty, MD",
+  "reading_physician": "Dr. Christopher P McCarty, MD",
+  "sonographer": "N' Dia Small",
+  "findings": {
+    "left_ventricle": {
+      "size": "Normal",
+      "ejection_fraction": "60-65%",
+      "wall_thickness": "Normal",
+      "systolic_function": "Normal",
+      "regional_wall_motion": "Normal",
+      "diastolic_dysfunction": "Grade I (impaired relaxation)"
+    },
+    "right_ventricle": {
+      "size": "Normal",
+      "systolic_function": "Normal"
+    },
+    "left_atrium": {
+      "size": "Normal"
+    },
+    "right_atrium": {
+      "size": "Normal"
+    },
+    "aortic_valve": {
+      "regurgitation": "Mild"
+    },
+    "mitral_valve": {
+      "leaflet_excursion": "Normal",
+      "stenosis": "None",
+      "regurgitation": "Trivial"
+    },
+    "tricuspid_valve": {
+      "structure": "Normal",
+      "stenosis": "None",
+      "regurgitation": "None"
+    },
+    "pulmonic_valve": {
+      "visualization": "Poor",
+      "regurgitation": "Trivial"
+    },
+    "aorta": {
+      "root_size": "Normal"
+    },
+    "inferior_vena_cava": {
+      "size": "Normal",
+      "respiratory_collapse": "Normal"
+    },
+    "pericardium": {
+      "appearance": "Normal",
+      "effusion": "None"
+    }
+  },
+  "impression": "Normal left ventricular ejection fraction (60-65%). Grade I diastolic dysfunction. Mild aortic regurgitation. Overall cardiac function preserved post-NSTEMI.",
+  "technical_limitations": "Limited by poor acoustic window availability"
+}
+

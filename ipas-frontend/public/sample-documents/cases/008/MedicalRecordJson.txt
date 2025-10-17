@@ -1,0 +1,164 @@
+{
+  "patient_information": {
+    "name": "Daniel De Los Santos Marin",
+    "date_of_birth": "08/01/1947",
+    "age": "77 years",
+    "gender": "Male",
+    "unit_number": "D000755916",
+    "account_number": "D00081633618",
+    "medical_record_number": "D856360",
+    "height": "67 in",
+    "weight": "188 lbs",
+    "body_surface_area": "1.97 m2",
+    "blood_pressure": "149 mmHg / 69",
+    "room_number": "D. 313-A",
+    "patient_location": "D. T3FL",
+    "admission_date": "02/05/2025",
+    "discharge_date": "02/07/2025",
+    "discharge_status": "Improved, stable",
+    "resuscitation_status": "DNR/Allow Natural Death",
+    "allergies": "No Known Drug Intolerances, No Known Drug Allergies"
+  },
+  "clinical_data": {
+    "echocardiogram": {
+      "study_date": "02/07/2025",
+      "indication": "Myocardial infarction without ST elevation (NSTEMI)",
+      "left_ventricle": {
+        "size": "Normal",
+        "ejection_fraction": "60-65%",
+        "wall_thickness": "Normal",
+        "systolic_function": "Normal",
+        "regional_wall_motion": "Normal",
+        "diastolic_dysfunction": "Grade I (impaired relaxation)"
+      },
+      "right_ventricle": {
+        "size": "Normal",
+        "systolic_function": "Normal"
+      },
+      "left_atrium": {
+        "size": "Normal"
+      },
+      "right_atrium": {
+        "size": "Normal"
+      },
+      "aortic_valve": {
+        "regurgitation": "Mild"
+      },
+      "mitral_valve": {
+        "leaflet_excursion": "Normal",
+        "stenosis": "None",
+        "regurgitation": "Trivial"
+      },
+      "tricuspid_valve": {
+        "structure": "Normal",
+        "stenosis": "None",
+        "regurgitation": "None"
+      },
+      "pulmonic_valve": {
+        "visualization": "Poor",
+        "regurgitation": "Trivial"
+      },
+      "aorta": {
+        "root_size": "Normal"
+      },
+      "inferior_vena_cava": {
+        "size": "Normal",
+        "respiratory_collapse": "Normal"
+      },
+      "pericardium": {
+        "appearance": "Normal",
+        "effusion": "None"
+      },
+      "technical_limitations": "Limited by poor acoustic window availability"
+    },
+    "cardiac_catheterization": {
+      "date_of_service": "02/05/2025",
+      "indications": [
+        "Chest pain",
+        "Non-ST-elevation MI"
+      ],
+      "procedures": [
+        "Left heart catheterization",
+        "Coronary angiography",
+        "PCI to obtuse marginal",
+        "Difficult PCI to RCA secondary to tortuosity and calcification",
+        "Conscious sedation of 133 minutes"
+      ],
+      "coronary_angiography": {
+        "left_main": "Mild disease of 10% to 20%",
+        "LAD": "Mild disease proximally at 10%, diffuse disease upwards of 40% in mid vessel",
+        "left_circumflex": "Mild disease upwards of 30%, 100% occlusion in distal vessel",
+        "RCA": "Mild disease proximally of 30%, significant tortuosity with stenosis upwards of 75% in mid vessel"
+      },
+      "PCI_to_obtuse_marginal": {
+        "stent": "Onyx 2.0 x 18 mm drug-eluting stent",
+        "balloon": "Emerge 2.0 x 12 mm balloon"
+      },
+      "PCI_to_RCA": {
+        "stent": "Onyx 3.0 x 22 mm drug-eluting stent",
+        "balloon": "Emerge 3.0 x 15 mm balloon"
+      },
+      "estimated_blood_loss": "10 cc",
+      "contrast_used": "230 cc of Isovue"
+    },
+    "laboratory_results": {
+      "basic_metabolic_panel": {
+        "sodium": "138 mEq/L",
+        "potassium": "3.6 mEq/L",
+        "chloride": "103 mEq/L",
+        "CO2": "24 mEq/L",
+        "anion_gap": "11",
+        "glucose": "117 mg/dl (High)",
+        "BUN": "21 mg/dl (High)",
+        "creatinine": "2.0 mg/dL (High)",
+        "estimated_CRCL_CG_IBW": "28.0 mL/min (Low)",
+        "estimated_CRCL_CG_ABW": "49.7 mL/min (Low)",
+        "GFR_CKD_EPI": "34 mL/min/1.73 m2 (Low)"
+      },
+      "lipid_panel": {
+        "calcium": "8.3 mg/dl (Low)",
+        "triglycerides": "91 mg/dl",
+        "cholesterol": "146 mg/dl",
+        "HDL_cholesterol": "27 mg/dl (Low)",
+        "LDL": "101 mg/dl (High)",
+        "coronary_risk": "5.4 (High)"
+      }
+    },
+    "medications": {
+      "discharge_medications": {
+        "aspirin": "81 mg daily",
+        "atorvastatin": "10 mg daily",
+        "amlodipine": "10 mg daily",
+        "valsartan": "320 mg daily",
+        "clopidogrel": "75 mg daily",
+        "carvedilol": "3.125 mg twice daily",
+        "hydralazine": "50 mg twice daily"
+      }
+    },
+    "vital_signs": {
+      "pulse_ox": "96",
+      "blood_pressure": "108/63",
+      "blood_pressure_mean": "77.9",
+      "temperature": "98.6",
+      "pulse": "75",
+      "respiration": "16"
+    },
+    "diagnosis": {
+      "primary": "NSTEMI, ACS",
+      "secondary": [
+        "Coronary artery disease status post stent",
+        "Essential hypertension",
+        "Hyperlipidemia",
+        "CKD 3B"
+      ]
+    }
+  },
+  "physicians": {
+    "reading_physician": "Christopher P Mccarty, MD",
+    "sonographer": "N' Dia Small",
+    "ordering_physician": "Christopher P Mccarty, MD",
+    "referring_physician": "Mitul Patel",
+    "attending_physician": "Ahmad Issa, MD",
+    "primary_care_physician": "Katherine Gannon Kiesel, NP"
+  }
+}

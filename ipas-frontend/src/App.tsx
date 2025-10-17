@@ -17,6 +17,8 @@ import Upload from './pages/Upload';
 import Analytics from './pages/Analytics';
 import HospitalPortal from './pages/HospitalPortal';
 import RecentCases from './pages/RecentCases';
+import OCR from './pages/OCR';
+
 
 // Create theme
 const theme = createTheme({
@@ -66,7 +68,17 @@ const AppRoutes: React.FC = () => {
 
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <Login />} />
+      <Route path="/login" element={user ? <Navigate to="/RecentCases" replace /> : <Login />} />
+      <Route
+        path="/RecentCases"
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <RecentCases />
+            </MainLayout>
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/dashboard"
         element={
@@ -77,12 +89,12 @@ const AppRoutes: React.FC = () => {
           </ProtectedRoute>
         }
       />
-      <Route
-        path="/RecentCases"
+        <Route
+        path="/OCR"
         element={
           <ProtectedRoute>
             <MainLayout>
-              <RecentCases />
+              <OCR />
             </MainLayout>
           </ProtectedRoute>
         }
@@ -137,8 +149,8 @@ const AppRoutes: React.FC = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<Navigate to="/RecentCases" replace />} />
+      <Route path="*" element={<Navigate to="/RecentCases" replace />} />
     </Routes>
   );
 };
