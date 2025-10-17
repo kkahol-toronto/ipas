@@ -268,17 +268,17 @@ const OCR: React.FC = () => {
             aria-label="data tabs"
             sx={{ borderBottom: 1, borderColor: 'divider' }}
           >
-            <Tab label="Automated data extraction" sx={{ fontSize: '1.2rem' }} />
+            {/* <Tab label="Automated data extraction" sx={{ fontSize: '1.2rem' }} /> */}
             <Tab label="JSON" sx={{ fontSize: '1.2rem' }} />
           </Tabs>
           <Paper elevation={3} sx={{ flex: 1, overflow: 'auto' }}>
             <Box sx={{ padding: 2 }}>
-              {tabValue === 0 && (
+              {/* {tabValue === 0 && (
                 <Typography variant="body1">
                   {ocrText || 'Automated data extraction will appear here after processing.'}
                 </Typography>
-              )}
-              {tabValue === 1 && (
+              )} */}
+              {tabValue === 0 && (
                 <Box
                   component="pre"
                   sx={{ whiteSpace: 'pre-wrap', height: '100%', overflow: 'auto' }}
