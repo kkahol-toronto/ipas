@@ -285,7 +285,7 @@ const OCR: React.FC = () => {
                 >
                   {                
                    pdfjsondata
-                    ? JSON.stringify(getCaseData(pdfjsondata), null, 2)
+                    ? JSON.stringify(pdfjsondata, null, 2)
                     : 'No JSON data available for the provided document ID.'}
                 </Box>
               )}
