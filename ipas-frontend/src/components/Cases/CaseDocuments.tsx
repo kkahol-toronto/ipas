@@ -37,7 +37,7 @@ interface CaseDocument {
   id: string;
   name: string;
   type: 'pdf' | 'image' | 'doc' | 'other';
-  category: 'polysomnography-report'| 'imaging'| 'lab-results'|'prior-auth' |'operativenotes' |'radionotes'| 'medical-records' |  'insurance' | 'clinical-notes' | 'diagnostics' | 'drnotes' | 'dmeform';
+  category: 'polysomnography-report'| 'imaging'| 'lab-results'|'prior-auth' |'operativenotes' |'radionotes'| 'medical-records' |  'insurance' | 'clinical-notes' | 'diagnostics' | 'drnotes' | 'dmeform' | '2d-doppler' | 'ecg' | 'discharge-summary';
   size: string;
   uploadDate: string;
   status: 'uploaded' | 'processing' | 'ready' | 'error';
@@ -747,6 +747,92 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           isExtracted: false
         }
   
+      ],
+      'PA-2024-008': [
+        {
+          id: '1',
+          name: 'Prior Auth Form',
+          type: 'pdf',
+          category: 'prior-auth',
+          size: '2.1 MB',
+          uploadDate: '2024-10-08',
+          status: 'ready',
+          url: '/sample-documents/cases/008/Prior Authorization-Form.pdf',
+          originalUrl: '/sample-documents/cases/008/Prior Authorization-Form.pdf',
+          extractedUrl: '/sample-documents/cases/008/20250425110402_HW.pdf',
+          jsonUrl: '/sample-documents/cases/008/prior-auth-form.json',
+          isExtracted: false
+        },
+        {
+          id: '2',
+          name: '2D Doppler Study',
+          type: 'pdf',
+          category: '2d-doppler',
+          size: '4.5 MB',
+          uploadDate: '2024-10-08',
+          status: 'ready',
+          url: '/sample-documents/cases/008/2D Doppler Study.pdf',
+          originalUrl: '/sample-documents/cases/008/2D Doppler Study.pdf',
+          extractedUrl: '/sample-documents/cases/008/ClinicalSummary _110402.pdf',
+          jsonUrl: '/sample-documents/cases/008/2d-doppler-study.json',
+          isExtracted: false
+        },
+        {
+          id: '3',
+          name: 'Laboratory Study',
+          type: 'pdf',
+          category: 'lab-results',
+          size: '1.8 MB',
+          uploadDate: '2024-10-08',
+          status: 'ready',
+          url: '/sample-documents/cases/008/Laboratory Study.pdf',
+          originalUrl: '/sample-documents/cases/008/Laboratory Study.pdf',
+          extractedUrl: '/sample-documents/cases/008/LCDClinicalSummary _110402.pdf',
+          jsonUrl: '/sample-documents/cases/008/laboratory-study.json',
+          isExtracted: false
+        },
+        {
+          id: '4',
+          name: 'Electrocardiogram',
+          type: 'pdf',
+          category: 'ecg',
+          size: '1.2 MB',
+          uploadDate: '2024-10-08',
+          status: 'ready',
+          url: '/sample-documents/cases/008/Electrocardiogram.pdf',
+          originalUrl: '/sample-documents/cases/008/Electrocardiogram.pdf',
+          extractedUrl: '/sample-documents/cases/008/20250425110402_HW.pdf',
+          jsonUrl: '/sample-documents/cases/008/electrocardiogram.json',
+          isExtracted: false
+        },
+        {
+          id: '5',
+          name: 'Discharge Summary',
+          type: 'pdf',
+          category: 'discharge-summary',
+          size: '2.4 MB',
+          uploadDate: '2024-10-09',
+          status: 'ready',
+          url: '/sample-documents/cases/008/Discharge Summary.pdf',
+          originalUrl: '/sample-documents/cases/008/Discharge Summary.pdf',
+          extractedUrl: '/sample-documents/cases/008/ClinicalSummary _110402.pdf',
+          jsonUrl: '/sample-documents/cases/008/discharge-summary.json',
+          isExtracted: false
+        },
+        {
+          id: '6',
+          name: 'Operative Report',
+          type: 'pdf',
+          category: 'operativenotes',
+          size: '3.1 MB',
+          uploadDate: '2024-10-08',
+          status: 'ready',
+          url: '/sample-documents/cases/008/Operative Report.pdf',
+          originalUrl: '/sample-documents/cases/008/Operative Report.pdf',
+          extractedUrl: '/sample-documents/cases/008/LCDClinicalSummary criteriaeval.pdf',
+          jsonUrl: '/sample-documents/cases/008/operative-report.json',
+          isExtracted: false
+        }
       ]
 
     };
@@ -949,14 +1035,17 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
         return <DocumentIcon color="secondary" />;
       case 'drnotes':
         return <DocumentIcon color="secondary" />;
-
       case 'dmeform':
         return <DocumentIcon color="secondary" />;
-
       case 'polysomnography-report':
       case 'operativenotes':
       case 'radionotes':
         return <DocumentIcon color="secondary" />;
+      case '2d-doppler':
+      case 'ecg':
+        return <ImageIcon color="info" />;
+      case 'discharge-summary':
+        return <DocumentIcon color="primary" />;
 
       default:
         return <AttachFileIcon color="action" />;
@@ -1000,6 +1089,12 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
         return 'Lab Results'
       case 'polysomnography-report':
         return 'Polysomnography Report'
+      case '2d-doppler':
+        return '2D Doppler Study'
+      case 'ecg':
+        return 'Electrocardiogram'
+      case 'discharge-summary':
+        return 'Discharge Summary'
 
       default:
         return 'Other';

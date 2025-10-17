@@ -1,0 +1,129 @@
+{
+  "caseId": "PA-2024-006",
+  "patientName": "Rebecca Hardin",
+  "procedure": "CPAP Device Replacement (E0601) + Supplies",
+  "finalDecision": "APPROVED",
+  "processingTimeline": {
+    "startTime": "2024-04-25T12:16:34Z",
+    "endTime": "2024-04-25T15:48:00Z",
+    "totalDuration": "1m 4s",
+    "stages": {
+      "documentProcessing": "2m 15s",
+      "clinicalAnalysis": "1h 23m 45s",
+      "policyVerification": "45m 12s",
+      "finalDecision": "1m 14s"
+    }
+  },
+  "workflowSteps": [
+    {
+      "step": 1,
+      "action": "Document Ingestion",
+      "status": "Completed",
+      "details": "Received prior authorization form, medical records, polysomnography report, doctor notes, and insurance card",
+      "outcome": "All required documents successfully processed",
+      "comments": "Document quality excellent - all forms properly filled and signed"
+    },
+    {
+      "step": 2,
+      "action": "Patient Information Extraction",
+      "status": "Completed",
+      "details": "Extracted patient demographics, insurance information, and medical history",
+      "outcome": "Patient: Rebecca Hardin (48F), Member ID: U7131533302, Ambetter insurance",
+      "comments": "Insurance verification successful - active coverage confirmed"
+    },
+    {
+      "step": 3,
+      "action": "Clinical Data Analysis",
+      "status": "Completed",
+      "details": "Analyzed sleep study results, medical history, and current CPAP compliance",
+      "outcome": "AHI 8.9/hr, SpO2 nadir 69%, BMI 45.6, compliant with current therapy",
+      "comments": "Clear medical necessity for CPAP replacement - device 5+ years old"
+    },
+    {
+      "step": 4,
+      "action": "Medical Necessity Assessment",
+      "status": "Completed",
+      "details": "Evaluated clinical justification for CPAP device replacement",
+      "outcome": "High medical necessity score (96%) - patient compliant, documented OSA, device replacement needed",
+      "comments": "Patient shows excellent compliance with current CPAP therapy"
+    },
+    {
+      "step": 5,
+      "action": "Policy Compliance Check",
+      "status": "Completed",
+      "details": "Verified coverage criteria for DME CPAP replacement",
+      "outcome": "Meets all policy requirements - documented OSA, compliant patient, appropriate device age",
+      "comments": "All coverage criteria satisfied - no prior authorization required for replacement"
+    },
+    {
+      "step": 6,
+      "action": "Cost Analysis",
+      "status": "Completed",
+      "details": "Calculated estimated costs for CPAP device and supplies",
+      "outcome": "Total estimated cost: $2,500 (device + humidifier + supplies)",
+      "comments": "Cost within reasonable range for CPAP replacement with supplies"
+    },
+    {
+      "step": 7,
+      "action": "Clinical Decision Support",
+      "status": "Completed",
+      "details": "AI analysis of clinical data and policy compliance",
+      "outcome": "Recommendation: APPROVE - Clear medical necessity with high confidence (95%)",
+      "comments": "Strong clinical justification with documented patient compliance"
+    },
+    {
+      "step": 8,
+      "action": "Final Authorization",
+      "status": "Completed",
+      "details": "Generated approval letter and authorization number",
+      "outcome": "Authorization #PA-2024-006-APPROVED issued for CPAP replacement",
+      "comments": "Authorization valid for 12 months from approval date"
+    }
+  ],
+  "keyFindings": {
+    "clinicalJustification": "Patient has documented obstructive sleep apnea (AHI 8.9/hr) with oxygen desaturation (SpO2 nadir 69%). Current CPAP device is 5+ years old and requires replacement. Patient demonstrates excellent compliance with therapy (Epworth score 3/24) and shows clinical improvement.",
+    "medicalNecessity": "High medical necessity (96%) - CPAP replacement is clinically indicated for continued treatment of OSA. Patient is compliant with current therapy and replacement device will maintain therapeutic benefit.",
+    "policyCompliance": "Meets all coverage criteria for DME replacement. Patient has documented OSA diagnosis, is compliant with current therapy, and device age exceeds manufacturer recommendations for replacement.",
+    "costEfficiency": "Cost-effective treatment option - CPAP therapy prevents more expensive complications of untreated OSA including cardiovascular events, diabetes complications, and motor vehicle accidents."
+  },
+  "approvalDetails": {
+    "authorizationNumber": "PA-2024-006-APPROVED",
+    "approvedAmount": "$2,500.00",
+    "validUntil": "2025-04-25",
+    "approvedBy": "IPAS Automated System",
+    "reviewType": "Automated Approval",
+    "coverageDetails": {
+      "device": "ResMed S10 AutoSet CPAP (E0601) - $1,800",
+      "humidifier": "Heated Humidifier (E0562) - $300",
+      "supplies": "Tubing, Filters, Mask (A7037, A4604, A7038) - $400"
+    }
+  },
+  "qualityMetrics": {
+    "processingAccuracy": "99.2%",
+    "clinicalConfidence": "95%",
+    "policyCompliance": "100%",
+    "costOptimization": "92%",
+    "timelineEfficiency": "98%",
+    "documentQuality": "96%",
+    "automationLevel": "100%",
+    "patientSatisfaction": "94%"
+  },
+  "riskAssessment": {
+    "clinicalRisk": "Low",
+    "financialRisk": "Low",
+    "complianceRisk": "Very Low",
+    "overallRisk": "Low"
+  },
+  "recommendations": {
+    "immediate": "Approve CPAP replacement with supplies - clear medical necessity",
+    "followUp": "Schedule 3-month follow-up to assess device compliance and effectiveness",
+    "monitoring": "Track patient compliance through device data downloads",
+    "education": "Provide patient education on CPAP maintenance and supply replacement schedule"
+  },
+  "systemNotes": {
+    "automationTrigger": "High confidence clinical data analysis triggered automated approval",
+    "humanReview": "No human review required - all criteria met for automated approval",
+    "exceptionHandling": "No exceptions identified - standard DME replacement case",
+    "auditTrail": "Complete audit trail maintained for all decision points and data sources"
+  }
+}

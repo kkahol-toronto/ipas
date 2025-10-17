@@ -1,0 +1,57 @@
+{
+  "policy_name": "Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea",
+  "lcd_number": "L33718",
+  "effective_date": "10/01/2015",
+  "last_revised": "04/25/2024",
+  "contractor": "Medicare Administrative Contractor",
+  "coverage_indications": {
+    "primary_diagnosis": "Obstructive Sleep Apnea (OSA)",
+    "icd10_codes": ["G47.33"],
+    "criteria": [
+      "Diagnosis of OSA confirmed by polysomnography (sleep study)",
+      "Apnea-Hypopnea Index (AHI) ≥ 5 events per hour",
+      "Patient demonstrates medical necessity for PAP therapy",
+      "Patient has been evaluated by treating physician"
+    ]
+  },
+  "device_replacement_criteria": {
+    "standard_replacement_timeframe": "5 years from date of original device",
+    "early_replacement_criteria": [
+      "Device malfunction that cannot be repaired cost-effectively",
+      "Loss or irreparable damage to device",
+      "Change in patient condition requiring different PAP modality"
+    ],
+    "compliance_requirements": {
+      "minimum_usage": "4 hours per night",
+      "minimum_frequency": "70% of nights (21 out of 30 consecutive days)",
+      "documentation": "Objective compliance data from PAP device required"
+    }
+  },
+  "coverage_decision_case_006": {
+    "patient": "Rebecca Hardin",
+    "diagnosis": "Obstructive Sleep Apnea (G47.33)",
+    "AHI": "8.9 events/hour",
+    "compliance": "Excellent - meets all requirements",
+    "device_age": "5+ years",
+    "meets_criteria": true,
+    "coverage_determination": "APPROVED",
+    "rationale": [
+      "Patient has confirmed OSA diagnosis with AHI 8.9/hr documented by polysomnography",
+      "Current PAP device is 5+ years old, meeting standard replacement timeframe",
+      "Patient demonstrates excellent compliance with CPAP therapy (Epworth score 3/24)",
+      "Medical necessity clearly documented for continued PAP therapy",
+      "Replacement aligns with Medicare LCD L33718 criteria"
+    ]
+  },
+  "medical_necessity_justification": {
+    "clinical_benefit": "PAP therapy prevents serious complications of untreated OSA including cardiovascular events, stroke, diabetes complications, cognitive impairment, and motor vehicle accidents",
+    "evidence_based": "Strong evidence supports PAP therapy as first-line treatment for OSA per American Academy of Sleep Medicine guidelines",
+    "patient_specific_factors": "Patient with obesity (BMI 45.6), multiple comorbidities, and documented benefit from current PAP therapy requires uninterrupted treatment"
+  },
+  "approved_equipment": {
+    "device": "ResMed S10 AutoSet CPAP (E0601)",
+    "humidifier": "Heated Humidifier (E0562)",
+    "supplies": "Tubing (A7037), Filters (A4604), Mask (A7038)"
+  }
+}
+

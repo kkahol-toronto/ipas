@@ -1,0 +1,88 @@
+{
+  "policy_name": "Cardiac Rehabilitation Programs - Coverage Criteria",
+  "lcd_reference": "AHA/ACC Guidelines for Cardiac Rehabilitation",
+  "effective_date": "01/01/2024",
+  "last_revised": "02/07/2025",
+  "applicable_payer": "AMBETTER-ATC Contracted",
+  "clinical_condition": "Post-NSTEMI Status, Coronary Artery Disease with PCI",
+  "icd10_codes": ["I21.4", "I25.10"],
+  "cpt_codes": ["93797", "93798"],
+  "coverage_indications": {
+    "qualifying_diagnoses": [
+      "Recent myocardial infarction (within 12 months)",
+      "Coronary artery bypass graft (CABG) surgery",
+      "Percutaneous coronary intervention (PCI) with stent placement",
+      "Stable angina pectoris",
+      "Heart valve repair or replacement",
+      "Heart or heart-lung transplantation",
+      "Chronic heart failure with reduced ejection fraction"
+    ],
+    "medical_necessity_criteria": [
+      "Documented cardiovascular diagnosis meeting coverage indications",
+      "Patient is medically stable for outpatient exercise program",
+      "Physician referral and prescription for cardiac rehabilitation",
+      "No absolute contraindications to exercise",
+      "Expected benefit from structured cardiac rehabilitation program"
+    ]
+  },
+  "program_specifications": {
+    "duration": "Up to 36 sessions over 12 weeks",
+    "frequency": "Typically 3 sessions per week",
+    "components": [
+      "Supervised exercise training",
+      "Cardiac risk factor modification",
+      "Nutrition counseling",
+      "Psychosocial assessment and counseling",
+      "Patient education on disease management"
+    ]
+  },
+  "coverage_decision_case_008": {
+    "patient": "Daniel De Los Santos Marin",
+    "age": "77 years",
+    "qualifying_diagnosis": "NSTEMI (I21.4) with PCI and drug-eluting stent placement",
+    "clinical_findings": {
+      "MI_date": "02/05/2025",
+      "PCI_performed": "Yes - Stents to left circumflex and RCA",
+      "ejection_fraction": "60-65% (preserved)",
+      "diastolic_dysfunction": "Grade I",
+      "cardiac_risk_factors": ["Hypertension", "Hyperlipidemia", "CKD 3B", "Coronary risk score 5.4"]
+    },
+    "meets_criteria": true,
+    "coverage_determination": "APPROVED",
+    "sessions_approved": "36 sessions over 12 weeks",
+    "rationale": [
+      "Recent NSTEMI (within 12 months) - meets qualifying diagnosis",
+      "Successful PCI with dual drug-eluting stent placement to obtuse marginal and RCA",
+      "Patient medically stable post-procedure for outpatient rehabilitation",
+      "Multiple cardiac risk factors requiring modification (HTN, dyslipidemia, CKD)",
+      "Preserved ejection fraction indicates good candidate for exercise-based rehabilitation",
+      "Physician referral with clear medical necessity documentation",
+      "Evidence-based guidelines (AHA/ACC) strongly recommend cardiac rehab post-MI with PCI",
+      "Expected to benefit from structured program for secondary prevention"
+    ]
+  },
+  "expected_outcomes": {
+    "mortality_reduction": "20-30% reduction in cardiovascular mortality",
+    "rehospitalization": "30-40% reduction in cardiac rehospitalization rates",
+    "functional_capacity": "Improved exercise tolerance and quality of life",
+    "risk_factor_modification": "Better control of hypertension, lipids, and diabetes",
+    "medication_adherence": "Improved compliance with cardiac medications"
+  },
+  "clinical_guidelines_applied": [
+    "AHA/ACC Guidelines for Cardiac Rehabilitation and Secondary Prevention (2024)",
+    "AACVPR Guidelines for Cardiac Rehabilitation Programs (2023)",
+    "CMS National Coverage Determination (NCD) 20.10 - Cardiac Rehabilitation Programs",
+    "Ambetter Medical Policy: Cardiac Rehabilitation Services Coverage Criteria"
+  ],
+  "evidence_summary": "Meta-analyses of randomized controlled trials demonstrate that cardiac rehabilitation after MI reduces all-cause mortality by 20-30%, improves functional capacity, enhances quality of life, and provides cost-effective secondary prevention. Current guidelines give Class I recommendation (strong evidence) for cardiac rehab post-PCI.",
+  "approved_program_details": {
+    "start_date": "02/14/2025",
+    "total_sessions": "36",
+    "duration": "12 weeks",
+    "frequency": "3 sessions per week",
+    "location": "Trident Medical Center Cardiac Rehabilitation",
+    "supervision": "Exercise physiologist and registered nurse",
+    "authorization_number": "PA-2024-008-APPROVED"
+  }
+}
+

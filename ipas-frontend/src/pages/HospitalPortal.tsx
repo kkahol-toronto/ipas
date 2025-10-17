@@ -156,6 +156,14 @@ const HospitalPortal: React.FC = () => {
                 provider: 'Benjamin Velky',
                 hospital: 'Self Regional HE'
               };
+            case 'PA-2024-008':
+              return {
+                patientName: 'Daniel de Los Santos marin',
+                patientId: 'P-2024-008',
+                procedure: 'Electrocardiogram',
+                provider: 'Amanda R',
+                hospital: 'Trident Medical Center'
+              };
                             
             default:
               return {

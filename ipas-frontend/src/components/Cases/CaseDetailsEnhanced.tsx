@@ -287,38 +287,93 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       },
       'PA-2024-007': {
         id: 'PA-2024-007',
-        patientName: 'Amanda Williams',
+        patientName: 'Amanda Latoya Williams',
         patientId: 'P-2024-007',
         dateOfBirth: '1987-03-05',
-        provider: 'Benjamin Velky',
-        providerId: 'PR-007',
-        hospital: 'Self regional HE',
-        procedure: 'In Patient',
-        diagnosis: 'Diverticulitis of Intestine, part unspecified, without perforation or abcess without bleeding (K57.92)',
+        provider: 'Dr. Benjamin Joseph Velky',
+        providerId: 'NPI-1083063507',
+        hospital: 'Self Regional Healthcare',
+        procedure: 'Inpatient Admission - Acute Uncomplicated Sigmoid Diverticulitis',
+        diagnosis: 'Diverticulitis of intestine, part unspecified, without perforation or abscess without bleeding (K57.92)',
         status: 'Denied',
         priority: 'Urgent',
-        submittedDate: '2024-04-25T12:16:34Z',
-        lastUpdated: '2024-04-25T15:48:00Z',
-        insurance: 'Ambetter - ATC contracted ',
+        submittedDate: '2025-04-24T16:54:00Z',
+        lastUpdated: '2025-04-25T14:05:30Z',
+        insurance: 'Ambetter / Absolute Total Care (ATC Contracted)',
         policyNumber: 'U7183854101',
-        estimatedCost: 2500,
+        estimatedCost: 13500,
+        deniedCost: 13500,
+        alternativeCost: 1000,
         documents: [
-          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
-          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' }
+          { id: 'doc1', name: 'Prior Authorization Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
+          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.8 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'CT Abdomen Pelvis Report.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Laboratory Results.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
+          { id: 'doc5', name: 'Structured Medical Records.json', type: 'JSON', size: '0.8 MB', status: 'Processed' },
+          { id: 'doc6', name: 'Authorization Request.json', type: 'JSON', size: '0.3 MB', status: 'Processed' },
+          { id: 'doc7', name: 'Clinical Summary.pdf', type: 'PDF', size: '1.9 MB', status: 'Analyzed' },
+          { id: 'doc8', name: 'UR Packet.pdf', type: 'PDF', size: '2.4 MB', status: 'Processed' },
+          { id: 'doc9', name: 'Imaging Reports.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
+          { id: 'doc10', name: 'Panel Recommendation.pdf', type: 'PDF', size: '1.7 MB', status: 'Processed' }
         ],
         clinicalNotes: [
-          { timestamp: '2024-04-24T15:05:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
-          { timestamp: '2024-04-24T15:48:00Z', note: "CPAP Device Replacement needed as member is requesting for a personal device. She is currently using father in law's device ", author: 'Amy Diane Kelly, NP' },
-          { timestamp: '2024-04-25T12:16:34Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
+          { timestamp: '2025-04-24T16:54:00Z', note: 'Patient admitted with 2-day history of abdominal pain, back pain, blood in stool, and vomiting. Presenting complaints consistent with acute diverticulitis', author: 'Dr. Benjamin Velky' },
+          { timestamp: '2025-04-24T18:30:00Z', note: 'Vitals stable: BP 138/84, HR 78, Temp 98.1°F, SpO2 100%. Patient afebrile and hemodynamically stable', author: 'Nurse Jennifer Lopez' },
+          { timestamp: '2025-04-24T19:45:00Z', note: 'CT Abdomen/Pelvis completed - shows uncomplicated sigmoid diverticulitis without abscess, perforation, or pericolonic complications', author: 'Dr. Sarah Mitchell, Radiology' },
+          { timestamp: '2025-04-24T21:00:00Z', note: 'Laboratory results: Normal WBC, no leukocytosis. CBC, CMP, BMP all within normal limits', author: 'Lab Department' },
+          { timestamp: '2025-04-25T08:30:00Z', note: 'Patient tolerating oral intake, pain controlled with oral analgesics. Currently on Ciprofloxacin 500mg + Metronidazole 500mg', author: 'Dr. Benjamin Velky' },
+          { timestamp: '2025-04-25T10:15:00Z', note: 'Inpatient authorization request submitted to Ambetter for continued hospitalization', author: 'UR Department, Self Regional HE' },
+          { timestamp: '2025-04-25T14:05:00Z', note: 'Physician panel review completed - consensus for denial of inpatient admission. Patient appropriate for outpatient management per AAFP guidelines', author: 'IPAS Physician Panel' }
         ],
         aiAnalysis: {
-          clinicalNecessity: 0.95,
-          coverageEligibility: 0.94,
+          clinicalNecessity: 0.32,
+          coverageEligibility: 0.15,
           riskAssessment: 'Low',
-          recommendedAction: 'Deny - clear medical necessity',
-          confidence: 0.95
+          recommendedAction: 'Deny inpatient admission - Approve outpatient management',
+          confidence: 0.94
         },
-        ipopFlag: ''
+        ipopFlag: 'Inpatient'
+      },
+      'PA-2024-008': {
+        id: 'PA-2024-008',
+        patientName: 'Daniel de Los Santos marin',
+        patientId: 'P-2024-008',
+        dateOfBirth: '1947-08-01',
+        provider: 'Dr. Amanda Reynolds',
+        providerId: 'NPI-1234567890',
+        hospital: 'Trident Medical Center',
+        procedure: 'Cardiac Rehabilitation',
+        diagnosis: 'NSTEMI, non-ST-elevation myocardial infarction (I21.4)',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2025-10-09T12:14:00Z',
+        lastUpdated: '2025-10-09T15:46:00Z',
+        insurance: 'AMBETTER-ATC Contracted',
+        policyNumber: 'U7183854101',
+        estimatedCost: 5500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Polysomnography Report.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Doctor Notes.pdf', type: 'PDF', size: '1.2 MB', status: 'Processed' },
+          { id: 'doc5', name: 'Insurance Card.pdf', type: 'PDF', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2025-10-08T08:30:00Z', note: 'Patient presented to ED with chest pain, diagnosed with NSTEMI. Troponin elevated at 2.5 ng/mL', author: 'Dr. Amanda Reynolds' },
+          { timestamp: '2025-10-08T10:45:00Z', note: 'Cardiac catheterization performed. 90% LAD stenosis identified and stent placed successfully', author: 'Dr. James Mitchell, Interventional Cardiologist' },
+          { timestamp: '2025-10-08T14:20:00Z', note: '2D Doppler echocardiogram shows reduced ejection fraction (40%), mild anterior wall hypokinesis', author: 'Dr. Sarah Chen, Cardiology' },
+          { timestamp: '2025-10-09T09:00:00Z', note: 'Patient stable post-PCI. Discharged with cardiac rehab recommendation', author: 'Dr. Amanda Reynolds' },
+          { timestamp: '2025-10-09T12:14:00Z', note: 'Prior authorization submitted for Phase II cardiac rehabilitation program - 36 sessions over 12 weeks', author: 'Maria Griffin, Case Manager' },
+          { timestamp: '2025-10-09T15:46:00Z', note: 'Patient meets criteria for cardiac rehab: recent MI with PCI, reduced EF, cardiac risk factors (HTN, DM, smoking history)', author: 'Dr. Amanda Reynolds' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.98,
+          coverageEligibility: 0.96,
+          riskAssessment: 'Moderate',
+          recommendedAction: 'Approve - clear medical necessity post-NSTEMI',
+          confidence: 0.97
+        },
+        ipopFlag: 'Outpatient'
       }
 
     };
@@ -372,6 +427,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           caseId === 'PA-2024-005' ? 'case-005-david-brown' :
           caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' :
           caseId === 'PA-2024-007' ? 'case-007':
+          caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos':
           'case-001-john-doe';
 
           const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
@@ -464,7 +520,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="info"
                   onClick={async () => {
                     try {
-                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe';
+                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos' : 'case-001-john-doe';
                       const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
                       const data = await response.json();
                       setObservabilityData(data);
@@ -483,7 +539,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="success"
                   onClick={() => {
                     const link = document.createElement('a');
-                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe'}/observability_and_explanation.json`;
+                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos' : 'case-001-john-doe'}/observability_and_explanation.json`;
                     link.download = `observability_and_explanation_${caseId}.json`;
                     link.click();
                   }}
@@ -914,7 +970,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos' : 'case-001-john-doe'}/observability_and_explanation.json`;
               link.download = `observability_and_explanation_${caseId}.json`;
               link.click();
             }}
@@ -927,6 +983,12 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">
             Close
           </Button> */}
+
+          {/* Clinical Criteria Evaluation Widget */}
+          <Box sx={{ mt: 4 }}>
+            <ClinicalCriteriaEval caseId={caseId} />
+          </Box>
+
           </Box>
         </TabPanel>
 
@@ -1244,7 +1306,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos' : 'case-001-john-doe'}/observability_and_explanation.json`;
               link.download = `observability_and_explanation_${caseId}.json`;
               link.click();
             }}
