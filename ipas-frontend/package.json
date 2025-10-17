@@ -34,6 +34,7 @@
     "react-scripts": "5.0.1",
     "reactflow": "^11.11.4",
     "recharts": "^3.2.1",
+    "tesseract.js": "^6.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -67,6 +68,7 @@
     ]
   },
   "devDependencies": {
-    "@types/leaflet": "^1.9.20"
+    "@types/leaflet": "^1.9.20",
+    "worker-loader": "^3.0.8"
   }
 }
