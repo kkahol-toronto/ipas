@@ -14,6 +14,7 @@ import {
 import {
   Dashboard as DashboardIcon,
   Assignment as AssignmentIcon,
+  CameraAlt as CameraAltIcon,
   Chat as ChatIcon,
   Upload as UploadIcon,
   Analytics as AnalyticsIcon,
@@ -39,18 +40,26 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   const { cases, stats } = useCases();
 
   const menuItems = [
+     {
+      text: 'Case Queue',
+      icon: <AssignmentIcon />,
+      path: '/cases',
+      permission: 'review_cases',
+      badge: cases.filter(c => c.status === 'pending' || c.status === 'under_review').length
+    },
     {
       text: 'Dashboard',
       icon: <DashboardIcon />,
       path: '/dashboard',
       permission: 'view_analytics'
     },
+   
     {
-      text: 'Case Queue',
-      icon: <AssignmentIcon />,
-      path: '/cases',
-      permission: 'review_cases',
-      badge: cases.filter(c => c.status === 'pending' || c.status === 'under_review').length
+      text: 'OCR',
+      icon: <CameraAltIcon />,
+      path: '/ocr',
+      permission: 'ocr',
+     // badge: cases.filter(c => c.status === 'pending' || c.status === 'under_review').length
     },
     {
       text: 'AI Chat',
