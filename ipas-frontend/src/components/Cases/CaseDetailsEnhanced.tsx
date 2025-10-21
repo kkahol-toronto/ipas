@@ -427,7 +427,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           caseId === 'PA-2024-005' ? 'case-005-david-brown' :
           caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' :
           caseId === 'PA-2024-007' ? 'case-007':
-          caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos':
+          caseId === 'PA-2024-008' ? '008':
           'case-001-john-doe';
 
           const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
@@ -520,7 +520,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="info"
                   onClick={async () => {
                     try {
-                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos' : 'case-001-john-doe';
+                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe';
                       const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
                       const data = await response.json();
                       setObservabilityData(data);
@@ -539,7 +539,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="success"
                   onClick={() => {
                     const link = document.createElement('a');
-                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos' : 'case-001-john-doe'}/observability_and_explanation.json`;
+                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe'}/observability_and_explanation.json`;
                     link.download = `observability_and_explanation_${caseId}.json`;
                     link.click();
                   }}
@@ -737,32 +737,118 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   </Grid>
                 </Grid>
 
-                {/* Approval Details */}
-                <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
-                <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
-                  <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved Amount</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Valid Until</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved By</Typography>
-                      <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Review Type</Typography>
-                      <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
-                    </Grid>
-                  </Grid>
-                </Paper>
+                {/* Approval/Denial Details */}
+                {observabilityData.denialDetails ? (
+                  <>
+                    <Typography variant="h6" sx={{ mb: 2 }}>Denial Details</Typography>
+                    <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
+                      <Grid container spacing={2}>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'error.main' }}>{observabilityData.denialDetails.authorizationNumber}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Denied Amount</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'error.main' }}>{observabilityData.denialDetails.deniedAmount}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Denial Date</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.denialDate}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Denial Reason</Typography>
+                          <Typography variant="body2" color="error.main">{observabilityData.denialDetails.denialReason}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Denied By</Typography>
+                          <Typography variant="body2">{observabilityData.denialDetails.deniedBy}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Review Type</Typography>
+                          <Typography variant="body2">{observabilityData.denialDetails.reviewType}</Typography>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+
+                    {/* Alternative Care Approved */}
+                    {observabilityData.denialDetails.alternativeCareApproved && (
+                      <>
+                        <Typography variant="h6" sx={{ mb: 2 }}>Alternative Care Plan (Approved)</Typography>
+                        <Paper sx={{ p: 2, mb: 3, bgcolor: '#e8f5e9' }} variant="outlined">
+                          <Grid container spacing={2}>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Medications</Typography>
+                              <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.alternativeCareApproved.medications}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Follow-up Visit</Typography>
+                              <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.alternativeCareApproved.followUpVisit}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Estimated Outpatient Cost</Typography>
+                              <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.denialDetails.alternativeCareApproved.estimatedOutpatientCost}</Typography>
+                            </Grid>
+                          </Grid>
+                        </Paper>
+                      </>
+                    )}
+
+                    {/* Appeal Rights */}
+                    {observabilityData.denialDetails.appealRights && (
+                      <>
+                        <Typography variant="h6" sx={{ mb: 2 }}>Appeal Rights</Typography>
+                        <Paper sx={{ p: 2, mb: 3, bgcolor: '#fff3e0' }} variant="outlined">
+                          <Grid container spacing={2}>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Appeal Deadline</Typography>
+                              <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.appealRights.appealDeadline}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Peer-to-Peer Review</Typography>
+                              <Typography variant="body2">{observabilityData.denialDetails.appealRights.peerToPeerReview}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Expedited Appeal</Typography>
+                              <Typography variant="body2">{observabilityData.denialDetails.appealRights.expeditedAppeal}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Contact Number</Typography>
+                              <Typography variant="body2">{observabilityData.denialDetails.appealRights.contactNumber}</Typography>
+                            </Grid>
+                          </Grid>
+                        </Paper>
+                      </>
+                    )}
+                  </>
+                ) : observabilityData.approvalDetails ? (
+                  <>
+                    <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
+                    <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
+                      <Grid container spacing={2}>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved Amount</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Valid Until</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved By</Typography>
+                          <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Review Type</Typography>
+                          <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+                  </>
+                ) : null}
 
                 {/* Quality Metrics */}
                 <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
@@ -970,7 +1056,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe'}/observability_and_explanation.json`;
               link.download = `observability_and_explanation_${caseId}.json`;
               link.click();
             }}
@@ -1257,32 +1343,68 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                 </Grid>
               </Grid>
 
-              {/* Approval Details */}
-              <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
-              <Paper sx={{ p: 2, mb: 3 }}>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Typography variant="caption" color="text.secondary">Valid Until</Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="caption" color="text.secondary">Approved By</Typography>
-                    <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="caption" color="text.secondary">Review Type</Typography>
-                    <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
-                  </Grid>
-                </Grid>
-              </Paper>
+              {/* Approval/Denial Details */}
+              {observabilityData.denialDetails ? (
+                <>
+                  <Typography variant="h6" sx={{ mb: 2 }}>Denial Details</Typography>
+                  <Paper sx={{ p: 2, mb: 3 }}>
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'error.main' }}>{observabilityData.denialDetails.authorizationNumber}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Denied Amount</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'error.main' }}>{observabilityData.denialDetails.deniedAmount}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Denial Date</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.denialDate}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12 }}>
+                        <Typography variant="caption" color="text.secondary">Denial Reason</Typography>
+                        <Typography variant="body2" color="error.main">{observabilityData.denialDetails.denialReason}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="caption" color="text.secondary">Denied By</Typography>
+                        <Typography variant="body2">{observabilityData.denialDetails.deniedBy}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="caption" color="text.secondary">Review Type</Typography>
+                        <Typography variant="body2">{observabilityData.denialDetails.reviewType}</Typography>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </>
+              ) : observabilityData.approvalDetails ? (
+                <>
+                  <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
+                  <Paper sx={{ p: 2, mb: 3 }}>
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Valid Until</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="caption" color="text.secondary">Approved By</Typography>
+                        <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="caption" color="text.secondary">Review Type</Typography>
+                        <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </>
+              ) : null}
 
               {/* Quality Metrics */}
               <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
@@ -1306,7 +1428,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? 'case-008-daniel-de-los-santos' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe'}/observability_and_explanation.json`;
               link.download = `observability_and_explanation_${caseId}.json`;
               link.click();
             }}
