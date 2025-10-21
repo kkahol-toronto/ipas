@@ -18,6 +18,8 @@ import Analytics from './pages/Analytics';
 import HospitalPortal from './pages/HospitalPortal';
 import RecentCases from './pages/RecentCases';
 import OCR from './pages/OCR';
+import Tasks from './pages/Tasks';
+import TrucareCloud from './pages/TrucareCloud';
 
 
 // Create theme
@@ -95,6 +97,26 @@ const AppRoutes: React.FC = () => {
           <ProtectedRoute>
             <MainLayout>
               <OCR />
+            </MainLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Tasks"
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Tasks />
+            </MainLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/TrucareCloud"
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <TrucareCloud />
             </MainLayout>
           </ProtectedRoute>
         }
