@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import Tesseract from 'tesseract.js';
-import { Box, Button, Typography, Paper, Tabs, Tab, CircularProgress } from '@mui/material';
+import { Box, Button, Typography, Paper, Tabs, Tab, CircularProgress, Grid } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 
 
@@ -14,6 +17,8 @@ const OCR: React.FC = () => {
   const [jsonData, setJsonData] = useState<object | null>(null);
   const [pdfjsondata, setpdfjsondata] = useState<any>(null);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [isDataShow, setIsDataShow] = useState<boolean>(false);
+  const [value, setValue] = React.useState('1');
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -35,6 +40,7 @@ const OCR: React.FC = () => {
     }
 
     setIsProcessing(true);
+    setIsDataShow(true);
     setTabValue(0); // Switch to JSON tab immediately
 
     if (file.type === 'application/pdf') {
@@ -43,7 +49,7 @@ const OCR: React.FC = () => {
         // Remove file extension to match the jsonDataMap keys
         const fileNameWithoutExt = file.name.replace(/\.(pdf|PDF)$/, '');
         const casedata = getCaseData(fileNameWithoutExt);
-      
+
         if (casedata) {
           setpdfjsondata(casedata);
         } else {
@@ -225,12 +231,17 @@ const OCR: React.FC = () => {
     setTabValue(newValue);
   };
 
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
+
   return (
     <Box sx={{ padding: 3, maxWidth: '100%', margin: '0 auto' }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#1976d2', fontWeight: 'bold' }}>
         Smart Auth OCR
       </Typography>
-      <Box sx={{ display: 'flex', gap: 3, alignItems: 'center', mb: 2 }}>
+
+      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mb: 3, mt: 3 }}>
         <input
           accept="image/*,.pdf"
           style={{ display: 'none' }}
@@ -240,7 +251,7 @@ const OCR: React.FC = () => {
         />
         <label htmlFor="file-upload">
           <Button
-            variant="contained"
+            variant="outlined"
             color="primary"
             component="span"
             startIcon={<CloudUploadIcon />}
@@ -249,97 +260,82 @@ const OCR: React.FC = () => {
           </Button>
         </label>
         <Typography variant="body1">{fileName}</Typography>
-        <Button 
-          variant="contained" 
-          color="secondary" 
+        <Button
+          variant="outlined"
+          color="success"
           onClick={handleFileUpload}
           disabled={isProcessing || !file}
         >
           {isProcessing ? 'Processing...' : 'Digitize'}
         </Button>
       </Box>
-      <Box sx={{ display: 'flex', gap: 3, minHeight: '70vh' }}>
-        {/* Left column with file viewer */}
-        <Box sx={{ flex: 1 }}>
-          <Paper
-            elevation={3}
-            sx={{
-              padding: 2,
-              height: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            {fileUrl ? (
-              file?.type === 'application/pdf' ? (
-                <iframe
-                  src={fileUrl}
-                  title="PDF Viewer"
-                  style={{ width: '100%', height: '100%', border: 'none' }}
-                />
-              ) : (
-                <img
-                  src={fileUrl}
-                  alt="Uploaded File"
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    objectFit: 'contain',
-                  }}
-                />
-              )
-            ) : (
-              <Typography variant="body1">No file selected</Typography>
-            )}
-          </Paper>
-        </Box>
-        {/* Right column with tab content */}
-        <Box sx={{ flex: 2, display: 'flex', flexDirection: 'column' }}>
-          <Tabs
-            value={tabValue}
-            onChange={handleTabChange}
-            aria-label="data tabs"
-            sx={{ borderBottom: 1, borderColor: 'divider' }}
-          >
-            {/* <Tab label="Automated data extraction" sx={{ fontSize: '1.2rem' }} /> */}
-            <Tab label="JSON" sx={{ fontSize: '1.2rem' }} />
-          </Tabs>
-          <Paper elevation={3} sx={{ flex: 1, overflow: 'auto' }}>
-            <Box sx={{ padding: 2 }}>
-              {/* {tabValue === 0 && (
-                <Typography variant="body1">
-                  {ocrText || 'Automated data extraction will appear here after processing.'}
-                </Typography>
-              )} */}
-              {tabValue === 0 && (
-                <>
-                  {isProcessing ? (
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 2 }}>
-                      <CircularProgress size={60} />
-                      <Typography variant="h6" color="primary">
-                        Processing file and extracting JSON data...
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Please wait while we analyze the document
-                      </Typography>
-                    </Box>
+
+{/* <Box sx={{ display: 'flex', gap: 3, minHeight: '70vh' }} >
+              
+              
+              
+            </Box> */}
+
+      {isDataShow && (
+        <Grid container spacing={2} sx={{ minHeight: '70vh' }}>
+          <Grid size={6}>
+            <Box sx={{ flex: 1, height: '100%' }}>
+              <Paper
+                elevation={3}
+                sx={{
+                  padding: 2,
+                  height: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {fileUrl ? (
+                  file?.type === 'application/pdf' ? (
+                    <iframe
+                      src={fileUrl}
+                      title="PDF Viewer"
+                      style={{ width: '100%', height: '100%', border: 'none' }}
+                    />
                   ) : (
-                    <Box
-                      component="pre"
-                      sx={{ whiteSpace: 'pre-wrap', height: '100%', overflow: 'auto' }}
-                    >
-                      {pdfjsondata
-                        ? JSON.stringify(pdfjsondata, null, 2)
-                        : 'No JSON data available. Please select a file and click "Digitize" to extract structured data.'}
-                    </Box>
-                  )}
-                </>
-              )}
+                    <img
+                      src={fileUrl}
+                      alt="Uploaded File"
+                      style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        objectFit: 'contain',
+                      }}
+                    />
+                  )
+                ) : (
+                  <Typography variant="body1">No file selected</Typography>
+                )}
+              </Paper>
             </Box>
-          </Paper>
-        </Box>
-      </Box>
+          </Grid>
+          <Grid size={6}>
+            {/* Right column with tab content */}
+            <Box sx={{ flex: 2, display: 'flex', flexDirection: 'column' }}>
+              <Box sx={{ width: '100%', typography: 'body1' }} className="tabStyle">
+                <TabContext value={value}>
+                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <TabList onChange={handleChange} aria-label="lab API tabs example">
+                      <Tab label="Automated data extraction" value="1" />
+                      <Tab label="JSON" value="2" />
+                    </TabList>
+                  </Box>
+                  <TabPanel value="1"></TabPanel>
+                  <TabPanel value="2"></TabPanel>
+                </TabContext>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+
+      )}
+
+
     </Box>
   );
 };
