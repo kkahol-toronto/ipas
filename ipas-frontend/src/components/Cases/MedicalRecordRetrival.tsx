@@ -56,7 +56,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-001": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval.xml",
+        "name": "Medical Record Retrieval",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.6 MB",
@@ -88,7 +88,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-002": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval.xml",
+        "name": "Medical Record Retrieval",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.8 MB",
@@ -120,7 +120,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-003": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval.xml",
+        "name": "Medical Record Retrieval",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.7 MB",
@@ -152,7 +152,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-006": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval.xml",
+        "name": "Medical Record Retrieval",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.6 MB",
@@ -184,7 +184,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-007": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval.xml",
+        "name": "Medical Record Retrieval",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.6 MB",
@@ -216,7 +216,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-008": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval.xml",
+        "name": "Medical Record Retrieval",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.6 MB",
