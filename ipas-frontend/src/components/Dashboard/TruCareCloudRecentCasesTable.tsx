@@ -301,7 +301,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                         <select className="form-select filterSelect w_130">
                             <option selected>Plan Product</option>
                         </select>
-                        <select className="form-select filterSelect w_80">
+                        <select className="form-select filterSelect w_100">
                             <option selected>More (4)</option>
                         </select>
                         <Box className="formRow" sx={{ml: 2}}>
