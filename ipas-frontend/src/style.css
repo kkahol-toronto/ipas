@@ -324,6 +324,29 @@ nav.main-menu li>a.active,
     print-color-adjust: exact; */
 }
 
+.form-select {
+    display: block;
+    width: 100%;
+    padding: .275rem .5rem;
+    -moz-padding-start: calc(0.75rem - 3px);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
 .advanceSearch {
     border-top: 1px solid #ddd;
     padding: 0.5rem 1rem;
@@ -543,4 +566,20 @@ th.MuiTableCell-stickyHeader {
     border: 0;
     width: 100%;
     padding-top: 1rem;
+}
+
+.inputHelpText {
+    font-size: 12px;
+    font-style: italic;
+    color: #888;
+    text-align: right;
+}
+
+.filterSelect {
+    border-radius: 30px;
+    margin-left: 1rem;
+}
+
+.w_80 {
+    width: 80px;
 }
