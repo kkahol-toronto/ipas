@@ -793,16 +793,16 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
         },
         {
           id: '4',
-          name: 'Electrocardiogram',
+          name: 'Cardiac rehabilitation',
           type: 'pdf',
           category: 'ecg',
           size: '1.2 MB',
           uploadDate: '2024-10-08',
           status: 'ready',
-          url: '/sample-documents/cases/008/Electrocardiogram.pdf',
-          originalUrl: '/sample-documents/cases/008/Electrocardiogram.pdf',
+          url: '/sample-documents/cases/008/Cardiac rehabilitation.pdf',
+          originalUrl: '/sample-documents/cases/008/Cardiac rehabilitation.pdf',
           extractedUrl: '/sample-documents/cases/008/summ/Electrocard.pdf',
-          jsonUrl: '/sample-documents/cases/008/electrocardiogram.json',
+          jsonUrl: '/sample-documents/cases/008/Cardiac rehabilitation.json',
           isExtracted: false
         },
         {
@@ -1092,7 +1092,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
       case '2d-doppler':
         return '2D Doppler Study'
       case 'ecg':
-        return 'Electrocardiogram'
+        return 'Cardiac rehabilitation'
       case 'discharge-summary':
         return 'Discharge Summary'
 

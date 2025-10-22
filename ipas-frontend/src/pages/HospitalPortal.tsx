@@ -160,7 +160,7 @@ const HospitalPortal: React.FC = () => {
               return {
                 patientName: 'Daniel de Los Santos marin',
                 patientId: 'P-2024-008',
-                procedure: 'Electrocardiogram',
+                procedure: 'Cardiac rehabilitation',
                 provider: 'Amanda R',
                 hospital: 'Trident Medical Center'
               };

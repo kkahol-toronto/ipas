@@ -1852,7 +1852,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           {
             role: 'assistant',
             content: caseId === 'PA-2024-008' 
-              ? `I've analyzed Case PA-2024-008 (Daniel de Los Santos marin - Electrocardiogram). Based on the clinical data, the patient presents with anxiety symptoms. An electrocardiogram has been ordered to rule out cardiac causes. The case shows clear medical necessity. My recommendation is APPROVE. Do you have questions?`
+              ? `I've analyzed Case PA-2024-008 (Daniel de Los Santos marin - Cardiac rehabilitation). Based on the clinical data, the patient presents with anxiety symptoms. An Cardiac rehabilitation has been ordered to rule out cardiac causes. The case shows clear medical necessity. My recommendation is APPROVE. Do you have questions?`
               : `I've analyzed Case PA-2024-006 (Rebecca Hardin - CPAP Device Replacement). Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision. The patient has documented OSA with AHI 8.9/hr, compliant with current CPAP therapy, and device replacement is medically necessary. My recommendation is APPROVE. Do you have questions?`
           }
         ]);

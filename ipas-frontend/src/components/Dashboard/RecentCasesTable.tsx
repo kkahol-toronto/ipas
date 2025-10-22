@@ -177,7 +177,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       id: 'PA-2024-008',
       patientName: 'Daniel de Los Santos marin',
       provider: 'Amanda R',
-      procedure: 'Electrocardiogram',
+      procedure: 'Cardiac rehabilitation',
       status: 'pending',
       submittedDate: '2025-10-08',
       priority: 'standard',
