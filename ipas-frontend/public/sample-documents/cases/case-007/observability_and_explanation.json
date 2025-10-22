@@ -101,9 +101,9 @@
       "step": 11,
       "action": "Final Authorization Decision",
       "status": "Completed",
-      "details": "Generated final denial determination with detailed clinical rationale, alternative care recommendations, and appeal rights information",
+      "details": "Generated final denial determination with detailed clinical rationale and alternative care recommendations",
       "outcome": "Authorization #PA-2024-007-DENIED issued for inpatient admission. Denial letter sent to provider and facility with comprehensive justification and outpatient care plan",
-      "comments": "Decision communicated to Self Regional HE UR Department via secure portal with complete audit trail. Provider advised of patient's appeal rights and peer-to-peer review availability"
+      "comments": "Decision communicated to Self Regional HE UR Department via secure portal with complete audit trail"
     }
   ],
   "keyFindings": {
@@ -127,18 +127,6 @@
     "coverageDetails": {
       "inpatientCare": "DENIED - Does not meet inpatient admission criteria per policy guidelines",
       "outpatientCare": "COVERED AND RECOMMENDED - Oral antibiotics (Ciprofloxacin 500mg BID + Metronidazole 500mg TID for 7-10 days), dietary modifications (clear liquid progressing to low-residue diet), oral analgesics for pain management, follow-up visit within 48-72 hours"
-    },
-    "alternativeCareApproved": {
-      "medications": "Ciprofloxacin 500mg, Metronidazole 500mg, Hydrocodone-acetaminophen 7.5-325mg PRN - APPROVED",
-      "followUpVisit": "Office visit within 48-72 hours - APPROVED",
-      "diagnosticTests": "Repeat CT abdomen/pelvis if symptoms worsen - PRE-APPROVED",
-      "estimatedOutpatientCost": "$800 - $1,200"
-    },
-    "appealRights": {
-      "appealDeadline": "2025-05-25 (30 days from denial date)",
-      "peerToPeerReview": "Available - Provider may request peer-to-peer discussion within 5 business days",
-      "expeditedAppeal": "Available if clinical situation changes or worsens",
-      "contactNumber": "1-800-IPAS-APPEAL"
     }
   },
   "qualityMetrics": {
@@ -170,7 +158,7 @@
     "humanReview": "Physician panel (gastroenterologist, hospitalist, medical director) convened for consensus review due to inpatient admission request conflicting with clinical guideline recommendations. Panel unanimously agreed with system recommendation for denial",
     "exceptionHandling": "No exceptions identified. Case followed standard denial pathway for uncomplicated diverticulitis. Alternative outpatient care plan approved and communicated. Peer-to-peer review option offered to requesting provider",
     "auditTrail": "Complete audit trail maintained for all 11 workflow steps including document processing timestamps, AI analysis parameters, policy criteria evaluation, panel review notes, and final decision communication. All data sources documented including medical records, imaging reports, laboratory results, and clinical guidelines referenced",
-    "communicationLog": "Denial notification sent via secure portal to Self Regional HE UR Department on 04/25/2025 at 14:05:30Z. Provider notification includes detailed clinical rationale, alternative care recommendations, appeal rights, and peer-to-peer review contact information. Patient notification letter generated with layman explanation of decision and care instructions",
+    "communicationLog": "Denial notification sent via secure portal to Self Regional HE UR Department on 04/25/2025 at 14:05:30Z. Provider notification includes detailed clinical rationale and alternative care recommendations. Patient notification letter generated with layman explanation of decision and care instructions",
     "qualityAssurance": "Case reviewed for quality assurance compliance - all documentation requirements met, clinical guidelines appropriately applied, patient safety considerations addressed through comprehensive outpatient care plan and safety-net instructions"
   },
   "clinicalReferences": {

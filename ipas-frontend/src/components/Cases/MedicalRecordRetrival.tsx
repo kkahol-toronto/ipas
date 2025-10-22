@@ -56,7 +56,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-001": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval",
+        "name": "Medical Record Retrieval.xml",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.6 MB",
@@ -88,7 +88,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-002": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval",
+        "name": "Medical Record Retrieval.xml",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.8 MB",
@@ -120,7 +120,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-003": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval",
+        "name": "Medical Record Retrieval.xml",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.7 MB",
@@ -152,7 +152,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-006": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval",
+        "name": "Medical Record Retrieval.xml",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.6 MB",
@@ -184,7 +184,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-007": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval",
+        "name": "Medical Record Retrieval.xml",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.6 MB",
@@ -194,7 +194,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
         "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
         "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
-        "recordretrivedUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
+        "recordretrivedUrl": "/sample-documents/cases/case-007/EMR007.txt",
         "isExtracted": false
       },
       {
@@ -216,7 +216,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
     "PA-2024-008": [
       {
         "id": "1",
-        "name": "Medical Record Retrieval",
+        "name": "Medical Record Retrieval.xml",
         "type": "pdf",
         "category": "Medical-Record-Retrival",
         "size": "1.6 MB",

@@ -110,7 +110,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           type: 'process',
           status: 'pending',
           description: 'Generate approval letter and notify provider',
-          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'EMR Integration'],
           nextSteps: [],
           position: { x: 800, y: 50 }
         }
@@ -814,7 +814,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         type: 'process',
         status: 'pending',
         description: 'Generate letter and notify provider',
-        subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+        subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'EMR Integration'],
         nextSteps: [],
         position: { x: 800, y: 50 }
       }
@@ -1311,40 +1311,40 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         if (foundFields === requiredFields.length) {
           setShowMessage('🎉 Auth Intake Agent work completed with success!');
           setAnimationStep(18);
+        } else {
+          setShowMessage(`⚠️ Auth Intake partially completed (${foundFields}/${requiredFields.length} fields found) - Proceeding anyway`);
+          setAnimationStep(18);
+        }
+        
+        // Update Auth Intake status to completed (even with partial data)
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'auth-intake' 
+              ? { ...step, status: 'completed' }
+              : step
+          )
+        );
+        
+        // Automatically proceed to Auth Triage after a short delay
+        setTimeout(() => {
+          setShowMessage('Proceeding to Auth Triage...');
+          setAnimationStep(19);
           
-          // Update Auth Intake status to completed
+          // Update Auth Triage to running status
           setProcessSteps(prev => 
             prev.map(step => 
-              step.id === 'auth-intake' 
-                ? { ...step, status: 'completed' }
+              step.id === 'auth-triage' 
+                ? { ...step, status: 'running' }
                 : step
             )
           );
           
-          // Automatically proceed to Auth Triage after a short delay
+          // Keep animation active for 2 more seconds while transitioning
           setTimeout(() => {
-            setShowMessage('Proceeding to Auth Triage...');
-            setAnimationStep(19);
-            
-            // Update Auth Triage to running status
-            setProcessSteps(prev => 
-              prev.map(step => 
-                step.id === 'auth-triage' 
-                  ? { ...step, status: 'running' }
-                  : step
-              )
-            );
-            
-            // Keep animation active for 2 more seconds while transitioning
-            setTimeout(() => {
-              // Start the Auth Triage process
-              startAuthTriageProcess();
-            }, 2000);
+            // Start the Auth Triage process
+            startAuthTriageProcess();
           }, 2000);
-        } else {
-          setShowMessage(`⚠️ Auth Intake partially completed (${foundFields}/${requiredFields.length} fields found)`);
-          setAnimationStep(18);
-        }
+        }, 2000);
         
         setIsAnimating(false);
       }, (requiredFields.length + 1) * 1000);
@@ -1590,14 +1590,14 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       setAnimationStep(44);
     }, 6000);
 
-    // Step 4: Epic Integration
+    // Step 4: EMR Integration
     setTimeout(() => {
-      setShowMessage('Sending authorization data to Epic medical records...');
+      setShowMessage('Sending authorization data to EMR medical records...');
       setAnimationStep(45);
     }, 7000);
 
     setTimeout(() => {
-      setShowMessage('✓ Data transmitted to Epic successfully');
+      setShowMessage('✓ Data transmitted to EMR successfully');
       setAnimationStep(46);
       
       // Trigger EMR notification service immediately
@@ -2403,15 +2403,15 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
               {showMessage}
             </Typography>
             
-            {/* Epic Medical Record Link */}
-            {showMessage.includes('Data transmitted to Epic successfully') && (
+            {/* EMR Medical Record Link */}
+            {showMessage.includes('Data transmitted to EMR successfully') && (
               <Box sx={{ mt: 2 }}>
                 <Button
                   variant="contained"
                   color="primary"
                   startIcon={<DocumentIcon />}
                   onClick={() => {
-                    // Open Epic medical record in new tab
+                    // Open EMR medical record in new tab
                     window.open('https://epic-demo.healthcare.com/patient/medical-records', '_blank');
                   }}
                   sx={{
@@ -2421,10 +2421,10 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                     }
                   }}
                 >
-                  View Updated Medical Record in Epic
+                  View Updated Medical Record in EMR
                 </Button>
                 <Typography variant="caption" sx={{ display: 'block', mt: 1, color: 'text.secondary' }}>
-                  Authorization data has been integrated into the patient's Epic medical record
+                  Authorization data has been integrated into the patient's EMR medical record
                 </Typography>
               </Box>
             )}

@@ -698,8 +698,8 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           size: '2.1 MB',
           uploadDate: '2024-04-25',
           status: 'ready',
-          url: '/sample-documents/cases/case-007/prior-auth-form-original.pdf',
-          originalUrl: '/sample-documents/cases/case-007/prior-auth-form-original.pdf',
+          url: '/sample-documents/cases/case-007/Prior Authorization Request Form 007.pdf',
+          originalUrl: '/sample-documents/cases/case-007/Prior Authorization Request Form 007.pdf',
           extractedUrl: '/sample-documents/cases/case-007/prior auth extracted.pdf',
           jsonUrl: '/sample-documents/cases/case-007/AuthReq.json',
           isExtracted: false
@@ -759,7 +759,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/008/Prior Authorization-Form.pdf',
           originalUrl: '/sample-documents/cases/008/Prior Authorization-Form.pdf',
-          extractedUrl: '/sample-documents/cases/008/20250425110402_HW.pdf',
+          extractedUrl: '/sample-documents/cases/008/summ/prior.pdf',
           jsonUrl: '/sample-documents/cases/008/prior-auth-form.json',
           isExtracted: false
         },
@@ -773,7 +773,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/008/2D Doppler Study.pdf',
           originalUrl: '/sample-documents/cases/008/2D Doppler Study.pdf',
-          extractedUrl: '/sample-documents/cases/008/ClinicalSummary _110402.pdf',
+          extractedUrl: '/sample-documents/cases/008/summ/dop.pdf',
           jsonUrl: '/sample-documents/cases/008/2d-doppler-study.json',
           isExtracted: false
         },
@@ -787,7 +787,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/008/Laboratory Study.pdf',
           originalUrl: '/sample-documents/cases/008/Laboratory Study.pdf',
-          extractedUrl: '/sample-documents/cases/008/LCDClinicalSummary _110402.pdf',
+          extractedUrl: '/sample-documents/cases/008/summ/lab.pdf',
           jsonUrl: '/sample-documents/cases/008/laboratory-study.json',
           isExtracted: false
         },
@@ -801,7 +801,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/008/Electrocardiogram.pdf',
           originalUrl: '/sample-documents/cases/008/Electrocardiogram.pdf',
-          extractedUrl: '/sample-documents/cases/008/20250425110402_HW.pdf',
+          extractedUrl: '/sample-documents/cases/008/summ/Electrocard.pdf',
           jsonUrl: '/sample-documents/cases/008/electrocardiogram.json',
           isExtracted: false
         },
@@ -815,7 +815,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/008/Discharge Summary.pdf',
           originalUrl: '/sample-documents/cases/008/Discharge Summary.pdf',
-          extractedUrl: '/sample-documents/cases/008/ClinicalSummary _110402.pdf',
+          extractedUrl: '/sample-documents/cases/008/summ/discharge.pdf',
           jsonUrl: '/sample-documents/cases/008/discharge-summary.json',
           isExtracted: false
         },
@@ -829,7 +829,7 @@ const CaseDocuments: React.FC<CaseDocumentsProps> = ({ caseId }) => {
           status: 'ready',
           url: '/sample-documents/cases/008/Operative Report.pdf',
           originalUrl: '/sample-documents/cases/008/Operative Report.pdf',
-          extractedUrl: '/sample-documents/cases/008/LCDClinicalSummary criteriaeval.pdf',
+          extractedUrl: '/sample-documents/cases/008/summ/oper.pdf',
           jsonUrl: '/sample-documents/cases/008/operative-report.json',
           isExtracted: false
         }

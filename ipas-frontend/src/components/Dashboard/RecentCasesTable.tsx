@@ -167,7 +167,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       id: 'PA-2024-007',
       patientName: 'Amanda Williams',
       provider: 'Benjamin Velky',
-      procedure: 'In patient',
+      procedure: 'Inpatient',
       status: 'denied',
       submittedDate: '2025-10-11',
       priority: 'Urgent',
