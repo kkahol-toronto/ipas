@@ -90,7 +90,7 @@ const Tasks: React.FC = () => {
     };
 
     return (
-        <Box sx={{p: 3}}>
+        <Box sx={{ p: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, mb: '1rem' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mr: 'auto' }}>
                     <Typography variant="h4" component="h3" gutterBottom sx={{ color: '#111', fontWeight: 'bold', marginBottom: 0, mr: '1rem' }}>
@@ -110,10 +110,11 @@ const Tasks: React.FC = () => {
             <Box sx={{ display: 'flex', mb: '1rem' }}>
                 <Box className="groupedNameWrapper">
                     <Box className="grupRow">Group Queue</Box>
-                    <Box className="grupRow formRow" sx={{background: '#fff'}}>
-                        <input type="text" className="form-control" id="formGroupExampleInput" placeholder="" />
+                    <Box className="grupRow formRow" sx={{ background: '#fff' }}>
+                        <input type="text" className="form-control" value="UM determination" id="formGroupExampleInput" placeholder="" />
+                        <Box className="inputHelpText">Minimum 2 characters</Box>
                     </Box>
-                    <Box className="grupRow" sx={{background: '#ddf2ff'}}>UM determination</Box>
+                    <Box className="grupRow" sx={{ background: '#ddf2ff' }}>UM determination</Box>
                 </Box>
                 <Box className="dateRangeWrapper">
                     <Box className="dateRangeRow">
@@ -122,61 +123,83 @@ const Tasks: React.FC = () => {
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"><b>Date Range</b></label>
-                                        <input type="text" className="form-control w_130" id="formGroupExampleInput" placeholder="" />
+                                        {/* <input type="text" className="form-control w_130" id="formGroupExampleInput" placeholder="" /> */}
+                                        <select className="form-select w_130">
+                                            <option selected>Due Date</option>
+                                        </select>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"><b>Date From</b></label>
                                         <input type="text" className="form-control w_130" id="formGroupExampleInput" placeholder="" />
+                                        <Box className="inputHelpText">MM/DD/YYYY</Box>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"></label>
                                         <input type="number" className="form-control w_60" id="formGroupExampleInput" placeholder="" />
+                                        <Box className="inputHelpText">HH</Box>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"></label>
-                                        <input type="text" className="form-control w_60" id="formGroupExampleInput" placeholder="" />
+                                        <input type="number" className="form-control w_60" id="formGroupExampleInput" placeholder="" />
+                                        <Box className="inputHelpText">MM</Box>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"></label>
-                                        <input type="text" className="form-control w_60" id="formGroupExampleInput" placeholder="" />
+                                        {/* <input type="text" className="form-control w_60" id="formGroupExampleInput" placeholder="" /> */}
+                                        <select className="form-select w_60">
+                                            <option selected>PM</option>
+                                            <option>AM</option>
+                                        </select>
+                                        <Box className="inputHelpText">AM/PM</Box>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"><b>Date To</b></label>
-                                        <input type="text" className="form-control w_130" id="formGroupExampleInput" placeholder="" />
+                                        <input type="text" className="form-control w_130" value="10/15/2025" id="formGroupExampleInput" placeholder="" />
+                                        <Box className="inputHelpText">MM/DD/YYYY</Box>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"></label>
-                                        <input type="number" className="form-control w_60" id="formGroupExampleInput" placeholder="" />
+                                        <input type="number" className="form-control w_60" value="11" id="formGroupExampleInput" placeholder="" />
+                                        <Box className="inputHelpText">HH</Box>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"></label>
-                                        <input type="text" className="form-control w_60" id="formGroupExampleInput" placeholder="" />
+                                        <input type="number" className="form-control w_60" value="59" id="formGroupExampleInput" placeholder="" />
+                                        <Box className="inputHelpText">MM</Box>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"></label>
-                                        <input type="text" className="form-control w_60" id="formGroupExampleInput" placeholder="" />
+                                        {/* <input type="text" className="form-control w_60" id="formGroupExampleInput" placeholder="" /> */}
+                                        <select className="form-select w_60">
+                                            <option selected>PM</option>
+                                            <option>AM</option>
+                                        </select>
+                                        <Box className="inputHelpText">AM/PM</Box>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">
                                     <Box style={{ marginBottom: '1rem' }}>
                                         <label htmlFor="formGroupExampleInput"><b>Priority</b></label>
-                                        <input type="text" className="form-control w_130" id="formGroupExampleInput" placeholder="" />
+                                        {/* <input type="text" className="form-control w_130" id="formGroupExampleInput" placeholder="" /> */}
+                                        <select className="form-select w_130">
+                                            <option selected>All</option>
+                                        </select>
                                     </Box>
                                 </Grid>
                                 <Grid size="auto">

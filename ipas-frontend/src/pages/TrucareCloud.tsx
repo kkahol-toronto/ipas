@@ -9,6 +9,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import CaseDetailsEnhanced from '../components/Cases/CaseDetailsEnhanced';
 import AddIcon from '@mui/icons-material/Add';
 import RocketLaunchSharpIcon from '@mui/icons-material/RocketLaunchSharp';
+import TruCareCloudRecentCasesTable from '../components/Dashboard/TruCareCloudRecentCasesTable';
 
 const TrucareCloud: React.FC = () => {
 
@@ -93,7 +94,7 @@ const TrucareCloud: React.FC = () => {
           </Box>
         </Box>
         <Box>
-          <RecentCasesTable onCaseClick={handleCaseClick} />
+          <TruCareCloudRecentCasesTable onCaseClick={handleCaseClick} />
         </Box>
       </Box>
       <Dialog
