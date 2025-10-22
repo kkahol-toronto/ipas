@@ -414,9 +414,9 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
       "size": "1.6 MB",
       "uploadDate": "2024-04-25",
       "status": "ready",
-      url: "/sample-documents/cases/case-007/Summary.pdf",
-      originalUrl: "/sample-documents/cases/case-007/Summary.pdf",
-      extractedUrl: '/sample-documents/cases/case-007/Summary.pdf',
+      url: "/sample-documents/cases/case-007/cc007.pdf",
+      originalUrl: "/sample-documents/cases/case-007/cc007.pdf",
+      extractedUrl: '/sample-documents/cases/case-007/cc007.pdf',
       jsonUrl: '/sample-documents/cases/case-007/clinical-criteria-evaluation.json',
       isExtracted: false
     },

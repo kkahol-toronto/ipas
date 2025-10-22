@@ -40,7 +40,8 @@ import {
   Edit as EditIcon,
   Share as ShareIcon,
   Computer as ComputerIcon,
-  Visibility as VisibilityIcon
+  Visibility as VisibilityIcon,
+  PictureAsPdf as PdfIcon
 } from '@mui/icons-material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
 import CaseDocuments from './CaseDocuments';
@@ -93,6 +94,223 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   );
   const [emrIntegrationOpen, setEmrIntegrationOpen] = useState(false);
 
+  // Function to generate and download PDF from JSON
+  const downloadObservabilityAsPDF = async () => {
+    try {
+      // Fetch the JSON data
+      const folderPath = caseId === 'PA-2024-001' ? 'case-001-john-doe' : 
+                         caseId === 'PA-2024-002' ? 'case-002-jane-smith' : 
+                         caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : 
+                         caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : 
+                         caseId === 'PA-2024-005' ? 'case-005-david-brown' : 
+                         caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 
+                         caseId === 'PA-2024-007' ? 'case-007' : 
+                         caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe';
+      
+      const response = await fetch(`/sample-documents/cases/${folderPath}/observability_and_explanation.json`);
+      const jsonData = await response.json();
+      
+      // Create a printable HTML content
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) return;
+      
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Observability & Explainability Report - ${caseId}</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              line-height: 1.6;
+              padding: 20px;
+              max-width: 900px;
+              margin: 0 auto;
+            }
+            h1 {
+              color: #1976d2;
+              border-bottom: 3px solid #1976d2;
+              padding-bottom: 10px;
+            }
+            h2 {
+              color: #2c3e50;
+              margin-top: 25px;
+              border-bottom: 2px solid #ecf0f1;
+              padding-bottom: 8px;
+            }
+            h3 {
+              color: #34495e;
+              margin-top: 15px;
+            }
+            .section {
+              margin-bottom: 30px;
+              background: #f8f9fa;
+              padding: 15px;
+              border-radius: 5px;
+            }
+            .workflow-step {
+              margin: 15px 0;
+              padding: 12px;
+              background: white;
+              border-left: 4px solid #1976d2;
+            }
+            .key-value {
+              display: flex;
+              margin: 8px 0;
+            }
+            .key {
+              font-weight: bold;
+              min-width: 200px;
+              color: #2c3e50;
+            }
+            .value {
+              color: #555;
+            }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin: 15px 0;
+            }
+            th, td {
+              border: 1px solid #ddd;
+              padding: 10px;
+              text-align: left;
+            }
+            th {
+              background-color: #1976d2;
+              color: white;
+            }
+            tr:nth-child(even) {
+              background-color: #f8f9fa;
+            }
+            .badge {
+              display: inline-block;
+              padding: 3px 8px;
+              border-radius: 3px;
+              font-size: 12px;
+              font-weight: bold;
+            }
+            .status-completed {
+              background-color: #d4edda;
+              color: #155724;
+            }
+            .footer {
+              margin-top: 40px;
+              text-align: center;
+              color: #7f8c8d;
+              font-size: 12px;
+              border-top: 1px solid #ddd;
+              padding-top: 20px;
+            }
+            @media print {
+              body { margin: 0; }
+              .no-print { display: none; }
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Observability & Explainability Report</h1>
+          <div class="key-value">
+            <span class="key">Case ID:</span>
+            <span class="value">${caseId}</span>
+          </div>
+          <div class="key-value">
+            <span class="key">Generated:</span>
+            <span class="value">${new Date().toLocaleString()}</span>
+          </div>
+
+          <div class="section">
+            <h2>Case Overview</h2>
+            ${jsonData.caseId ? `<div class="key-value"><span class="key">Case ID:</span><span class="value">${jsonData.caseId}</span></div>` : ''}
+            ${jsonData.patientName ? `<div class="key-value"><span class="key">Patient:</span><span class="value">${jsonData.patientName}</span></div>` : ''}
+            ${jsonData.provider ? `<div class="key-value"><span class="key">Provider:</span><span class="value">${jsonData.provider}</span></div>` : ''}
+            ${jsonData.facility ? `<div class="key-value"><span class="key">Facility:</span><span class="value">${jsonData.facility}</span></div>` : ''}
+            ${jsonData.requestedService ? `<div class="key-value"><span class="key">Requested Service:</span><span class="value">${jsonData.requestedService}</span></div>` : ''}
+            ${jsonData.authorizationAmount ? `<div class="key-value"><span class="key">Authorization Amount:</span><span class="value">${jsonData.authorizationAmount}</span></div>` : ''}
+          </div>
+
+          <div class="section">
+            <h2>Workflow Steps</h2>
+            ${jsonData.workflowSteps ? jsonData.workflowSteps.map((step: any, index: number) => `
+              <div class="workflow-step">
+                <h3>Step ${step.step || index + 1}: ${step.action}</h3>
+                <div class="key-value">
+                  <span class="key">Status:</span>
+                  <span class="value"><span class="badge status-completed">${step.status}</span></span>
+                </div>
+                ${step.details ? `<div class="key-value"><span class="key">Details:</span><span class="value">${step.details}</span></div>` : ''}
+                ${step.outcome ? `<div class="key-value"><span class="key">Outcome:</span><span class="value">${step.outcome}</span></div>` : ''}
+                ${step.comments ? `<div class="key-value"><span class="key">Comments:</span><span class="value">${step.comments}</span></div>` : ''}
+              </div>
+            `).join('') : ''}
+          </div>
+
+          ${jsonData.keyFindings ? `
+          <div class="section">
+            <h2>Key Findings</h2>
+            ${Object.entries(jsonData.keyFindings).map(([key, value]) => `
+              <div class="key-value">
+                <span class="key">${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</span>
+                <span class="value">${value}</span>
+              </div>
+            `).join('')}
+          </div>
+          ` : ''}
+
+          ${jsonData.denialDetails || jsonData.approvalDetails ? `
+          <div class="section">
+            <h2>${jsonData.denialDetails ? 'Denial' : 'Approval'} Details</h2>
+            ${JSON.stringify(jsonData.denialDetails || jsonData.approvalDetails, null, 2).split('\\n').map(line => 
+              `<div>${line.replace(/\s/g, '&nbsp;')}</div>`
+            ).join('')}
+          </div>
+          ` : ''}
+
+          ${jsonData.qualityMetrics ? `
+          <div class="section">
+            <h2>Quality Metrics</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${Object.entries(jsonData.qualityMetrics).map(([key, value]) => `
+                  <tr>
+                    <td>${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</td>
+                    <td>${value}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+          ` : ''}
+
+          <div class="footer">
+            <p>Generated by IPAS (Intelligent Prior Authorization System)</p>
+            <p>This document contains confidential patient information</p>
+          </div>
+
+          <div class="no-print" style="text-align: center; margin: 20px;">
+            <button onclick="window.print()" style="padding: 10px 20px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+              Print / Save as PDF
+            </button>
+            <button onclick="window.close()" style="padding: 10px 20px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-left: 10px;">
+              Close
+            </button>
+          </div>
+        </body>
+        </html>
+      `);
+      
+      printWindow.document.close();
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    }
+  };
 
   // Dynamic case data based on caseId
   const getCaseData = (caseId: string) => {
@@ -534,7 +752,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   <VisibilityIcon />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="Download Observability & Explanation Report">
+              <Tooltip title="Download Observability Report (JSON)">
                 <IconButton
                   color="success"
                   onClick={() => {
@@ -545,6 +763,14 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   }}
                 >
                   <DownloadIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Download Observability Report (PDF)">
+                <IconButton
+                  color="error"
+                  onClick={downloadObservabilityAsPDF}
+                >
+                  <PdfIcon />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Edit Clinical Notes">
@@ -877,7 +1103,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                     </Box>
                     <Box>
                       <Typography variant="body2" sx={{ mb: 3 }}>
-                        Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : 'APPROVE'}</strong>
+                        Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : caseId === 'PA-2024-007' ? 'DENIED' : 'APPROVE'}</strong>
                       </Typography>
                       {caseId === 'PA-2024-003' && (
                         <Typography variant="body2" color="warning.main" sx={{ mb: 2, p: 1, bgcolor: '#fff3cd', borderRadius: 1 }}>
@@ -1433,7 +1659,14 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               link.click();
             }}
           >
-            Download
+            Download JSON
+          </Button>
+          <Button
+            startIcon={<PdfIcon />}
+            color="error"
+            onClick={downloadObservabilityAsPDF}
+          >
+            Download PDF
           </Button>
           <Button variant="contained">
             Save

@@ -1,0 +1,1755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3">
+<realmCode code="US"/>
+<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
+<templateId root="1.2.840.114350.1.72.1.51693"/>
+<templateId root="2.16.840.1.113883.10.20.22.1.1"/>
+<templateId root="2.16.840.1.113883.10.20.22.1.1" extension="2015-08-01"/>
+<templateId root="2.16.840.1.113883.10.20.22.1.1" extension="2023-05-01"/>
+<templateId root="2.16.840.1.113883.10.20.22.1.9"/>
+<templateId root="2.16.840.1.113883.10.20.22.1.9" extension="2015-08-01"/>
+<id assigningAuthorityName="EPC" root="1.2.840.114350.1.13.0.1.7.8.688883.13550"/>
+<code code="11506-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Subsequent evaluation note"/>
+<title>Encounter Summary</title>
+<effectiveTime value="20250915023840-0500"/>
+<confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" displayName="Normal"/>
+<languageCode code="en-US"/>
+<setId assigningAuthorityName="EPC" extension="9e3345d2-f670-11e9-b8ae-0050568bd7c0" root="1.2.840.114350.1.13.0.1.7.1.1"/>
+<versionNumber value="4"/>
+<recordTarget>
+<patientRole>
+<id root="1.2.840.114350.1.13.0.1.7.3.688884.100" extension="FHRCXF57HBNH4QG"/>
+<addr use="HP">
+<streetAddressLine>7324 Roosevelt Ave</streetAddressLine>
+<county>MARION</county>
+<city>INDIANAPOLIS</city>
+<state>IN</state>
+<postalCode>46201</postalCode>
+<country>USA</country>
+<useablePeriod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+<low value="20190524"/>
+<high nullFlavor="NA"/>
+</useablePeriod>
+</addr>
+<telecom use="WP" value="tel:+1-785-666-6668"/>
+<telecom use="MC" value="tel:+1-785-785-4322"/>
+<telecom value="mailto:knixontestemail2@EPIC.com"/>
+<patient>
+<name use="L">
+<given>Amanda Latoya</given>
+<family>Williams</family>
+<validTime>
+<low nullFlavor="NA"/>
+<high nullFlavor="NA"/>
+</validTime>
+</name>
+<administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGenderCode" displayName="Female"/>
+<birthTime value="19780823"/>
+<sdtc:deceasedInd xmlns:sdtc="urn:hl7-org:sdtc" value="false"/>
+<maritalStatusCode code="M" codeSystem="2.16.840.1.113883.5.2" codeSystemName="MaritalStatusCode" displayName="Married"/>
+<raceCode code="2028-9" codeSystem="2.16.840.1.113883.6.238" codeSystemName="CDC Race and Ethnicity" displayName="Asian"/>
+<ethnicGroupCode code="2186-5" codeSystem="2.16.840.1.113883.6.238" codeSystemName="CDC Race and Ethnicity" displayName="Not Hispanic or Latino"/>
+<languageCommunication>
+<languageCode code="en"/>
+<modeCode code="ESP" codeSystem="2.16.840.1.113883.5.60" displayName="Expressed Spoken"/>
+<preferenceInd value="true"/>
+</languageCommunication>
+<languageCommunication>
+<languageCode code="eng"/>
+<modeCode code="EWR" codeSystem="2.16.840.1.113883.5.60" displayName="Expressed Written"/>
+<preferenceInd value="true"/>
+</languageCommunication>
+<languageCommunication>
+<languageCode code="zho"/>
+<modeCode code="EWR" codeSystem="2.16.840.1.113883.5.60" displayName="Expressed Written"/>
+<preferenceInd value="false"/>
+</languageCommunication>
+</patient>
+<providerOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<name>FHIR Sandbox</name>
+<telecom nullFlavor="NI"/>
+<addr use="WP">
+<streetAddressLine>1989 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53590</postalCode>
+<country>USA</country>
+</addr>
+</providerOrganization>
+</patientRole>
+</recordTarget>
+<author>
+<time value="20250915023840-0500"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.1" extension="11.5"/>
+<addr nullFlavor="NA"/>
+<telecom nullFlavor="NA"/>
+<assignedAuthoringDevice>
+<manufacturerModelName>EMR- Version 11.5</manufacturerModelName>
+<softwareName>EMR- Version 11.5</softwareName>
+</assignedAuthoringDevice>
+<representedOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<name>FHIR Sandbox</name>
+<telecom nullFlavor="NI"/>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53598</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+<custodian>
+<assignedCustodian>
+<representedCustodianOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<name>FHIR Sandbox</name>
+<telecom nullFlavor="NI"/>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53590</postalCode>
+<country>USA</country>
+</addr>
+</representedCustodianOrganization>
+</assignedCustodian>
+</custodian>
+<legalAuthenticator>
+<time value="20250915023840-0500"/>
+<signatureCode code="S"/>
+<assignedEntity>
+<id nullFlavor="UNK"/>
+<code nullFlavor="UNK"/>
+<addr nullFlavor="UNK"/>
+<telecom nullFlavor="UNK"/>
+<assignedPerson>
+<name nullFlavor="UNK"/>
+</assignedPerson>
+</assignedEntity>
+</legalAuthenticator>
+<documentationOf typeCode="DOC">
+<serviceEvent classCode="PCPR">
+<templateId root="2.16.840.1.113883.10.20.21.3.1"/>
+<effectiveTime>
+<low value="20190622"/>
+<high value="20250715"/>
+</effectiveTime>
+<performer typeCode="PRF">
+<functionCode code="PCP" codeSystem="2.16.840.1.113883.5.88" codeSystemName="ParticipationFunction" displayName="Primary Care Provider">
+<originalText>Primary Care Provider</originalText>
+</functionCode>
+<time>
+<low nullFlavor="NI"/>
+<high nullFlavor="NI"/>
+</time>
+<assignedEntity nullFlavor="NI">
+<id nullFlavor="UNK"/>
+<addr nullFlavor="UNK"/>
+<telecom nullFlavor="NA"/>
+<assignedPerson nullFlavor="NA">
+<name nullFlavor="UNK"/>
+</assignedPerson>
+<representedOrganization classCode="ORG">
+<name>FHIR Sandbox</name>
+<telecom nullFlavor="UNK"/>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53590</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedEntity>
+</performer>
+</serviceEvent>
+</documentationOf>
+<relatedDocument typeCode="RPLC">
+<parentDocument>
+<id assigningAuthorityName="EPC" root="1.2.840.114350.1.13.0.1.7.8.688883.146"/>
+<setId assigningAuthorityName="EPC" extension="9e3345d2-f670-11e9-b8ae-0050568bd7c0" root="1.2.840.114350.1.13.0.1.7.1.1"/>
+<versionNumber value="3"/>
+</parentDocument>
+</relatedDocument>
+<componentOf>
+<encompassingEncounter>
+<id root="1.2.840.114350.1.13.0.1.7.3.698084.8" extension="27556"/>
+<code code="AMB" codeSystem="2.16.840.1.113883.5.4" displayName="Ambulatory">
+<originalText>Office Visit</originalText>
+<translation code="0" codeSystem="1.2.840.114350.1.72.1.30.1"/>
+</code>
+<effectiveTime>
+<low value="20190622"/>
+</effectiveTime>
+<responsibleParty>
+<assignedEntity>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<city>MADISON</city>
+<state>WI</state>
+<postalCode>53719</postalCode>
+<country>USA</country>
+</addr>
+<telecom use="WP" value="tel:+1-555-555-5555"/>
+<assignedPerson>
+<name>
+<given>Physician</given>
+<family>Family Medicine</family>
+</name>
+</assignedPerson>
+<representedOrganization>
+<name>FHIR Sandbox</name>
+</representedOrganization>
+</assignedEntity>
+</responsibleParty>
+<encounterParticipant typeCode="ATND">
+<time value="20190528"/>
+<assignedEntity>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+<code code="207Q00000X" codeSystem="2.16.840.1.113883.11.19465" displayName="Family Medicine Physician">
+<originalText>Family Medicine</originalText>
+<translation code="9" codeSystem="1.2.840.114350.1.13.0.1.7.10.836982.1050" codeSystemName="EPIC.SER.ProviderSpecialty" displayName="Family Medicine"/>
+</code>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<city>MADISON</city>
+<state>WI</state>
+<postalCode>53719</postalCode>
+<country>USA</country>
+</addr>
+<telecom use="WP" value="tel:+1-555-555-5555"/>
+<assignedPerson>
+<name use="L">
+<given>Physician</given>
+<family>Family Medicine</family>
+<suffix qualifier="AC"> MD</suffix>
+</name>
+</assignedPerson>
+</assignedEntity>
+</encounterParticipant>
+<location>
+<healthCareFacility>
+<id root="1.2.840.114350.1.13.0.1.7.2.686980" extension="10501101"/>
+<code nullFlavor="UNK">
+<originalText>Family Medicine</originalText>
+</code>
+<location>
+<name>EMC Family Medicine</name>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<county>DANE</county>
+<city>VERONA</city>
+<state>WI</state>
+<postalCode>53593-9179</postalCode>
+<country>USA</country>
+</addr>
+</location>
+<serviceProviderOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.696570" extension="10501"/>
+<name>EHS Clinic</name>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<county>DANE</county>
+<city>VERONA</city>
+<state>WI</state>
+<postalCode>53593-9179</postalCode>
+<country>USA</country>
+</addr>
+<asOrganizationPartOf>
+<wholeOrganization>
+<name>FHIR Sandbox</name>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</wholeOrganization>
+</asOrganizationPartOf>
+</serviceProviderOrganization>
+</healthCareFacility>
+</location>
+</encompassingEncounter>
+</componentOf>
+<component>
+<structuredBody>
+<component>
+<section>
+<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.1"/>
+<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.1" extension="2014-06-09"/>
+<code code="42349-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Reason for evaluation"/>
+<title>Reason for Evaluation</title>
+<text>
+<list>
+<item ID="Evaluation">
+<caption>Consultation (Routine) - Authorized</caption>
+<table>
+<colgroup>
+<col span="4" width="25%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Specialty</th>
+<th>Diagnoses / Procedures</th>
+<th>Referred By Contact</th>
+<th>Referred To Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cardiology</td>
+<td>
+<paragraph styleCode="xcellHeader">Diagnoses</paragraph>
+<paragraph ID="Evaluation1Dx1">Risk for colon cancer between 30% and 40% in next 5 years</paragraph>
+<br/>
+</td>
+<td>
+<paragraph>Family Medicine, Physician, MD</paragraph>
+<paragraph>123 Anywhere Street</paragraph>
+<paragraph>MADISON, WI 53719</paragraph>
+<paragraph>Phone: tel:+1-555-555-5555</paragraph>
+</td>
+<td>
+<paragraph/>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="13%"/>
+<col width="12%"/>
+<col width="25%"/>
+<col width="13%"/>
+<col width="12%"/>
+<col width="13%"/>
+<col width="12%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Evaluation ID</th>
+<th>Status</th>
+<th>Reason</th>
+<th>Start Date</th>
+<th>Expiration Date</th>
+<th>Visits Requested</th>
+<th>Visits Authorized</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1375</td>
+<td>Authorized</td>
+<td>
+<paragraph ID="Evaluation Reason1">Specialty Services Required</paragraph>
+</td>
+<td>6/20/2019</td>
+<td>11/24/2019</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<paragraph styleCode="xLabel">Electronically signed by Family Medicine, Physician, MD at 05/28/2019 8:46 AM CDT</paragraph>
+</item>
+</list>
+</text>
+<entry>
+<act classCode="PCPR" moodCode="INT">
+<templateId root="2.16.840.1.113883.10.20.22.4.140"/>
+<id root="1.2.840.114350.1.13.0.1.7.3.827076.15" extension="1375"/>
+<code code="3457005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Patient Evaluation"/>
+<text>
+<reference value="#Evaluation1"/>
+</text>
+<statusCode code="active"/>
+<effectiveTime>
+<low value="20190622"/>
+<high value="20191124"/>
+</effectiveTime>
+<priorityCode code="R" codeSystem="2.16.840.1.113883.5.7" codeSystemName="HL7 actPriority">
+<originalText>Routine</originalText>
+</priorityCode>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20241105124234-0600"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+<code code="207Q00000X" codeSystem="2.16.840.1.113883.11.19465" displayName="Family Medicine Physician">
+<originalText>Family Medicine</originalText>
+<translation code="9" codeSystem="1.2.840.114350.1.13.0.1.7.10.836982.1050" codeSystemName="EPIC.SER.ProviderSpecialty" displayName="Family Medicine"/>
+</code>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<city>MADISON</city>
+<state>WI</state>
+<postalCode>53719</postalCode>
+<country>USA</country>
+</addr>
+<telecom use="WP" value="tel:+1-555-555-5555"/>
+<assignedPerson>
+<name use="L">
+<given>Physician</given>
+<family>Family Medicine</family>
+<suffix qualifier="AC"> MD</suffix>
+</name>
+</assignedPerson>
+<representedOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<id root="2.16.840.1.113883.4.2" nullFlavor="UNK"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<name>FHIR Sandbox</name>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+<participant typeCode="REFB">
+<participantRole classCode="PROV">
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+<code code="207Q00000X" codeSystem="2.16.840.1.113883.11.19465" displayName="Family Medicine Physician">
+<originalText>Family Medicine</originalText>
+<translation code="9" codeSystem="1.2.840.114350.1.13.0.1.7.10.836982.1050" codeSystemName="EPIC.SER.ProviderSpecialty" displayName="Family Medicine"/>
+</code>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<city>MADISON</city>
+<state>WI</state>
+<postalCode>53719</postalCode>
+<country>USA</country>
+</addr>
+<telecom use="WP" value="tel:+1-555-555-5555"/>
+<playingEntity>
+<name use="L">
+<given>Physician</given>
+<family>Family Medicine</family>
+<suffix qualifier="AC"> MD</suffix>
+</name>
+</playingEntity>
+</participantRole>
+</participant>
+<participant typeCode="REFT">
+<participantRole classCode="PROV">
+<code nullFlavor="UNK"/>
+<addr nullFlavor="UNK"/>
+<playingEntity>
+<name nullFlavor="UNK"/>
+</playingEntity>
+</participantRole>
+</participant>
+<entryRelationship typeCode="RSON">
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.19"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.19" extension="2014-06-09"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.19" extension="2023-05-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.6.827076.1000" extension="1375.1"/>
+<code code="282291009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Diagnosis interpretation"/>
+<text>
+<reference value="#Evaluation1Dx1"/>
+</text>
+<statusCode code="completed"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="315016007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Risk for colon cancer disease between 30% and 40% in next 5 years" xsi:type="CD">
+<originalText>
+<reference value="#Evaluation1Dx1"/>
+</originalText>
+</value>
+</observation>
+</entryRelationship>
+<entryRelationship typeCode="RSON">
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.24.3.88"/>
+<templateId root="2.16.840.1.113883.10.20.24.3.88" extension="2023-05-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.6.827076.1020" extension="1375.1"/>
+<code code="77301-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Reason care action performed or not"/>
+<text>
+<reference value="#Evaluation1Reason1"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime>
+<low nullFlavor="UNK"/>
+</effectiveTime>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="5" codeSystem="1.2.840.114350.1.13.0.1.7.10.827076.1020" codeSystemName="EMRRFL 1020" displayName="Specialty Services Required" xsi:type="CD"/>
+</observation>
+</entryRelationship>
+</act>
+</entry>
+</section>
+</component>
+<component>
+<section>
+<templateId root="2.16.840.1.113883.10.20.22.2.12"/>
+<code code="29299-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="REASON FOR VISIT"/>
+<title>Reason for Visit</title>
+<text>
+<list>
+<item>
+<table>
+<colgroup>
+<col width="25%"/>
+<col width="75%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr ID="rfv3">
+<td ID="reasonrfv3">Annual Exam</td>
+<td/>
+</tr>
+</tbody>
+</table>
+</item>
+</list>
+</text>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="1.2.840.114350.1.72.7"/>
+<id root="1.2.840.114350.1.13.0.1.7.2.728286" extension="HRV-83-27556-1"/>
+<code code="8661-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Chief Complaint"/>
+<statusCode code="completed"/>
+<effectiveTime nullFlavor="UNK"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD" nullFlavor="UNK">
+<originalText>Annual Exam</originalText>
+</value>
+</observation>
+</entry>
+</section>
+</component>
+<component>
+<section>
+<templateId root="2.16.840.1.113883.10.20.22.2.22"/>
+<templateId root="2.16.840.1.113883.10.20.22.2.22" extension="2015-08-01"/>
+<templateId root="2.16.840.1.113883.10.20.22.2.22.1"/>
+<templateId root="2.16.840.1.113883.10.20.22.2.22.1" extension="2015-08-01"/>
+<code code="46240-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of Hospitalizations+Outpatient visits Narrative"/>
+<title>Encounter Details</title>
+<text>
+<table>
+<colgroup>
+<col width="10%"/>
+<col width="15%"/>
+<col span="3" width="25%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Date</th>
+<th>Type</th>
+<th>Department</th>
+<th>Care Team (Latest Contact Info)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr ID="encounter4" styleCode="xRowNormal">
+<td>05/28/2019</td>
+<td ID="encounter4type">Office Visit</td>
+<td>
+<paragraph>EMC Family Medicine</paragraph>
+<paragraph>123 Anywhere Street</paragraph>
+<paragraph>VERONA, WI 53593-9179</paragraph>
+<paragraph>555-555-5555</paragraph>
+</td>
+<td>
+<paragraph styleCode="Bold">Family Medicine, Physician, MD</paragraph>
+<paragraph>123 Anywhere Street</paragraph>
+<paragraph>MADISON, WI 53719</paragraph>
+<paragraph>555-555-5555 (Work)</paragraph>
+</td>
+<td>
+<content ID="encounter4desc">Risk for colon cancer disease between 30% and 40% in next 5 (Primary Dx)</content>
+</td>
+</tr>
+</tbody>
+</table>
+</text>
+<entry>
+<encounter classCode="ENC" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.49"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.49" extension="2015-08-01"/>
+<id assigningAuthorityName="EPIC" root="1.2.840.114350.1.13.0.1.7.3.698084.8" extension="27556"/>
+<code code="AMB" codeSystem="2.16.840.1.113883.5.4">
+<originalText>
+<reference value="#encounter4type"/>
+</originalText>
+<translation code="101" codeSystem="1.2.840.114350.1.13.0.1.7.4.698084.30" codeSystemName="EPIC.EncounterType"/>
+<translation code="101" codeSystem="1.2.840.114350.1.72.1.30"/>
+<translation code="0" codeSystem="1.2.840.114350.1.72.1.30.1"/>
+</code>
+<text>
+<reference value="#encounter4"/>
+</text>
+<statusCode code="normal"/>
+<effectiveTime>
+<low value="20190528"/>
+</effectiveTime>
+<performer typeCode="PRF">
+<time>
+<low nullFlavor="UNK"/>
+<high nullFlavor="UNK"/>
+</time>
+<assignedEntity classCode="ASSIGNED">
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+<code code="207Q00000X" codeSystem="2.16.840.1.113883.11.19465" displayName="Family Medicine Physician">
+<originalText>Family Medicine</originalText>
+<translation code="9" codeSystem="1.2.840.114350.1.13.0.1.7.10.836982.1050" codeSystemName="EPIC.SER.ProviderSpecialty" displayName="Family Medicine"/>
+</code>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<city>MADISON</city>
+<state>WI</state>
+<postalCode>53719</postalCode>
+<country>USA</country>
+</addr>
+<telecom use="WP" value="tel:+1-555-555-5555"/>
+<assignedPerson>
+<name>
+<given>Physician</given>
+<family>Family Medicine</family>
+<suffix qualifier="AC">MD</suffix>
+</name>
+</assignedPerson>
+<representedOrganization classCode="ORG">
+<name>FHIR Sandbox</name>
+<telecom nullFlavor="NI"/>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedEntity>
+</performer>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528083752-0500"/>
+<assignedAuthor>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<addr nullFlavor="UNK"/>
+<telecom nullFlavor="UNK"/>
+<representedOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<id root="2.16.840.1.113883.4.2" nullFlavor="UNK"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<name>FHIR Sandbox</name>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+<participant typeCode="LOC">
+<participantRole classCode="SDLOC">
+<templateId root="2.16.840.1.113883.10.20.22.4.32"/>
+<id root="1.2.840.114350.1.13.0.1.7.2.686980" extension="10501101"/>
+<code nullFlavor="UNK">
+<originalText>Family Medicine</originalText>
+</code>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<county>DANE</county>
+<city>VERONA</city>
+<state>WI</state>
+<postalCode>53593-9179</postalCode>
+<country>USA</country>
+</addr>
+<playingEntity classCode="PLC">
+<name>EMC Family Medicine</name>
+<desc>Family Medicine</desc>
+</playingEntity>
+</participantRole>
+</participant>
+<entryRelationship typeCode="COMP">
+<act classCode="ACT" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.64"/>
+<code code="48767-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+<text>
+<reference value="#encounter4desc"/>
+</text>
+<statusCode code="completed"/>
+</act>
+</entryRelationship>
+<entryRelationship typeCode="SUBJ">
+<act classCode="ACT" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.80"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.80" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1099.1" extension="27556-1189463-concern"/>
+<code code="29308-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+<statusCode code="active"/>
+<entryRelationship typeCode="SUBJ" inversionInd="false">
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2022-06-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1099.1" extension="27556-1189463"/>
+<code code="282291009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+<translation code="29308-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+</code>
+<text>Risk for colon cancer disease between 30% and 40% in next 5 years</text>
+<statusCode code="completed"/>
+<effectiveTime>
+<low nullFlavor="UNK"/>
+</effectiveTime>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="315016007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" xsi:type="CD">
+<originalText>Risk for colon cancer disease between 30% and 40% in next 5 years</originalText>
+<translation code="Z15.09" codeSystem="2.16.840.1.113883.6.90" codeSystemName="ICD-10-CM" displayName="Genetic susceptibility to other malignant neoplasm"/>
+<translation code="V84.09" codeSystem="2.16.840.1.113883.6.103" codeSystemName="ICD-9CM (diagnosis codes)" displayName="Genetic susceptibility to other malignant neoplasm"/>
+<translation code="34908715" codeSystem="2.16.840.1.113883.3.247.1.1" codeSystemName="Intelligent Medical Objects ProblemIT" displayName="Genetic susceptibility to other malignant neoplasm"/>
+</value>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528084516-0500"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+<participant typeCode="LOC">
+<participantRole classCode="SDLOC">
+<templateId root="2.16.840.1.113883.10.20.22.4.32"/>
+<code nullFlavor="UNK">
+<translation code="0" codeSystem="1.2.840.114350.1.72.1.7.7.10.698084.18465" codeSystemName="EPIC.isEDDX"/>
+</code>
+<addr nullFlavor="UNK"/>
+<playingEntity classCode="PLC">
+<name nullFlavor="UNK"/>
+</playingEntity>
+</participantRole>
+</participant>
+<entryRelationship typeCode="REFR">
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.6"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.6" extension="2019-06-20"/>
+<code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+<statusCode code="completed"/>
+<effectiveTime>
+<low nullFlavor="UNK"/>
+</effectiveTime>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="55561003" codeSystem="2.16.840.1.113883.6.96" displayName="Active" xsi:type="CD"/>
+</observation>
+</entryRelationship>
+<entryRelationship typeCode="REFR">
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.24.3.166" extension="2019-12-01"/>
+<code code="263486008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Rank"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="INT" value="1"/>
+</observation>
+</entryRelationship>
+</observation>
+</entryRelationship>
+</act>
+</entryRelationship>
+</encounter>
+</entry>
+</section>
+</component>
+<component>
+<section>
+<templateId root="2.16.840.1.113883.10.20.22.2.17"/>
+<templateId root="2.16.840.1.113883.10.20.22.2.17" extension="2015-08-01"/>
+<code code="29762-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Social history Narrative"/>
+<title>Social History</title>
+<text>
+<table ID="sochist8">
+<colgroup>
+<col span="2" width="25%"/>
+<col width="13%"/>
+<col width="12%"/>
+<col width="25%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Tobacco Use</th>
+<th>Types</th>
+<th>Packs/Day</th>
+<th>Years Used</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Smoking Tobacco: Former</td>
+<td>Cigarettes</td>
+<td ID="sochist8packsperday">0.5</td>
+<td>18</td>
+<td>1998 - 2016</td>
+</tr>
+<tr ID="sochist8smokeless" styleCode="xRowAlt">
+<td>Smokeless Tobacco: Never</td>
+<td/>
+<td/>
+<td/>
+<td/>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="50%"/>
+<col span="2" width="25%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Sex and Gender Information</th>
+<th>Value</th>
+<th>Date Recorded</th>
+</tr>
+</thead>
+<tbody>
+<tr ID="BirthSex11">
+<td>Sex Assigned at Birth</td>
+<td ID="BirthSex11Value">Not on file</td>
+<td/>
+</tr>
+<tr ID="LegalSex12">
+<td>Legal Sex</td>
+<td ID="LegalSex12Value">Female</td>
+<td>05/24/2019 1:09 PM CDT</td>
+</tr>
+<tr ID="GenderIdentity9">
+<td>Gender Identity</td>
+<td ID="GenderIdentity9Value">Not on file</td>
+<td/>
+</tr>
+<tr ID="SexualOrientation10">
+<td>Sexual Orientation</td>
+<td ID="SexualOrientation10Value">Not on file</td>
+<td/>
+</tr>
+</tbody>
+</table>
+<footnote ID="subTitle7" styleCode="xSectionSubTitle">documented as of this encounter</footnote>
+</text>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.78"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.78" extension="2014-06-09"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.1" extension="Z6127^^72166-2"/>
+<code code="72166-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Tobacco smoking status NHIS"/>
+<text>
+<reference value="#sochist8"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="20190528"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="8517006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Ex-smoker" xsi:type="CD"/>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.85"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.85" extension="2014-06-09"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.2" extension="Z6127^^77176002"/>
+<code code="11367-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of tobacco use"/>
+<text>
+<reference value="#sochist8"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime>
+<low value="1998"/>
+<high value="2016"/>
+</effectiveTime>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="77176002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Current smoker" xsi:type="CD"/>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.85"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.85" extension="2014-06-09"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.2" extension="Z6127^^65568007"/>
+<code code="11367-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of tobacco use"/>
+<text>
+<reference value="#sochist8"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime>
+<low value="1998"/>
+<high value="2016"/>
+</effectiveTime>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="65568007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Cigarette Smoker" xsi:type="CD"/>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.38"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.3" extension="Z6127^^8663-7"/>
+<code code="8663-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Cigarettes smoked current (pack per day) - Reported"/>
+<text>
+<reference value="#sochist8packsperday"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="20190528"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="REAL" value=".5"/>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.38"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.4" extension="Z6127^^401201003"/>
+<code code="401201003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="Cigarette pack-years">
+<translation nullFlavor="UNK"/>
+</code>
+<statusCode code="completed"/>
+<effectiveTime value="20190528"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="REAL" value="9"/>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.38"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.8" extension="Z6127^^713914004"/>
+<code code="229819007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="Tobacco use and exposure">
+<translation code="88031-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Smokeless tobacco status"/>
+</code>
+<text>
+<reference value="#sochist8smokeless"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="20190528"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="451381000124107" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Smokeless tobacco non-user" xsi:type="CD"/>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.200" extension="2016-06-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.20" extension="Z6127"/>
+<code code="76689-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Sex assigned at birth"/>
+<text>
+<reference value="#BirthSex11"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="19730603"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" codeSystem="2.16.840.1.113883.5.1" codeSystemName="HL7 Gender" xsi:type="CD" nullFlavor="UNK">
+<originalText>
+<reference value="#BirthSex11Value"/>
+</originalText>
+</value>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.38"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38" extension="2015-08-01"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38" extension="2022-06-01"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.507" extension="2023-06-28"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.23" extension="Z6127^65157^46098-0"/>
+<code code="46098-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Sex"/>
+<text>
+<reference value="#LegalSex12"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="20190524130919-0500"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD" nullFlavor="OTH">
+<originalText>
+<reference value="#LegalSex12Value"/>
+</originalText>
+</value>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190524130919-0500"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="550623057"/>
+<id root="1.2.840.114350.1.13.0.1.7.2.697780" extension="ADTEDREG"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<addr use="WP">
+<streetAddressLine>123 Anywhere St.</streetAddressLine>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53753</postalCode>
+</addr>
+<telecom use="WP" value="tel:555-5555"/>
+<assignedPerson>
+<name use="L">
+<given>Ed</given>
+<given>Registrar</given>
+<family>Adt</family>
+</name>
+</assignedPerson>
+<representedOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<id root="2.16.840.1.113883.4.2" nullFlavor="UNK"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<name>FHIR Sandbox</name>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.34.3.45" extension="2022-06-01"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.46" extension="Z6127"/>
+<code code="76691-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Gender identity"/>
+<text>
+<reference value="#GenderIdentity9"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime>
+<low nullFlavor="UNK"/>
+</effectiveTime>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD" nullFlavor="UNK">
+<originalText>
+<reference value="#GenderIdentity9Value"/>
+</originalText>
+</value>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.501" extension="2022-06-01"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.38" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1040.45" extension="Z6127.1"/>
+<code code="76690-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Sexual orientation"/>
+<text>
+<reference value="#SexualOrientation10"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime>
+<low nullFlavor="UNK"/>
+</effectiveTime>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD" nullFlavor="UNK">
+<originalText>
+<reference value="#SexualOrientation10Value"/>
+</originalText>
+</value>
+</observation>
+</entry>
+</section>
+</component>
+<component>
+<section>
+<templateId root="2.16.840.1.113883.10.20.22.2.4"/>
+<templateId root="2.16.840.1.113883.10.20.22.2.4" extension="2015-08-01"/>
+<code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Vital signs"/>
+<title>Last Filed Vital Signs</title>
+<text>
+<table>
+<colgroup>
+<col span="4" width="25%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Vital Sign</th>
+<th>Reading</th>
+<th>Time Taken</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr styleCode="xRowNormal">
+<td styleCode="xcellHeader">Blood Pressure</td>
+<td>
+<content ID="sysBP_5627750400">10</content>
+/
+<content ID="diaBP_5627750400">10</content>
+</td>
+<td>05/02/2019 7:00 PM CDT</td>
+<td/>
+</tr>
+<tr ID="pulse_5627816294" styleCode="xRowAlt">
+<td styleCode="xcellHeader">Pulse</td>
+<td>10</td>
+<td>05/03/2019 1:18 PM CDT</td>
+<td/>
+</tr>
+<tr ID="temp_" styleCode="xRowNormal">
+<td styleCode="xcellHeader">Temperature</td>
+<td>-</td>
+<td>-</td>
+<td/>
+</tr>
+<tr ID="resp_" styleCode="xRowAlt">
+<td styleCode="xcellHeader">Respiratory Rate</td>
+<td>-</td>
+<td>-</td>
+<td/>
+</tr>
+<tr ID="SpO2_" styleCode="xRowNormal">
+<td styleCode="xcellHeader">Oxygen Saturation</td>
+<td>-</td>
+<td>-</td>
+<td/>
+</tr>
+<tr ID="inhaled_" styleCode="xRowAlt">
+<td styleCode="xcellHeader">Inhaled Oxygen Concentration</td>
+<td>-</td>
+<td>-</td>
+<td/>
+</tr>
+<tr ID="weight_5627816294" styleCode="xRowNormal">
+<td styleCode="xcellHeader">Weight</td>
+<td>50 kg (110 lb 3.7 oz)</td>
+<td>05/03/2019 1:18 PM CDT</td>
+<td/>
+</tr>
+<tr ID="height_" styleCode="xRowAlt">
+<td styleCode="xcellHeader">Height</td>
+<td>-</td>
+<td>-</td>
+<td/>
+</tr>
+<tr ID="bmi_" styleCode="xRowNormal">
+<td styleCode="xcellHeader">Body Mass Index</td>
+<td>-</td>
+<td>-</td>
+<td/>
+</tr>
+</tbody>
+</table>
+<footnote ID="subTitle13" styleCode="xSectionSubTitle">documented in this encounter</footnote>
+</text>
+<entry typeCode="DRIV">
+<organizer classCode="CLUSTER" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.26"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.26" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.2109" extension="5627750400-Z6127"/>
+<code code="46680005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Vital signs">
+<translation code="74728-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Vital signs, weight, height, head circumference, oximetry, BMI, and BSA panel - HL7.CCDAr1.1"/>
+</code>
+<statusCode code="completed"/>
+<effectiveTime value="20190503000000+0000"/>
+<component>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.27" extension="2014-06-09"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.2109.1" extension="5627750400-sysBP-Z6127"/>
+<code code="8480-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+<originalText>Systolic blood pressure</originalText>
+</code>
+<text>
+<reference value="#sysBP_5627750400"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="20190503000000+0000"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="10" unit="mm[Hg]"/>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20201111103039-0600"/>
+<assignedAuthor>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<addr nullFlavor="UNK"/>
+<telecom nullFlavor="UNK"/>
+<representedOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<id root="2.16.840.1.113883.4.2" nullFlavor="UNK"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<name>FHIR Sandbox</name>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+</observation>
+</component>
+<component>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.27" extension="2014-06-09"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.2109.1" extension="5627750400-diaBP-Z6127"/>
+<code code="8462-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+<originalText>Diastolic blood pressure</originalText>
+</code>
+<text>
+<reference value="#diaBP_5627750400"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="20190503000000+0000"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="10" unit="mm[Hg]"/>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20201111103039-0600"/>
+<assignedAuthor>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<addr nullFlavor="UNK"/>
+<telecom nullFlavor="UNK"/>
+<representedOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<id root="2.16.840.1.113883.4.2" nullFlavor="UNK"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<name>FHIR Sandbox</name>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+</observation>
+</component>
+</organizer>
+</entry>
+<entry typeCode="DRIV">
+<organizer classCode="CLUSTER" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.26"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.26" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.2109" extension="5627816294-Z6127"/>
+<code code="46680005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Vital signs">
+<translation code="74728-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Vital signs, weight, height, head circumference, oximetry, BMI, and BSA panel - HL7.CCDAr1.1"/>
+</code>
+<statusCode code="completed"/>
+<effectiveTime value="20190503181814+0000"/>
+<component>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.27" extension="2014-06-09"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.2109.1" extension="5627816294-pulse-Z6127"/>
+<code code="8867-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+<originalText>Heart rate</originalText>
+</code>
+<text>
+<reference value="#pulse_5627816294"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="20190503181814+0000"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="10" unit="/min"/>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20201121185958-0600"/>
+<assignedAuthor>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<addr nullFlavor="UNK"/>
+<telecom nullFlavor="UNK"/>
+<representedOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<id root="2.16.840.1.113883.4.2" nullFlavor="UNK"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<name>FHIR Sandbox</name>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+</observation>
+</component>
+<component>
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.27" extension="2014-06-09"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.2109.1" extension="5627816294-weightC83-Z6127"/>
+<code code="29463-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+<originalText>Body weight</originalText>
+</code>
+<text>
+<reference value="#weight_5627816294"/>
+</text>
+<statusCode code="completed"/>
+<effectiveTime value="20190503181814+0000"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" value="50" unit="kg"/>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20201221190031-0600"/>
+<assignedAuthor>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<addr nullFlavor="UNK"/>
+<telecom nullFlavor="UNK"/>
+<representedOrganization>
+<id root="1.2.840.114350.1.13.0.1.7.2.688879" extension="1100"/>
+<id root="2.16.840.1.113883.4.2" nullFlavor="UNK"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<name>FHIR Sandbox</name>
+<addr use="WP">
+<streetAddressLine>1979 Milky Way</streetAddressLine>
+<county>DANE</county>
+<city>Verona</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+</observation>
+</component>
+</organizer>
+</entry>
+</section>
+</component>
+<component>
+<section>
+<templateId root="2.16.840.1.113883.10.20.22.2.10"/>
+<templateId root="2.16.840.1.113883.10.20.22.2.10" extension="2014-06-09"/>
+<code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Plan of care note"/>
+<title>Plan of Treatment</title>
+<text>
+<table>
+<caption>Scheduled Orders</caption>
+<colgroup>
+<col width="25%"/>
+<col width="15%"/>
+<col width="10%"/>
+<col span="2" width="25%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Priority</th>
+<th>Associated Diagnoses</th>
+<th>Order Schedule</th>
+</tr>
+</thead>
+<tbody>
+<tr ID="procedure32">
+<td>
+<content ID="procedure32name">obstructive sleep apnea, direct</content>
+</td>
+<td>Lab</td>
+<td>Routine</td>
+<td>
+<paragraph ID="procedure32diagnosis1">Class 3 Severe obesity</paragraph>
+</td>
+<td ID="procedure32schedule">1 Occurrences starting 8/16/2022 until present</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Scheduled Evaluation</caption>
+<colgroup>
+<col width="25%"/>
+<col width="15%"/>
+<col width="10%"/>
+<col span="2" width="25%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Priority</th>
+<th>Associated Diagnoses</th>
+<th>Order Schedule</th>
+</tr>
+</thead>
+<tbody>
+<tr ID="procedure31">
+<td>
+<content ID="procedure31name">CPAP replacement along with humidifier/content</content>
+</td>
+<td>Outpatient Evaluation</td>
+<td>Routine</td>
+<td>
+<paragraph ID="procedure31diagnosis1"> Abdominal pain and vomiting, Mild Obstructive Sleep Apnea (OSA). The Apnea/Hypopnea Index (AHI) was 8.9 
+events/hour</paragraph>
+</td>
+<td ID="procedure31schedule">1 Occurrences starting 05/28/2019 until 05/28/2020</td>
+</tr>
+</tbody>
+</table>
+<footnote ID="subTitle29" styleCode="xSectionSubTitle">documented as of this encounter</footnote>
+</text>
+<entry>
+<procedure classCode="PROC" moodCode="INT">
+<templateId root="2.16.840.1.113883.10.20.22.4.41"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.41" extension="2014-06-09"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.41" extension="2022-06-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.1.1988.1" extension="1066883^"/>
+<code code="852" codeSystem="1.2.840.114350.1.13.0.1.7.2.696580" codeSystemName="EPIC.EAP.ID" displayName="LDL cholesterol, direct">
+<originalText>
+<reference value="#procedure32name"/>
+</originalText>
+</code>
+<text>
+<reference value="#procedure32"/>
+</text>
+<statusCode code="active"/>
+<effectiveTime>
+<high value="20200528"/>
+</effectiveTime>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528084530-0500"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="717860049"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+<code code="207Q00000X" codeSystem="2.16.840.1.113883.11.19465" displayName="Family Medicine Physician">
+<originalText>Family Medicine</originalText>
+<translation code="9" codeSystem="1.2.840.114350.1.13.0.1.7.10.836982.1050" codeSystemName="EPIC.SER.ProviderSpecialty" displayName="Family Medicine"/>
+</code>
+<addr use="WP">
+<streetAddressLine>123 Anywhere Street</streetAddressLine>
+<city>MADISON</city>
+<state>WI</state>
+<postalCode>53719</postalCode>
+<country>USA</country>
+</addr>
+<telecom use="WP" value="tel:+1-555-555-5555"/>
+<assignedPerson>
+<name use="L">
+<given>Physician</given>
+<family>Family Medicine</family>
+<suffix qualifier="AC"> MD</suffix>
+</name>
+</assignedPerson>
+<representedOrganization>
+<id root="2.16.840.1.113883.4.2" nullFlavor="UNK"/>
+<id root="2.16.840.1.113883.4.6" nullFlavor="UNK"/>
+<name>EMRHospital System</name>
+<addr use="WP">
+<streetAddressLine>123 Anywhere St.</streetAddressLine>
+<city>VERONA</city>
+<state>WI</state>
+<postalCode>53593</postalCode>
+<country>USA</country>
+</addr>
+</representedOrganization>
+</assignedAuthor>
+</author>
+<entryRelationship typeCode="RSON">
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.19"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.19" extension="2014-06-09"/>
+<id root="1.2.840.114350.1.13.0.1.7.2.696871" extension="1189463"/>
+<code code="29308-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+<statusCode code="completed"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" code="315016007" codeSystem="2.16.840.1.113883.6.96" xsi:type="CD">
+<originalText>
+<reference value="#procedure32diagnosis1"/>
+</originalText>
+</value>
+</observation>
+</entryRelationship>
+<entryRelationship typeCode="COMP">
+<act classCode="ACT" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.64"/>
+<code code="48767-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Annotation comment"/>
+<text>
+<reference value="#procedure32schedule"/>
+</text>
+<statusCode code="completed"/>
+</act>
+</entryRelationship>
+</procedure>
+</entry>
+</section>
+</component>
+<component>
+<section>
+<templateId root="2.16.840.1.113883.10.20.22.2.60"/>
+<code code="61146-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Goals"/>
+<title>Goals</title>
+<text>
+<table>
+<colgroup>
+<col width="30%"/>
+<col width="10%"/>
+<col width="15%"/>
+<col width="20%"/>
+<col width="12%"/>
+<col width="13%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Patient Goal Type</th>
+<th>Associated Problems</th>
+<th>Recent Progress</th>
+<th>Patient-Stated?</th>
+<th>Author</th>
+</tr>
+</thead>
+<tbody>
+<tr styleCode="xRowNormal">
+<td>
+<paragraph ID="goal1">Increase physical activity </paragraph>
+</td>
+<td>Exercise</td>
+<td/>
+<td>
+<content ID="goal1val">On track</content>
+<content> (05/28/2019 9:03 AM CDT)</content>
+</td>
+<td>No</td>
+<td>Family Medicine, Physician, MD</td>
+</tr>
+<tr styleCode="xRowNormal xMergeUp">
+<td styleCode="xIndent" colspan="6">
+<paragraph styleCode="xLabel">Note: </paragraph>
+<content ID="goal1note">
+<content styleCode="xLabel">Formatting of this note might be different from the original.</content>
+<br/>
+Try to add 30 minutes of additional activity twice a week.
+</content>
+<br/>
+</td>
+</tr>
+<tr styleCode="xRowAlt">
+<td>
+<paragraph ID="goal2">Get 7-8 hours of restful sleep each night</paragraph>
+</td>
+<td>Lifestyle</td>
+<td/>
+<td>
+<content ID="goal2val">On track</content>
+<content> (05/28/2019 9:03 AM CDT)</content>
+</td>
+<td>No</td>
+<td>Family Medicine, Physician, MD</td>
+</tr>
+<tr styleCode="xRowAlt xMergeUp">
+<td styleCode="xIndent" colspan="6">
+<paragraph styleCode="xLabel">Note: </paragraph>
+<content ID="goal2note">
+<content styleCode="xLabel">Formatting of this note might be different from the original.</content>
+<br/>
+Sufficient sleep is important for your general well-being.
+</content>
+<br/>
+</td>
+</tr>
+</tbody>
+</table>
+<footnote ID="subTitle33" styleCode="xSectionSubTitle">documented as of this encounter</footnote>
+</text>
+<entry>
+<observation classCode="OBS" moodCode="GOL">
+<templateId root="2.16.840.1.113883.10.20.22.4.121"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.121" extension="2022-06-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.2.737179" extension="3374"/>
+<code code="87528-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Personal health goal"/>
+<statusCode code="active"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD" nullFlavor="UNK">
+<originalText>
+<reference value="#goal1"/>
+</originalText>
+</value>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528085705-0500"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528090339-0500"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+<entryRelationship typeCode="SUBJ" inversionInd="true">
+<act classCode="ACT" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.64"/>
+<code code="48767-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Annotation comment"/>
+<text>
+<reference value="#goal1note"/>
+</text>
+<statusCode code="completed"/>
+</act>
+</entryRelationship>
+<entryRelationship typeCode="REFR">
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.2"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.2" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.2.737179" extension="3374"/>
+<code nullFlavor="UNK">
+<originalText>
+<reference value="#goal1val"/>
+</originalText>
+</code>
+<statusCode code="completed"/>
+<effectiveTime value="20190528090339-0500"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ST">On track</value>
+</observation>
+</entryRelationship>
+</observation>
+</entry>
+<entry>
+<observation classCode="OBS" moodCode="GOL">
+<templateId root="2.16.840.1.113883.10.20.22.4.121"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.121" extension="2022-06-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.2.737179" extension="3375"/>
+<code code="87528-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Personal health goal"/>
+<statusCode code="active"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CD" nullFlavor="UNK">
+<originalText>
+<reference value="#goal2"/>
+</originalText>
+</value>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528085921-0500"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+<author>
+<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+<templateId root="2.16.840.1.113883.10.20.22.5.6" extension="2019-10-01"/>
+<time value="20190528090338-0500"/>
+<assignedAuthor>
+<id root="1.2.840.114350.1.13.0.1.7.1.1133" extension="555340354"/>
+<id root="2.16.840.1.113883.4.6" extension="1627363736"/>
+</assignedAuthor>
+</author>
+<entryRelationship typeCode="SUBJ" inversionInd="true">
+<act classCode="ACT" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.64"/>
+<code code="48767-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Annotation comment"/>
+<text>
+<reference value="#goal2note"/>
+</text>
+<statusCode code="completed"/>
+</act>
+</entryRelationship>
+<entryRelationship typeCode="REFR">
+<observation classCode="OBS" moodCode="EVN">
+<templateId root="2.16.840.1.113883.10.20.22.4.2"/>
+<templateId root="2.16.840.1.113883.10.20.22.4.2" extension="2015-08-01"/>
+<id root="1.2.840.114350.1.13.0.1.7.2.737179" extension="3375"/>
+<code nullFlavor="UNK">
+<originalText>
+<reference value="#goal2val"/>
+</originalText>
+</code>
+<statusCode code="completed"/>
+<effectiveTime value="20190528090338-0500"/>
+<value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ST">On track</value>
+</observation>
+</entryRelationship>
+</observation>
+</entry>
+</section>
+</component>
+<component>
+<section>
+<templateId root="2.16.840.1.113883.10.20.22.2.8"/>
+<id root="001228D0-9207-11F0-A24F-005056BECC4A"/>
+<code code="51848-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Assessments"/>
+<title>Visit Diagnoses</title>
+<text>
+<table>
+<colgroup>
+<col width="100%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Diagnosis</th>
+</tr>
+</thead>
+<tbody>
+<tr ID="vdx5" styleCode="xRowNormal">
+<td>
+<paragraph>
+<content ID="vdx5Name">Risk for colon cancer disease between 30% and 40% in next 5 years</content>
+<content> - Primary</content>
+</paragraph>
+</td>
+</tr>
+</tbody>
+</table>
+<footnote ID="subTitle37" styleCode="xSectionSubTitle">documented in this encounter</footnote>
+</text>
+</section>
+</component>
+</structuredBody>
+</component>
+</ClinicalDocument>
