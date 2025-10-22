@@ -2446,7 +2446,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             backgroundColor: '#fafafa'
           }}
         >
-          <svg width="100%" height="680" style={{ position: 'absolute', top: 0, left: 0, minWidth: 'calc(100% + 150px)' }}>
+          <svg width="100%" height="680" style={{ position: 'absolute', top: 0, left: 0, minWidth: '1565px' }}>
             <defs>
               <marker
                 id="arrowhead"

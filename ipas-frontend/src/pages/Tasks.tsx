@@ -110,6 +110,10 @@ const Tasks: React.FC = () => {
             <Box sx={{ display: 'flex', mb: '1rem' }}>
                 <Box className="groupedNameWrapper">
                     <Box className="grupRow">Group Queue</Box>
+                    <Box className="grupRow formRow" sx={{background: '#fff'}}>
+                        <input type="text" className="form-control" id="formGroupExampleInput" placeholder="" />
+                    </Box>
+                    <Box className="grupRow" sx={{background: '#ddf2ff'}}>UM determination</Box>
                 </Box>
                 <Box className="dateRangeWrapper">
                     <Box className="dateRangeRow">
