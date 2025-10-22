@@ -4,6 +4,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink, useLocation } from 'react-router-dom';
 import CloudIcon from '@mui/icons-material/Cloud';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 
 
 function SidebarMenu() {
@@ -37,7 +38,7 @@ function SidebarMenu() {
                 </li>
                 <li>
                     <NavLink to="/Tasks" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-                        <div className="SideMenuIcon"><AssignmentIcon /></div>
+                        <div className="SideMenuIcon"><ArticleOutlinedIcon /></div>
                         <span className="nav-text">
                             Trucare Classic
                         </span>

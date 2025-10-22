@@ -5,6 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import $ from 'jquery';
 
 
 
@@ -20,6 +21,9 @@ const OCR: React.FC = () => {
   const [isDataShow, setIsDataShow] = useState<boolean>(false);
   const [value, setValue] = React.useState('1');
 
+  const [jsonFileData, setJsonFileData] = useState<object | null>(null);
+  const [htmlFileData, setHtmlFileData] = useState<string | null>(null);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const selectedFile = event.target.files[0];
@@ -33,6 +37,122 @@ const OCR: React.FC = () => {
     }
   };
 
+  const jsonData20250425121731_1: any = {
+
+    "key_values": {
+      "FormType": "OUTPATIENT AUTHORIZATION FORM",
+      "Member ID": "U7131533302",
+      "Last Name": "HARDIN",
+      "First Name": "REBECCA",
+      "Date Of Birth": "08-25-1976",
+      "Requesting NPI": "1578173555",
+      "Requesting TIN": "474914917",
+      "Requesting Provider Contact Name": "AMY KELLY",
+      "Requesting Provider Name": "AMY KELLY",
+      "Requesting Provider Phone Number": "8037749787",
+      "Requesting Provider Fax": "8037748890",
+      "Servicing NPI": "1124566716",
+      "Servicing TIN": "593758015",
+      "Servicing Provider Contact Name": "MARIA GRIFFIN",
+      "Servicing Provider Name": "AEROCARE",
+      "Servicing Provider Phone Number": "8035724391",
+      "Servicing Provider Fax": "8037019115",
+      "Primary Procedure Code": "E0601",
+      "Additional Procedure Code2": "E0562",
+      "Admission Date": "04-25-2025",
+      "OUTPATIENT SERVICE TYPE": "417",
+      "Diagnosis Code": "G4733",
+      "AuthPriority": [
+        {
+          "Standard requests": true,
+          "Urgent requests": false
+        }
+      ],
+      "Additional Procedure Code1": null,
+      "Additional Procedure Code3": null,
+      "Discharge Date": null,
+      "Total Units/Visits/Days": null
+    }
+  };
+  const jsonData20250425122624_1: any = {
+    "key_values": {
+      "FormType": "INPATIENT AUTHORIZATION FORM",
+      "Member ID": "U7183854101",
+      "Last Name": "WILLIAMS",
+      "First Name": ", AMANDA",
+      "Date Of Birth": "03-05-1987",
+      "Requesting Provider NPI": "1083063507",
+      "Requesting Provider Name": "BENJAMIN VELKY",
+      "Requesting Provider Phone Number": "8647254865",
+      "Servicing Provider NPI": "1023046612",
+      "Servicing Provider Contact Name": "UR DEPT",
+      "Servicing Provider Name": "SELF REGIONAL HE",
+      "Servicing Provider Phone Number": "8647255039",
+      "Servicing Provider Fax": "8647255044",
+      "Admission Date": "04-24-2025",
+      "INPATIENT SERVICE TYPE": "970",
+      "Diagnosis Code": "K5792",
+      "Servicing Provider TIN": "570331865",
+      "Authpriority": [
+        {
+          "Standard requests": false,
+          "Urgent requests": true
+        }
+      ],
+      "Requesting Provider TIN": null,
+      "Requesting Provider Contact Name": null,
+      "Requesting Provider Fax": null,
+      "Discharge Date": null,
+      "Additional Procedure Code1": null,
+      "Additional Procedure Code2": null,
+      "Additional Procedure Code3": null,
+      "Primary Procedure Code": null,
+      "Additional Diagnosis Code": null
+    }
+  };
+
+  const jsonDataAuth_HW: any = {
+    "key_values": {
+      "FormType": "OUTPATIENT AUTHORIZATION FORM",
+      "Member ID": "U9541367801",
+      "Last Name": "DE LOS SANTOS MARIN",
+      "First Name": "DANIEL",
+      "Date Of Birth": "08011947",
+      "Requesting Provider NPI": "1366496937",
+      "Requesting Provider TIN": "621768106",
+      "Requesting Provider Contact Name": "Amanda R",
+      "Requesting Provider Name": "Trident MedicalCenter",
+      "Requesting Provider Phone Number": "8439705021",
+      "Requesting Provider Fax": "8438325118",
+      "Servicing Provider NPI": "1366496937",
+      "Servicing Provider TIN": "621768106",
+      "Servicing Provider Contact Name": "Amanda R",
+      "Servicing Provider Name": "Trident MedicalCenter",
+      "Servicing Provider Phone Number": "8439705021",
+      "Servicing Provider Fax": "8438325118",
+      "Primary Procedure Code": "93798",
+      "Admission Date": "05142025",
+      "Total Units/Visits/Days": "36",
+      "OUTPATIENT SERVICE TYPE": "794",
+      "Diagnosis Code": "I214",
+      "AuthPriority": [
+        {
+          "Standard requests": true,
+          "Urgent requests": false
+        }
+      ],
+      "Additional Procedure Code1": null,
+      "Additional Procedure Code2": null,
+      "Additional Procedure Code3": null,
+      "Discharge Date": null,
+      "Service Provider Same as Requesting Provider": true
+    }
+  };
+
+  const html_1 = 'assets/files/20250425121731_1.htm';
+  const html_2 = 'assets/files/20250425122624_1.htm';
+  const html_3 = 'assets/files/20250425110402_1.htm';
+
   const handleFileUpload = () => {
     if (!file) {
       alert('Please select a file first.');
@@ -42,6 +162,24 @@ const OCR: React.FC = () => {
     setIsProcessing(true);
     setIsDataShow(true);
     setTabValue(0); // Switch to JSON tab immediately
+
+    setJsonFileData(null);
+    setHtmlFileData('');
+
+    if (fileName === '20250425110402_HW.pdf') {
+      setJsonFileData(jsonDataAuth_HW);
+      setHtmlFileData(html_3);
+    }
+
+    if (fileName === '20250425122624_1.pdf') {
+      setJsonFileData(jsonData20250425122624_1);
+      setHtmlFileData(html_2);
+    }
+
+    if (fileName === '20250425121731_1.pdf') {
+      setJsonFileData(jsonData20250425121731_1);
+      setHtmlFileData(html_1);
+    }
 
     if (file.type === 'application/pdf') {
       // Simulate processing delay for better UX
@@ -235,6 +373,8 @@ const OCR: React.FC = () => {
     setValue(newValue);
   };
 
+
+
   return (
     <Box sx={{ padding: 3, maxWidth: '100%', margin: '0 auto' }}>
       <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#1976d2', fontWeight: 'bold' }}>
@@ -270,7 +410,7 @@ const OCR: React.FC = () => {
         </Button>
       </Box>
 
-{/* <Box sx={{ display: 'flex', gap: 3, minHeight: '70vh' }} >
+      {/* <Box sx={{ display: 'flex', gap: 3, minHeight: '70vh' }} >
               
               
               
@@ -325,8 +465,16 @@ const OCR: React.FC = () => {
                       <Tab label="JSON" value="2" />
                     </TabList>
                   </Box>
-                  <TabPanel value="1"></TabPanel>
-                  <TabPanel value="2"></TabPanel>
+                  <TabPanel value="1" sx={{p:0}}>
+                    {htmlFileData && (
+                      <iframe src={htmlFileData} className='iframeContainer_html' />
+                    )}
+                  </TabPanel>
+                  <TabPanel value="2" className='tabPaneContainer'>
+                    {jsonFileData && (
+                      <pre id="jsonDataContainer">{JSON.stringify(jsonFileData, null, 2)}</pre>
+                    )}
+                  </TabPanel>
                 </TabContext>
               </Box>
             </Box>

@@ -18,7 +18,7 @@ const TrucareCloudMenu: React.FC = () => {
                     </Typography>
 
                 </Grid>
-                <Grid size={6}>
+                <Grid size={5}>
                     <Box className="truSearchBox">
                         <select aria-label="Small select example">
                             <option selected>Member</option>

@@ -92,7 +92,7 @@ const RecentCases: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ p: 3, pb: 2 }}>
       <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#1976d2', fontWeight: 'bold' }}>
         Smart Auth Recent Cases
       </Typography>
@@ -327,7 +327,7 @@ const RecentCases: React.FC = () => {
         </Box> */}
 
       {/* Recent Cases Table */}
-      <Box sx={{ mb: 4 }}>
+      <Box sx={{ mb: 0 }}>
         <RecentCasesTable onCaseClick={handleCaseClick} />
       </Box>
 

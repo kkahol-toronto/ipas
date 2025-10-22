@@ -278,7 +278,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
 
   return (
     <Card>
-      <CardContent>
+      <CardContent sx={{ pb: '0 !important' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
           <Typography variant="h6" component="h2">
             Recent Cases
@@ -307,7 +307,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             </Button>
           </Box>
         </Box>
-        <TableContainer component={Paper} sx={{ maxHeight: 570 }}>
+        <TableContainer component={Paper} sx={{ maxHeight: 665 }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
