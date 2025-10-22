@@ -226,7 +226,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "originalUrl": "/sample-documents/cases/008/ClinicalSummary _110402.pdf",
         "extractedUrl": '/sample-documents/cases/008/ClinicalSummary _110402.pdf',
         "jsonUrl": '/sample-documents/cases/008/MedicalRecordJson.txt',
-        "recordretrivedUrl": "/sample-documents/cases/008/MedicalRecordJson.txt",
+        "recordretrivedUrl": "/sample-documents/cases/008/EMR008.txt",
         "isExtracted": false
       },
       {
