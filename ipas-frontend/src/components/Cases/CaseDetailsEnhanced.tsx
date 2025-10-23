@@ -29,6 +29,8 @@ import {
   TableHead,
   TableRow
 } from '@mui/material';
+import { Chat } from '@mui/icons-material';
+import CaseChat from './CaseChat';
 import {
   Person as PersonIcon,
   LocalHospital as HospitalIcon,
@@ -859,8 +861,9 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             <Tab label="Documents" icon={<DocumentIcon />} />
             <Tab label="Clinical Summary" icon={<DocumentIcon />} />
             <Tab label="Auth Decision Summary" icon={<DocumentIcon />} />
-
+            <Tab label="EMR Integration" icon={<HospitalIcon />} />
             <Tab label="Review Notes" icon={<TimelineIcon />} />
+            <Tab label="Chat with Case" icon={<Chat />} />
           </Tabs>
           <Box sx={{ marginLeft: 'auto' }}>
             <Tooltip title="EMR Integration">
@@ -1326,6 +1329,15 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               {index < caseData.clinicalNotes.length - 1 && <Divider sx={{ mt: 2 }} />}
             </Box>
           ))}
+        </TabPanel>
+
+        <TabPanel value={tabValue} index={5}>
+          <CaseChat 
+            caseId={caseId}
+            patientName={caseData.patientName}
+            extractedData={caseData.extractedData}
+            documents={caseData.documents}
+          />
         </TabPanel>
       </Card>
 

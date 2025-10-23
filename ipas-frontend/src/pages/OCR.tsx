@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Tesseract from 'tesseract.js';
+// const Tesseract = require('tesseract.js');
 import { Box, Button, Typography, Paper, Tabs, Tab, CircularProgress, Grid } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TabContext from '@mui/lab/TabContext';
@@ -212,11 +212,13 @@ const OCR: React.FC = () => {
 
   const processImage = async (image: File | Blob) => {
     try {
-      const { data: { text } } = await Tesseract.recognize(
-        image,
-        'eng',
-        { logger: (m: any) => console.log(m) }
-      );
+      // Temporarily disabled Tesseract functionality
+      // const { data: { text } } = await Tesseract.recognize(
+      //   image,
+      //   'eng',
+      //   { logger: (m: any) => console.log(m) }
+      // );
+      const text = "OCR functionality temporarily disabled";
       setOcrText(text);
       const jsonObject = parseTextToJson(text);
       setJsonData(jsonObject);
