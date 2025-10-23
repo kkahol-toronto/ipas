@@ -1,0 +1,71 @@
+{
+  "policy_name": "Inpatient Hospital Admissions - Medical Necessity Criteria",
+  "guideline_reference": "AAFP Evidence-Based Guidelines for Acute Diverticulitis, InterQual Level of Care Criteria",
+  "effective_date": "01/01/2024",
+  "last_revised": "04/25/2025",
+  "applicable_payer": "Ambetter-ATC Contracted",
+  "clinical_condition": "Acute Uncomplicated Sigmoid Diverticulitis",
+  "icd10_code": "K57.92",
+  "coverage_criteria": {
+    "inpatient_admission_requirements": [
+      "Presence of complications (abscess, perforation, fistula, obstruction)",
+      "Hemodynamic instability (hypotension, tachycardia, shock)",
+      "Sepsis or systemic signs of infection",
+      "Inability to tolerate oral intake or medications",
+      "Failure of outpatient management",
+      "Significant comorbidities requiring inpatient monitoring",
+      "Peritoneal signs on physical examination"
+    ],
+    "outpatient_management_criteria": [
+      "Uncomplicated diverticulitis (Hinchey Grade 0-1)",
+      "Hemodynamically stable vital signs",
+      "Afebrile or low-grade fever",
+      "Normal or mildly elevated WBC count",
+      "Able to tolerate oral intake and medications",
+      "No imaging evidence of abscess or perforation",
+      "Adequate social support for home care"
+    ]
+  },
+  "coverage_decision_case_007": {
+    "patient": "Amanda Latoya Williams",
+    "diagnosis": "Acute Uncomplicated Sigmoid Diverticulitis (K57.92)",
+    "clinical_presentation": {
+      "vital_signs": "Stable - BP 138/84, HR 78, Temp 98.1°F, SpO2 100%",
+      "fever": "Afebrile",
+      "WBC": "Normal, no leukocytosis",
+      "CT_findings": "Uncomplicated sigmoid diverticulitis without abscess, perforation, or pericolonic complications",
+      "oral_tolerance": "Tolerating oral intake",
+      "pain_control": "Controlled with oral analgesics"
+    },
+    "meets_inpatient_criteria": false,
+    "meets_outpatient_criteria": true,
+    "coverage_determination": "DENIED - Inpatient Admission",
+    "alternative_approved": "Outpatient Management with Antibiotics",
+    "rationale": [
+      "Patient is hemodynamically stable with normal vital signs",
+      "Afebrile with no signs of systemic toxicity or sepsis",
+      "CT imaging shows uncomplicated diverticulitis (Hinchey Grade 0) without complications",
+      "Laboratory results normal - no leukocytosis indicating systemic infection",
+      "Patient tolerating oral intake and oral medications",
+      "Already receiving appropriate antibiotic therapy (Ciprofloxacin + Metronidazole)",
+      "Evidence-based guidelines (AAFP, ACG) strongly support outpatient management for this clinical presentation",
+      "Does not meet InterQual criteria for continued inpatient stay"
+    ]
+  },
+  "approved_outpatient_plan": {
+    "antibiotics": "Ciprofloxacin 500mg BID + Metronidazole 500mg TID for 7-10 days",
+    "diet": "Clear liquid diet progressing to low-residue diet as tolerated",
+    "pain_management": "Hydrocodone-acetaminophen 7.5-325mg PRN for pain",
+    "follow_up": "Office visit within 48-72 hours for clinical reassessment",
+    "safety_net_instructions": "Return to ED if fever >101°F, worsening abdominal pain, persistent vomiting, inability to tolerate PO, or signs of peritonitis"
+  },
+  "clinical_guidelines_applied": [
+    "AAFP Evidence-Based Guidelines for Acute Diverticulitis Management (2021)",
+    "American College of Gastroenterology Clinical Guidelines for Diverticular Disease (2021)",
+    "InterQual Level of Care Criteria for Acute Care Admissions (2024)",
+    "CMS Two-Midnight Rule for Inpatient Admissions",
+    "Ambetter Medical Policy: Inpatient Hospital Admissions - Medical Necessity Criteria"
+  ],
+  "evidence_summary": "Multiple prospective studies demonstrate safety and efficacy of selective outpatient management for uncomplicated acute diverticulitis with treatment success rates of 93-95% and complication rates <2%. Hinchey Grade 0-1 diverticulitis without systemic signs of infection does not require hospitalization per current evidence."
+}
+

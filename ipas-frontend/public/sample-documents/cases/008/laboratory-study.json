@@ -1,0 +1,123 @@
+{
+  "study_type": "Laboratory Panel",
+  "patient_name": "Daniel De Los Santos Marin",
+  "medical_record_number": "D856360",
+  "collection_date": "02/05/2025",
+  "ordering_physician": "Dr. Ahmad Issa, MD",
+  "basic_metabolic_panel": {
+    "sodium": {
+      "value": "138",
+      "unit": "mEq/L",
+      "reference_range": "135-145",
+      "status": "Normal"
+    },
+    "potassium": {
+      "value": "3.6",
+      "unit": "mEq/L",
+      "reference_range": "3.5-5.0",
+      "status": "Normal"
+    },
+    "chloride": {
+      "value": "103",
+      "unit": "mEq/L",
+      "reference_range": "98-107",
+      "status": "Normal"
+    },
+    "CO2": {
+      "value": "24",
+      "unit": "mEq/L",
+      "reference_range": "22-30",
+      "status": "Normal"
+    },
+    "anion_gap": {
+      "value": "11",
+      "unit": "",
+      "reference_range": "8-16",
+      "status": "Normal"
+    },
+    "glucose": {
+      "value": "117",
+      "unit": "mg/dL",
+      "reference_range": "70-100",
+      "status": "High"
+    },
+    "BUN": {
+      "value": "21",
+      "unit": "mg/dL",
+      "reference_range": "7-18",
+      "status": "High"
+    },
+    "creatinine": {
+      "value": "2.0",
+      "unit": "mg/dL",
+      "reference_range": "0.6-1.2",
+      "status": "High"
+    },
+    "estimated_CRCL_CG_IBW": {
+      "value": "28.0",
+      "unit": "mL/min",
+      "reference_range": ">60",
+      "status": "Low"
+    },
+    "estimated_CRCL_CG_ABW": {
+      "value": "49.7",
+      "unit": "mL/min",
+      "reference_range": ">60",
+      "status": "Low"
+    },
+    "GFR_CKD_EPI": {
+      "value": "34",
+      "unit": "mL/min/1.73 m2",
+      "reference_range": ">60",
+      "status": "Low"
+    }
+  },
+  "lipid_panel": {
+    "calcium": {
+      "value": "8.3",
+      "unit": "mg/dL",
+      "reference_range": "8.5-10.5",
+      "status": "Low"
+    },
+    "triglycerides": {
+      "value": "91",
+      "unit": "mg/dL",
+      "reference_range": "<150",
+      "status": "Normal"
+    },
+    "cholesterol": {
+      "value": "146",
+      "unit": "mg/dL",
+      "reference_range": "<200",
+      "status": "Normal"
+    },
+    "HDL_cholesterol": {
+      "value": "27",
+      "unit": "mg/dL",
+      "reference_range": ">40",
+      "status": "Low"
+    },
+    "LDL": {
+      "value": "101",
+      "unit": "mg/dL",
+      "reference_range": "<100",
+      "status": "High"
+    },
+    "coronary_risk": {
+      "value": "5.4",
+      "unit": "",
+      "reference_range": "<3.5",
+      "status": "High"
+    }
+  },
+  "cardiac_markers": {
+    "troponin_I": {
+      "value": "2.5",
+      "unit": "ng/mL",
+      "reference_range": "<0.04",
+      "status": "Significantly Elevated"
+    }
+  },
+  "impression": "Elevated troponin consistent with NSTEMI. Renal insufficiency (CKD 3B). Dyslipidemia with low HDL and elevated LDL. Requires cardiac rehabilitation and optimization of medical therapy."
+}
+

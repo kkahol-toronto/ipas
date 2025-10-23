@@ -1,13 +1,25 @@
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import CloudIcon from '@mui/icons-material/Cloud';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 
 
 function SidebarMenu() {
+    const location = useLocation();
     return (
-        <nav className="main-menu">
+        <nav className={`main-menu ${location.pathname === '/Tasks' && 'taskeMenu'}`}>
             <ul>
+                  <li>
+                    <NavLink to="/RecentCases" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                        <div className="SideMenuIcon"><AssignmentIcon /></div>
+                        <span className="nav-text">
+                            Recent Cases
+                        </span>
+                    </NavLink>
+                </li>
                 <li>
                     <NavLink to="/Dashboard" className={({ isActive }) => (isActive ? 'active' : undefined)}>
                         <div className="SideMenuIcon"><DashboardIcon /></div>
@@ -17,13 +29,30 @@ function SidebarMenu() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/RecentCases" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-                        <div className="SideMenuIcon"><AssignmentIcon /></div>
+                    <NavLink to="/OCR" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                        <div className="SideMenuIcon"><CameraAltIcon /></div>
                         <span className="nav-text">
-                            Recent Cases
+                            OCR
                         </span>
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink to="/Tasks" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                        <div className="SideMenuIcon"><ArticleOutlinedIcon /></div>
+                        <span className="nav-text">
+                            Trucare Classic
+                        </span>
+                    </NavLink>
+                </li>
+                 <li>
+                    <NavLink to="/TrucareCloud" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                        <div className="SideMenuIcon"><CloudIcon /></div>
+                        <span className="nav-text">
+                            Trucare Cloud
+                        </span>
+                    </NavLink>
+                </li>
+              
             </ul >
 
             {/* <ul className="logout">

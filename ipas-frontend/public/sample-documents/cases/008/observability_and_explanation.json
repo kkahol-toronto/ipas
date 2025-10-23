@@ -1,0 +1,132 @@
+{
+  "caseId": "PA-2024-008",
+  "patientName": "Daniel De Los Santos Marin",
+  "procedure": "Cardiac Rehabilitation Program (36 sessions)",
+  "finalDecision": "APPROVED",
+  "processingTimeline": {
+    "startTime": "2025-02-09T09:00:00Z",
+    "endTime": "2025-02-09T14:30:00Z",
+    "totalDuration": "5h 30m",
+    "stages": {
+      "documentProcessing": "1h 15m",
+      "clinicalAnalysis": "2h 10m",
+      "policyVerification": "1h 25m",
+      "finalDecision": "40m"
+    }
+  },
+  "workflowSteps": [
+    {
+      "step": 1,
+      "action": "Document Ingestion",
+      "status": "Completed",
+      "details": "Received prior authorization form, discharge summary, operative report, ECG, 2D Doppler study, and laboratory results",
+      "outcome": "All required documents successfully processed - 6 documents including cardiac catheterization report, echocardiogram, and complete lab panel",
+      "comments": "Document quality excellent - comprehensive post-NSTEMI documentation with complete cardiac workup"
+    },
+    {
+      "step": 2,
+      "action": "Patient Information Extraction",
+      "status": "Completed",
+      "details": "Extracted patient demographics, insurance information, provider details, and cardiac history",
+      "outcome": "Patient: Daniel De Los Santos Marin (77M), Member ID: U7183854101, Ambetter-ATC insurance",
+      "comments": "Insurance verification successful - active coverage confirmed, requesting provider: Dr. Amanda Reynolds"
+    },
+    {
+      "step": 3,
+      "action": "Clinical Data Analysis",
+      "status": "Completed",
+      "details": "Analyzed post-MI status, cardiac catheterization results, echocardiogram findings, and laboratory values",
+      "outcome": "Recent NSTEMI (02/05/2025) with PCI and stent placement to left circumflex and RCA. Ejection fraction 60-65%, Grade I diastolic dysfunction. Elevated troponin (2.5 ng/mL). Multiple cardiac risk factors present",
+      "comments": "Patient meets Class I indication for cardiac rehabilitation post-MI with PCI per AHA/ACC guidelines"
+    },
+    {
+      "step": 4,
+      "action": "Medical Necessity Assessment",
+      "status": "Completed",
+      "details": "Evaluated cardiac rehabilitation necessity based on recent MI, PCI, and cardiac risk factors",
+      "outcome": "High medical necessity score (98%) - Patient is ideal candidate for Phase II cardiac rehabilitation with documented recent NSTEMI, successful revascularization, and multiple modifiable risk factors",
+      "comments": "Cardiac rehabilitation strongly indicated for secondary prevention and functional recovery post-MI"
+    },
+    {
+      "step": 5,
+      "action": "Policy Compliance Check",
+      "status": "Completed",
+      "details": "Verified coverage criteria for cardiac rehabilitation services under Ambetter policy",
+      "outcome": "Meets all policy requirements - recent MI with PCI within 12 months, physician referral, medically stable for outpatient program",
+      "comments": "All coverage criteria satisfied per CMS NCD 20.10 and Ambetter cardiac rehab policy"
+    },
+    {
+      "step": 6,
+      "action": "Cost Analysis",
+      "status": "Completed",
+      "details": "Calculated estimated costs for 36-session cardiac rehabilitation program",
+      "outcome": "Total estimated cost: $5,500 (36 sessions over 12 weeks at ~$153 per session)",
+      "comments": "Cost within reasonable range for cardiac rehabilitation. Evidence shows cost-effectiveness with 20-30% reduction in mortality and rehospitalization"
+    },
+    {
+      "step": 7,
+      "action": "Clinical Decision Support",
+      "status": "Completed",
+      "details": "AI analysis of cardiac data, risk factors, and guideline compliance",
+      "outcome": "Recommendation: APPROVE - Clear medical necessity with high confidence (97%). Strong evidence for improved outcomes with cardiac rehab post-MI",
+      "comments": "Patient has preserved EF but multiple risk factors (HTN, dyslipidemia, CKD 3B) requiring comprehensive rehabilitation program"
+    },
+    {
+      "step": 8,
+      "action": "Final Authorization",
+      "status": "Completed",
+      "details": "Generated approval letter and authorization number for 36 cardiac rehabilitation sessions",
+      "outcome": "Authorization #PA-2024-008-APPROVED issued for cardiac rehabilitation program",
+      "comments": "Authorization valid for 12 weeks from start date (02/14/2025), 3 sessions per week"
+    }
+  ],
+  "keyFindings": {
+    "clinicalJustification": "77-year-old male with recent NSTEMI (02/05/2025) requiring emergent PCI with dual stent placement. Post-procedure echocardiogram shows preserved ejection fraction (60-65%) with Grade I diastolic dysfunction. Multiple cardiac risk factors including hypertension, dyslipidemia (coronary risk 5.4), and CKD 3B require comprehensive secondary prevention.",
+    "medicalNecessity": "High medical necessity (98%) - Cardiac rehabilitation is strongly indicated post-MI with PCI. Evidence-based guidelines (AHA/ACC Class I recommendation) demonstrate 20-30% reduction in cardiovascular mortality and improved functional capacity with structured cardiac rehab programs.",
+    "policyCompliance": "Meets all coverage criteria for cardiac rehabilitation services. Patient has qualifying diagnosis (NSTEMI with PCI), is medically stable for outpatient program, has physician referral, and falls within 12-month post-MI window per CMS NCD 20.10.",
+    "costEfficiency": "Cost-effective intervention - $5,500 for 36-session program provides superior value compared to potential costs of recurrent MI, rehospitalization, or cardiovascular complications. Evidence shows significant healthcare cost savings through prevention of adverse events."
+  },
+  "approvalDetails": {
+    "authorizationNumber": "PA-2024-008-APPROVED",
+    "approvedAmount": "$5,500.00",
+    "validUntil": "2025-05-14",
+    "approvedBy": "IPAS Automated System",
+    "reviewType": "Automated Approval",
+    "coverageDetails": {
+      "program": "Phase II Cardiac Rehabilitation - 36 sessions over 12 weeks",
+      "frequency": "3 sessions per week",
+      "components": "Supervised exercise training, cardiac risk factor modification, nutrition counseling, psychosocial support, patient education",
+      "location": "Trident Medical Center Cardiac Rehabilitation",
+      "startDate": "02/14/2025"
+    }
+  },
+  "qualityMetrics": {
+    "processingAccuracy": "99.5%",
+    "clinicalConfidence": "97%",
+    "policyCompliance": "100%",
+    "costOptimization": "94%",
+    "timelineEfficiency": "96%",
+    "documentQuality": "98%",
+    "automationLevel": "100%",
+    "patientSatisfaction": "96%"
+  },
+  "riskAssessment": {
+    "clinicalRisk": "Moderate",
+    "financialRisk": "Low",
+    "complianceRisk": "Low",
+    "overallRisk": "Low"
+  },
+  "recommendations": {
+    "immediate": "Approve cardiac rehabilitation program - 36 sessions over 12 weeks starting 02/14/2025",
+    "followUp": "Monitor cardiac rehab attendance and progress. Reassess risk factors at 6-week and 12-week intervals",
+    "monitoring": "Track exercise capacity improvements, medication adherence, blood pressure control, lipid panel optimization, and patient-reported quality of life",
+    "education": "Comprehensive patient education on cardiac diet, medication compliance (especially dual antiplatelet therapy), exercise progression, smoking cessation, and recognition of cardiac warning symptoms"
+  },
+  "systemNotes": {
+    "automationTrigger": "Recent MI with PCI and multiple cardiac risk factors triggered automated approval pathway per evidence-based guidelines",
+    "humanReview": "No human review required - clear Class I indication for cardiac rehabilitation post-MI with PCI",
+    "exceptionHandling": "No exceptions identified - standard post-MI cardiac rehab approval case",
+    "auditTrail": "Complete audit trail maintained for all decision points, clinical data sources, and guideline references"
+  }
+}
+

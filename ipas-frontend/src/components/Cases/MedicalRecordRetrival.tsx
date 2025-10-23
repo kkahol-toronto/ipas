@@ -175,7 +175,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "status": "ready",
         "url": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
         "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
-        "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
+        "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf',
         "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
         "recordretrivedUrl": "/sample-documents/cases/case-006-rebecca-hardin/medical_records.pdf",
         "isExtracted": false
@@ -194,7 +194,7 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "originalUrl": "/sample-documents/clinicalcriteriaeval/LCD - Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (L33718).pdf",
         "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
         "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
-        "recordretrivedUrl": "sample-documents/medicalrecordretrival/Rebecca_Hardin.xml",
+        "recordretrivedUrl": "/sample-documents/cases/case-007/EMR007.txt",
         "isExtracted": false
       },
       {
@@ -210,6 +210,38 @@ const ClinicalCriteriaEvaluations: React.FC<ClinicalCriteriaEvaluationsProps> = 
         "extractedUrl": '/sample-documents/cases/case-006-rebecca-hardin/prior-auth-form-original.pdf',
         "jsonUrl": '/sample-documents/cases/case-006-rebecca-hardin/PAP-policy.json',
         "recordretrivedUrl": "/sample-documents/cases/case-007/medrec.pdf",
+        "isExtracted": false
+      }
+    ],
+    "PA-2024-008": [
+      {
+        "id": "1",
+        "name": "Medical Record Retrieval",
+        "type": "pdf",
+        "category": "Medical-Record-Retrival",
+        "size": "1.6 MB",
+        "uploadDate": "2024-02-07",
+        "status": "ready",
+        "url": "/sample-documents/cases/008/ClinicalSummary _110402.pdf",
+        "originalUrl": "/sample-documents/cases/008/ClinicalSummary _110402.pdf",
+        "extractedUrl": '/sample-documents/cases/008/ClinicalSummary _110402.pdf',
+        "jsonUrl": '/sample-documents/cases/008/MedicalRecordJson.txt',
+        "recordretrivedUrl": "/sample-documents/cases/008/EMR008.txt",
+        "isExtracted": false
+      },
+      {
+        "id": "2",
+        "name": "Medical Record Retrieval.pdf",
+        "type": "pdf",
+        "category": "Medical-Record-Retrival",
+        "size": "1.6 MB",
+        "uploadDate": "2024-02-07",
+        "status": "ready",
+        "url": "/sample-documents/cases/008/ClinicalSummary _110402.pdf",
+        "originalUrl": "/sample-documents/cases/008/ClinicalSummary _110402.pdf",
+        "extractedUrl": '/sample-documents/cases/008/ClinicalSummary _110402.pdf',
+        "jsonUrl": '/sample-documents/cases/008/MedicalRecordJson.txt',
+        "recordretrivedUrl": "/sample-documents/cases/008/medrecord008.pdf",
         "isExtracted": false
       }
     ]

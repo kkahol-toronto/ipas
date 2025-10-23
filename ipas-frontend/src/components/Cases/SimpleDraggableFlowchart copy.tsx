@@ -541,8 +541,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       ];
     }
     
-    // Case PA-2024-006: Full review workflow ending in approval (CPAP replacement - compliant patient)
-    if (caseId === 'PA-2024-006' || caseId === '006') {
+    // Case PA-2024-006 & PA-2024-008: Full review workflow ending in approval (CPAP replacement - compliant patient)
+    if (caseId === 'PA-2024-006' || caseId === '006' || caseId === 'PA-2024-008' || caseId === '008') {
       return [
         {
           id: 'start',
@@ -1110,37 +1110,43 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                  caseId === 'PA-2024-003' ? 'robert.davis@email.com' :
                  caseId === 'PA-2024-004' ? 'lisa.wilson@email.com' :
                  caseId === 'PA-2024-005' ? 'david.brown@email.com' :
-                 caseId === 'PA-2024-006' ? 'rebecca.hardin@email.com' : 'patient@email.com',
+                 caseId === 'PA-2024-006' ? 'rebecca.hardin@email.com' :
+                 caseId === 'PA-2024-008' ? 'daniel.delossantos@email.com' : 'patient@email.com',
           mail: caseId === 'PA-2024-001' ? '123 Main St, Anytown, USA' :
                 caseId === 'PA-2024-002' ? '456 Oak Ave, Springfield, USA' :
                 caseId === 'PA-2024-003' ? '789 Pine Rd, Riverside, USA' :
                 caseId === 'PA-2024-004' ? '321 Elm St, Lakeside, USA' :
                 caseId === 'PA-2024-005' ? '654 Maple Dr, Hillside, USA' :
-                caseId === 'PA-2024-006' ? '987 Cedar Ln, Valley, USA' : '123 Patient St',
+                caseId === 'PA-2024-006' ? '987 Cedar Ln, Valley, USA' :
+                caseId === 'PA-2024-008' ? '123 Trident Way, Charleston, USA' : '123 Patient St',
           fax: caseId === 'PA-2024-001' ? '+1-555-123-4567' :
                caseId === 'PA-2024-002' ? '+1-555-234-5678' :
                caseId === 'PA-2024-003' ? '+1-555-345-6789' :
                caseId === 'PA-2024-004' ? '+1-555-456-7890' :
                caseId === 'PA-2024-005' ? '+1-555-567-8901' :
-               caseId === 'PA-2024-006' ? '+1-555-678-9012' : '+1-555-000-0000',
+               caseId === 'PA-2024-006' ? '+1-555-678-9012' :
+               caseId === 'PA-2024-008' ? '+1-555-789-0123' : '+1-555-000-0000',
           phone: caseId === 'PA-2024-001' ? '+1-555-987-6543' :
                  caseId === 'PA-2024-002' ? '+1-555-876-5432' :
                  caseId === 'PA-2024-003' ? '+1-555-765-4321' :
                  caseId === 'PA-2024-004' ? '+1-555-654-3210' :
                  caseId === 'PA-2024-005' ? '+1-555-543-2109' :
-                 caseId === 'PA-2024-006' ? '+1-555-432-1098' : '+1-555-000-0000',
+                 caseId === 'PA-2024-006' ? '+1-555-432-1098' :
+                 caseId === 'PA-2024-008' ? '+1-555-321-0987' : '+1-555-000-0000',
           edi_fhir: caseId === 'PA-2024-001' ? 'FHIR-R4-Resource' :
                     caseId === 'PA-2024-002' ? 'FHIR-R4-Cardiology' :
                     caseId === 'PA-2024-003' ? 'FHIR-R4-Orthopedic' :
                     caseId === 'PA-2024-004' ? 'FHIR-R4-Gastroenterology' :
                     caseId === 'PA-2024-005' ? 'FHIR-R4-Radiology' :
-                    caseId === 'PA-2024-006' ? 'FHIR-R4-DME-Pulmonology' : 'FHIR-R4-Resource',
+                    caseId === 'PA-2024-006' ? 'FHIR-R4-DME-Pulmonology' :
+                    caseId === 'PA-2024-008' ? 'FHIR-R4-Cardiology' : 'FHIR-R4-Resource',
           auth_id: caseId === 'PA-2024-001' ? 'AUTH-2024-001' :
                    caseId === 'PA-2024-002' ? 'AUTH-2024-002' :
                    caseId === 'PA-2024-003' ? 'AUTH-2024-003' :
                    caseId === 'PA-2024-004' ? 'AUTH-2024-004' :
                    caseId === 'PA-2024-005' ? 'AUTH-2024-005' :
-                   caseId === 'PA-2024-006' ? 'AUTH-2024-006' : 'AUTH-2024-000'
+                   caseId === 'PA-2024-006' ? 'AUTH-2024-006' :
+                   caseId === 'PA-2024-008' ? 'AUTH-2024-008' : 'AUTH-2024-000'
         }
       };
       localStorage.setItem(storageKey, JSON.stringify(extractionData));
@@ -1253,7 +1259,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       }
       
       // For Case 001, Case 002, and Case 006, ensure all fields are found for demo purposes
-      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002' || caseId === 'PA-2024-006' || caseId === '006') {
+      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002' || caseId === 'PA-2024-006' || caseId === '006' || caseId === 'PA-2024-008' || caseId === '008') {
         return true;
       }
       
@@ -1394,7 +1400,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           setTimeout(() => {
             startProviderNotificationProcess();
           }, 2000);
-        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006') {
+        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
           // Case-002, Case-003, Case-004, Case-005 & Case-006: Proceed to Member Verification
           setShowMessage('Proceeding to Member Verification...');
           setAnimationStep(37);
@@ -1442,7 +1448,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-004') {
         setShowMessage('✓ Denial letter generated - Missing documentation noted');
-      } else if (caseId === 'PA-2024-006') {
+      } else if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
         setShowMessage('✓ Approval letter generated - CPAP replacement approved');
       } else {
         setShowMessage('✓ Approval letter generated');
@@ -1505,7 +1511,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-007') {
         setShowMessage('❌ Authorization Denied - Letter available for download');
-      } else if (caseId === 'PA-2024-006') {
+      } else if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
         setShowMessage('✅ Authorization Approved - CPAP Replacement Authorized');
       } else {
         setShowMessage('🎉 Authorization Complete - Letter available for download!');
@@ -1610,7 +1616,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         setShowMessage('📊 X-ray and MRI results found');
       } else if (caseId === 'PA-2024-005') {
         setShowMessage('📊 Previous chest X-ray and lab results found');
-      } else if (caseId === 'PA-2024-006') {
+      } else if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
         setShowMessage('📊 Sleep study results found - OSA diagnosis confirmed (AHI 8.9/hr)');
       } else {
         setShowMessage('📊 Stress test results found');
@@ -1841,11 +1847,13 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             content: `I've analyzed Case PA-2024-005 (David Brown - CT Chest with Contrast). The imaging is medically necessary based on clinical symptoms and meets all guidelines. Similar cases show a 92% approval rate. The $1,800 cost is reasonable and within coverage. My recommendation is APPROVE. Do you have any questions about the case?`
           }
         ]);
-      } else if (caseId === 'PA-2024-006') {
+      } else if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
         setChatMessages([
           {
             role: 'assistant',
-            content: `I've analyzed Case PA-2024-006 (Rebecca Hardin - CPAP Device Replacement). Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision. The patient has documented OSA with AHI 8.9/hr, compliant with current CPAP therapy, and device replacement is medically necessary. My recommendation is APPROVE. Do you have questions?`
+            content: caseId === 'PA-2024-008' 
+              ? `I've analyzed Case PA-2024-008 (Daniel de Los Santos marin - Cardiac rehabilitation). Based on the clinical data, the patient presents with anxiety symptoms. An Cardiac rehabilitation has been ordered to rule out cardiac causes. The case shows clear medical necessity. My recommendation is APPROVE. Do you have questions?`
+              : `I've analyzed Case PA-2024-006 (Rebecca Hardin - CPAP Device Replacement). Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision. The patient has documented OSA with AHI 8.9/hr, compliant with current CPAP therapy, and device replacement is medically necessary. My recommendation is APPROVE. Do you have questions?`
           }
         ]);
       } else {
@@ -2022,7 +2030,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-003') {
         setShowMessage('✓ Final Recommendation: PARTIAL APPROVAL ($4,000 of $8,000)');
-      } else if (caseId === 'PA-2024-006') {
+      } else if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
         setShowMessage('✓ Final Recommendation: APPROVE - CPAP replacement with supplies');
       } else {
         setShowMessage('✓ Final Recommendation: APPROVE');
@@ -2666,7 +2674,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       let responses: {[key: string]: string} = {};
                       
                       // Case-specific responses
-                      if (caseId === 'PA-2024-006') {
+                      if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
@@ -2711,7 +2719,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       let responses: {[key: string]: string} = {};
                       
                       // Case-specific responses
-                      if (caseId === 'PA-2024-006') {
+                      if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
@@ -2783,7 +2791,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       setShowMessage('✓ Meets clinical guidelines for knee arthroscopy');
                     } else if (caseId === 'PA-2024-005') {
                       setShowMessage('✓ Meets clinical guidelines for CT chest with contrast');
-                    } else if (caseId === 'PA-2024-006') {
+                    } else if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
                       setShowMessage('✓ Meets DME replacement guidelines - Device >5 years old, compliant patient');
                     } else {
                       setShowMessage('✓ Meets clinical guidelines for cardiac catheterization');
@@ -2801,7 +2809,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       setShowMessage('✓ 65% of similar patients were partially approved');
                     } else if (caseId === 'PA-2024-005') {
                       setShowMessage('✓ 92% of similar patients were approved');
-                    } else if (caseId === 'PA-2024-006') {
+                    } else if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
                       setShowMessage('✓ 87% of similar DME replacement cases were approved');
                     } else {
                       setShowMessage('✓ 87% of similar patients were approved');

@@ -1,0 +1,94 @@
+{
+  "document_type": "Discharge Summary",
+  "patient_information": {
+    "name": "Daniel De Los Santos Marin",
+    "date_of_birth": "08/01/1947",
+    "age": "77 years",
+    "gender": "Male",
+    "medical_record_number": "D856360",
+    "account_number": "D00081633618"
+  },
+  "admission_details": {
+    "admission_date": "02/05/2025",
+    "admission_time": "08:30 AM",
+    "discharge_date": "02/07/2025",
+    "discharge_time": "11:45 AM",
+    "length_of_stay": "2 days",
+    "admission_type": "Emergency",
+    "discharge_disposition": "Home with cardiac rehabilitation referral"
+  },
+  "attending_physician": {
+    "name": "Dr. Ahmad Issa, MD",
+    "specialty": "Cardiology"
+  },
+  "admitting_diagnosis": "Acute chest pain, rule out myocardial infarction",
+  "discharge_diagnoses": {
+    "primary": "Non-ST-elevation myocardial infarction (NSTEMI), I21.4",
+    "secondary": [
+      "Coronary artery disease with 100% occlusion of distal left circumflex and 75% stenosis of RCA, status post PCI with drug-eluting stents",
+      "Essential hypertension",
+      "Hyperlipidemia",
+      "Chronic kidney disease stage 3B"
+    ]
+  },
+  "hospital_course": "77-year-old male presented to ED with chest pain radiating to left arm. Initial ECG showed ST depression in inferior and lateral leads. Troponin elevated at 2.5 ng/mL. Patient was taken emergently to cardiac catheterization lab. Coronary angiography revealed 100% occlusion of distal left circumflex and 75% stenosis of RCA. Successful PCI performed with placement of drug-eluting stents to obtuse marginal and RCA. Post-procedure course uncomplicated. Follow-up echocardiogram showed preserved ejection fraction of 60-65% with Grade I diastolic dysfunction. Patient remained hemodynamically stable throughout hospitalization.",
+  "procedures_performed": [
+    {
+      "procedure": "Left heart catheterization",
+      "date": "02/05/2025"
+    },
+    {
+      "procedure": "Coronary angiography",
+      "date": "02/05/2025"
+    },
+    {
+      "procedure": "Percutaneous coronary intervention (PCI) to obtuse marginal with Onyx 2.0 x 18 mm drug-eluting stent",
+      "date": "02/05/2025"
+    },
+    {
+      "procedure": "Percutaneous coronary intervention (PCI) to RCA with Onyx 3.0 x 22 mm drug-eluting stent",
+      "date": "02/05/2025"
+    },
+    {
+      "procedure": "2D Doppler echocardiogram",
+      "date": "02/07/2025"
+    }
+  ],
+  "discharge_medications": {
+    "antiplatelet_therapy": [
+      "Aspirin 81 mg daily",
+      "Clopidogrel (Plavix) 75 mg daily - DO NOT STOP for at least 12 months"
+    ],
+    "cardiovascular": [
+      "Atorvastatin 10 mg daily",
+      "Amlodipine 10 mg daily",
+      "Valsartan 320 mg daily",
+      "Carvedilol 3.125 mg twice daily",
+      "Hydralazine 50 mg twice daily"
+    ]
+  },
+  "discharge_instructions": {
+    "activity": "Light activity only. No heavy lifting >10 lbs for 1 week. Gradual return to normal activities as tolerated.",
+    "diet": "Cardiac diet - low sodium (<2000mg/day), low fat, heart healthy",
+    "wound_care": "Keep catheter site clean and dry. Watch for signs of infection, bleeding, or hematoma.",
+    "follow_up": [
+      "Cardiology follow-up in 1 week with Dr. McCarty",
+      "Primary care follow-up in 2 weeks with NP Katherine Gannon Kiesel",
+      "Cardiac rehabilitation - approved for 36 sessions over 12 weeks starting 02/14/2025"
+    ],
+    "warning_signs": "Return to ED immediately if experiencing chest pain, shortness of breath, palpitations, dizziness, or bleeding from catheter site."
+  },
+  "discharge_condition": {
+    "status": "Improved, stable",
+    "vital_signs": {
+      "blood_pressure": "108/63",
+      "heart_rate": "75 bpm",
+      "temperature": "98.6°F",
+      "respiratory_rate": "16",
+      "oxygen_saturation": "96% on room air"
+    }
+  },
+  "patient_education": "Patient educated on importance of dual antiplatelet therapy, medication compliance, cardiac diet, regular exercise through cardiac rehab, and recognition of warning signs. Patient verbalized understanding and agreed to treatment plan.",
+  "resuscitation_status": "DNR/Allow Natural Death per patient wishes"
+}
+

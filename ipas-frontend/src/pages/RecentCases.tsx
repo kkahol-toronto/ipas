@@ -17,7 +17,7 @@ const RecentCases: React.FC = () => {
   // Check if letter was generated for any case
   React.useEffect(() => {
     const checkLetterGeneration = () => {
-      const caseIds = ['PA-2024-001', 'PA-2024-002', 'PA-2024-003', 'PA-2024-004', 'PA-2024-005', 'PA-2024-006','PA-2024-007'];
+      const caseIds = ['PA-2024-001', 'PA-2024-002', 'PA-2024-003', 'PA-2024-004', 'PA-2024-005', 'PA-2024-006','PA-2024-007', 'PA-2024-008'];
       
       for (const caseId of caseIds) {
         const letterKey = `ipas_letter_generated_${caseId}`;
@@ -92,7 +92,7 @@ const RecentCases: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ p: 3, pb: 2 }}>
       <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#1976d2', fontWeight: 'bold' }}>
         Smart Auth Recent Cases
       </Typography>
@@ -327,7 +327,7 @@ const RecentCases: React.FC = () => {
         </Box> */}
 
       {/* Recent Cases Table */}
-      <Box sx={{ mb: 4 }}>
+      <Box sx={{ mb: 0 }}>
         <RecentCasesTable onCaseClick={handleCaseClick} />
       </Box>
 

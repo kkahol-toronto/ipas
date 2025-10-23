@@ -1,0 +1,49 @@
+{
+  "form_type": "Prior Authorization Request Form",
+  "patient_information": {
+    "name": "Daniel De Los Santos Marin",
+    "date_of_birth": "08/01/1947",
+    "age": "77 years",
+    "gender": "Male",
+    "member_id": "U7183854101",
+    "medical_record_number": "D856360"
+  },
+  "provider_information": {
+    "requesting_physician": "Dr. Amanda Reynolds, MD",
+    "physician_npi": "1234567890",
+    "facility": "Trident Medical Center",
+    "facility_phone": "(843) 797-7000"
+  },
+  "service_requested": {
+    "procedure": "Cardiac Rehabilitation Program",
+    "procedure_code": "93797, 93798",
+    "diagnosis": "NSTEMI, non-ST-elevation myocardial infarction (I21.4)",
+    "diagnosis_code": "I21.4",
+    "additional_diagnoses": [
+      "Coronary artery disease status post stent",
+      "Essential hypertension",
+      "Hyperlipidemia",
+      "CKD 3B"
+    ]
+  },
+  "clinical_information": {
+    "date_of_service": "02/05/2025",
+    "admission_date": "02/05/2025",
+    "discharge_date": "02/07/2025",
+    "procedure_performed": "Left heart catheterization, Coronary angiography, PCI to obtuse marginal and RCA",
+    "medical_necessity": "Patient with recent NSTEMI requiring cardiac rehabilitation for secondary prevention and functional recovery"
+  },
+  "authorization_details": {
+    "number_of_sessions_requested": "36",
+    "duration": "12 weeks",
+    "frequency": "3 sessions per week",
+    "start_date": "02/14/2025",
+    "estimated_cost": "$5,500"
+  },
+  "insurance": {
+    "payer": "AMBETTER-ATC Contracted",
+    "policy_number": "U7183854101",
+    "group_number": "001"
+  }
+}
+

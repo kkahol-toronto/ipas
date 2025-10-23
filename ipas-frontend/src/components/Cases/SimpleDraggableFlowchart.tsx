@@ -110,7 +110,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           type: 'process',
           status: 'pending',
           description: 'Generate approval letter and notify provider',
-          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+          subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'EMR Integration'],
           nextSteps: [],
           position: { x: 800, y: 50 }
         }
@@ -542,7 +542,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }
     
     // Case PA-2024-006: Full review workflow ending in approval (CPAP replacement - compliant patient)
-    if (caseId === 'PA-2024-006' || caseId === '006') {
+    // Case PA-2024-008: Full review workflow ending in approval (Cardiac Rehabilitation post-NSTEMI)
+    if (caseId === 'PA-2024-006' || caseId === '006' || caseId === 'PA-2024-008' || caseId === '008') {
       return [
         {
           id: 'start',
@@ -657,7 +658,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       ];
     }
 
-   // Case PA-2024-007: Full review workflow ending in approval (CPAP replacement - compliant patient)
+   // Case PA-2024-007: Full review workflow ending in denial (Inpatient admission - uncomplicated diverticulitis)
     if (caseId === 'PA-2024-007' || caseId === '007') {
       return [
         {
@@ -813,7 +814,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         type: 'process',
         status: 'pending',
         description: 'Generate letter and notify provider',
-        subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'Epic Integration'],
+        subSteps: ['Letter Creation', 'Letter Generation', 'Provider Notification', 'EMR Integration'],
         nextSteps: [],
         position: { x: 800, y: 50 }
       }
@@ -1228,37 +1229,43 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                  caseId === 'PA-2024-003' ? 'robert.davis@email.com' :
                  caseId === 'PA-2024-004' ? 'lisa.wilson@email.com' :
                  caseId === 'PA-2024-005' ? 'david.brown@email.com' :
-                 caseId === 'PA-2024-006' ? 'rebecca.hardin@email.com' : 'patient@email.com',
+                 caseId === 'PA-2024-006' ? 'rebecca.hardin@email.com' :
+                 caseId === 'PA-2024-008' ? 'daniel.delossantos@email.com' : 'patient@email.com',
           mail: caseId === 'PA-2024-001' ? '123 Main St, Anytown, USA' :
                 caseId === 'PA-2024-002' ? '456 Oak Ave, Springfield, USA' :
                 caseId === 'PA-2024-003' ? '789 Pine Rd, Riverside, USA' :
                 caseId === 'PA-2024-004' ? '321 Elm St, Lakeside, USA' :
                 caseId === 'PA-2024-005' ? '654 Maple Dr, Hillside, USA' :
-                caseId === 'PA-2024-006' ? '987 Cedar Ln, Valley, USA' : '123 Patient St',
+                caseId === 'PA-2024-006' ? '987 Cedar Ln, Valley, USA' :
+                caseId === 'PA-2024-008' ? '123 Trident Way, Charleston, USA' : '123 Patient St',
           fax: caseId === 'PA-2024-001' ? '+1-555-123-4567' :
                caseId === 'PA-2024-002' ? '+1-555-234-5678' :
                caseId === 'PA-2024-003' ? '+1-555-345-6789' :
                caseId === 'PA-2024-004' ? '+1-555-456-7890' :
                caseId === 'PA-2024-005' ? '+1-555-567-8901' :
-               caseId === 'PA-2024-006' ? '+1-555-678-9012' : '+1-555-000-0000',
+               caseId === 'PA-2024-006' ? '+1-555-678-9012' :
+               caseId === 'PA-2024-008' ? '+1-555-789-0123' : '+1-555-000-0000',
           phone: caseId === 'PA-2024-001' ? '+1-555-987-6543' :
                  caseId === 'PA-2024-002' ? '+1-555-876-5432' :
                  caseId === 'PA-2024-003' ? '+1-555-765-4321' :
                  caseId === 'PA-2024-004' ? '+1-555-654-3210' :
                  caseId === 'PA-2024-005' ? '+1-555-543-2109' :
-                 caseId === 'PA-2024-006' ? '+1-555-432-1098' : '+1-555-000-0000',
+                 caseId === 'PA-2024-006' ? '+1-555-432-1098' :
+                 caseId === 'PA-2024-008' ? '+1-555-321-0987' : '+1-555-000-0000',
           edi_fhir: caseId === 'PA-2024-001' ? 'FHIR-R4-Resource' :
                     caseId === 'PA-2024-002' ? 'FHIR-R4-Cardiology' :
                     caseId === 'PA-2024-003' ? 'FHIR-R4-Orthopedic' :
                     caseId === 'PA-2024-004' ? 'FHIR-R4-Gastroenterology' :
                     caseId === 'PA-2024-005' ? 'FHIR-R4-Radiology' :
-                    caseId === 'PA-2024-006' ? 'FHIR-R4-DME-Pulmonology' : 'FHIR-R4-Resource',
+                    caseId === 'PA-2024-006' ? 'FHIR-R4-DME-Pulmonology' :
+                    caseId === 'PA-2024-008' ? 'FHIR-R4-Cardiology' : 'FHIR-R4-Resource',
           auth_id: caseId === 'PA-2024-001' ? 'AUTH-2024-001' :
                    caseId === 'PA-2024-002' ? 'AUTH-2024-002' :
                    caseId === 'PA-2024-003' ? 'AUTH-2024-003' :
                    caseId === 'PA-2024-004' ? 'AUTH-2024-004' :
                    caseId === 'PA-2024-005' ? 'AUTH-2024-005' :
-                   caseId === 'PA-2024-006' ? 'AUTH-2024-006' : 'AUTH-2024-000'
+                   caseId === 'PA-2024-006' ? 'AUTH-2024-006' :
+                   caseId === 'PA-2024-008' ? 'AUTH-2024-008' : 'AUTH-2024-000'
         }
       };
       localStorage.setItem(storageKey, JSON.stringify(extractionData));
@@ -1304,40 +1311,40 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         if (foundFields === requiredFields.length) {
           setShowMessage('🎉 Auth Intake Agent work completed with success!');
           setAnimationStep(18);
+        } else {
+          setShowMessage(`⚠️ Auth Intake partially completed (${foundFields}/${requiredFields.length} fields found) - Proceeding anyway`);
+          setAnimationStep(18);
+        }
+        
+        // Update Auth Intake status to completed (even with partial data)
+        setProcessSteps(prev => 
+          prev.map(step => 
+            step.id === 'auth-intake' 
+              ? { ...step, status: 'completed' }
+              : step
+          )
+        );
+        
+        // Automatically proceed to Auth Triage after a short delay
+        setTimeout(() => {
+          setShowMessage('Proceeding to Auth Triage...');
+          setAnimationStep(19);
           
-          // Update Auth Intake status to completed
+          // Update Auth Triage to running status
           setProcessSteps(prev => 
             prev.map(step => 
-              step.id === 'auth-intake' 
-                ? { ...step, status: 'completed' }
+              step.id === 'auth-triage' 
+                ? { ...step, status: 'running' }
                 : step
             )
           );
           
-          // Automatically proceed to Auth Triage after a short delay
+          // Keep animation active for 2 more seconds while transitioning
           setTimeout(() => {
-            setShowMessage('Proceeding to Auth Triage...');
-            setAnimationStep(19);
-            
-            // Update Auth Triage to running status
-            setProcessSteps(prev => 
-              prev.map(step => 
-                step.id === 'auth-triage' 
-                  ? { ...step, status: 'running' }
-                  : step
-              )
-            );
-            
-            // Keep animation active for 2 more seconds while transitioning
-            setTimeout(() => {
-              // Start the Auth Triage process
-              startAuthTriageProcess();
-            }, 2000);
+            // Start the Auth Triage process
+            startAuthTriageProcess();
           }, 2000);
-        } else {
-          setShowMessage(`⚠️ Auth Intake partially completed (${foundFields}/${requiredFields.length} fields found)`);
-          setAnimationStep(18);
-        }
+        }, 2000);
         
         setIsAnimating(false);
       }, (requiredFields.length + 1) * 1000);
@@ -1371,7 +1378,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       }
       
       // For Case 001, Case 002, and Case 006, ensure all fields are found for demo purposes
-      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002' || caseId === 'PA-2024-006' || caseId === '006') {
+      if (caseId === 'PA-2024-001' || caseId === '001' || caseId === 'PA-2024-002' || caseId === '002' || caseId === 'PA-2024-006' || caseId === '006' || caseId === 'PA-2024-008' || caseId === '008') {
         return true;
       }
       
@@ -1512,8 +1519,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           setTimeout(() => {
             startProviderNotificationProcess();
           }, 2000);
-        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006' || caseId === 'PA-2024-007') {
-          // Case-002, Case-003, Case-004, Case-005 & Case-006: Proceed to Member Verification
+        } else if (caseId === 'PA-2024-002' || caseId === 'PA-2024-003' || caseId === 'PA-2024-004' || caseId === 'PA-2024-005' || caseId === 'PA-2024-006' || caseId === 'PA-2024-007' || caseId === 'PA-2024-008') {
+          // Case-002, Case-003, Case-004, Case-005, Case-006 & Case-007: Proceed to Member Verification
           setShowMessage('Proceeding to Member Verification...');
           setAnimationStep(37);
           setProcessSteps(prev => 
@@ -1560,8 +1567,12 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-004') {
         setShowMessage('✓ Denial letter generated - Missing documentation noted');
+      } else if (caseId === 'PA-2024-007') {
+        setShowMessage('✓ Denial letter generated - Inpatient admission not medically necessary');
       } else if (caseId === 'PA-2024-006') {
         setShowMessage('✓ Approval letter generated - CPAP replacement approved');
+      } else if (caseId === 'PA-2024-008') {
+        setShowMessage('✓ Approval letter generated - Cardiac rehabilitation approved');
       } else {
         setShowMessage('✓ Approval letter generated');
       }
@@ -1579,14 +1590,14 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       setAnimationStep(44);
     }, 6000);
 
-    // Step 4: Epic Integration
+    // Step 4: EMR Integration
     setTimeout(() => {
-      setShowMessage('Sending authorization data to Epic medical records...');
+      setShowMessage('Sending authorization data to EMR medical records...');
       setAnimationStep(45);
     }, 7000);
 
     setTimeout(() => {
-      setShowMessage('✓ Data transmitted to Epic successfully');
+      setShowMessage('✓ Data transmitted to EMR successfully');
       setAnimationStep(46);
       
       // Trigger EMR notification service immediately
@@ -1625,6 +1636,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         setShowMessage('❌ Authorization Denied - Letter available for download');
       } else if (caseId === 'PA-2024-006') {
         setShowMessage('✅ Authorization Approved - CPAP Replacement Authorized');
+      } else if (caseId === 'PA-2024-008') {
+        setShowMessage('✅ Authorization Approved - Cardiac Rehabilitation Authorized (36 sessions)');
       } else {
         setShowMessage('🎉 Authorization Complete - Letter available for download!');
       }
@@ -1643,7 +1656,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       localStorage.setItem(`ipas_letter_generated_${caseId}`, new Date().toISOString());
       
       // Update case status to approved/denied based on the decision
-      const finalStatus = (caseId === 'PA-2024-004') ? 'denied' : 'approved';
+      const finalStatus = (caseId === 'PA-2024-004' || caseId === 'PA-2024-007') ? 'denied' : 'approved';
       console.log(`✓ Updating case ${caseId} status to: ${finalStatus}`);
       statusTracker.updateCaseStatus(
         caseId, 
@@ -1730,6 +1743,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
         setShowMessage('📊 Previous chest X-ray and lab results found');
       } else if (caseId === 'PA-2024-006') {
         setShowMessage('📊 Sleep study results found - OSA diagnosis confirmed (AHI 8.9/hr)');
+      } else if (caseId === 'PA-2024-008') {
+        setShowMessage('📊 Cardiac cath report and echo results found - NSTEMI with reduced EF (40%)');
       } else {
         setShowMessage('📊 Stress test results found');
       }
@@ -1931,6 +1946,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-003') {
         setShowMessage('✓ Prediction: PARTIAL APPROVAL recommended ($4,000)');
+      } else if (caseId === 'PA-2024-007') {
+        setShowMessage('✓ Prediction: DENIAL recommended - Outpatient management appropriate');
       } else {
         setShowMessage('✓ Prediction: Case can be APPROVED');
       }
@@ -1959,11 +1976,20 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             content: `I've analyzed Case PA-2024-005 (David Brown - CT Chest with Contrast). The imaging is medically necessary based on clinical symptoms and meets all guidelines. Similar cases show a 92% approval rate. The $1,800 cost is reasonable and within coverage. My recommendation is APPROVE. Do you have any questions about the case?`
           }
         ]);
-      } else if (caseId === 'PA-2024-006') {
+      } else if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
         setChatMessages([
           {
             role: 'assistant',
-            content: `I've analyzed Case PA-2024-006 (Rebecca Hardin - CPAP Device Replacement). Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision. The patient has documented OSA with AHI 8.9/hr, compliant with current CPAP therapy, and device replacement is medically necessary. My recommendation is APPROVE. Do you have questions?`
+            content: caseId === 'PA-2024-008' 
+              ? `I've analyzed Case PA-2024-008 (Daniel de Los Santos marin - Cardiac Rehabilitation). The patient recently suffered NSTEMI with 90% LAD stenosis requiring PCI with stent placement. Post-procedure echocardiogram shows reduced ejection fraction (40%) with anterior wall hypokinesis. Patient meets all criteria for Phase II cardiac rehabilitation: recent MI with PCI, reduced EF, multiple cardiac risk factors (HTN, DM, smoking history). Evidence strongly supports cardiac rehab improves mortality and functional capacity post-MI. My recommendation is APPROVE - 36 sessions over 12 weeks. Do you have questions?`
+              : `I've analyzed Case PA-2024-006 (Rebecca Hardin - CPAP Device Replacement). Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision. The patient has documented OSA with AHI 8.9/hr, compliant with current CPAP therapy, and device replacement is medically necessary. My recommendation is APPROVE. Do you have questions?`
+          }
+        ]);
+      } else if (caseId === 'PA-2024-007') {
+        setChatMessages([
+          {
+            role: 'assistant',
+            content: `I've analyzed Case PA-2024-007 (Amanda Latoya Williams - Inpatient Admission for Acute Diverticulitis). After comprehensive review of clinical data, vital signs, laboratory results, and CT imaging, I've identified key findings: Patient is hemodynamically stable (BP 138/84, HR 78, Temp 98.1°F, SpO2 100%), afebrile, with normal WBC (no leukocytosis). CT shows uncomplicated sigmoid diverticulitis without abscess, perforation, or pericolonic complications. Patient tolerating oral intake and receiving appropriate antibiotic therapy (Ciprofloxacin + Metronidazole). Per AAFP guidelines and InterQual criteria, inpatient admission is not medically necessary - case meets criteria for outpatient management. My recommendation is DENY inpatient admission and APPROVE outpatient management plan. Do you have questions about this assessment?`
           }
         ]);
       } else {
@@ -2119,7 +2145,9 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     }, 11500);
 
     setTimeout(() => {
-      if (caseId === 'PA-2024-006') {
+      if (caseId === 'PA-2024-007') {
+        setShowMessage('✓ Quality Assurance recommends: DENY INPATIENT - Does not meet admission criteria');
+      } else if (caseId === 'PA-2024-006') {
         setShowMessage('✓ Quality Assurance recommends: APPROVE - Meets all DME replacement criteria');
       } else {
         setShowMessage('✓ Quality Assurance recommends: APPROVE');
@@ -2129,7 +2157,9 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
 
     // Panel consensus
     setTimeout(() => {
-      if (caseId === 'PA-2024-006') {
+      if (caseId === 'PA-2024-007') {
+        setShowMessage('🎯 Panel Consensus: All 3 reviewers agree - DENY INPATIENT admission');
+      } else if (caseId === 'PA-2024-006') {
         setShowMessage('🎯 Panel Consensus: All 4 reviewers agree - APPROVE CPAP replacement');
       } else {
         setShowMessage('🎯 Panel Consensus: All 4 reviewers agree - APPROVE');
@@ -2140,8 +2170,12 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
     setTimeout(() => {
       if (caseId === 'PA-2024-003') {
         setShowMessage('✓ Final Recommendation: PARTIAL APPROVAL ($4,000 of $8,000)');
+      } else if (caseId === 'PA-2024-007') {
+        setShowMessage('✓ Final Recommendation: DENY INPATIENT - Approve outpatient management');
       } else if (caseId === 'PA-2024-006') {
         setShowMessage('✓ Final Recommendation: APPROVE - CPAP replacement with supplies');
+      } else if (caseId === 'PA-2024-008') {
+        setShowMessage('✓ Final Recommendation: APPROVE - Cardiac rehabilitation 36 sessions');
       } else {
         setShowMessage('✓ Final Recommendation: APPROVE');
       }
@@ -2369,15 +2403,15 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
               {showMessage}
             </Typography>
             
-            {/* Epic Medical Record Link */}
-            {showMessage.includes('Data transmitted to Epic successfully') && (
+            {/* EMR Medical Record Link */}
+            {showMessage.includes('Data transmitted to EMR successfully') && (
               <Box sx={{ mt: 2 }}>
                 <Button
                   variant="contained"
                   color="primary"
                   startIcon={<DocumentIcon />}
                   onClick={() => {
-                    // Open Epic medical record in new tab
+                    // Open EMR medical record in new tab
                     window.open('https://epic-demo.healthcare.com/patient/medical-records', '_blank');
                   }}
                   sx={{
@@ -2387,10 +2421,10 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                     }
                   }}
                 >
-                  View Updated Medical Record in Epic
+                  View Updated Medical Record in EMR
                 </Button>
                 <Typography variant="caption" sx={{ display: 'block', mt: 1, color: 'text.secondary' }}>
-                  Authorization data has been integrated into the patient's Epic medical record
+                  Authorization data has been integrated into the patient's EMR medical record
                 </Typography>
               </Box>
             )}
@@ -2412,7 +2446,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
             backgroundColor: '#fafafa'
           }}
         >
-          <svg width="100%" height="680" style={{ position: 'absolute', top: 0, left: 0, minWidth: '1588' }}>
+          <svg width="100%" height="680" style={{ position: 'absolute', top: 0, left: 0, minWidth: '1565px' }}>
             <defs>
               <marker
                 id="arrowhead"
@@ -2784,7 +2818,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       let responses: {[key: string]: string} = {};
                       
                       // Case-specific responses
-                      if (caseId === 'PA-2024-006') {
+                      if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
@@ -2793,6 +2827,19 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                           'symptoms': 'Patient presented with documented Obstructive Sleep Apnea (AHI 8.9/hr on diagnostic sleep study). Current symptoms include daytime sleepiness (Epworth score 3/24 - indicating excellent control with current therapy). Patient is highly compliant with CPAP therapy and requires device replacement as current unit is 5+ years old.',
                           'diagnosis': 'The patient has a confirmed diagnosis of Obstructive Sleep Apnea (ICD-10: G47.33) documented via polysomnography. The AHI of 8.9/hr falls within the mild-to-moderate range, clearly meeting medical necessity criteria for CPAP therapy.',
                           'medically necessary': 'This CPAP replacement is medically necessary because: 1) Patient has documented OSA with AHI 8.9/hr requiring ongoing therapy, 2) Current device is 5+ years old and approaching end of functional life, 3) Patient demonstrates excellent compliance with therapy (Epworth score 3/24), 4) Device replacement is standard practice per Medicare LCD guidelines for DME >5 years old, 5) Continued CPAP therapy prevents serious complications including cardiovascular events, cognitive impairment, and motor vehicle accidents.',
+                        };
+                      } else if (caseId === 'PA-2024-007') {
+                        responses = {
+                          'default': 'Based on the clinical data, the inpatient admission does not meet medical necessity criteria. Patient is hemodynamically stable, afebrile, with normal labs and uncomplicated diverticulitis on CT. AAFP guidelines support outpatient management.',
+                          'risk': 'Low clinical risk for outpatient management. Patient has stable vital signs (BP 138/84, HR 78, Temp 98.1°F, SpO2 100%), no systemic toxicity, tolerating oral intake, and receiving appropriate antibiotic therapy. Risk of progression is approximately 5%.',
+                          'cost': 'Inpatient admission would cost $12,500-$15,000 for 3-day stay, while outpatient management costs only $800-$1,200. Cost savings of approximately $11,700 while maintaining appropriate level of care.',
+                          'guidelines': 'The case does NOT meet inpatient admission criteria per AAFP evidence-based guidelines, ACG clinical guidelines, or InterQual criteria. Guidelines require complications (abscess, perforation), hemodynamic instability, sepsis, or inability to tolerate oral intake for inpatient care.',
+                          'vitals': 'Patient vitals are completely stable: BP 138/84, HR 78, Temp 98.1°F (afebrile), SpO2 100%. No signs of hemodynamic instability or systemic toxicity.',
+                          'symptoms': 'Patient presented with abdominal pain, back pain, and blood in stool. However, current clinical presentation shows patient tolerating oral intake, pain controlled with oral analgesics, and receiving appropriate antibiotic coverage.',
+                          'diagnosis': 'The patient has acute uncomplicated sigmoid diverticulitis (K57.92) confirmed on CT scan. CT shows no abscess, perforation, or pericolonic complications. This is a classic case for outpatient management.',
+                          'labs': 'Laboratory results show normal WBC with no leukocytosis, normal metabolic panel, and normal renal function. Absence of elevated WBC count indicates no systemic infection requiring inpatient care.',
+                          'imaging': 'CT abdomen/pelvis shows uncomplicated sigmoid diverticulitis without abscess, perforation, or pericolonic complications. This is Hinchey Grade 0-1 diverticulitis, which evidence strongly supports for outpatient management.',
+                          'medically necessary': 'Inpatient admission is NOT medically necessary because: 1) Patient is hemodynamically stable with normal vital signs, 2) Afebrile with normal inflammatory markers, 3) CT shows uncomplicated diverticulitis without complications, 4) Tolerating oral intake and oral medications, 5) Receiving appropriate antibiotic therapy (Ciprofloxacin + Metronidazole), 6) All evidence-based guidelines support outpatient management for this clinical presentation.',
                         };
                       } else {
                         responses = {
@@ -2807,8 +2854,13 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       if (userMessage.toLowerCase().includes('risk')) response = responses.risk;
                       if (userMessage.toLowerCase().includes('cost') || userMessage.toLowerCase().includes('amount')) response = responses.cost;
                       if (userMessage.toLowerCase().includes('guideline')) response = responses.guidelines;
+                      if (userMessage.toLowerCase().includes('compliance')) response = responses.compliance || responses.default;
+                      if (userMessage.toLowerCase().includes('device age') || userMessage.toLowerCase().includes('how old')) response = responses['device age'] || responses.default;
                       if (userMessage.toLowerCase().includes('symptom')) response = responses.symptoms || responses.default;
                       if (userMessage.toLowerCase().includes('diagnosis') || userMessage.toLowerCase().includes('diagnose')) response = responses.diagnosis || responses.default;
+                      if (userMessage.toLowerCase().includes('vital') || userMessage.toLowerCase().includes('vitals')) response = responses.vitals || responses.default;
+                      if (userMessage.toLowerCase().includes('lab') || userMessage.toLowerCase().includes('laboratory')) response = responses.labs || responses.default;
+                      if (userMessage.toLowerCase().includes('imaging') || userMessage.toLowerCase().includes('ct') || userMessage.toLowerCase().includes('scan')) response = responses.imaging || responses.default;
                       if (userMessage.toLowerCase().includes('medically necessary') || userMessage.toLowerCase().includes('why is it medically necessary') || userMessage.toLowerCase().includes('medical necessity')) response = responses['medically necessary'] || responses.default;
                       
                       setChatMessages(prev => [...prev, { role: 'assistant', content: response }]);
@@ -2829,7 +2881,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       let responses: {[key: string]: string} = {};
                       
                       // Case-specific responses
-                      if (caseId === 'PA-2024-006') {
+                      if (caseId === 'PA-2024-006' || caseId === 'PA-2024-008') {
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
@@ -2838,6 +2890,19 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                           'symptoms': 'Patient presented with documented Obstructive Sleep Apnea (AHI 8.9/hr on diagnostic sleep study). Current symptoms include daytime sleepiness (Epworth score 3/24 - indicating excellent control with current therapy). Patient is highly compliant with CPAP therapy and requires device replacement as current unit is 5+ years old.',
                           'diagnosis': 'The patient has a confirmed diagnosis of Obstructive Sleep Apnea (ICD-10: G47.33) documented via polysomnography. The AHI of 8.9/hr falls within the mild-to-moderate range, clearly meeting medical necessity criteria for CPAP therapy.',
                           'medically necessary': 'This CPAP replacement is medically necessary because: 1) Patient has documented OSA with AHI 8.9/hr requiring ongoing therapy, 2) Current device is 5+ years old and approaching end of functional life, 3) Patient demonstrates excellent compliance with therapy (Epworth score 3/24), 4) Device replacement is standard practice per Medicare LCD guidelines for DME >5 years old, 5) Continued CPAP therapy prevents serious complications including cardiovascular events, cognitive impairment, and motor vehicle accidents.',
+                        };
+                      } else if (caseId === 'PA-2024-007') {
+                        responses = {
+                          'default': 'Based on the clinical data, the inpatient admission does not meet medical necessity criteria. Patient is hemodynamically stable, afebrile, with normal labs and uncomplicated diverticulitis on CT. AAFP guidelines support outpatient management.',
+                          'risk': 'Low clinical risk for outpatient management. Patient has stable vital signs (BP 138/84, HR 78, Temp 98.1°F, SpO2 100%), no systemic toxicity, tolerating oral intake, and receiving appropriate antibiotic therapy. Risk of progression is approximately 5%.',
+                          'cost': 'Inpatient admission would cost $12,500-$15,000 for 3-day stay, while outpatient management costs only $800-$1,200. Cost savings of approximately $11,700 while maintaining appropriate level of care.',
+                          'guidelines': 'The case does NOT meet inpatient admission criteria per AAFP evidence-based guidelines, ACG clinical guidelines, or InterQual criteria. Guidelines require complications (abscess, perforation), hemodynamic instability, sepsis, or inability to tolerate oral intake for inpatient care.',
+                          'vitals': 'Patient vitals are completely stable: BP 138/84, HR 78, Temp 98.1°F (afebrile), SpO2 100%. No signs of hemodynamic instability or systemic toxicity.',
+                          'symptoms': 'Patient presented with abdominal pain, back pain, and blood in stool. However, current clinical presentation shows patient tolerating oral intake, pain controlled with oral analgesics, and receiving appropriate antibiotic coverage.',
+                          'diagnosis': 'The patient has acute uncomplicated sigmoid diverticulitis (K57.92) confirmed on CT scan. CT shows no abscess, perforation, or pericolonic complications. This is a classic case for outpatient management.',
+                          'labs': 'Laboratory results show normal WBC with no leukocytosis, normal metabolic panel, and normal renal function. Absence of elevated WBC count indicates no systemic infection requiring inpatient care.',
+                          'imaging': 'CT abdomen/pelvis shows uncomplicated sigmoid diverticulitis without abscess, perforation, or pericolonic complications. This is Hinchey Grade 0-1 diverticulitis, which evidence strongly supports for outpatient management.',
+                          'medically necessary': 'Inpatient admission is NOT medically necessary because: 1) Patient is hemodynamically stable with normal vital signs, 2) Afebrile with normal inflammatory markers, 3) CT shows uncomplicated diverticulitis without complications, 4) Tolerating oral intake and oral medications, 5) Receiving appropriate antibiotic therapy (Ciprofloxacin + Metronidazole), 6) All evidence-based guidelines support outpatient management for this clinical presentation.',
                         };
                       } else {
                         responses = {
@@ -2852,8 +2917,13 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       if (userMessage.toLowerCase().includes('risk')) response = responses.risk;
                       if (userMessage.toLowerCase().includes('cost') || userMessage.toLowerCase().includes('amount')) response = responses.cost;
                       if (userMessage.toLowerCase().includes('guideline')) response = responses.guidelines;
+                      if (userMessage.toLowerCase().includes('compliance')) response = responses.compliance || responses.default;
+                      if (userMessage.toLowerCase().includes('device age') || userMessage.toLowerCase().includes('how old')) response = responses['device age'] || responses.default;
                       if (userMessage.toLowerCase().includes('symptom')) response = responses.symptoms || responses.default;
                       if (userMessage.toLowerCase().includes('diagnosis') || userMessage.toLowerCase().includes('diagnose')) response = responses.diagnosis || responses.default;
+                      if (userMessage.toLowerCase().includes('vital') || userMessage.toLowerCase().includes('vitals')) response = responses.vitals || responses.default;
+                      if (userMessage.toLowerCase().includes('lab') || userMessage.toLowerCase().includes('laboratory')) response = responses.labs || responses.default;
+                      if (userMessage.toLowerCase().includes('imaging') || userMessage.toLowerCase().includes('ct') || userMessage.toLowerCase().includes('scan')) response = responses.imaging || responses.default;
                       if (userMessage.toLowerCase().includes('medically necessary') || userMessage.toLowerCase().includes('why is it medically necessary') || userMessage.toLowerCase().includes('medical necessity')) response = responses['medically necessary'] || responses.default;
                       
                       setChatMessages(prev => [...prev, { 
@@ -2903,6 +2973,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       setShowMessage('✓ Meets clinical guidelines for CT chest with contrast');
                     } else if (caseId === 'PA-2024-006') {
                       setShowMessage('✓ Meets DME replacement guidelines - Device >5 years old, compliant patient');
+                    } else if (caseId === 'PA-2024-008') {
+                      setShowMessage('✓ Meets AHA/ACC guidelines for cardiac rehabilitation post-MI with reduced EF');
                     } else {
                       setShowMessage('✓ Meets clinical guidelines for cardiac catheterization');
                     }
@@ -2921,6 +2993,8 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                       setShowMessage('✓ 92% of similar patients were approved');
                     } else if (caseId === 'PA-2024-006') {
                       setShowMessage('✓ 87% of similar DME replacement cases were approved');
+                    } else if (caseId === 'PA-2024-008') {
+                      setShowMessage('✓ 94% of similar post-MI cardiac rehab cases were approved');
                     } else {
                       setShowMessage('✓ 87% of similar patients were approved');
                     }
@@ -2969,75 +3043,87 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
           </DialogTitle>
           <DialogContent>
             <Typography variant="body2" sx={{ mb: 3 }}>
-              Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : 'APPROVE'}</strong>
+              Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : caseId === 'PA-2024-007' ? 'DECLINE' : 'APPROVE'}</strong>
             </Typography>
             {caseId === 'PA-2024-003' && (
               <Typography variant="body2" color="warning.main" sx={{ mb: 2, p: 1, bgcolor: '#fff3cd', borderRadius: 1 }}>
                 ⚠️ Insurance coverage limit: $4,000 maximum for knee arthroscopy procedures
               </Typography>
             )}
+            {caseId === 'PA-2024-007' && (
+              <Typography variant="body2" color="error.main" sx={{ mb: 2, p: 1, bgcolor: '#ffebee', borderRadius: 1 }}>
+                ❌ Inpatient admission not medically necessary: Patient hemodynamically stable, afebrile, normal labs, uncomplicated diverticulitis on CT. Meets criteria for outpatient management per AAFP guidelines.
+              </Typography>
+            )}
             
             {/* Panel Members' Votes */}
             <Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
               <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
-                Panel Review Summary (4 Doctors)
+                {caseId === 'PA-2024-007' ? 'Panel Review Summary (3 Doctors)' : 'Panel Review Summary (4 Doctors)'}
               </Typography>
               
-              {/* Doctor 1 */}
-              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+              {/* Gastroenterologist */}
+              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: caseId === 'PA-2024-007' ? '4px solid #f44336' : '4px solid #4caf50' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                   <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                     Sleep medicine specialist
+                     {caseId === 'PA-2024-007' ? 'Gastroenterologist' : 'Sleep medicine specialist'}
                   </Typography>
-                  <Chip label="APPROVE" color="success" size="small" />
+                  <Chip label={caseId === 'PA-2024-007' ? 'DENY' : 'APPROVE'} color={caseId === 'PA-2024-007' ? 'error' : 'success'} size="small" />
                 </Box>
                 <Typography variant="caption" color="text.secondary">
                   {caseId === 'PA-2024-003' 
-                    ? "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
-                    : "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
+                    ? "Given the patient's established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
+                    : caseId === 'PA-2024-007'
+                    ? "Given the acute onset of symptoms, prior history of diverticulitis, and confirmation by imaging, it is medically necessary to initiate appropriate treatment and observation in Outpatient setting as the patient is stable, afebrile, and has no evidence of complications. Supportive therapy, dietary modifications, and symptom monitoring are essential. Antibiotics may be considered given her history, but shared decision-making and close follow-up are recommended."
+                    : "Given the patient's established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
                   }
                 </Typography>
               </Box>
               
-              {/* Doctor 2 */}
-              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+              {/* Infectious Disease Specialist */}
+              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: caseId === 'PA-2024-007' ? '4px solid #f44336' : '4px solid #4caf50' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                   <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                    {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
+                    {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : caseId === 'PA-2024-007' ? 'Infectious Disease Specialist' : 'Otolarngology/ENT Specialist'}
                   </Typography>
-                  <Chip label="APPROVE" color="success" size="small" />
+                  <Chip label={caseId === 'PA-2024-007' ? 'DENY' : 'APPROVE'} color={caseId === 'PA-2024-007' ? 'error' : 'success'} size="small" />
                 </Box>
                 <Typography variant="caption" color="text.secondary">
                   {caseId === 'PA-2024-003'
                     ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
+                    : caseId === 'PA-2024-007'
+                    ? "For this patient with uncomplicated acute diverticulitis, the medically necessary management includes supportive care, possible oral antibiotic therapy, pain control, and close outpatient monitoring. Inpatient admission or intravenous antibiotic therapy is not indicated unless her condition worsens or she develops signs of systemic infection or complications."
                     : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
                   }
                 </Typography>
               </Box>
               
-              {/* Doctor 3 */}
-              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+              {/* General Surgeon */}
+              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: caseId === 'PA-2024-007' ? '4px solid #f44336' : '4px solid #4caf50' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                   <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                    {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
+                    {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : caseId === 'PA-2024-007' ? 'General Surgeon' : ' Obesity Medicine Specialist'}
                   </Typography>
-                  <Chip label="APPROVE" color="success" size="small" />
+                  <Chip label={caseId === 'PA-2024-007' ? 'DENY' : 'APPROVE'} color={caseId === 'PA-2024-007' ? 'error' : 'success'} size="small" />
                 </Box>
                 <Typography variant="caption" color="text.secondary">
                   {caseId === 'PA-2024-003'
                     ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
+                    : caseId === 'PA-2024-007'
+                    ? "For this patient with uncomplicated acute diverticulitis, there is no medical necessity for surgical intervention or inpatient admission at this time. Outpatient management with supportive care and close follow-up is medically necessary, aligning with current surgical and clinical guidelines."
                     : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
                   }
                 </Typography>
               </Box>
               
-              {/* Doctor 4 */}
-              <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+              {/* Cardiologist - Only show for non-007 cases */}
+              {caseId !== 'PA-2024-007' && (
+                <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                   <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
                     {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
                   </Typography>
-                  <Chip label="APPROVE" color="success" size="small" />
+                    <Chip label='APPROVE' color='success' size="small" />
                 </Box>
                 <Typography variant="caption" color="text.secondary">
                   {caseId === 'PA-2024-003'
@@ -3046,10 +3132,11 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                   }
                 </Typography>
               </Box>
+              )}
 
-              <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
-                <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-                  ✓ Consensus: 4/4 doctors recommend APPROVAL
+              <Box sx={{ mt: 2, p: 1, bgcolor: caseId === 'PA-2024-007' ? '#ffebee' : '#e3f2fd', borderRadius: 1 }}>
+                <Typography variant="caption" sx={{ fontWeight: 'bold', color: caseId === 'PA-2024-007' ? '#c62828' : '#1976d2' }}>
+                  {caseId === 'PA-2024-007' ? '❌ Consensus: 3/3 doctors recommend DENIAL' : '✓ Consensus: 4/4 doctors recommend APPROVAL'}
                 </Typography>
               </Box>
             </Box>

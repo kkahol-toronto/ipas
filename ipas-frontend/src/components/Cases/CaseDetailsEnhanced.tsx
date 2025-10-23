@@ -40,7 +40,8 @@ import {
   Edit as EditIcon,
   Share as ShareIcon,
   Computer as ComputerIcon,
-  Visibility as VisibilityIcon
+  Visibility as VisibilityIcon,
+  PictureAsPdf as PdfIcon
 } from '@mui/icons-material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
 import CaseDocuments from './CaseDocuments';
@@ -88,9 +89,228 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [clinicalNotes, setClinicalNotes] = useState('');
   const [observabilityDialogOpen, setObservabilityDialogOpen] = useState(false);
   const [observabilityData, setObservabilityData] = useState<any>(null);
-  const [selectedOption, setSelectedOption] = useState('Approved');
+  const [selectedOption, setSelectedOption] = useState(
+    caseId === 'PA-2024-007' ? 'Denied' : 'Approved'
+  );
   const [emrIntegrationOpen, setEmrIntegrationOpen] = useState(false);
 
+  // Function to generate and download PDF from JSON
+  const downloadObservabilityAsPDF = async () => {
+    try {
+      // Fetch the JSON data
+      const folderPath = caseId === 'PA-2024-001' ? 'case-001-john-doe' : 
+                         caseId === 'PA-2024-002' ? 'case-002-jane-smith' : 
+                         caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : 
+                         caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : 
+                         caseId === 'PA-2024-005' ? 'case-005-david-brown' : 
+                         caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 
+                         caseId === 'PA-2024-007' ? 'case-007' : 
+                         caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe';
+      
+      const response = await fetch(`/sample-documents/cases/${folderPath}/observability_and_explanation.json`);
+      const jsonData = await response.json();
+      
+      // Create a printable HTML content
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) return;
+      
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Observability & Explainability Report - ${caseId}</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              line-height: 1.6;
+              padding: 20px;
+              max-width: 900px;
+              margin: 0 auto;
+            }
+            h1 {
+              color: #1976d2;
+              border-bottom: 3px solid #1976d2;
+              padding-bottom: 10px;
+            }
+            h2 {
+              color: #2c3e50;
+              margin-top: 25px;
+              border-bottom: 2px solid #ecf0f1;
+              padding-bottom: 8px;
+            }
+            h3 {
+              color: #34495e;
+              margin-top: 15px;
+            }
+            .section {
+              margin-bottom: 30px;
+              background: #f8f9fa;
+              padding: 15px;
+              border-radius: 5px;
+            }
+            .workflow-step {
+              margin: 15px 0;
+              padding: 12px;
+              background: white;
+              border-left: 4px solid #1976d2;
+            }
+            .key-value {
+              display: flex;
+              margin: 8px 0;
+            }
+            .key {
+              font-weight: bold;
+              min-width: 200px;
+              color: #2c3e50;
+            }
+            .value {
+              color: #555;
+            }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin: 15px 0;
+            }
+            th, td {
+              border: 1px solid #ddd;
+              padding: 10px;
+              text-align: left;
+            }
+            th {
+              background-color: #1976d2;
+              color: white;
+            }
+            tr:nth-child(even) {
+              background-color: #f8f9fa;
+            }
+            .badge {
+              display: inline-block;
+              padding: 3px 8px;
+              border-radius: 3px;
+              font-size: 12px;
+              font-weight: bold;
+            }
+            .status-completed {
+              background-color: #d4edda;
+              color: #155724;
+            }
+            .footer {
+              margin-top: 40px;
+              text-align: center;
+              color: #7f8c8d;
+              font-size: 12px;
+              border-top: 1px solid #ddd;
+              padding-top: 20px;
+            }
+            @media print {
+              body { margin: 0; }
+              .no-print { display: none; }
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Observability & Explainability Report</h1>
+          <div class="key-value">
+            <span class="key">Case ID:</span>
+            <span class="value">${caseId}</span>
+          </div>
+          <div class="key-value">
+            <span class="key">Generated:</span>
+            <span class="value">${new Date().toLocaleString()}</span>
+          </div>
+
+          <div class="section">
+            <h2>Case Overview</h2>
+            ${jsonData.caseId ? `<div class="key-value"><span class="key">Case ID:</span><span class="value">${jsonData.caseId}</span></div>` : ''}
+            ${jsonData.patientName ? `<div class="key-value"><span class="key">Patient:</span><span class="value">${jsonData.patientName}</span></div>` : ''}
+            ${jsonData.provider ? `<div class="key-value"><span class="key">Provider:</span><span class="value">${jsonData.provider}</span></div>` : ''}
+            ${jsonData.facility ? `<div class="key-value"><span class="key">Facility:</span><span class="value">${jsonData.facility}</span></div>` : ''}
+            ${jsonData.requestedService ? `<div class="key-value"><span class="key">Requested Service:</span><span class="value">${jsonData.requestedService}</span></div>` : ''}
+            ${jsonData.authorizationAmount ? `<div class="key-value"><span class="key">Authorization Amount:</span><span class="value">${jsonData.authorizationAmount}</span></div>` : ''}
+          </div>
+
+          <div class="section">
+            <h2>Workflow Steps</h2>
+            ${jsonData.workflowSteps ? jsonData.workflowSteps.map((step: any, index: number) => `
+              <div class="workflow-step">
+                <h3>Step ${step.step || index + 1}: ${step.action}</h3>
+                <div class="key-value">
+                  <span class="key">Status:</span>
+                  <span class="value"><span class="badge status-completed">${step.status}</span></span>
+                </div>
+                ${step.details ? `<div class="key-value"><span class="key">Details:</span><span class="value">${step.details}</span></div>` : ''}
+                ${step.outcome ? `<div class="key-value"><span class="key">Outcome:</span><span class="value">${step.outcome}</span></div>` : ''}
+                ${step.comments ? `<div class="key-value"><span class="key">Comments:</span><span class="value">${step.comments}</span></div>` : ''}
+              </div>
+            `).join('') : ''}
+          </div>
+
+          ${jsonData.keyFindings ? `
+          <div class="section">
+            <h2>Key Findings</h2>
+            ${Object.entries(jsonData.keyFindings).map(([key, value]) => `
+              <div class="key-value">
+                <span class="key">${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</span>
+                <span class="value">${value}</span>
+              </div>
+            `).join('')}
+          </div>
+          ` : ''}
+
+          ${jsonData.denialDetails || jsonData.approvalDetails ? `
+          <div class="section">
+            <h2>${jsonData.denialDetails ? 'Denial' : 'Approval'} Details</h2>
+            ${JSON.stringify(jsonData.denialDetails || jsonData.approvalDetails, null, 2).split('\\n').map(line => 
+              `<div>${line.replace(/\s/g, '&nbsp;')}</div>`
+            ).join('')}
+          </div>
+          ` : ''}
+
+          ${jsonData.qualityMetrics ? `
+          <div class="section">
+            <h2>Quality Metrics</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${Object.entries(jsonData.qualityMetrics).map(([key, value]) => `
+                  <tr>
+                    <td>${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</td>
+                    <td>${value}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+          ` : ''}
+
+          <div class="footer">
+            <p>Generated by IPAS (Intelligent Prior Authorization System)</p>
+            <p>This document contains confidential patient information</p>
+          </div>
+
+          <div class="no-print" style="text-align: center; margin: 20px;">
+            <button onclick="window.print()" style="padding: 10px 20px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+              Print / Save as PDF
+            </button>
+            <button onclick="window.close()" style="padding: 10px 20px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-left: 10px;">
+              Close
+            </button>
+          </div>
+        </body>
+        </html>
+      `);
+      
+      printWindow.document.close();
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    }
+  };
 
   // Dynamic case data based on caseId
   const getCaseData = (caseId: string) => {
@@ -285,38 +505,93 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       },
       'PA-2024-007': {
         id: 'PA-2024-007',
-        patientName: 'Amanda Williams',
+        patientName: 'Amanda Latoya Williams',
         patientId: 'P-2024-007',
         dateOfBirth: '1987-03-05',
-        provider: 'Benjamin Velky',
-        providerId: 'PR-007',
-        hospital: 'Self regional HE',
-        procedure: 'In Patient',
-        diagnosis: 'Diverticulitis of Intestine, part unspecified, without perforation or abcess without bleeding (K57.92)',
+        provider: 'Dr. Benjamin Joseph Velky',
+        providerId: 'NPI-1083063507',
+        hospital: 'Self Regional Healthcare',
+        procedure: 'Inpatient Admission - Acute Uncomplicated Sigmoid Diverticulitis',
+        diagnosis: 'Diverticulitis of intestine, part unspecified, without perforation or abscess without bleeding (K57.92)',
         status: 'Denied',
         priority: 'Urgent',
-        submittedDate: '2024-04-25T12:16:34Z',
-        lastUpdated: '2024-04-25T15:48:00Z',
-        insurance: 'Ambetter - ATC contracted ',
+        submittedDate: '2025-04-24T16:54:00Z',
+        lastUpdated: '2025-04-25T14:05:30Z',
+        insurance: 'Ambetter / Absolute Total Care (ATC Contracted)',
         policyNumber: 'U7183854101',
-        estimatedCost: 2500,
+        estimatedCost: 13500,
+        deniedCost: 13500,
+        alternativeCost: 1000,
         documents: [
-          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
-          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' }
+          { id: 'doc1', name: 'Prior Authorization Request Form.pdf', type: 'PDF', size: '2.3 MB', status: 'Processed' },
+          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.8 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'CT Abdomen Pelvis Report.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Laboratory Results.pdf', type: 'PDF', size: '1.5 MB', status: 'Processed' },
+          { id: 'doc5', name: 'Structured Medical Records.json', type: 'JSON', size: '0.8 MB', status: 'Processed' },
+          { id: 'doc6', name: 'Authorization Request.json', type: 'JSON', size: '0.3 MB', status: 'Processed' },
+          { id: 'doc7', name: 'Clinical Summary.pdf', type: 'PDF', size: '1.9 MB', status: 'Analyzed' },
+          { id: 'doc8', name: 'UR Packet.pdf', type: 'PDF', size: '2.4 MB', status: 'Processed' },
+          { id: 'doc9', name: 'Imaging Reports.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
+          { id: 'doc10', name: 'Panel Recommendation.pdf', type: 'PDF', size: '1.7 MB', status: 'Processed' }
         ],
         clinicalNotes: [
-          { timestamp: '2024-04-24T15:05:00Z', note: 'Patient compliant with CPAP therapy, Epworth score 3/24', author: 'Amy Diane Kelly, NP' },
-          { timestamp: '2024-04-24T15:48:00Z', note: "CPAP Device Replacement needed as member is requesting for a personal device. She is currently using father in law's device ", author: 'Amy Diane Kelly, NP' },
-          { timestamp: '2024-04-25T12:16:34Z', note: 'Prior authorization submitted for CPAP replacement and supplies', author: 'Maria Griffin' }
+          { timestamp: '2025-04-24T16:54:00Z', note: 'Patient admitted with 2-day history of abdominal pain, back pain, blood in stool, and vomiting. Presenting complaints consistent with acute diverticulitis', author: 'Dr. Benjamin Velky' },
+          { timestamp: '2025-04-24T18:30:00Z', note: 'Vitals stable: BP 138/84, HR 78, Temp 98.1°F, SpO2 100%. Patient afebrile and hemodynamically stable', author: 'Nurse Jennifer Lopez' },
+          { timestamp: '2025-04-24T19:45:00Z', note: 'CT Abdomen/Pelvis completed - shows uncomplicated sigmoid diverticulitis without abscess, perforation, or pericolonic complications', author: 'Dr. Sarah Mitchell, Radiology' },
+          { timestamp: '2025-04-24T21:00:00Z', note: 'Laboratory results: Normal WBC, no leukocytosis. CBC, CMP, BMP all within normal limits', author: 'Lab Department' },
+          { timestamp: '2025-04-25T08:30:00Z', note: 'Patient tolerating oral intake, pain controlled with oral analgesics. Currently on Ciprofloxacin 500mg + Metronidazole 500mg', author: 'Dr. Benjamin Velky' },
+          { timestamp: '2025-04-25T10:15:00Z', note: 'Inpatient authorization request submitted to Ambetter for continued hospitalization', author: 'UR Department, Self Regional HE' },
+          { timestamp: '2025-04-25T14:05:00Z', note: 'Physician panel review completed - consensus for denial of inpatient admission. Patient appropriate for outpatient management per AAFP guidelines', author: 'IPAS Physician Panel' }
         ],
         aiAnalysis: {
-          clinicalNecessity: 0.95,
-          coverageEligibility: 0.94,
+          clinicalNecessity: 0.32,
+          coverageEligibility: 0.15,
           riskAssessment: 'Low',
-          recommendedAction: 'Deny - clear medical necessity',
-          confidence: 0.95
+          recommendedAction: 'Deny inpatient admission - Approve outpatient management',
+          confidence: 0.94
         },
-        ipopFlag: ''
+        ipopFlag: 'Inpatient'
+      },
+      'PA-2024-008': {
+        id: 'PA-2024-008',
+        patientName: 'Daniel de Los Santos marin',
+        patientId: 'P-2024-008',
+        dateOfBirth: '1947-08-01',
+        provider: 'Dr. Amanda Reynolds',
+        providerId: 'NPI-1234567890',
+        hospital: 'Trident Medical Center',
+        procedure: 'Cardiac Rehabilitation',
+        diagnosis: 'NSTEMI, non-ST-elevation myocardial infarction (I21.4)',
+        status: 'In Review',
+        priority: 'High',
+        submittedDate: '2025-10-09T12:14:00Z',
+        lastUpdated: '2025-10-09T15:46:00Z',
+        insurance: 'AMBETTER-ATC Contracted',
+        policyNumber: 'U7183854101',
+        estimatedCost: 5500,
+        documents: [
+          { id: 'doc1', name: 'Prior Auth Request Form.pdf', type: 'PDF', size: '2.1 MB', status: 'Processed' },
+          { id: 'doc2', name: 'Medical Records.pdf', type: 'PDF', size: '3.2 MB', status: 'Analyzed' },
+          { id: 'doc3', name: 'Polysomnography Report.pdf', type: 'PDF', size: '1.8 MB', status: 'Processed' },
+          { id: 'doc4', name: 'Doctor Notes.pdf', type: 'PDF', size: '1.2 MB', status: 'Processed' },
+          { id: 'doc5', name: 'Insurance Card.pdf', type: 'PDF', size: '0.9 MB', status: 'Processed' }
+        ],
+        clinicalNotes: [
+          { timestamp: '2025-10-08T08:30:00Z', note: 'Patient presented to ED with chest pain, diagnosed with NSTEMI. Troponin elevated at 2.5 ng/mL', author: 'Dr. Amanda Reynolds' },
+          { timestamp: '2025-10-08T10:45:00Z', note: 'Cardiac catheterization performed. 90% LAD stenosis identified and stent placed successfully', author: 'Dr. James Mitchell, Interventional Cardiologist' },
+          { timestamp: '2025-10-08T14:20:00Z', note: '2D Doppler echocardiogram shows reduced ejection fraction (40%), mild anterior wall hypokinesis', author: 'Dr. Sarah Chen, Cardiology' },
+          { timestamp: '2025-10-09T09:00:00Z', note: 'Patient stable post-PCI. Discharged with cardiac rehab recommendation', author: 'Dr. Amanda Reynolds' },
+          { timestamp: '2025-10-09T12:14:00Z', note: 'Prior authorization submitted for Phase II cardiac rehabilitation program - 36 sessions over 12 weeks', author: 'Maria Griffin, Case Manager' },
+          { timestamp: '2025-10-09T15:46:00Z', note: 'Patient meets criteria for cardiac rehab: recent MI with PCI, reduced EF, cardiac risk factors (HTN, DM, smoking history)', author: 'Dr. Amanda Reynolds' }
+        ],
+        aiAnalysis: {
+          clinicalNecessity: 0.98,
+          coverageEligibility: 0.96,
+          riskAssessment: 'Moderate',
+          recommendedAction: 'Approve - clear medical necessity post-NSTEMI',
+          confidence: 0.97
+        },
+        ipopFlag: 'Outpatient'
       }
 
     };
@@ -370,6 +645,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           caseId === 'PA-2024-005' ? 'case-005-david-brown' :
           caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' :
           caseId === 'PA-2024-007' ? 'case-007':
+          caseId === 'PA-2024-008' ? '008':
           'case-001-john-doe';
 
           const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
@@ -462,7 +738,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color="info"
                   onClick={async () => {
                     try {
-                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe';
+                      const folderName = caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe';
                       const response = await fetch(`/sample-documents/cases/${folderName}/observability_and_explanation.json`);
                       const data = await response.json();
                       setObservabilityData(data);
@@ -476,17 +752,25 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   <VisibilityIcon />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="Download Observability & Explanation Report">
+              <Tooltip title="Download Observability Report (JSON)">
                 <IconButton
                   color="success"
                   onClick={() => {
                     const link = document.createElement('a');
-                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe'}/observability_and_explanation.json`;
+                    link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe'}/observability_and_explanation.json`;
                     link.download = `observability_and_explanation_${caseId}.json`;
                     link.click();
                   }}
                 >
                   <DownloadIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Download Observability Report (PDF)">
+                <IconButton
+                  color="error"
+                  onClick={downloadObservabilityAsPDF}
+                >
+                  <PdfIcon />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Edit Clinical Notes">
@@ -679,32 +963,118 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   </Grid>
                 </Grid>
 
-                {/* Approval Details */}
-                <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
-                <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
-                  <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved Amount</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Valid Until</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved By</Typography>
-                      <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Review Type</Typography>
-                      <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
-                    </Grid>
-                  </Grid>
-                </Paper>
+                {/* Approval/Denial Details */}
+                {observabilityData.denialDetails ? (
+                  <>
+                    <Typography variant="h6" sx={{ mb: 2 }}>Denial Details</Typography>
+                    <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
+                      <Grid container spacing={2}>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'error.main' }}>{observabilityData.denialDetails.authorizationNumber}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Denied Amount</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'error.main' }}>{observabilityData.denialDetails.deniedAmount}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Denial Date</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.denialDate}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Denial Reason</Typography>
+                          <Typography variant="body2" color="error.main">{observabilityData.denialDetails.denialReason}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Denied By</Typography>
+                          <Typography variant="body2">{observabilityData.denialDetails.deniedBy}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Review Type</Typography>
+                          <Typography variant="body2">{observabilityData.denialDetails.reviewType}</Typography>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+
+                    {/* Alternative Care Approved */}
+                    {observabilityData.denialDetails.alternativeCareApproved && (
+                      <>
+                        <Typography variant="h6" sx={{ mb: 2 }}>Alternative Care Plan (Approved)</Typography>
+                        <Paper sx={{ p: 2, mb: 3, bgcolor: '#e8f5e9' }} variant="outlined">
+                          <Grid container spacing={2}>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Medications</Typography>
+                              <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.alternativeCareApproved.medications}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Follow-up Visit</Typography>
+                              <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.alternativeCareApproved.followUpVisit}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Estimated Outpatient Cost</Typography>
+                              <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.denialDetails.alternativeCareApproved.estimatedOutpatientCost}</Typography>
+                            </Grid>
+                          </Grid>
+                        </Paper>
+                      </>
+                    )}
+
+                    {/* Appeal Rights */}
+                    {observabilityData.denialDetails.appealRights && (
+                      <>
+                        <Typography variant="h6" sx={{ mb: 2 }}>Appeal Rights</Typography>
+                        <Paper sx={{ p: 2, mb: 3, bgcolor: '#fff3e0' }} variant="outlined">
+                          <Grid container spacing={2}>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Appeal Deadline</Typography>
+                              <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.appealRights.appealDeadline}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Peer-to-Peer Review</Typography>
+                              <Typography variant="body2">{observabilityData.denialDetails.appealRights.peerToPeerReview}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Expedited Appeal</Typography>
+                              <Typography variant="body2">{observabilityData.denialDetails.appealRights.expeditedAppeal}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Contact Number</Typography>
+                              <Typography variant="body2">{observabilityData.denialDetails.appealRights.contactNumber}</Typography>
+                            </Grid>
+                          </Grid>
+                        </Paper>
+                      </>
+                    )}
+                  </>
+                ) : observabilityData.approvalDetails ? (
+                  <>
+                    <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
+                    <Paper sx={{ p: 2, mb: 3 }} variant="outlined">
+                      <Grid container spacing={2}>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved Amount</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Valid Until</Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved By</Typography>
+                          <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Review Type</Typography>
+                          <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+                  </>
+                ) : null}
 
                 {/* Quality Metrics */}
                 <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
@@ -733,7 +1103,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                     </Box>
                     <Box>
                       <Typography variant="body2" sx={{ mb: 3 }}>
-                        Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : 'APPROVE'}</strong>
+                        Recommendation: <strong>{caseId === 'PA-2024-003' ? 'PARTIAL APPROVAL ($4,000 of $8,000)' : caseId === 'PA-2024-007' ? 'DENIED' : 'APPROVE'}</strong>
                       </Typography>
                       {caseId === 'PA-2024-003' && (
                         <Typography variant="body2" color="warning.main" sx={{ mb: 2, p: 1, bgcolor: '#fff3cd', borderRadius: 1 }}>
@@ -742,129 +1112,128 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                       )}
 
                       {/* Panel Members' Votes */}
-{/* Panel Members' Votes */}
-<Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
-<Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
-    Panel Review Summary ({caseId === 'PA-2024-007' ? '3 Doctors' : '4 Doctors'})
-</Typography>
- 
-  {caseId === 'PA-2024-007' ? (
-<>
-      {/* Gastroenterologist */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            Gastroenterologist
-</Typography>
-<Chip label="DENY" color="error" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          Given the acute onset of symptoms, prior history of diverticulitis, and confirmation by imaging, it is medically necessary to initiate appropriate treatment and observation in Outpatient setting as the patient is stable, afebrile, and has no evidence of complications. Supportive therapy, dietary modifications, and symptom monitoring are essential. Antibiotics may be considered given her history, but shared decision-making and close follow-up are recommended.
-</Typography>
-</Box>
- 
-      {/* Infectious disease specialist */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            Infectious disease specialist
-</Typography>
-<Chip label="DENY" color="error" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          For this patient with uncomplicated acute diverticulitis, the medically necessary management includes supportive care, possible oral antibiotic therapy, pain control, and close outpatient monitoring. Inpatient admission or intravenous antibiotic therapy is not indicated unless her condition worsens or she develops signs of systemic infection or complications.
-</Typography>
-</Box>
- 
-      {/* General Surgeon */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            General Surgeon
-</Typography>
-<Chip label="DENY" color="error" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          For this patient with uncomplicated acute diverticulitis, there is no medical necessity for surgical intervention or inpatient admission at this time. Outpatient management with supportive care and close follow-up is medically necessary, aligning with current surgical and clinical guidelines
-</Typography>
-</Box>
- 
-      <Box sx={{ mt: 2, p: 1, bgcolor: '#fdecea', borderRadius: 1 }}>
-<Typography variant="caption" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
-          ✓ Consensus: 0/3 doctors recommend APPROVAL (case PA-2024-007)
-</Typography>
-</Box>
-</>
-  ) : (
-<>
-      {/* Doctor 1 */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-             Sleep medicine specialist
-</Typography>
-<Chip label="APPROVE" color="success" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          {caseId === 'PA-2024-003' 
-            ? "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
-            : "Given the patient’s established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
-          }
-</Typography>
-</Box>
-      {/* Doctor 2 */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
-</Typography>
-<Chip label="APPROVE" color="success" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          {caseId === 'PA-2024-003'
-            ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
-            : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
-          }
-</Typography>
-</Box>
-      {/* Doctor 3 */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
-</Typography>
-<Chip label="APPROVE" color="success" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          {caseId === 'PA-2024-003'
-            ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
-            : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
-          }
-</Typography>
-</Box>
-      {/* Doctor 4 */}
-<Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-<Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
-</Typography>
-<Chip label="APPROVE" color="success" size="small" />
-</Box>
-<Typography variant="caption" color="text.secondary">
-          {caseId === 'PA-2024-003'
-            ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
-            : "As a Cardiologist, I strongly affirm the medical necessity of continued CPAP therapy for this patient. Given the interplay between OSA, hypertension, arrhythmias, and severe obesity, ongoing CPAP use is essential for cardiovascular risk reduction and long-term health maintenance."
-          }
-</Typography>
-</Box>
- 
-      <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
-<Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-          ✓ Consensus: 4/4 doctors recommend APPROVAL
-</Typography>
-</Box>
-</>
-  )}
+                      <Box sx={{ mb: 3, p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+                        <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 2 }}>
+                          Panel Review Summary ({caseId === 'PA-2024-007' ? '3 Doctors' : '4 Doctors'})
+                        </Typography>
+
+                        {caseId === 'PA-2024-007' ? (
+                          <>
+                            {/* Gastroenterologist */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  Gastroenterologist
+                                </Typography>
+                                <Chip label="DENY" color="error" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                Given the acute onset of symptoms, prior history of diverticulitis, and confirmation by imaging, it is medically necessary to initiate appropriate treatment and observation in Outpatient setting as the patient is stable, afebrile, and has no evidence of complications. Supportive therapy, dietary modifications, and symptom monitoring are essential. Antibiotics may be considered given her history, but shared decision-making and close follow-up are recommended.
+                              </Typography>
+                            </Box>
+
+                            {/* Infectious disease specialist */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  Infectious disease specialist
+                                </Typography>
+                                <Chip label="DENY" color="error" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                For this patient with uncomplicated acute diverticulitis, the medically necessary management includes supportive care, possible oral antibiotic therapy, pain control, and close outpatient monitoring. Inpatient admission or intravenous antibiotic therapy is not indicated unless her condition worsens or she develops signs of systemic infection or complications.
+                              </Typography>
+                            </Box>
+
+                            {/* General Surgeon */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #f44336' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  General Surgeon
+                                </Typography>
+                                <Chip label="DENY" color="error" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                For this patient with uncomplicated acute diverticulitis, there is no medical necessity for surgical intervention or inpatient admission at this time. Outpatient management with supportive care and close follow-up is medically necessary, aligning with current surgical and clinical guidelines
+                              </Typography>
+                            </Box>
+
+                            <Box sx={{ mt: 2, p: 1, bgcolor: '#fdecea', borderRadius: 1 }}>
+                              <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
+                                ✓ Consensus: 0/3 doctors recommend APPROVAL (case PA-2024-007)
+                              </Typography>
+                            </Box>
+                          </>
+                        ) : (
+                          <>
+                            {/* Doctor 1 */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  Sleep medicine specialist
+                                </Typography>
+                                <Chip label="APPROVE" color="success" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                {caseId === 'PA-2024-003' 
+                                  ? "Given the patient's established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment."
+                                  : "Given the patient's established diagnosis of OSA, the presence of multiple high-risk comorbidities, and the demonstrated clinical benefit of CPAP therapy, it is medically necessary for the patient to continue CPAP treatment. Discontinuation of CPAP would likely lead to worsening of OSA and significant negative health consequences."
+                                }
+                              </Typography>
+                            </Box>
+                            {/* Doctor 2 */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  {caseId === 'PA-2024-003' ? 'Dr. James Roberts, DO - Orthopedic Surgeon' : 'Otolarngology/ENT Specialist'}
+                                </Typography>
+                                <Chip label="APPROVE" color="success" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                {caseId === 'PA-2024-003'
+                                  ? "MRI findings confirm meniscal tear and cartilage damage. Patient has documented 6 months of failed conservative therapy including PT and anti-inflammatories. Surgical intervention is appropriate next step."
+                                  : "As an Otolaryngologist, I affirm that continued CPAP therapy is medically necessary for this patient. The combined presence of anatomical (enlarged thyroid, obesity) and systemic risk factors (hypertension, arrhythmias) makes ongoing CPAP usage crucial for managing OSA and preventing serious health consequences."
+                                }
+                              </Typography>
+                            </Box>
+                            {/* Doctor 3 */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  {caseId === 'PA-2024-003' ? 'Dr. Emily Watson, MD - Sports Medicine' : ' Obesity Medicine Specialist'}
+                                </Typography>
+                                <Chip label="APPROVE" color="success" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                {caseId === 'PA-2024-003'
+                                  ? "Patient is 45 years old and active. Functional limitations are significant. Evidence-based guidelines support arthroscopic surgery when conservative management fails. Expected outcomes are favorable."
+                                  : "As an Obesity Medicine Specialist, I strongly support the medical necessity of continued CPAP therapy for this patient. The combination of class 3 severe obesity, existing cardiovascular comorbidities, and anatomical risk factors necessitates ongoing CPAP use to optimize health outcomes, reduce morbidity, and support overall weight management efforts."
+                                }
+                              </Typography>
+                            </Box>
+                            {/* Doctor 4 */}
+                            <Box sx={{ mb: 2, p: 1.5, bgcolor: 'white', borderRadius: 1, borderLeft: '4px solid #4caf50' }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                  {caseId === 'PA-2024-003' ? 'Dr. David Kim, MD - Physical Medicine & Rehabilitation' : ' Cardiologist'}
+                                </Typography>
+                                <Chip label="APPROVE" color="success" size="small" />
+                              </Box>
+                              <Typography variant="caption" color="text.secondary">
+                                {caseId === 'PA-2024-003'
+                                  ? "Comprehensive review of medical records shows progressive worsening despite appropriate non-surgical treatment. Functional status assessment indicates significant impact on daily activities. Approve with recommendation for post-op physical therapy."
+                                  : "As a Cardiologist, I strongly affirm the medical necessity of continued CPAP therapy for this patient. Given the interplay between OSA, hypertension, arrhythmias, and severe obesity, ongoing CPAP use is essential for cardiovascular risk reduction and long-term health maintenance."
+                                }
+                              </Typography>
+                            </Box>
+
+                            <Box sx={{ mt: 2, p: 1, bgcolor: '#e3f2fd', borderRadius: 1 }}>
+                              <Typography variant="caption" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+                                ✓ Consensus: 4/4 doctors recommend APPROVAL
+                              </Typography>
+                            </Box>
+                          </>
+                        )}
                       </Box>
                     </Box>
                   </CardContent>
@@ -913,7 +1282,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe'}/observability_and_explanation.json`;
               link.download = `observability_and_explanation_${caseId}.json`;
               link.click();
             }}
@@ -926,6 +1295,12 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
           <Button onClick={() => setObservabilityDialogOpen(false)} variant="contained">
             Close
           </Button> */}
+
+          {/* Clinical Criteria Evaluation Widget */}
+          <Box sx={{ mt: 4 }}>
+            <ClinicalCriteriaEval caseId={caseId} />
+          </Box>
+
           </Box>
         </TabPanel>
 
@@ -1194,32 +1569,68 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                 </Grid>
               </Grid>
 
-              {/* Approval Details */}
-              <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
-              <Paper sx={{ p: 2, mb: 3 }}>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Typography variant="caption" color="text.secondary">Valid Until</Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="caption" color="text.secondary">Approved By</Typography>
-                    <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="caption" color="text.secondary">Review Type</Typography>
-                    <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
-                  </Grid>
-                </Grid>
-              </Paper>
+              {/* Approval/Denial Details */}
+              {observabilityData.denialDetails ? (
+                <>
+                  <Typography variant="h6" sx={{ mb: 2 }}>Denial Details</Typography>
+                  <Paper sx={{ p: 2, mb: 3 }}>
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'error.main' }}>{observabilityData.denialDetails.authorizationNumber}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Denied Amount</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'error.main' }}>{observabilityData.denialDetails.deniedAmount}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Denial Date</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.denialDetails.denialDate}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12 }}>
+                        <Typography variant="caption" color="text.secondary">Denial Reason</Typography>
+                        <Typography variant="body2" color="error.main">{observabilityData.denialDetails.denialReason}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="caption" color="text.secondary">Denied By</Typography>
+                        <Typography variant="body2">{observabilityData.denialDetails.deniedBy}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="caption" color="text.secondary">Review Type</Typography>
+                        <Typography variant="body2">{observabilityData.denialDetails.reviewType}</Typography>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </>
+              ) : observabilityData.approvalDetails ? (
+                <>
+                  <Typography variant="h6" sx={{ mb: 2 }}>Approval Details</Typography>
+                  <Paper sx={{ p: 2, mb: 3 }}>
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Authorization Number</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 4 }}>
+                        <Typography variant="caption" color="text.secondary">Valid Until</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="caption" color="text.secondary">Approved By</Typography>
+                        <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="caption" color="text.secondary">Review Type</Typography>
+                        <Typography variant="body2">{observabilityData.approvalDetails.reviewType}</Typography>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </>
+              ) : null}
 
               {/* Quality Metrics */}
               <Typography variant="h6" sx={{ mb: 2 }}>Quality Metrics</Typography>
@@ -1243,12 +1654,19 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
             startIcon={<DownloadIcon />}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : 'case-001-john-doe'}/observability_and_explanation.json`;
+              link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe'}/observability_and_explanation.json`;
               link.download = `observability_and_explanation_${caseId}.json`;
               link.click();
             }}
           >
-            Download
+            Download JSON
+          </Button>
+          <Button
+            startIcon={<PdfIcon />}
+            color="error"
+            onClick={downloadObservabilityAsPDF}
+          >
+            Download PDF
           </Button>
           <Button variant="contained">
             Save

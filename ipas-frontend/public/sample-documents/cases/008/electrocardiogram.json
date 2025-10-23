@@ -1,0 +1,55 @@
+{
+  "study_type": "12-Lead Cardiac rehabilitation (ECG/EKG)",
+  "patient_name": "Daniel De Los Santos Marin",
+  "medical_record_number": "D856360",
+  "study_date": "02/05/2025",
+  "study_time": "08:45 AM",
+  "ordering_physician": "Dr. Ahmad Issa, MD",
+  "reading_physician": "Dr. Christopher P McCarty, MD",
+  "measurements": {
+    "heart_rate": "75 bpm",
+    "PR_interval": "168 ms",
+    "QRS_duration": "96 ms",
+    "QT_interval": "412 ms",
+    "QTc_interval": "438 ms",
+    "P_wave_axis": "+45 degrees",
+    "QRS_axis": "+15 degrees",
+    "T_wave_axis": "+40 degrees"
+  },
+  "rhythm": {
+    "description": "Normal sinus rhythm",
+    "rate": "75 bpm",
+    "regularity": "Regular"
+  },
+  "intervals": {
+    "PR_interval": "Normal (168 ms)",
+    "QRS_duration": "Normal (96 ms)",
+    "QT_interval": "Normal (412 ms)",
+    "QTc_interval": "Normal (438 ms)"
+  },
+  "axis": {
+    "P_wave": "Normal (+45 degrees)",
+    "QRS": "Normal (+15 degrees)",
+    "T_wave": "Normal (+40 degrees)"
+  },
+  "waves": {
+    "P_wave": "Normal morphology",
+    "Q_wave": "Small Q waves in leads V5-V6 (normal septal Q waves)",
+    "R_wave": "Normal progression",
+    "S_wave": "Normal",
+    "T_wave": "Biphasic T waves in leads V2-V4, suggestive of ischemia"
+  },
+  "segments": {
+    "ST_segment": "ST depression of 1-2 mm in leads II, III, aVF, V4-V6"
+  },
+  "findings": [
+    "Normal sinus rhythm at 75 bpm",
+    "ST segment depression in inferior and lateral leads",
+    "Biphasic T waves in precordial leads V2-V4",
+    "Findings consistent with myocardial ischemia/NSTEMI"
+  ],
+  "impression": "Abnormal ECG. ST segment depression and T wave changes consistent with acute coronary syndrome (NSTEMI). Recommend urgent cardiology evaluation and cardiac catheterization.",
+  "comparison": "No prior ECG available for comparison",
+  "clinical_correlation": "ECG findings correlated with elevated troponin and clinical presentation of chest pain. Patient underwent emergent cardiac catheterization."
+}
+

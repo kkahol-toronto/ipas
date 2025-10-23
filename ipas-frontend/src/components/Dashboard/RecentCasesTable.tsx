@@ -23,7 +23,8 @@ import {
   Select,
   FormControl,
   InputLabel,
-  Tooltip
+  Tooltip,
+  TablePagination
 } from '@mui/material';
 import {
   Visibility as VisibilityIcon,
@@ -69,6 +70,9 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   const [statusReason, setStatusReason] = React.useState('');
   const [agenticDialogOpen, setAgenticDialogOpen] = React.useState(false);
   const [selectedCaseID, setSelectedCaseID] = React.useState('');
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
 
   // Load and monitor case statuses using the status tracker
   React.useEffect(() => {
@@ -163,10 +167,20 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
       id: 'PA-2024-007',
       patientName: 'Amanda Williams',
       provider: 'Benjamin Velky',
-      procedure: 'In patient',
+      procedure: 'Inpatient',
       status: 'denied',
       submittedDate: '2025-10-11',
       priority: 'Urgent',
+      amount: 2500
+    },
+    {
+      id: 'PA-2024-008',
+      patientName: 'Daniel de Los Santos marin',
+      provider: 'Amanda R',
+      procedure: 'Cardiac rehabilitation',
+      status: 'pending',
+      submittedDate: '2025-10-08',
+      priority: 'standard',
       amount: 2500
     }
   ];
@@ -253,9 +267,18 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
     'Dr. Robert Martinez - Cardiothoracic Surgery'
   ];
 
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   return (
     <Card>
-      <CardContent>
+      <CardContent sx={{ pb: '0 !important' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
           <Typography variant="h6" component="h2">
             Recent Cases
@@ -284,7 +307,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             </Button>
           </Box>
         </Box>
-        <TableContainer component={Paper} sx={{ maxHeight: 570 }}>
+        <TableContainer component={Paper} sx={{ maxHeight: 665 }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
@@ -301,7 +324,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cases.map((caseItem) => {
+              {cases.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((caseItem) => {
                 // Use dynamic status from tracker
                 const caseStatus = caseStatuses[caseItem.id];
                 const currentStatus = caseStatus?.currentStatus || caseItem.status;
@@ -459,6 +482,15 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 20, 100]}
+          component="div"
+          count={cases.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </CardContent>
 
       {/* Edit Clinical Notes Dialog */}
@@ -613,7 +645,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
         sx: { maxWidth: 1700 }, // max width in px or use e.g. '80vw'
       }}>
         <DialogTitle>
-          Orchestration FLow
+          Orchestration Flow
         </DialogTitle>
         <DialogContent>
           <SimpleDraggableFlowchart caseId={selectedCaseID} />
