@@ -42,6 +42,7 @@ import { statusTracker, CaseStatus } from '../../services/statusTracker';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SimpleDraggableFlowchart from '../Cases/SimpleDraggableFlowchart';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
+import { useLocation } from 'react-router-dom';
 
 interface Case {
     id: string;
@@ -73,7 +74,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
     const [selectedCaseID, setSelectedCaseID] = React.useState('');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+    const location = useLocation();
 
     // Load and monitor case statuses using the status tracker
     React.useEffect(() => {
@@ -284,30 +285,40 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                     {/* <Typography variant="h6" component="h2">
             Recent Cases
           </Typography> */}
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <FilterListOutlinedIcon />
-                        <select className="form-select filterSelect w_80">
-                            <option selected>Status</option>
-                        </select>
-                        <select className="form-select filterSelect w_80">
-                            <option selected>Type</option>
-                        </select>
-                        <select className="form-select filterSelect w_130">
-                            <option selected>Diagnosis T...</option>
-                        </select>
-                        <select className="form-select filterSelect w_80">
-                            <option selected>LOB</option>
-                        </select>
-                        <select className="form-select filterSelect w_130">
-                            <option selected>Plan Product</option>
-                        </select>
-                        <select className="form-select filterSelect w_100">
-                            <option selected>More (4)</option>
-                        </select>
-                        <Box className="formRow" sx={{ml: 2}}>
-                            <input type="text" placeholder="Search" className='form-control' />
-                        </Box>
-                        <Button variant="text" sx={{color: '#999'}}>Clear</Button>
+                    <Box>
+                        {location.pathname === '/TrucareCloud' && (
+                            <Box sx={{ display: 'flex', alignItems: 'center' }} >
+                                <FilterListOutlinedIcon />
+                                <select className="form-select filterSelect w_80">
+                                    <option selected>Status</option>
+                                </select>
+                                <select className="form-select filterSelect w_80">
+                                    <option selected>Type</option>
+                                </select>
+                                <select className="form-select filterSelect w_130">
+                                    <option selected>Diagnosis T...</option>
+                                </select>
+                                <select className="form-select filterSelect w_80">
+                                    <option selected>LOB</option>
+                                </select>
+                                <select className="form-select filterSelect w_130">
+                                    <option selected>Plan Product</option>
+                                </select>
+                                <select className="form-select filterSelect w_100">
+                                    <option selected>More (4)</option>
+                                </select>
+                                <Box className="formRow" sx={{ ml: 2 }}>
+                                    <input type="text" placeholder="Search" className='form-control' />
+                                </Box>
+                                <Button variant="text" sx={{ color: '#999' }}>Clear</Button>
+                            </Box>
+                        )}
+
+                        {location.pathname === '/Tasks' && (
+                            <Typography variant="h6" component="h2">
+                                Recent Cases
+                            </Typography>
+                        )}
                     </Box>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                         <Button
@@ -343,7 +354,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                 <TableCell>Procedure</TableCell>
                                 <TableCell>Status</TableCell>
                                 <TableCell>Priority</TableCell>
-                                <TableCell>Amount</TableCell>
+                                {/* <TableCell>Amount</TableCell> */}
                                 <TableCell>Submitted</TableCell>
                                 <TableCell>Letter</TableCell>
                                 <TableCell>Actions</TableCell>
@@ -373,7 +384,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                         <TableCell>
                                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                                 {getStatusChip(currentStatus)}
-                                                <Tooltip title="Update Status">
+                                                {/* <Tooltip title="Update Status">
                                                     <IconButton
                                                         size="small"
                                                         onClick={() => {
@@ -384,7 +395,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                                     >
                                                         <EditIcon fontSize="small" />
                                                     </IconButton>
-                                                </Tooltip>
+                                                </Tooltip> */}
                                             </Box>
                                         </TableCell>
                                         <TableCell>
@@ -405,11 +416,11 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                             </Box>
 
                                         </TableCell>
-                                        <TableCell>
+                                        {/* <TableCell>
                                             <Typography variant="body2" fontWeight="bold">
                                                 ${caseItem.amount.toLocaleString()}
                                             </Typography>
-                                        </TableCell>
+                                        </TableCell> */}
                                         <TableCell>
                                             <Typography variant="body2" color="text.secondary">
                                                 {new Date(caseItem.submittedDate).toLocaleDateString()}

@@ -708,11 +708,11 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color={getPriorityColor(caseData.priority) as any}
                   size="small"
                 />
-                <Chip
+                {/* <Chip
                   label={`$${caseData.estimatedCost.toLocaleString()}`}
                   color="info"
                   size="small"
-                />
+                /> */}
 
                 {caseData.ipopFlag &&
                   <Chip
