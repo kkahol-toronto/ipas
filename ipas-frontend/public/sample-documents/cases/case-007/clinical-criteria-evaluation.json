@@ -40,7 +40,6 @@
     "meets_inpatient_criteria": false,
     "meets_outpatient_criteria": true,
     "coverage_determination": "DENIED - Inpatient Admission",
-    "alternative_approved": "Outpatient Management with Antibiotics",
     "rationale": [
       "Patient is hemodynamically stable with normal vital signs",
       "Afebrile with no signs of systemic toxicity or sepsis",
@@ -48,21 +47,12 @@
       "Laboratory results normal - no leukocytosis indicating systemic infection",
       "Patient tolerating oral intake and oral medications",
       "Already receiving appropriate antibiotic therapy (Ciprofloxacin + Metronidazole)",
-      "Evidence-based guidelines (AAFP, ACG) strongly support outpatient management for this clinical presentation",
-      "Does not meet InterQual criteria for continued inpatient stay"
+      "Evidence-based guidelines (AAFP, ACG) strongly support outpatient management for this clinical presentation"
     ]
-  },
-  "approved_outpatient_plan": {
-    "antibiotics": "Ciprofloxacin 500mg BID + Metronidazole 500mg TID for 7-10 days",
-    "diet": "Clear liquid diet progressing to low-residue diet as tolerated",
-    "pain_management": "Hydrocodone-acetaminophen 7.5-325mg PRN for pain",
-    "follow_up": "Office visit within 48-72 hours for clinical reassessment",
-    "safety_net_instructions": "Return to ED if fever >101°F, worsening abdominal pain, persistent vomiting, inability to tolerate PO, or signs of peritonitis"
   },
   "clinical_guidelines_applied": [
     "AAFP Evidence-Based Guidelines for Acute Diverticulitis Management (2021)",
     "American College of Gastroenterology Clinical Guidelines for Diverticular Disease (2021)",
-    "InterQual Level of Care Criteria for Acute Care Admissions (2024)",
     "CMS Two-Midnight Rule for Inpatient Admissions",
     "Ambetter Medical Policy: Inpatient Hospital Admissions - Medical Necessity Criteria"
   ],

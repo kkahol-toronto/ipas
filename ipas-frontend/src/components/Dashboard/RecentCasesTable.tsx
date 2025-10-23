@@ -78,6 +78,7 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
   React.useEffect(() => {
     const loadCaseStatuses = () => {
       const allStatuses = statusTracker.getAllStatuses();
+      console.log('📊 RecentCasesTable: Loading case statuses:', allStatuses);
       setCaseStatuses(allStatuses);
     };
 
@@ -432,22 +433,6 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                           title="Edit Clinical Notes"
                         >
                           <EditIcon />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          color="info"
-                          //onClick={() => handleDownloadEPIC(caseItem)}
-                          title="Download EMRInsert JSON"
-                        >
-                          <DownloadIcon />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          color="warning"
-                          onClick={() => simulateWorkflow(caseItem.id)}
-                          title="Simulate Workflow Progression"
-                        >
-                          <PlayArrowIcon />
                         </IconButton>
                         <IconButton
                           size="small"

@@ -1656,7 +1656,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       localStorage.setItem(`ipas_letter_generated_${caseId}`, new Date().toISOString());
       
       // Update case status to approved/denied based on the decision
-      const finalStatus = (caseId === 'PA-2024-004' || caseId === 'PA-2024-007') ? 'denied' : 'approved';
+      const finalStatus = (caseId === 'PA-2024-007') ? 'denied' : 'approved';
       console.log(`✓ Updating case ${caseId} status to: ${finalStatus}`);
       statusTracker.updateCaseStatus(
         caseId, 

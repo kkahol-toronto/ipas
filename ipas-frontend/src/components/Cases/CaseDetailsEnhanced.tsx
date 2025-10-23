@@ -41,14 +41,18 @@ import {
   Share as ShareIcon,
   Computer as ComputerIcon,
   Visibility as VisibilityIcon,
-  PictureAsPdf as PdfIcon
+  PictureAsPdf as PdfIcon,
+  CheckCircle as CheckCircleIcon,
+  Reviews as ReviewsIcon
 } from '@mui/icons-material';
+import { CircularProgress as CircularProgressIcon } from '@mui/material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
 import CaseDocuments from './CaseDocuments';
 import ClinicalSummary from './ClinicalSummary';
 import ClinicalCriteriaEval from './ClinicalCriteriaEval';
 import MedicalRecordRetrival from './MedicalRecordRetrival'
 import EMRNotificationPanel from '../Notifications/EMRNotificationPanel';
+import { statusTracker } from '../../services/statusTracker';
 
 interface CaseDetailsEnhancedProps {
   caseId: string;
@@ -93,6 +97,46 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
     caseId === 'PA-2024-007' ? 'Denied' : 'Approved'
   );
   const [emrIntegrationOpen, setEmrIntegrationOpen] = useState(false);
+  const [reviewCompleted, setReviewCompleted] = useState(false);
+  const [isProcessingReview, setIsProcessingReview] = useState(false);
+  const [finalReviewStatus, setFinalReviewStatus] = useState<'approved' | 'denied' | null>(null);
+
+  // Function to handle review completion
+  const handleReviewCompleted = async () => {
+    setIsProcessingReview(true);
+    
+    // Simulate processing time with transition animation
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Get SmartAuth recommendation from case data
+    const caseData = getCaseData(caseId);
+    const smartAuthRecommendation = caseData.aiAnalysis?.recommendedAction || 'Approve with monitoring';
+    
+    // Determine final status based on SmartAuth recommendation
+    let finalStatus: 'approved' | 'denied' = 'approved';
+    if (smartAuthRecommendation.toLowerCase().includes('deny') || 
+        smartAuthRecommendation.toLowerCase().includes('reject')) {
+      finalStatus = 'denied';
+    }
+    
+    // Update case status in statusTracker
+    console.log(`🔄 Updating case ${caseId} status to ${finalStatus}`);
+    statusTracker.updateCaseStatus(
+      caseId, 
+      finalStatus, 
+      'user', 
+      'Review completed - SmartAuth recommendation applied',
+      `SmartAuth recommended: ${smartAuthRecommendation}`
+    );
+    
+    // Verify the update
+    const updatedStatus = statusTracker.getCaseStatus(caseId);
+    console.log(`✅ Case ${caseId} status after update:`, updatedStatus);
+    
+    setFinalReviewStatus(finalStatus);
+    setReviewCompleted(true);
+    setIsProcessingReview(false);
+  };
 
   // Function to generate and download PDF from JSON
   const downloadObservabilityAsPDF = async () => {
@@ -752,9 +796,38 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   <VisibilityIcon />
                 </IconButton>
               </Tooltip>
+              
+              {/* Review Completed Button */}
+              <Tooltip title={reviewCompleted ? "Review Completed" : "Complete Review"}>
+                <IconButton
+                  color="primary"
+                  onClick={handleReviewCompleted}
+                  disabled={isProcessingReview || reviewCompleted}
+                  sx={{
+                    backgroundColor: reviewCompleted 
+                      ? (finalReviewStatus === 'approved' ? 'success.main' : 'error.main')
+                      : (isProcessingReview ? 'rgba(25, 118, 210, 0.1)' : 'primary.main'),
+                    color: 'white',
+                    transition: 'all 0.3s ease-in-out',
+                    '&:hover': {
+                      backgroundColor: reviewCompleted 
+                        ? (finalReviewStatus === 'approved' ? 'success.dark' : 'error.dark')
+                        : (isProcessingReview ? 'rgba(25, 118, 210, 0.1)' : 'primary.dark'),
+                    }
+                  }}
+                >
+                  {isProcessingReview ? (
+                    <CircularProgressIcon size={20} color="inherit" />
+                  ) : (
+                    <ReviewsIcon />
+                  )}
+                </IconButton>
+              </Tooltip>
+              
               <Tooltip title="Download Observability Report (JSON)">
                 <IconButton
                   color="success"
+                  disabled={!reviewCompleted}
                   onClick={() => {
                     const link = document.createElement('a');
                     link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe'}/observability_and_explanation.json`;
@@ -768,6 +841,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               <Tooltip title="Download Observability Report (PDF)">
                 <IconButton
                   color="error"
+                  disabled={!reviewCompleted}
                   onClick={downloadObservabilityAsPDF}
                 >
                   <PdfIcon />

@@ -88,11 +88,11 @@ class StatusTracker {
         lastUpdated: new Date().toISOString(),
         isCompleted: false
       },
-      '': {
-        caseId: '',
+      'PA-2024-006': {
+        caseId: 'PA-2024-006',
         currentStatus: 'pending',
         statusHistory: [{
-          caseId: '',
+          caseId: 'PA-2024-006',
           status: 'pending',
           timestamp: new Date().toISOString(),
           updatedBy: 'system',
@@ -113,6 +113,19 @@ class StatusTracker {
         }],
         lastUpdated: new Date().toISOString(),
         isCompleted: false
+      },
+      'PA-2024-008': {
+        caseId: 'PA-2024-008',
+        currentStatus: 'pending',
+        statusHistory: [{
+          caseId: 'PA-2024-008',
+          status: 'pending',
+          timestamp: new Date().toISOString(),
+          updatedBy: 'system',
+          reason: 'Initial status'
+        }],
+        lastUpdated: new Date().toISOString(),
+        isCompleted: false
       }
     };
 
@@ -120,7 +133,9 @@ class StatusTracker {
     const existingStatuses = this.getAllStatuses();
     if (!existingStatuses || Object.keys(existingStatuses).length === 0) {
       this.saveAllStatuses(defaultStatuses);
-      console.log('✓ Initialized default case statuses');
+      console.log('✓ Initialized default case statuses for cases:', Object.keys(defaultStatuses));
+    } else {
+      console.log('✓ Status tracker already initialized with cases:', Object.keys(existingStatuses));
     }
   }
 

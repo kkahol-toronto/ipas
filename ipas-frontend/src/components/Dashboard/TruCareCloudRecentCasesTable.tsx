@@ -79,6 +79,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
     React.useEffect(() => {
         const loadCaseStatuses = () => {
             const allStatuses = statusTracker.getAllStatuses();
+            console.log('📊 TruCareCloudRecentCasesTable: Loading case statuses:', allStatuses);
             setCaseStatuses(allStatuses);
         };
 
@@ -458,22 +459,6 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                                     title="Edit Clinical Notes"
                                                 >
                                                     <EditIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    size="small"
-                                                    color="info"
-                                                    //onClick={() => handleDownloadEPIC(caseItem)}
-                                                    title="Download EMRInsert JSON"
-                                                >
-                                                    <DownloadIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    size="small"
-                                                    color="warning"
-                                                    onClick={() => simulateWorkflow(caseItem.id)}
-                                                    title="Simulate Workflow Progression"
-                                                >
-                                                    <PlayArrowIcon />
                                                 </IconButton>
                                                 <IconButton
                                                     size="small"
