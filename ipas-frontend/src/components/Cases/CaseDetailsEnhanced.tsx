@@ -56,6 +56,7 @@ import { statusTracker } from '../../services/statusTracker';
 
 interface CaseDetailsEnhancedProps {
   caseId: string;
+  defaultTab?: number;
 }
 
 interface TabPanelProps {
@@ -84,8 +85,8 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => {
-  const [tabValue, setTabValue] = useState(0);
+const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defaultTab = 0 }) => {
+  const [tabValue, setTabValue] = useState(defaultTab);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [selectedReviewers, setSelectedReviewers] = useState<string[]>([]);
   const [shareNote, setShareNote] = useState('');
@@ -100,6 +101,19 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
   const [reviewCompleted, setReviewCompleted] = useState(false);
   const [isProcessingReview, setIsProcessingReview] = useState(false);
   const [finalReviewStatus, setFinalReviewStatus] = useState<'approved' | 'denied' | null>(null);
+
+  // Load review status from localStorage on component mount
+  React.useEffect(() => {
+    const savedReviewStatus = localStorage.getItem(`review_completed_${caseId}`);
+    const savedFinalStatus = localStorage.getItem(`final_review_status_${caseId}`);
+    
+    if (savedReviewStatus === 'true') {
+      setReviewCompleted(true);
+      if (savedFinalStatus === 'approved' || savedFinalStatus === 'denied') {
+        setFinalReviewStatus(savedFinalStatus as 'approved' | 'denied');
+      }
+    }
+  }, [caseId]);
 
   // Function to handle review completion
   const handleReviewCompleted = async () => {
@@ -136,6 +150,10 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
     setFinalReviewStatus(finalStatus);
     setReviewCompleted(true);
     setIsProcessingReview(false);
+    
+    // Save review status to localStorage for persistence
+    localStorage.setItem(`review_completed_${caseId}`, 'true');
+    localStorage.setItem(`final_review_status_${caseId}`, finalStatus);
   };
 
   // Function to generate and download PDF from JSON
@@ -800,9 +818,9 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               {/* Review Completed Button */}
               <Tooltip title={reviewCompleted ? "Review Completed" : "Complete Review"}>
                 <IconButton
-                  color="primary"
+                  color={reviewCompleted ? "success" : "primary"}
                   onClick={handleReviewCompleted}
-                  disabled={isProcessingReview || reviewCompleted}
+                  //disabled={isProcessingReview || reviewCompleted}
                   sx={{
                     backgroundColor: reviewCompleted 
                       ? (finalReviewStatus === 'approved' ? 'success.main' : 'error.main')

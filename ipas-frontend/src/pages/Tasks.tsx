@@ -12,6 +12,7 @@ const Tasks: React.FC = () => {
     const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
     const [caseDetailsOpen, setCaseDetailsOpen] = useState(false);
     const [showLetterNotification, setShowLetterNotification] = useState(false);
+    const [defaultTab, setDefaultTab] = useState<number>(0);
 
     // Check if letter was generated for any case
     React.useEffect(() => {
@@ -104,8 +105,32 @@ const Tasks: React.FC = () => {
                     </ButtonGroup>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Button variant="contained" color="success" size="small" sx={{ background: '#4a387e', mr: 2 }}>NOTE (5) <AddIcon sx={{ml: 1}} /></Button>
-                    <Button variant="contained" color="success" size="small" sx={{ background: '#4a387e', mr: 2 }}>ATTACHMENTS (2) <AddIcon sx={{ml: 1}} /></Button>
+                    <Button 
+                        variant="contained" 
+                        color="success" 
+                        size="small" 
+                        sx={{ background: '#4a387e', mr: 2 }}
+                        onClick={() => {
+                            setDefaultTab(3); // Review Notes tab (index 3)
+                            setSelectedCaseId('PA-2024-006');
+                            setCaseDetailsOpen(true);
+                        }}
+                    >
+                        NOTE (5) <AddIcon sx={{ml: 1}} />
+                    </Button>
+                    <Button 
+                        variant="contained" 
+                        color="success" 
+                        size="small" 
+                        sx={{ background: '#4a387e', mr: 2 }}
+                        onClick={() => {
+                            setDefaultTab(0); // Documents tab (index 0)
+                            setSelectedCaseId('PA-2024-006');
+                            setCaseDetailsOpen(true);
+                        }}
+                    >
+                        ATTACHMENTS (2) <AddIcon sx={{ml: 1}} />
+                    </Button>
                     <a href=""><PrintOutlinedIcon fontSize='large' /></a>
                 </Box>
             </Box>
@@ -266,7 +291,7 @@ const Tasks: React.FC = () => {
                 <DialogContent sx={{ p: 0 }}>
                     {selectedCaseId && (
                         <ErrorBoundary>
-                            <CaseDetailsEnhanced caseId={selectedCaseId} />
+                            <CaseDetailsEnhanced caseId={selectedCaseId} defaultTab={defaultTab} />
                         </ErrorBoundary>
                     )}
                 </DialogContent>

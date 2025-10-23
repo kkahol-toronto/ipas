@@ -36,7 +36,8 @@ import {
     Description as DescriptionIcon,
     Share as ShareIcon,
     PlayArrow as PlayArrowIcon,
-    Refresh as RefreshIcon
+    Refresh as RefreshIcon,
+    ResetTv as ResetTvIcon
 } from '@mui/icons-material';
 import { statusTracker, CaseStatus } from '../../services/statusTracker';
 import PsychologyIcon from '@mui/icons-material/Psychology';
@@ -332,17 +333,18 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                         >
                             Refresh
                         </Button>
-                        <Button
-                            size="small"
-                            onClick={() => {
-                                statusTracker.resetAllStatuses();
-                                setCaseStatuses(statusTracker.getAllStatuses());
-                            }}
-                            variant="outlined"
-                            color="warning"
-                        >
-                            Reset All Statuses
-                        </Button>
+                        <Tooltip title="Reset All Statuses">
+                            <IconButton
+                                size="small"
+                                onClick={() => {
+                                    statusTracker.resetAllStatuses();
+                                    setCaseStatuses(statusTracker.getAllStatuses());
+                                }}
+                                color="warning"
+                            >
+                                <ResetTvIcon />
+                            </IconButton>
+                        </Tooltip>
                     </Box>
                 </Box>
                 <TableContainer component={Paper} sx={{ maxHeight: 665 }}>

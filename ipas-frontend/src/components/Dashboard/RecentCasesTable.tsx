@@ -36,7 +36,8 @@ import {
   Description as DescriptionIcon,
   Share as ShareIcon,
   PlayArrow as PlayArrowIcon,
-  Refresh as RefreshIcon
+  Refresh as RefreshIcon,
+  ResetTv as ResetTvIcon
 } from '@mui/icons-material';
 import { statusTracker, CaseStatus } from '../../services/statusTracker';
 import PsychologyIcon from '@mui/icons-material/Psychology';
@@ -295,17 +296,18 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
             >
               Refresh
             </Button>
-            <Button
-              size="small"
-              onClick={() => {
-                statusTracker.resetAllStatuses();
-                setCaseStatuses(statusTracker.getAllStatuses());
-              }}
-              variant="outlined"
-              color="warning"
-            >
-              Reset All Statuses
-            </Button>
+            <Tooltip title="Reset All Statuses">
+              <IconButton
+                size="small"
+                onClick={() => {
+                  statusTracker.resetAllStatuses();
+                  setCaseStatuses(statusTracker.getAllStatuses());
+                }}
+                color="warning"
+              >
+                <ResetTvIcon />
+              </IconButton>
+            </Tooltip>
           </Box>
         </Box>
         <TableContainer component={Paper} sx={{ maxHeight: 665 }}>
@@ -396,13 +398,17 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                           size="small"
                           color="success"
                           onClick={() => {
-                            // Download the approval letter PDF
-                            const link = document.createElement('a');
-                            link.href = `/sample-documents/approval-letters/${caseItem.id}-approval-letter.pdf`;
-                            link.download = `${caseItem.id}-approval-letter.pdf`;
-                            link.click();
+                            // Navigate to case 006 and open documents tab
+                            onCaseClick?.('PA-2024-006');
+                            // Open documents tab
+                            setTimeout(() => {
+                              const documentsTab = document.querySelector('[data-tab="documents"]');
+                              if (documentsTab) {
+                                (documentsTab as HTMLElement).click();
+                              }
+                            }, 100);
                           }}
-                          title="Download Approval Letter"
+                          title="Case 006 Documents"
                         >
                           <DownloadIcon />
                         </IconButton>
@@ -426,11 +432,17 @@ const RecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseClick }) => {
                           size="small"
                           color="secondary"
                           onClick={() => {
-                            setSelectedCase(caseItem);
-                            setClinicalNotes(`Clinical notes for ${caseItem.patientName}:\n\nProcedure: ${caseItem.procedure}\nStatus: ${currentStatus}\nPriority: ${caseItem.priority}\n\nAdd your clinical observations here...`);
-                            setEditDialogOpen(true);
+                            // Navigate to case 006 and open review notes tab
+                            onCaseClick?.('PA-2024-006');
+                            // Open review notes tab popup
+                            setTimeout(() => {
+                              const reviewNotesTab = document.querySelector('[data-tab="review-notes"]');
+                              if (reviewNotesTab) {
+                                (reviewNotesTab as HTMLElement).click();
+                              }
+                            }, 100);
                           }}
-                          title="Edit Clinical Notes"
+                          title="Review Notes (Case 006)"
                         >
                           <EditIcon />
                         </IconButton>
