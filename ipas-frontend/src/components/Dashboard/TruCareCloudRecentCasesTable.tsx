@@ -431,20 +431,22 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                         </TableCell>
                                         <TableCell>
                                             {currentStatus === 'approved' ? (
-                                                <IconButton
-                                                    size="small"
-                                                    color="success"
-                                                    onClick={() => {
-                                                        // Download the approval letter PDF
-                                                        const link = document.createElement('a');
-                                                        link.href = `/sample-documents/approval-letters/${caseItem.id}-approval-letter.pdf`;
-                                                        link.download = `${caseItem.id}-approval-letter.pdf`;
-                                                        link.click();
-                                                    }}
-                                                    title="Download Approval Letter"
-                                                >
-                                                    <DownloadIcon />
-                                                </IconButton>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <IconButton
+                                                        size="small"
+                                                        color="success"
+                                                        onClick={() => {
+                                                            // Download the approval letter PDF
+                                                            const link = document.createElement('a');
+                                                            link.href = `/sample-documents/approval-letters/${caseItem.id}-approval-letter.pdf`;
+                                                            link.download = `${caseItem.id}-approval-letter.pdf`;
+                                                            link.click();
+                                                        }}
+                                                        title="Download Approval Letter"
+                                                    >
+                                                        <DownloadIcon />
+                                                    </IconButton>
+                                                </Box>
                                             ) : (
                                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                     <DescriptionIcon sx={{ color: '#ccc', fontSize: 20 }} />

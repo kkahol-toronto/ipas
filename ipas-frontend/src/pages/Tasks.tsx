@@ -116,7 +116,7 @@ const Tasks: React.FC = () => {
                             setCaseDetailsOpen(true);
                         }}
                     >
-                        NOTE (5) <AddIcon sx={{ml: 1}} />
+                        NOTE (3) <AddIcon sx={{ml: 1}} />
                     </Button>
                     <Button 
                         variant="contained" 
@@ -129,7 +129,7 @@ const Tasks: React.FC = () => {
                             setCaseDetailsOpen(true);
                         }}
                     >
-                        ATTACHMENTS (2) <AddIcon sx={{ml: 1}} />
+                        ATTACHMENTS (5) <AddIcon sx={{ml: 1}} />
                     </Button>
                     <a href=""><PrintOutlinedIcon fontSize='large' /></a>
                 </Box>
