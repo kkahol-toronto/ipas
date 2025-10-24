@@ -110,7 +110,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
         {
             id: 'PA-2024-001',
             patientName: 'John Smith',
-            provider: 'Sarah Johnson',
+            provider: 'Dr. Sarah Johnson',
             procedure: 'MRI Brain with Contrast',
             status: 'approved',
             submittedDate: '2025-10-11',
@@ -150,7 +150,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
         {
             id: 'PA-2024-005',
             patientName: 'David Brown',
-            provider: 'Sarah Johnson',
+            provider: 'Dr. Sarah Johnson',
             procedure: 'CT Chest with Contrast',
             status: 'approved',
             submittedDate: '2025-10-11',
@@ -170,7 +170,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
         {
             id: 'PA-2024-007',
             patientName: 'Amanda Williams',
-            provider: 'Benjamin Velky',
+            provider: 'Dr. Benjamin Velky',
             procedure: 'In patient',
             status: 'denied',
             submittedDate: '2025-10-11',
@@ -180,7 +180,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
         {
             id: 'PA-2024-008',
             patientName: 'Daniel de Los Santos marin',
-            provider: 'Amanda R',
+            provider: 'Dr. Amanda R',
             procedure: 'Cardiac rehabilitation',
             status: 'pending',
             submittedDate: '2025-10-08',
