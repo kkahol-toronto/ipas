@@ -88,9 +88,9 @@
   },
   "approvalDetails": {
     "authorizationNumber": "PA-2024-008-APPROVED",
-    "approvedAmount": "$5,500.00",
+    "approvedAmount": "5,500.00",
     "validUntil": "2025-05-14",
-    "approvedBy": "IPAS Automated System",
+    "approvedBy": "Smart Auth",
     "reviewType": "Automated Approval",
     "coverageDetails": {
       "program": "Phase II Cardiac Rehabilitation - 36 sessions over 12 weeks",

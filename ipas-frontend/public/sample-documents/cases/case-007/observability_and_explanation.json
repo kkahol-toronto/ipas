@@ -115,9 +115,9 @@
   "denialDetails": {
     "authorizationNumber": "PA-2024-007-DENIED",
     "denialReason": "Inpatient admission does not meet medical necessity criteria - clinical presentation appropriate for outpatient management",
-    "deniedAmount": "$12,500.00 - $15,000.00",
+    "deniedAmount": "12,500.00 - 15,000.00",
     "denialDate": "2025-04-25",
-    "deniedBy": "IPAS Automated System with Physician Panel Review",
+    "deniedBy": "Smart Auth with Physician Panel Review",
     "reviewType": "Automated Initial Denial with Physician Panel Consensus Review",
     "reviewPanel": {
       "gastroenterologist": "Dr. Sarah Mitchell, MD - Gastroenterology",

@@ -36,12 +36,14 @@ import {
     Description as DescriptionIcon,
     Share as ShareIcon,
     PlayArrow as PlayArrowIcon,
-    Refresh as RefreshIcon
+    Refresh as RefreshIcon,
+    ResetTv as ResetTvIcon
 } from '@mui/icons-material';
 import { statusTracker, CaseStatus } from '../../services/statusTracker';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SimpleDraggableFlowchart from '../Cases/SimpleDraggableFlowchart';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
+import { useLocation } from 'react-router-dom';
 
 interface Case {
     id: string;
@@ -73,12 +75,13 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
     const [selectedCaseID, setSelectedCaseID] = React.useState('');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+    const location = useLocation();
 
     // Load and monitor case statuses using the status tracker
     React.useEffect(() => {
         const loadCaseStatuses = () => {
             const allStatuses = statusTracker.getAllStatuses();
+            console.log('📊 TruCareCloudRecentCasesTable: Loading case statuses:', allStatuses);
             setCaseStatuses(allStatuses);
         };
 
@@ -107,7 +110,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
         {
             id: 'PA-2024-001',
             patientName: 'John Smith',
-            provider: 'Sarah Johnson',
+            provider: 'Dr. Sarah Johnson',
             procedure: 'MRI Brain with Contrast',
             status: 'approved',
             submittedDate: '2025-10-11',
@@ -147,7 +150,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
         {
             id: 'PA-2024-005',
             patientName: 'David Brown',
-            provider: 'Sarah Johnson',
+            provider: 'Dr. Sarah Johnson',
             procedure: 'CT Chest with Contrast',
             status: 'approved',
             submittedDate: '2025-10-11',
@@ -167,8 +170,8 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
         {
             id: 'PA-2024-007',
             patientName: 'Amanda Williams',
-            provider: 'Benjamin Velky',
-            procedure: 'In patient',
+            provider: 'Dr. Benjamin Velky',
+            procedure: 'Inpatient',
             status: 'denied',
             submittedDate: '2025-10-11',
             priority: 'Urgent',
@@ -177,7 +180,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
         {
             id: 'PA-2024-008',
             patientName: 'Daniel de Los Santos marin',
-            provider: 'Amanda R',
+            provider: 'Dr. Amanda R',
             procedure: 'Cardiac rehabilitation',
             status: 'pending',
             submittedDate: '2025-10-08',
@@ -284,30 +287,40 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                     {/* <Typography variant="h6" component="h2">
             Recent Cases
           </Typography> */}
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <FilterListOutlinedIcon />
-                        <select className="form-select filterSelect w_80">
-                            <option selected>Status</option>
-                        </select>
-                        <select className="form-select filterSelect w_80">
-                            <option selected>Type</option>
-                        </select>
-                        <select className="form-select filterSelect w_130">
-                            <option selected>Diagnosis T...</option>
-                        </select>
-                        <select className="form-select filterSelect w_80">
-                            <option selected>LOB</option>
-                        </select>
-                        <select className="form-select filterSelect w_130">
-                            <option selected>Plan Product</option>
-                        </select>
-                        <select className="form-select filterSelect w_100">
-                            <option selected>More (4)</option>
-                        </select>
-                        <Box className="formRow" sx={{ml: 2}}>
-                            <input type="text" placeholder="Search" className='form-control' />
-                        </Box>
-                        <Button variant="text" sx={{color: '#999'}}>Clear</Button>
+                    <Box>
+                        {location.pathname === '/TrucareCloud' && (
+                            <Box sx={{ display: 'flex', alignItems: 'center' }} >
+                                <FilterListOutlinedIcon />
+                                <select className="form-select filterSelect w_80">
+                                    <option selected>Status</option>
+                                </select>
+                                <select className="form-select filterSelect w_80">
+                                    <option selected>Type</option>
+                                </select>
+                                <select className="form-select filterSelect w_130">
+                                    <option selected>Diagnosis T...</option>
+                                </select>
+                                <select className="form-select filterSelect w_80">
+                                    <option selected>LOB</option>
+                                </select>
+                                <select className="form-select filterSelect w_130">
+                                    <option selected>Plan Product</option>
+                                </select>
+                                <select className="form-select filterSelect w_100">
+                                    <option selected>More (4)</option>
+                                </select>
+                                <Box className="formRow" sx={{ ml: 2 }}>
+                                    <input type="text" placeholder="Search" className='form-control' />
+                                </Box>
+                                <Button variant="text" sx={{ color: '#999' }}>Clear</Button>
+                            </Box>
+                        )}
+
+                        {location.pathname === '/Tasks' && (
+                            <Typography variant="h6" component="h2">
+                                Recent Cases
+                            </Typography>
+                        )}
                     </Box>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                         <Button
@@ -320,17 +333,18 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                         >
                             Refresh
                         </Button>
-                        <Button
-                            size="small"
-                            onClick={() => {
-                                statusTracker.resetAllStatuses();
-                                setCaseStatuses(statusTracker.getAllStatuses());
-                            }}
-                            variant="outlined"
-                            color="warning"
-                        >
-                            Reset All Statuses
-                        </Button>
+                        <Tooltip title="Reset All Statuses">
+                            <IconButton
+                                size="small"
+                                onClick={() => {
+                                    statusTracker.resetAllStatuses();
+                                    setCaseStatuses(statusTracker.getAllStatuses());
+                                }}
+                                color="warning"
+                            >
+                                <ResetTvIcon />
+                            </IconButton>
+                        </Tooltip>
                     </Box>
                 </Box>
                 <TableContainer component={Paper} sx={{ maxHeight: 665 }}>
@@ -343,7 +357,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                 <TableCell>Procedure</TableCell>
                                 <TableCell>Status</TableCell>
                                 <TableCell>Priority</TableCell>
-                                <TableCell>Amount</TableCell>
+                                {/* <TableCell>Amount</TableCell> */}
                                 <TableCell>Submitted</TableCell>
                                 <TableCell>Letter</TableCell>
                                 <TableCell>Actions</TableCell>
@@ -373,7 +387,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                         <TableCell>
                                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                                 {getStatusChip(currentStatus)}
-                                                <Tooltip title="Update Status">
+                                                {/* <Tooltip title="Update Status">
                                                     <IconButton
                                                         size="small"
                                                         onClick={() => {
@@ -384,7 +398,7 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                                     >
                                                         <EditIcon fontSize="small" />
                                                     </IconButton>
-                                                </Tooltip>
+                                                </Tooltip> */}
                                             </Box>
                                         </TableCell>
                                         <TableCell>
@@ -405,11 +419,11 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                             </Box>
 
                                         </TableCell>
-                                        <TableCell>
+                                        {/* <TableCell>
                                             <Typography variant="body2" fontWeight="bold">
                                                 ${caseItem.amount.toLocaleString()}
                                             </Typography>
-                                        </TableCell>
+                                        </TableCell> */}
                                         <TableCell>
                                             <Typography variant="body2" color="text.secondary">
                                                 {new Date(caseItem.submittedDate).toLocaleDateString()}
@@ -417,20 +431,22 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                         </TableCell>
                                         <TableCell>
                                             {currentStatus === 'approved' ? (
-                                                <IconButton
-                                                    size="small"
-                                                    color="success"
-                                                    onClick={() => {
-                                                        // Download the approval letter PDF
-                                                        const link = document.createElement('a');
-                                                        link.href = `/sample-documents/approval-letters/${caseItem.id}-approval-letter.pdf`;
-                                                        link.download = `${caseItem.id}-approval-letter.pdf`;
-                                                        link.click();
-                                                    }}
-                                                    title="Download Approval Letter"
-                                                >
-                                                    <DownloadIcon />
-                                                </IconButton>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <IconButton
+                                                        size="small"
+                                                        color="success"
+                                                        onClick={() => {
+                                                            // Download the approval letter PDF
+                                                            const link = document.createElement('a');
+                                                            link.href = `/sample-documents/approval-letters/${caseItem.id}-approval-letter.pdf`;
+                                                            link.download = `${caseItem.id}-approval-letter.pdf`;
+                                                            link.click();
+                                                        }}
+                                                        title="Download Approval Letter"
+                                                    >
+                                                        <DownloadIcon />
+                                                    </IconButton>
+                                                </Box>
                                             ) : (
                                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                     <DescriptionIcon sx={{ color: '#ccc', fontSize: 20 }} />
@@ -458,22 +474,6 @@ const TruCareCloudRecentCasesTable: React.FC<RecentCasesTableProps> = ({ onCaseC
                                                     title="Edit Clinical Notes"
                                                 >
                                                     <EditIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    size="small"
-                                                    color="info"
-                                                    //onClick={() => handleDownloadEPIC(caseItem)}
-                                                    title="Download EMRInsert JSON"
-                                                >
-                                                    <DownloadIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    size="small"
-                                                    color="warning"
-                                                    onClick={() => simulateWorkflow(caseItem.id)}
-                                                    title="Simulate Workflow Progression"
-                                                >
-                                                    <PlayArrowIcon />
                                                 </IconButton>
                                                 <IconButton
                                                     size="small"

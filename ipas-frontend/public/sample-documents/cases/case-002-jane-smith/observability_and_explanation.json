@@ -16,7 +16,7 @@
       "status": "Completed",
       "details": "Prior authorization request submitted by Dr. Michael Chen",
       "outcome": "Case PA-2024-002 created and queued for processing",
-      "comments": "High priority case - Acute coronary syndrome, high-cost procedure ($15,000)"
+      "comments": "High priority case - Acute coronary syndrome, high-cost procedure (15,000)"
     },
     {
       "step": 2,
@@ -41,7 +41,7 @@
       "action": "Authorization Triage",
       "timestamp": "2024-01-16T09:02:00Z",
       "status": "Completed",
-      "details": "Rules engine evaluation: High-cost procedure ($15,000), Complex cardiac case, Requires clinical review",
+      "details": "Rules engine evaluation: High-cost procedure (15,000), Complex cardiac case, Requires clinical review",
       "outcome": "Routed to clinical review panel - Does not meet auto-approval criteria",
       "comments": "High cost threshold exceeded. Clinical complexity requires specialist review."
     },
@@ -167,14 +167,14 @@
     "clinicalJustification": "52-year-old female with acute coronary syndrome (NSTEMI). Positive stress test showing ischemia, elevated cardiac biomarkers, ST depression on EKG. Multiple cardiac risk factors including diabetes, hypertension, and hyperlipidemia.",
     "medicalNecessity": "Cardiac catheterization medically necessary for diagnosis and potential intervention in NSTEMI per ACC/AHA Class I recommendation. Patient at intermediate risk (TIMI score 4) requiring urgent invasive assessment.",
     "policyCompliance": "Procedure covered under Aetna PPO Premier plan. No coverage limits for cardiac procedures. Prior authorization requirement met.",
-    "costEfficiency": "Procedure cost of $15,000 justified by potential to prevent MI, reduce morbidity, and guide appropriate treatment"
+    "costEfficiency": "Procedure cost of 15,000 justified by potential to prevent MI, reduce morbidity, and guide appropriate treatment"
   },
   "approvalDetails": {
     "authorizationNumber": "AUTH-PA-2024-002",
     "approvedProcedure": "Cardiac Catheterization (CPT: 93458)",
     "approvalDate": "2024-01-16",
     "validUntil": "2024-01-30",
-    "approvedAmount": "$15,000",
+    "approvedAmount": "15,000",
     "approvedBy": "Clinical Review Panel (4/4 unanimous approval)",
     "reviewType": "Clinical Panel Review - Multidisciplinary Cardiology Panel"
   },

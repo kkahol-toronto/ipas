@@ -41,17 +41,22 @@ import {
   Share as ShareIcon,
   Computer as ComputerIcon,
   Visibility as VisibilityIcon,
-  PictureAsPdf as PdfIcon
+  PictureAsPdf as PdfIcon,
+  CheckCircle as CheckCircleIcon,
+  Reviews as ReviewsIcon
 } from '@mui/icons-material';
+import { CircularProgress as CircularProgressIcon } from '@mui/material';
 import SimpleDraggableFlowchart from './SimpleDraggableFlowchart';
 import CaseDocuments from './CaseDocuments';
 import ClinicalSummary from './ClinicalSummary';
 import ClinicalCriteriaEval from './ClinicalCriteriaEval';
 import MedicalRecordRetrival from './MedicalRecordRetrival'
 import EMRNotificationPanel from '../Notifications/EMRNotificationPanel';
+import { statusTracker } from '../../services/statusTracker';
 
 interface CaseDetailsEnhancedProps {
   caseId: string;
+  defaultTab?: number;
 }
 
 interface TabPanelProps {
@@ -80,8 +85,8 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => {
-  const [tabValue, setTabValue] = useState(0);
+const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defaultTab = 0 }) => {
+  const [tabValue, setTabValue] = useState(defaultTab);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [selectedReviewers, setSelectedReviewers] = useState<string[]>([]);
   const [shareNote, setShareNote] = useState('');
@@ -93,6 +98,83 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
     caseId === 'PA-2024-007' ? 'Denied' : 'Approved'
   );
   const [emrIntegrationOpen, setEmrIntegrationOpen] = useState(false);
+  const [reviewCompleted, setReviewCompleted] = useState(false);
+  const [isProcessingReview, setIsProcessingReview] = useState(false);
+  const [finalReviewStatus, setFinalReviewStatus] = useState<'approved' | 'denied' | null>(null);
+
+  // Load review status from localStorage on component mount and monitor status changes
+  React.useEffect(() => {
+    const checkAndUpdateReviewStatus = () => {
+      const savedReviewStatus = localStorage.getItem(`review_completed_${caseId}`);
+      const savedFinalStatus = localStorage.getItem(`final_review_status_${caseId}`);
+      
+      // Check current case status from statusTracker
+      const currentCaseStatus = statusTracker.getCaseStatus(caseId);
+      
+      // If case status is pending, reset the review completed state
+      if (currentCaseStatus?.currentStatus === 'pending') {
+        setReviewCompleted(false);
+        setFinalReviewStatus(null);
+        // Clear localStorage
+        localStorage.removeItem(`review_completed_${caseId}`);
+        localStorage.removeItem(`final_review_status_${caseId}`);
+      } else if (savedReviewStatus === 'true') {
+        setReviewCompleted(true);
+        if (savedFinalStatus === 'approved' || savedFinalStatus === 'denied') {
+          setFinalReviewStatus(savedFinalStatus as 'approved' | 'denied');
+        }
+      }
+    };
+
+    // Initial check
+    checkAndUpdateReviewStatus();
+
+    // Poll for status changes every 1 second
+    const interval = setInterval(checkAndUpdateReviewStatus, 1000);
+
+    return () => clearInterval(interval);
+  }, [caseId]);
+
+  // Function to handle review completion
+  const handleReviewCompleted = async () => {
+    setIsProcessingReview(true);
+    
+    // Simulate processing time with transition animation
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Get SmartAuth recommendation from case data
+    const caseData = getCaseData(caseId);
+    const smartAuthRecommendation = caseData.aiAnalysis?.recommendedAction || 'Approve with monitoring';
+    
+    // Determine final status based on SmartAuth recommendation
+    let finalStatus: 'approved' | 'denied' = 'approved';
+    if (smartAuthRecommendation.toLowerCase().includes('deny') || 
+        smartAuthRecommendation.toLowerCase().includes('reject')) {
+      finalStatus = 'denied';
+    }
+    
+    // Update case status in statusTracker
+    console.log(`🔄 Updating case ${caseId} status to ${finalStatus}`);
+    statusTracker.updateCaseStatus(
+      caseId, 
+      finalStatus, 
+      'user', 
+      'Review completed - SmartAuth recommendation applied',
+      `SmartAuth recommended: ${smartAuthRecommendation}`
+    );
+    
+    // Verify the update
+    const updatedStatus = statusTracker.getCaseStatus(caseId);
+    console.log(`✅ Case ${caseId} status after update:`, updatedStatus);
+    
+    setFinalReviewStatus(finalStatus);
+    setReviewCompleted(true);
+    setIsProcessingReview(false);
+    
+    // Save review status to localStorage for persistence
+    localStorage.setItem(`review_completed_${caseId}`, 'true');
+    localStorage.setItem(`final_review_status_${caseId}`, finalStatus);
+  };
 
   // Function to generate and download PDF from JSON
   const downloadObservabilityAsPDF = async () => {
@@ -318,7 +400,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       'PA-2024-001': {
         id: 'PA-2024-001',
         patientName: 'John Smith',
-        patientId: 'P-2024-001',
+        patientId: 'PA-2024-001',
         dateOfBirth: '1985-03-15',
         provider: 'Sarah Johnson',
         providerId: 'PR-001',
@@ -355,7 +437,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       'PA-2024-002': {
         id: 'PA-2024-002',
         patientName: 'Mary Johnson',
-        patientId: 'P-2024-002',
+        patientId: 'PA-2024-002',
         dateOfBirth: '1972-08-22',
         provider: 'Dr. Michael Chen',
         providerId: 'PR-002',
@@ -392,7 +474,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       'PA-2024-003': {
         id: 'PA-2024-003',
         patientName: 'Robert Davis',
-        patientId: 'P-2024-003',
+        patientId: 'PA-2024-003',
         dateOfBirth: '1965-12-03',
         provider: 'Dr. Emily Rodriguez',
         providerId: 'PR-003',
@@ -429,7 +511,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       'PA-2024-004': {
         id: 'PA-2024-004',
         patientName: 'Lisa Wilson',
-        patientId: 'P-2024-004',
+        patientId: 'PA-2024-004',
         dateOfBirth: '1985-03-15',
         provider: 'Andrew Thomson',
         providerId: 'PR-004',
@@ -466,7 +548,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       'PA-2024-006': {
         id: 'PA-2024-006',
         patientName: 'Rebecca Hardin',
-        patientId: 'P-2024-006',
+        patientId: 'PA-2024-006',
         dateOfBirth: '1976-08-25',
         provider: 'Amy Diane Kelly, NP',
         providerId: 'PR-006',
@@ -506,7 +588,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       'PA-2024-007': {
         id: 'PA-2024-007',
         patientName: 'Amanda Latoya Williams',
-        patientId: 'P-2024-007',
+        patientId: 'PA-2024-007',
         dateOfBirth: '1987-03-05',
         provider: 'Dr. Benjamin Joseph Velky',
         providerId: 'NPI-1083063507',
@@ -555,7 +637,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
       'PA-2024-008': {
         id: 'PA-2024-008',
         patientName: 'Daniel de Los Santos marin',
-        patientId: 'P-2024-008',
+        patientId: 'PA-2024-008',
         dateOfBirth: '1947-08-01',
         provider: 'Dr. Amanda Reynolds',
         providerId: 'NPI-1234567890',
@@ -599,7 +681,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
     return caseDataMap[caseId] || {
       id: caseId,
       patientName: 'Unknown Patient',
-      patientId: 'P-UNKNOWN',
+      patientId: 'PA-2024-005',
       dateOfBirth: 'Unknown',
       provider: 'Unknown Provider',
       providerId: 'PR-UNKNOWN',
@@ -708,11 +790,11 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   color={getPriorityColor(caseData.priority) as any}
                   size="small"
                 />
-                <Chip
+                {/* <Chip
                   label={`$${caseData.estimatedCost.toLocaleString()}`}
                   color="info"
                   size="small"
-                />
+                /> */}
 
                 {caseData.ipopFlag &&
                   <Chip
@@ -752,9 +834,38 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                   <VisibilityIcon />
                 </IconButton>
               </Tooltip>
+              
+              {/* Review Completed Button */}
+              <Tooltip title={reviewCompleted ? "Review Completed" : "Complete Review"}>
+                <IconButton
+                  color={reviewCompleted ? "success" : "primary"}
+                  onClick={handleReviewCompleted}
+                  //disabled={isProcessingReview || reviewCompleted}
+                  sx={{
+                    backgroundColor: reviewCompleted 
+                      ? (finalReviewStatus === 'approved' ? 'success.main' : 'error.main')
+                      : (isProcessingReview ? 'rgba(25, 118, 210, 0.1)' : 'primary.main'),
+                    color: 'white',
+                    transition: 'all 0.3s ease-in-out',
+                    '&:hover': {
+                      backgroundColor: reviewCompleted 
+                        ? (finalReviewStatus === 'approved' ? 'success.dark' : 'error.dark')
+                        : (isProcessingReview ? 'rgba(25, 118, 210, 0.1)' : 'primary.dark'),
+                    }
+                  }}
+                >
+                  {isProcessingReview ? (
+                    <CircularProgressIcon size={20} color="inherit" />
+                  ) : (
+                    <ReviewsIcon />
+                  )}
+                </IconButton>
+              </Tooltip>
+              
               <Tooltip title="Download Observability Report (JSON)">
                 <IconButton
                   color="success"
+                  disabled={!reviewCompleted}
                   onClick={() => {
                     const link = document.createElement('a');
                     link.href = `/sample-documents/cases/${caseId === 'PA-2024-001' ? 'case-001-john-doe' : caseId === 'PA-2024-002' ? 'case-002-jane-smith' : caseId === 'PA-2024-003' ? 'case-003-mike-johnson' : caseId === 'PA-2024-004' ? 'case-004-sarah-wilson' : caseId === 'PA-2024-005' ? 'case-005-david-brown' : caseId === 'PA-2024-006' ? 'case-006-rebecca-hardin' : caseId === 'PA-2024-007' ? 'case-007' : caseId === 'PA-2024-008' ? '008' : 'case-001-john-doe'}/observability_and_explanation.json`;
@@ -768,6 +879,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
               <Tooltip title="Download Observability Report (PDF)">
                 <IconButton
                   color="error"
+                  disabled={!reviewCompleted}
                   onClick={downloadObservabilityAsPDF}
                 >
                   <PdfIcon />
@@ -1055,15 +1167,15 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                           <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
                           <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
                         </Grid>
-                        <Grid size={{ xs: 12, md: 4 }}>
+                        {/* <Grid size={{ xs: 12, md: 4 }}>
                           <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved Amount</Typography>
                           <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
-                        </Grid>
+                        </Grid> */}
                         <Grid size={{ xs: 12, md: 4 }}>
                           <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Valid Until</Typography>
                           <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
                         </Grid>
-                        <Grid size={{ xs: 12, md: 6 }}>
+                        <Grid size={{ xs: 12, md: 4 }}>
                           <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved By</Typography>
                           <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
                         </Grid>
@@ -1612,7 +1724,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId }) => 
                         <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
                       </Grid>
                       <Grid size={{ xs: 12, md: 4 }}>
-                        <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
+                        <Typography variant="caption" color="text.secondary"></Typography>
                         <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
                       </Grid>
                       <Grid size={{ xs: 12, md: 4 }}>

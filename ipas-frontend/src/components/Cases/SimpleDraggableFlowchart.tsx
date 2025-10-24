@@ -1656,7 +1656,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
       localStorage.setItem(`ipas_letter_generated_${caseId}`, new Date().toISOString());
       
       // Update case status to approved/denied based on the decision
-      const finalStatus = (caseId === 'PA-2024-004' || caseId === 'PA-2024-007') ? 'denied' : 'approved';
+      const finalStatus = (caseId === 'PA-2024-007') ? 'denied' : 'approved';
       console.log(`✓ Updating case ${caseId} status to: ${finalStatus}`);
       statusTracker.updateCaseStatus(
         caseId, 
@@ -2822,7 +2822,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
-                          'cost': 'The $2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
+                          'cost': 'The 2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
                           'guidelines': 'The case meets all clinical guidelines for DME replacement as per Medicare LCD and policy requirements.',
                           'symptoms': 'Patient presented with documented Obstructive Sleep Apnea (AHI 8.9/hr on diagnostic sleep study). Current symptoms include daytime sleepiness (Epworth score 3/24 - indicating excellent control with current therapy). Patient is highly compliant with CPAP therapy and requires device replacement as current unit is 5+ years old.',
                           'diagnosis': 'The patient has a confirmed diagnosis of Obstructive Sleep Apnea (ICD-10: G47.33) documented via polysomnography. The AHI of 8.9/hr falls within the mild-to-moderate range, clearly meeting medical necessity criteria for CPAP therapy.',
@@ -2832,7 +2832,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data, the inpatient admission does not meet medical necessity criteria. Patient is hemodynamically stable, afebrile, with normal labs and uncomplicated diverticulitis on CT. AAFP guidelines support outpatient management.',
                           'risk': 'Low clinical risk for outpatient management. Patient has stable vital signs (BP 138/84, HR 78, Temp 98.1°F, SpO2 100%), no systemic toxicity, tolerating oral intake, and receiving appropriate antibiotic therapy. Risk of progression is approximately 5%.',
-                          'cost': 'Inpatient admission would cost $12,500-$15,000 for 3-day stay, while outpatient management costs only $800-$1,200. Cost savings of approximately $11,700 while maintaining appropriate level of care.',
+                          'cost': 'Inpatient admission would cost $12,500-15,000 for 3-day stay, while outpatient management costs only $800-$1,200. Cost savings of approximately $11,700 while maintaining appropriate level of care.',
                           'guidelines': 'The case does NOT meet inpatient admission criteria per AAFP evidence-based guidelines, ACG clinical guidelines, or InterQual criteria. Guidelines require complications (abscess, perforation), hemodynamic instability, sepsis, or inability to tolerate oral intake for inpatient care.',
                           'vitals': 'Patient vitals are completely stable: BP 138/84, HR 78, Temp 98.1°F (afebrile), SpO2 100%. No signs of hemodynamic instability or systemic toxicity.',
                           'symptoms': 'Patient presented with abdominal pain, back pain, and blood in stool. However, current clinical presentation shows patient tolerating oral intake, pain controlled with oral analgesics, and receiving appropriate antibiotic coverage.',
@@ -2845,7 +2845,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has stable vitals and meets all clinical criteria for the procedure.',
-                          'cost': 'The $15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
+                          'cost': 'The 15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
                           'guidelines': 'The case meets all clinical guidelines for cardiac catheterization as per the American College of Cardiology standards.',
                         };
                       }
@@ -2885,7 +2885,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
-                          'cost': 'The $2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
+                          'cost': 'The 2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
                           'guidelines': 'The case meets all clinical guidelines for DME replacement as per Medicare LCD and policy requirements.',
                           'symptoms': 'Patient presented with documented Obstructive Sleep Apnea (AHI 8.9/hr on diagnostic sleep study). Current symptoms include daytime sleepiness (Epworth score 3/24 - indicating excellent control with current therapy). Patient is highly compliant with CPAP therapy and requires device replacement as current unit is 5+ years old.',
                           'diagnosis': 'The patient has a confirmed diagnosis of Obstructive Sleep Apnea (ICD-10: G47.33) documented via polysomnography. The AHI of 8.9/hr falls within the mild-to-moderate range, clearly meeting medical necessity criteria for CPAP therapy.',
@@ -2895,7 +2895,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data, the inpatient admission does not meet medical necessity criteria. Patient is hemodynamically stable, afebrile, with normal labs and uncomplicated diverticulitis on CT. AAFP guidelines support outpatient management.',
                           'risk': 'Low clinical risk for outpatient management. Patient has stable vital signs (BP 138/84, HR 78, Temp 98.1°F, SpO2 100%), no systemic toxicity, tolerating oral intake, and receiving appropriate antibiotic therapy. Risk of progression is approximately 5%.',
-                          'cost': 'Inpatient admission would cost $12,500-$15,000 for 3-day stay, while outpatient management costs only $800-$1,200. Cost savings of approximately $11,700 while maintaining appropriate level of care.',
+                          'cost': 'Inpatient admission would cost $12,500-15,000 for 3-day stay, while outpatient management costs only $800-$1,200. Cost savings of approximately $11,700 while maintaining appropriate level of care.',
                           'guidelines': 'The case does NOT meet inpatient admission criteria per AAFP evidence-based guidelines, ACG clinical guidelines, or InterQual criteria. Guidelines require complications (abscess, perforation), hemodynamic instability, sepsis, or inability to tolerate oral intake for inpatient care.',
                           'vitals': 'Patient vitals are completely stable: BP 138/84, HR 78, Temp 98.1°F (afebrile), SpO2 100%. No signs of hemodynamic instability or systemic toxicity.',
                           'symptoms': 'Patient presented with abdominal pain, back pain, and blood in stool. However, current clinical presentation shows patient tolerating oral intake, pain controlled with oral analgesics, and receiving appropriate antibiotic coverage.',
@@ -2908,7 +2908,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has stable vitals and meets all clinical criteria for the procedure.',
-                          'cost': 'The $15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
+                          'cost': 'The 15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
                           'guidelines': 'The case meets all clinical guidelines for cardiac catheterization as per the American College of Cardiology standards.',
                         };
                       }

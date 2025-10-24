@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Grid, Box, Typography, Card, CardContent, Dialog, DialogTitle, DialogContent, Alert, IconButton, Button, LinearProgress, Chip, ButtonGroup, Checkbox } from '@mui/material';
+import { Grid, Box, Typography, Card, CardContent, Dialog, DialogTitle, DialogContent, Alert, IconButton, Button, LinearProgress, Chip, ButtonGroup, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 import { Close as CloseIcon, Download as DownloadIcon, Description as DescriptionIcon, TrendingUp, TrendingDown, TrendingFlat } from '@mui/icons-material';
-import RecentCasesTable from '../components/Dashboard/RecentCasesTable';
 import CaseDetailsEnhanced from '../components/Cases/CaseDetailsEnhanced';
 import ErrorBoundary from '../components/ErrorBoundary';
 import PrintOutlinedIcon from '@mui/icons-material/PrintOutlined';
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
+import TruCareCloudRecentCasesTable from '../components/Dashboard/TruCareCloudRecentCasesTable';
+import AddIcon from '@mui/icons-material/Add';
 
 const Tasks: React.FC = () => {
     const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
     const [caseDetailsOpen, setCaseDetailsOpen] = useState(false);
     const [showLetterNotification, setShowLetterNotification] = useState(false);
+    const [defaultTab, setDefaultTab] = useState<number>(0);
 
     // Check if letter was generated for any case
     React.useEffect(() => {
@@ -102,7 +104,33 @@ const Tasks: React.FC = () => {
                         <Button sx={{ lineHeight: 'normal' }}>Personal Queues</Button>
                     </ButtonGroup>
                 </Box>
-                <Box>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Button 
+                        variant="contained" 
+                        color="success" 
+                        size="small" 
+                        sx={{ background: '#4a387e', mr: 2 }}
+                        onClick={() => {
+                            setDefaultTab(3); // Review Notes tab (index 3)
+                            setSelectedCaseId('PA-2024-006');
+                            setCaseDetailsOpen(true);
+                        }}
+                    >
+                        NOTES (3) <AddIcon sx={{ml: 1}} />
+                    </Button>
+                    <Button 
+                        variant="contained" 
+                        color="success" 
+                        size="small" 
+                        sx={{ background: '#4a387e', mr: 2 }}
+                        onClick={() => {
+                            setDefaultTab(0); // Documents tab (index 0)
+                            setSelectedCaseId('PA-2024-006');
+                            setCaseDetailsOpen(true);
+                        }}
+                    >
+                        ATTACHMENTS (5) <AddIcon sx={{ml: 1}} />
+                    </Button>
                     <a href=""><PrintOutlinedIcon fontSize='large' /></a>
                 </Box>
             </Box>
@@ -204,28 +232,34 @@ const Tasks: React.FC = () => {
                                 </Grid>
                                 <Grid size="auto">
                                     <label htmlFor="formGroupExampleInput" style={{ display: 'block', fontWeight: '600' }}>Include</label>
-                                    <Box className="form-check form-check-inline" style={{ marginBottom: '1rem' }}>
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox1" checked value="option1" />
+                                    {/* <Box className="form-check form-check-inline" style={{ marginBottom: '1rem' }}>
+                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox1" checked  />
                                         <label className="form-check-label" htmlFor="inlineCheckbox1">Open</label>
                                     </Box>
                                     <Box className="form-check form-check-inline" style={{ marginBottom: '1rem' }}>
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" checked value="option1" />
+                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" checked />
                                         <label className="form-check-label" htmlFor="inlineCheckbox2">Overdue</label>
                                     </Box>
                                     <Box className="form-check form-check-inline" style={{ marginBottom: '1rem' }}>
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="option1" />
+                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox3" checked  />
                                         <label className="form-check-label" htmlFor="inlineCheckbox3">Completed</label>
                                     </Box>
                                     <Box className="form-check form-check-inline" style={{ marginBottom: '1rem' }}>
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1" />
+                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox4" />
                                         <label className="form-check-label" htmlFor="inlineCheckbox4">Cancelled</label>
-                                    </Box>
+                                    </Box> */}
+                                    <FormGroup sx={{ flexDirection: 'row' }}>
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Open" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Overdue" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Completed" />
+                                        <FormControlLabel control={<Checkbox />} label="Cancelled" />
+                                    </FormGroup>
                                 </Grid>
                             </Grid>
                         </Box>
 
                         <Box className="advanceSearch">
-                            <ExpandCircleDownOutlinedIcon /><b>Advance Search</b>
+                            <ExpandCircleDownOutlinedIcon /><b>Advanced search</b>
                         </Box>
                         <Box className="advanceSearch" sx={{ justifyContent: 'end' }}>
                             <Button variant="contained" color="success" size="small" sx={{ background: '#4a387e', mr: 1 }}>Search</Button>
@@ -234,7 +268,7 @@ const Tasks: React.FC = () => {
                     </Box>
                     <Box className="borderBox recentTableStyle" sx={{ mt: 2 }}>
                         {/* Recent Cases Table */}
-                        <RecentCasesTable onCaseClick={handleCaseClick} />
+                        <TruCareCloudRecentCasesTable onCaseClick={handleCaseClick} />
                     </Box>
                 </Box>
             </Box>
@@ -257,7 +291,7 @@ const Tasks: React.FC = () => {
                 <DialogContent sx={{ p: 0 }}>
                     {selectedCaseId && (
                         <ErrorBoundary>
-                            <CaseDetailsEnhanced caseId={selectedCaseId} />
+                            <CaseDetailsEnhanced caseId={selectedCaseId} defaultTab={defaultTab} />
                         </ErrorBoundary>
                     )}
                 </DialogContent>

@@ -2678,7 +2678,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
-                          'cost': 'The $2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
+                          'cost': 'The 2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
                           'guidelines': 'The case meets all clinical guidelines for DME replacement as per Medicare LCD and policy requirements.',
                           'symptoms': 'Patient presented with documented Obstructive Sleep Apnea (AHI 8.9/hr on diagnostic sleep study). Current symptoms include daytime sleepiness (Epworth score 3/24 - indicating excellent control with current therapy). Patient is highly compliant with CPAP therapy and requires device replacement as current unit is 5+ years old.',
                           'diagnosis': 'The patient has a confirmed diagnosis of Obstructive Sleep Apnea (ICD-10: G47.33) documented via polysomnography. The AHI of 8.9/hr falls within the mild-to-moderate range, clearly meeting medical necessity criteria for CPAP therapy.',
@@ -2688,7 +2688,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has stable vitals and meets all clinical criteria for the procedure.',
-                          'cost': 'The $15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
+                          'cost': 'The 15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
                           'guidelines': 'The case meets all clinical guidelines for cardiac catheterization as per the American College of Cardiology standards.',
                         };
                       }
@@ -2723,7 +2723,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity. The 77% approval rate for similar cases supports an approval decision.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has excellent CPAP compliance and stable condition.',
-                          'cost': 'The $2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
+                          'cost': 'The 2,500 amount is within normal range for CPAP device replacement with accessories. Similar approved cases averaged $2,300.',
                           'guidelines': 'The case meets all clinical guidelines for DME replacement as per Medicare LCD and policy requirements.',
                           'symptoms': 'Patient presented with documented Obstructive Sleep Apnea (AHI 8.9/hr on diagnostic sleep study). Current symptoms include daytime sleepiness (Epworth score 3/24 - indicating excellent control with current therapy). Patient is highly compliant with CPAP therapy and requires device replacement as current unit is 5+ years old.',
                           'diagnosis': 'The patient has a confirmed diagnosis of Obstructive Sleep Apnea (ICD-10: G47.33) documented via polysomnography. The AHI of 8.9/hr falls within the mild-to-moderate range, clearly meeting medical necessity criteria for CPAP therapy.',
@@ -2733,7 +2733,7 @@ const SimpleDraggableFlowchart: React.FC<SimpleDraggableFlowchartProps> = ({ cas
                         responses = {
                           'default': 'Based on the clinical data and similar patient outcomes, the case shows strong medical necessity.',
                           'risk': 'The risk assessment indicates a favorable outcome. Patient has stable vitals and meets all clinical criteria for the procedure.',
-                          'cost': 'The $15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
+                          'cost': 'The 15,000 amount is within normal range for cardiac catheterization. Similar approved cases averaged $14,500.',
                           'guidelines': 'The case meets all clinical guidelines for cardiac catheterization as per the American College of Cardiology standards.',
                         };
                       }

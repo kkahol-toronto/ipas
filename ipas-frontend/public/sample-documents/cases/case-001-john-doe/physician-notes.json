@@ -37,7 +37,7 @@
       "No response to OTC medications"
     ],
     "redFlags": [
-      "New onset headaches in patient >40",
+      "New onset headaches Inpatient >40",
       "Associated neurological symptoms",
       "No response to standard treatments"
     ]
