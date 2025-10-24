@@ -1167,15 +1167,15 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
                           <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Authorization Number</Typography>
                           <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
                         </Grid>
-                        <Grid size={{ xs: 12, md: 4 }}>
+                        {/* <Grid size={{ xs: 12, md: 4 }}>
                           <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved Amount</Typography>
                           <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
-                        </Grid>
+                        </Grid> */}
                         <Grid size={{ xs: 12, md: 4 }}>
                           <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Valid Until</Typography>
                           <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.validUntil}</Typography>
                         </Grid>
-                        <Grid size={{ xs: 12, md: 6 }}>
+                        <Grid size={{ xs: 12, md: 4 }}>
                           <Typography variant="caption" color="text.secondary" sx={{fontSize:'14px'}}>Approved By</Typography>
                           <Typography variant="body2">{observabilityData.approvalDetails.approvedBy}</Typography>
                         </Grid>
