@@ -19,7 +19,7 @@
     "early_replacement_criteria": [
       "Device malfunction that cannot be repaired cost-effectively",
       "Loss or irreparable damage to device",
-      "Change in patient condition requiring different PAP modality"
+      "Change Inpatient condition requiring different PAP modality"
     ],
     "compliance_requirements": {
       "minimum_usage": "4 hours per night",
