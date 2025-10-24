@@ -102,17 +102,37 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
   const [isProcessingReview, setIsProcessingReview] = useState(false);
   const [finalReviewStatus, setFinalReviewStatus] = useState<'approved' | 'denied' | null>(null);
 
-  // Load review status from localStorage on component mount
+  // Load review status from localStorage on component mount and monitor status changes
   React.useEffect(() => {
-    const savedReviewStatus = localStorage.getItem(`review_completed_${caseId}`);
-    const savedFinalStatus = localStorage.getItem(`final_review_status_${caseId}`);
-    
-    if (savedReviewStatus === 'true') {
-      setReviewCompleted(true);
-      if (savedFinalStatus === 'approved' || savedFinalStatus === 'denied') {
-        setFinalReviewStatus(savedFinalStatus as 'approved' | 'denied');
+    const checkAndUpdateReviewStatus = () => {
+      const savedReviewStatus = localStorage.getItem(`review_completed_${caseId}`);
+      const savedFinalStatus = localStorage.getItem(`final_review_status_${caseId}`);
+      
+      // Check current case status from statusTracker
+      const currentCaseStatus = statusTracker.getCaseStatus(caseId);
+      
+      // If case status is pending, reset the review completed state
+      if (currentCaseStatus?.currentStatus === 'pending') {
+        setReviewCompleted(false);
+        setFinalReviewStatus(null);
+        // Clear localStorage
+        localStorage.removeItem(`review_completed_${caseId}`);
+        localStorage.removeItem(`final_review_status_${caseId}`);
+      } else if (savedReviewStatus === 'true') {
+        setReviewCompleted(true);
+        if (savedFinalStatus === 'approved' || savedFinalStatus === 'denied') {
+          setFinalReviewStatus(savedFinalStatus as 'approved' | 'denied');
+        }
       }
-    }
+    };
+
+    // Initial check
+    checkAndUpdateReviewStatus();
+
+    // Poll for status changes every 1 second
+    const interval = setInterval(checkAndUpdateReviewStatus, 1000);
+
+    return () => clearInterval(interval);
   }, [caseId]);
 
   // Function to handle review completion
