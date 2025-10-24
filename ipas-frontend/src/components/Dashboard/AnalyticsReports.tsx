@@ -61,8 +61,8 @@ const AnalyticsReports: React.FC = () => {
   ];
 
   const procedureStats = [
-    { procedure: 'MRI Brain with Contrast', count: 15, avgCost: '$2,500', approvalRate: '93%' },
-    { procedure: 'Cardiac Catheterization', count: 12, avgCost: '$15,000', approvalRate: '88%' },
+    { procedure: 'MRI Brain with Contrast', count: 15, avgCost: '2,500', approvalRate: '93%' },
+    { procedure: 'Cardiac Catheterization', count: 12, avgCost: '15,000', approvalRate: '88%' },
     { procedure: 'Knee Arthroscopy', count: 18, avgCost: '$8,000', approvalRate: '91%' },
     { procedure: 'Colonoscopy', count: 25, avgCost: '$1,200', approvalRate: '96%' }
   ];

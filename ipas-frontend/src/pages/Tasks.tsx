@@ -116,7 +116,7 @@ const Tasks: React.FC = () => {
                             setCaseDetailsOpen(true);
                         }}
                     >
-                        NOTE (3) <AddIcon sx={{ml: 1}} />
+                        NOTES (3) <AddIcon sx={{ml: 1}} />
                     </Button>
                     <Button 
                         variant="contained" 
@@ -259,7 +259,7 @@ const Tasks: React.FC = () => {
                         </Box>
 
                         <Box className="advanceSearch">
-                            <ExpandCircleDownOutlinedIcon /><b>Advance Search</b>
+                            <ExpandCircleDownOutlinedIcon /><b>Advanced search</b>
                         </Box>
                         <Box className="advanceSearch" sx={{ justifyContent: 'end' }}>
                             <Button variant="contained" color="success" size="small" sx={{ background: '#4a387e', mr: 1 }}>Search</Button>

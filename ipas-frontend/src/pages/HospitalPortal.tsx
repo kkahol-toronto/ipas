@@ -103,7 +103,7 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-001':
               return {
                 patientName: 'John Doe',
-                patientId: 'P-2024-001',
+                patientId: 'PA-2024-001',
                 procedure: 'MRI Brain with Contrast',
                 provider: 'Dr. Sarah Johnson',
                 hospital: 'UCLA Medical Center'
@@ -111,7 +111,7 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-002':
               return {
                 patientName: 'Mary Johnson',
-                patientId: 'P-2024-002',
+                patientId: 'PA-2024-002',
                 procedure: 'Cardiac Catheterization',
                 provider: 'Dr. Michael Chen',
                 hospital: 'Cedars-Sinai Medical Center'
@@ -119,7 +119,7 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-003':
               return {
                 patientName: 'Robert Davis',
-                patientId: 'P-2024-003',
+                patientId: 'PA-2024-003',
                 procedure: 'Knee Arthroscopy',
                 provider: 'Dr. Lisa Wilson',
                 hospital: 'Kaiser Permanente'
@@ -127,7 +127,7 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-004':
               return {
                 patientName: 'Sarah Wilson',
-                patientId: 'P-2024-004',
+                patientId: 'PA-2024-004',
                 procedure: 'CT Abdomen with Contrast',
                 provider: 'Dr. David Brown',
                 hospital: 'Stanford Health Care'
@@ -135,7 +135,7 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-005':
               return {
                 patientName: 'David Brown',
-                patientId: 'P-2024-005',
+                patientId: 'PA-2024-005',
                 procedure: 'CT Chest with Contrast',
                 provider: 'Dr. Jennifer Taylor',
                 hospital: 'UCSF Medical Center'
@@ -143,7 +143,7 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-006':
               return {
                 patientName: 'Rebecca Hardin',
-                patientId: 'P-2024-006',
+                patientId: 'PA-2024-006',
                 procedure: 'CPAP Device Replacement',
                 provider: 'Amy Diane Kelly, NP',
                 hospital: 'Prisma Health Pulmonology - Sumter'
@@ -151,7 +151,7 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-007':
               return {
                 patientName: 'Rebecca===Hardin',
-                patientId: 'P-2024-007',
+                patientId: 'PA-2024-007',
                 procedure: 'Inpatient',
                 provider: 'Benjamin Velky',
                 hospital: 'Self Regional HE'
@@ -159,7 +159,7 @@ const HospitalPortal: React.FC = () => {
             case 'PA-2024-008':
               return {
                 patientName: 'Daniel de Los Santos marin',
-                patientId: 'P-2024-008',
+                patientId: 'PA-2024-008',
                 procedure: 'Cardiac rehabilitation',
                 provider: 'Amanda R',
                 hospital: 'Trident Medical Center'
@@ -168,7 +168,7 @@ const HospitalPortal: React.FC = () => {
             default:
               return {
                 patientName: 'Unknown Patient',
-                patientId: 'P-2024-000',
+                patientId: 'PA-2024-000',
                 procedure: 'Unknown Procedure',
                 provider: 'Unknown Provider',
                 hospital: 'Unknown Hospital'

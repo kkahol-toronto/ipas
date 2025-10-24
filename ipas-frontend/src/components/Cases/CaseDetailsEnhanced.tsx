@@ -380,7 +380,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
       'PA-2024-001': {
         id: 'PA-2024-001',
         patientName: 'John Smith',
-        patientId: 'P-2024-001',
+        patientId: 'PA-2024-001',
         dateOfBirth: '1985-03-15',
         provider: 'Sarah Johnson',
         providerId: 'PR-001',
@@ -417,7 +417,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
       'PA-2024-002': {
         id: 'PA-2024-002',
         patientName: 'Mary Johnson',
-        patientId: 'P-2024-002',
+        patientId: 'PA-2024-002',
         dateOfBirth: '1972-08-22',
         provider: 'Dr. Michael Chen',
         providerId: 'PR-002',
@@ -454,7 +454,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
       'PA-2024-003': {
         id: 'PA-2024-003',
         patientName: 'Robert Davis',
-        patientId: 'P-2024-003',
+        patientId: 'PA-2024-003',
         dateOfBirth: '1965-12-03',
         provider: 'Dr. Emily Rodriguez',
         providerId: 'PR-003',
@@ -491,7 +491,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
       'PA-2024-004': {
         id: 'PA-2024-004',
         patientName: 'Lisa Wilson',
-        patientId: 'P-2024-004',
+        patientId: 'PA-2024-004',
         dateOfBirth: '1985-03-15',
         provider: 'Andrew Thomson',
         providerId: 'PR-004',
@@ -528,7 +528,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
       'PA-2024-006': {
         id: 'PA-2024-006',
         patientName: 'Rebecca Hardin',
-        patientId: 'P-2024-006',
+        patientId: 'PA-2024-006',
         dateOfBirth: '1976-08-25',
         provider: 'Amy Diane Kelly, NP',
         providerId: 'PR-006',
@@ -568,7 +568,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
       'PA-2024-007': {
         id: 'PA-2024-007',
         patientName: 'Amanda Latoya Williams',
-        patientId: 'P-2024-007',
+        patientId: 'PA-2024-007',
         dateOfBirth: '1987-03-05',
         provider: 'Dr. Benjamin Joseph Velky',
         providerId: 'NPI-1083063507',
@@ -617,7 +617,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
       'PA-2024-008': {
         id: 'PA-2024-008',
         patientName: 'Daniel de Los Santos marin',
-        patientId: 'P-2024-008',
+        patientId: 'PA-2024-008',
         dateOfBirth: '1947-08-01',
         provider: 'Dr. Amanda Reynolds',
         providerId: 'NPI-1234567890',
@@ -661,7 +661,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
     return caseDataMap[caseId] || {
       id: caseId,
       patientName: 'Unknown Patient',
-      patientId: 'P-UNKNOWN',
+      patientId: 'PA-2024-005',
       dateOfBirth: 'Unknown',
       provider: 'Unknown Provider',
       providerId: 'PR-UNKNOWN',
@@ -1704,7 +1704,7 @@ const CaseDetailsEnhanced: React.FC<CaseDetailsEnhancedProps> = ({ caseId, defau
                         <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{observabilityData.approvalDetails.authorizationNumber}</Typography>
                       </Grid>
                       <Grid size={{ xs: 12, md: 4 }}>
-                        <Typography variant="caption" color="text.secondary">Approved Amount</Typography>
+                        <Typography variant="caption" color="text.secondary"></Typography>
                         <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'success.main' }}>{observabilityData.approvalDetails.approvedAmount}</Typography>
                       </Grid>
                       <Grid size={{ xs: 12, md: 4 }}>

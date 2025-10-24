@@ -60,7 +60,7 @@
       "action": "Cost Analysis",
       "status": "Completed",
       "details": "Calculated estimated costs for CPAP device and supplies",
-      "outcome": "Total estimated cost: $2,500 (device + humidifier + supplies)",
+      "outcome": "Total estimated cost: 2,500 (device + humidifier + supplies)",
       "comments": "Cost within reasonable range for CPAP replacement with supplies"
     },
     {
@@ -88,9 +88,9 @@
   },
   "approvalDetails": {
     "authorizationNumber": "PA-2024-006-APPROVED",
-    "approvedAmount": "$2,500.00",
+    "approvedAmount": "2,500.00",
     "validUntil": "2025-04-25",
-    "approvedBy": "IPAS Automated System",
+    "approvedBy": "Smart Auth",
     "reviewType": "Automated Approval",
     "coverageDetails": {
       "device": "ResMed S10 AutoSet CPAP (E0601) - $1,800",
